@@ -30,7 +30,7 @@ Sau khi clone ve can
 $ npm i
 
 Cach push code:
-git stash (bỏ code mình mới modifed)
+git stash (bỏ code mình mới modifed) /n
 git pull (pull code mới về)
 git stash pop (thêm lại code đã stash và merge code)
 git status 
