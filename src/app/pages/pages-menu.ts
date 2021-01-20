@@ -7,4 +7,9 @@ export const MENU_ITEMS: NbMenuItem[] = [
     link: '/pages/dashboard',
     home: true,
   },
+  {
+    title: 'Login',
+    icon: 'shopping-cart-outline',
+    link: '/pages/login',
+  },
 ]
