@@ -1,11 +1,12 @@
 import { NgModule } from '@angular/core';
-import { NbButtonModule, NbCardModule, NbCheckboxModule, NbIconModule, NbLayoutModule, NbMenuModule, NbSidebarModule, NbThemeModule } from '@nebular/theme';
+import { NbButtonModule, NbCardModule, NbIconModule, NbLayoutModule, NbMenuModule,NbCheckboxModule, NbSidebarModule, NbTabsetModule, NbThemeModule } from '@nebular/theme';
 
 import { PagesComponent } from './pages.component';
 import { PagesRoutingModule } from './pages-routing.module';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { LoginComponent } from './login/login.component';
 import { LoginModule } from './login/login.module';
+import { FacultyComponent } from './faculty/faculty.component';
 
 @NgModule({
   imports: [
@@ -21,6 +22,7 @@ import { LoginModule } from './login/login.module';
     NbCheckboxModule,
     NbCardModule,
     LoginModule,
+    NbTabsetModule
   ],
   declarations: [
     PagesComponent,
