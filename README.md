@@ -38,3 +38,4 @@ git add
 git status 
 git commit -m "note here"
 npm run prepush
+git push
