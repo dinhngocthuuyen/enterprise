@@ -26,16 +26,16 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
 
-Sau khi clone ve can. 
+Sau khi clone ve can  
 $ npm i. 
 
-Cach push code:  
-git stash (bỏ code mình mới modifed). 
-git pull (pull code mới về). 
-git stash pop (thêm lại code đã stash và merge code). 
-git status.  
-git add.  
-git status.  
-git commit -m "note here". 
-npm run prepush. 
-git push. 
+Cách push code:  
+git stash (bỏ code mình mới modifed)  
+git pull (pull code mới về)   
+git stash pop (thêm lại code đã stash và merge code)  
+git status  
+git add  
+git status  
+git commit -m "note here"  
+npm run prepush  
+git push  
