@@ -1,9 +1,12 @@
+import { CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 import { NgModule } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 import { NbEvaIconsModule } from "@nebular/eva-icons";
-import { NbCardModule, NbIconModule, NbTabsetModule, NbTreeGridModule } from "@nebular/theme";
+import { NbCardModule, NbIconModule, NbTabsetModule } from "@nebular/theme";
 import { Ng2SmartTableModule } from "ng2-smart-table";
 
+import { LoginComponent } from "../login/login.component";
+import { LoginModule } from "../login/login.module";
 import { FacultyComponent } from "./faculty.component";
 
 @NgModule({
@@ -11,13 +14,14 @@ import { FacultyComponent } from "./faculty.component";
         FormsModule,
         NbCardModule,
         NbTabsetModule,
-        NbTreeGridModule,
         NbIconModule,
         NbEvaIconsModule,
-        Ng2SmartTableModule
+        Ng2SmartTableModule,
+        LoginModule,
     ],
     declarations: [
         FacultyComponent,
-    ]
+    ],
+
 })
 export class FacultyModule { }

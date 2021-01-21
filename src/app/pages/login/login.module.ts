@@ -22,6 +22,9 @@ import { DashboardComponent } from '../dashboard/dashboard.component';
     LoginComponent,
     
   ],
+  exports: [ LoginComponent ],
+
+
 })
 export class LoginModule {
 }

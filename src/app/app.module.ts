@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -8,10 +8,14 @@ import { NbThemeModule, NbLayoutModule, NbSidebarModule, NbButtonGroupModule, Nb
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { PagesComponent } from './pages/pages.component';
+import { LoginModule } from './pages/login/login.module';
+import { LoginComponent } from './pages/login/login.component';
+import { FacultyModule } from './pages/faculty/faculty.module';
 
 @NgModule({
   declarations: [
     AppComponent,
+    // LoginComponent,
     // DashboardComponent,
     // PagesComponent
   ],
@@ -28,9 +32,11 @@ import { PagesComponent } from './pages/pages.component';
     NbEvaIconsModule,
     NbCardModule,
     NbTabsetModule,
-    NbTreeGridModule,
+
+  
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+
 })
 export class AppModule { }
