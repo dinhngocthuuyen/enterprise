@@ -1,8 +1,9 @@
 import { NgModule } from '@angular/core';
-import { NbButtonModule, NbCardModule, NbCheckboxComponent, NbCheckboxModule, NbFormFieldModule, NbIconModule, NbInputModule, NbLayoutModule, NbMenuModule, NbSidebarModule, NbTableModule, NbTabsetComponent, NbTabsetModule, NbThemeModule } from '@nebular/theme';
+import { NbButtonModule, NbCardModule, NbCheckboxComponent, NbCheckboxModule, NbFormFieldModule, NbIconModule, NbInputModule, NbLayoutModule, NbMenuModule, NbSidebarModule, NbTableModule, NbTabsetComponent, NbTabsetModule, NbThemeModule, NbTreeGridModule } from '@nebular/theme';
 
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { LoginComponent } from './login.component';
+import { DashboardComponent } from '../dashboard/dashboard.component';
 
 @NgModule({
   imports: [
@@ -19,6 +20,7 @@ import { LoginComponent } from './login.component';
   ],
   declarations: [
     LoginComponent,
+    
   ],
 })
 export class LoginModule {

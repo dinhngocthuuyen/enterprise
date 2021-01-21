@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { NbButtonModule, NbCardModule, NbIconModule, NbLayoutModule, NbMenuModule,NbCheckboxModule, NbSidebarModule, NbTabsetModule, NbThemeModule } from '@nebular/theme';
+import { NbButtonModule, NbCardModule, NbIconModule, NbLayoutModule, NbMenuModule,NbCheckboxModule, NbSidebarModule, NbTabsetModule, NbThemeModule, NbTagInputDirective, NbFilterInputDirective, NbTreeGridModule } from '@nebular/theme';
 
 import { PagesComponent } from './pages.component';
 import { PagesRoutingModule } from './pages-routing.module';
@@ -23,7 +23,8 @@ import { ManagerComponent } from './manager/manager.component';
     NbCheckboxModule,
     NbCardModule,
     LoginModule,
-    NbTabsetModule
+    NbTabsetModule,
+    NbTreeGridModule,
   ],
   declarations: [
     PagesComponent,
