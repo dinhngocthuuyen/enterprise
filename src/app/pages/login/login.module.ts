@@ -13,6 +13,8 @@ import { LoginComponent } from './login.component';
     NbFormFieldModule,
     NbTableModule,
     NbTabsetModule,
+    NbLayoutModule,
+    NbSidebarModule,
     
   ],
   declarations: [
