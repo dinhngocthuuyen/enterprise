@@ -7,6 +7,7 @@ import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { LoginComponent } from './login/login.component';
 import { LoginModule } from './login/login.module';
 import { FacultyComponent } from './faculty/faculty.component';
+import { ManagerComponent } from './manager/manager.component';
 
 @NgModule({
   imports: [
@@ -26,6 +27,7 @@ import { FacultyComponent } from './faculty/faculty.component';
   ],
   declarations: [
     PagesComponent,
+    ManagerComponent,
     // LoginComponent,
   ],
 })
