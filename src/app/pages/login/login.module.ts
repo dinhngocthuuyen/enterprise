@@ -18,12 +18,10 @@ import { DashboardComponent } from '../dashboard/dashboard.component';
     NbSidebarModule,
     
   ],
+  exports: [LoginComponent],
   declarations: [
     LoginComponent,
-    
   ],
-  exports: [ LoginComponent ],
-
 
 })
 export class LoginModule {
