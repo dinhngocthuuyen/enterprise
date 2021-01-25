@@ -8,6 +8,7 @@ import { LoginComponent } from './login/login.component';
 import { LoginModule } from './login/login.module';
 import { FacultyComponent } from './faculty/faculty.component';
 import { ManagerComponent } from './manager/manager.component';
+import { StudentComponent } from './student/student.component';
 
 @NgModule({
   imports: [
@@ -29,6 +30,7 @@ import { ManagerComponent } from './manager/manager.component';
   declarations: [
     PagesComponent,
     ManagerComponent,
+    // StudentComponent,
     // LoginComponent,
   ],
 })
