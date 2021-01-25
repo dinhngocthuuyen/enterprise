@@ -8,6 +8,7 @@ import { LoginComponent } from './login/login.component';
 import { LoginModule } from './login/login.module';
 import { FacultyComponent } from './faculty/faculty.component';
 import { ManagerComponent } from './manager/manager.component';
+import { AdminComponent } from './admin/admin.component';
 
 @NgModule({
   imports: [

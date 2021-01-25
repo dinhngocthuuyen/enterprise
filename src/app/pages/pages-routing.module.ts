@@ -6,6 +6,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { LoginComponent } from './login/login.component';
 import { FacultyComponent } from './faculty/faculty.component';
 import { ManagerComponent } from './manager/manager.component';
+import { AdminComponent } from './admin/admin.component';
 
 const routes: Routes = [{
   path: '',
@@ -41,6 +42,16 @@ const routes: Routes = [{
       path: '',
       redirectTo: 'dashboard',
       pathMatch: 'full',
+    },
+
+    {
+      path: 'admin',
+      component: AdminComponent,
+    },
+    {
+      path: 'admin',
+      loadChildren: () => import('./admin/admin.module')
+        .then(m => m.AdminModule),
     },
     {
       path: '**',

@@ -22,4 +22,10 @@ export const MENU_ITEMS: NbMenuItem[] = [
     icon: 'shopping-cart-outline',
     link: '/pages/manager',
   },
+
+  {
+    title: 'Admin',
+    icon: 'shopping-cart-outline',
+    link: '/pages/admin',
+  },
 ]
