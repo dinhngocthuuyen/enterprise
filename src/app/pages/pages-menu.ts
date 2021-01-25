@@ -28,4 +28,9 @@ export const MENU_ITEMS: NbMenuItem[] = [
     icon: 'shopping-cart-outline',
     link: '/pages/admin',
   },
+  {
+    title: 'Student',
+    icon: 'home-outline',
+    link: '/pages/student',
+  },
 ]

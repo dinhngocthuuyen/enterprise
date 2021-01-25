@@ -7,6 +7,7 @@ import { LoginComponent } from './login/login.component';
 import { FacultyComponent } from './faculty/faculty.component';
 import { ManagerComponent } from './manager/manager.component';
 import { AdminComponent } from './admin/admin.component';
+import { StudentComponent } from './student/student.component';
 
 const routes: Routes = [{
   path: '',
@@ -37,6 +38,15 @@ const routes: Routes = [{
     {
       path: 'manager',
       component:  ManagerComponent,
+    },
+    {
+      path: 'student',
+      component: StudentComponent,
+    },
+    {
+      path: 'student',
+      loadChildren: () => import('./student/student.module')
+        .then(m => m.StudentModule),
     },
     {
       path: '',
