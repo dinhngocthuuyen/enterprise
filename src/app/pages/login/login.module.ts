@@ -4,6 +4,7 @@ import { NbButtonModule, NbCardModule, NbCheckboxComponent, NbCheckboxModule, Nb
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { LoginComponent } from './login.component';
 import { DashboardComponent } from '../dashboard/dashboard.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   imports: [
@@ -16,7 +17,7 @@ import { DashboardComponent } from '../dashboard/dashboard.component';
     NbTabsetModule,
     NbLayoutModule,
     NbSidebarModule,
-    
+    FormsModule
   ],
   exports: [LoginComponent],
   declarations: [

@@ -14,6 +14,7 @@ import { FacultyModule } from './pages/faculty/faculty.module';
 import { StoreModule } from '@ngrx/store';
 import { exampleReducer } from './pages/example/example.reducer';
 import { CommonModule } from '@angular/common';
+import { counterReducer } from './pages/faculty/state/counter.reducer';
 
 @NgModule({
   declarations: [
@@ -35,8 +36,9 @@ import { CommonModule } from '@angular/common';
     NbEvaIconsModule,
     NbCardModule,
     NbTabsetModule,
-    StoreModule.forRoot({ count: exampleReducer }),
-  
+    StoreModule.forRoot({ count: exampleReducer, count2: counterReducer }),
+
+
   ],
   providers: [],
   bootstrap: [AppComponent],

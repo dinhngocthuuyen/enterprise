@@ -8,14 +8,24 @@
 
 <nb-card>
   <nb-card-body class="example-items-col">
-    <input type="text" nbInput fullWidth status="basic" placeholder="Default">
-    <input type="text" nbInput fullWidth status="primary" placeholder="Primary">
-    <input type="text" nbInput fullWidth status="info" placeholder="Info">
-    <input type="text" nbInput fullWidth status="success" placeholder="Success">
-    <input type="text" nbInput fullWidth status="warning" placeholder="Warning">
-    <input type="text" nbInput fullWidth status="danger" placeholder="Danger">
-    <div class="control-status-example">
-      <input type="text" nbInput fullWidth status="control" placeholder="Control">
-    </div>
+    <!-- <textarea nbInput #postInput></textarea> -->
+    <textarea nbInput [(ngModel)]="enteredValue"></textarea>
+    <hr>
+    <!-- <button nbButton status="primary" (click)="onAddPost(postInput)">Test Button</button> -->
+    <button nbButton status="primary" (click)="onAddPost()">Test Button</button>
+
+    <p>{{ newPost }}</p>
+  </nb-card-body>
+</nb-card>
+
+<nb-card>
+  <nb-card-body>
+    <button nbButton (click)="increment()">Increment</button>
+
+  <div>Current Count: {{ count2$ | async }}</div>
+
+  <button nbButton (click)="decrement()">Decrement</button>
+
+  <button nbButton (click)="reset()">Reset Counter</button>
   </nb-card-body>
 </nb-card>

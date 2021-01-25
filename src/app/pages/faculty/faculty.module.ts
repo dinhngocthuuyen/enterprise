@@ -1,8 +1,9 @@
+import { CommonModule } from "@angular/common";
 import { CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 import { NgModule } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 import { NbEvaIconsModule } from "@nebular/eva-icons";
-import { NbCardModule, NbIconModule, NbInputModule, NbTabsetModule } from "@nebular/theme";
+import { NbButtonModule, NbCardModule, NbIconModule, NbInputModule, NbTabsetModule } from "@nebular/theme";
 import { Ng2SmartTableModule } from "ng2-smart-table";
 
 import { LoginComponent } from "../login/login.component";
@@ -18,7 +19,9 @@ import { FacultyComponent } from "./faculty.component";
         NbEvaIconsModule,
         Ng2SmartTableModule,
         LoginModule,
-        NbInputModule
+        NbInputModule,
+        NbButtonModule,
+        CommonModule
     ],
     declarations: [
         FacultyComponent,
