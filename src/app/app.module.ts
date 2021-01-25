@@ -11,6 +11,9 @@ import { PagesComponent } from './pages/pages.component';
 import { LoginModule } from './pages/login/login.module';
 import { LoginComponent } from './pages/login/login.component';
 import { FacultyModule } from './pages/faculty/faculty.module';
+import { StoreModule } from '@ngrx/store';
+import { exampleReducer } from './pages/example/example.reducer';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -32,7 +35,7 @@ import { FacultyModule } from './pages/faculty/faculty.module';
     NbEvaIconsModule,
     NbCardModule,
     NbTabsetModule,
-
+    StoreModule.forRoot({ count: exampleReducer }),
   
   ],
   providers: [],

@@ -10,6 +10,9 @@ import { FacultyComponent } from './faculty/faculty.component';
 import { ManagerComponent } from './manager/manager.component';
 import { AdminComponent } from './admin/admin.component';
 import { StudentComponent } from './student/student.component';
+import { ExampleComponent } from './example/example.component';
+import { CommonModule } from '@angular/common';
+import { ExampleModule } from './example/example.module';
 
 @NgModule({
   imports: [
