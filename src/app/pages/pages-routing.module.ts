@@ -8,6 +8,7 @@ import { FacultyComponent } from './faculty/faculty.component';
 import { ManagerComponent } from './manager/manager.component';
 import { AdminComponent } from './admin/admin.component';
 import { StudentComponent } from './student/student.component';
+import { ExampleComponent } from './example/example.component';
 
 const routes: Routes = [{
   path: '',
@@ -47,6 +48,15 @@ const routes: Routes = [{
       path: 'student',
       loadChildren: () => import('./student/student.module')
         .then(m => m.StudentModule),
+    },
+    {
+      path: 'example',
+      component:  ExampleComponent,
+    },
+    {
+      path: 'example',
+      loadChildren: () => import('./example/example.module')
+        .then(m => m.ExampleModule),
     },
     {
       path: '',

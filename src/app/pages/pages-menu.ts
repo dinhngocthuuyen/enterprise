@@ -25,12 +25,17 @@ export const MENU_ITEMS: NbMenuItem[] = [
 
   {
     title: 'Admin',
-    icon: 'shopping-cart-outline',
+    icon: 'person-outline',
     link: '/pages/admin',
   },
   {
     title: 'Student',
     icon: 'home-outline',
     link: '/pages/student',
+  },
+  {
+    title: 'Exmaple',
+    icon: 'shopping-cart-outline',
+    link: '/pages/example',
   },
 ]

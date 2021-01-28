@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { NbButtonModule, NbCardModule, NbLayoutModule, NbListComponent, NbListModule } from '@nebular/theme';
+import { NbButtonGroupModule, NbButtonModule, NbCardModule, NbIconModule, NbInputDirective, NbInputModule, NbLayoutModule, NbListComponent, NbListModule, NbRadioModule } from '@nebular/theme';
 import { AdminComponent } from './admin.component';
 
 
@@ -8,9 +8,7 @@ import { AdminComponent } from './admin.component';
   imports: [
       NbCardModule,
       NbButtonModule,
-      
-      
-    
+      NbIconModule,
     
   ],
   declarations: [
