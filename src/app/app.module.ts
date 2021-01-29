@@ -7,6 +7,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NbThemeModule, NbLayoutModule, NbSidebarModule, NbButtonModule, NbIconModule, NbMenuModule, NbCardModule, NbTabsetModule, NbTreeGridModule } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { FormsModule } from '@angular/forms';
+import { StoreModule } from '@ngrx/store';
+import { exampleReducer } from './pages/example/example.reducer';
+import { counterReducer } from './pages/faculty/state/counter.reducer';
 
 @NgModule({
   declarations: [
