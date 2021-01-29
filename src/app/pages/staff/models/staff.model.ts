@@ -1,4 +1,4 @@
  export interface Staff{
      id: number;
-     Name: String;
+     name: String;
  }

@@ -17,7 +17,9 @@ import { FormsModule } from '@angular/forms';
     NbTabsetModule,
     NbLayoutModule,
     NbSidebarModule,
-    FormsModule
+    FormsModule,
+    NbButtonModule,
+    NbTabsetModule,
   ],
   exports: [LoginComponent],
   declarations: [

@@ -12,6 +12,8 @@ import { exampleReducer } from './pages/example/example.reducer';
 import { counterReducer } from './pages/faculty/state/counter.reducer';
 import { EffectsModule } from '@ngrx/effects';
 import { CommonModule } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
+import { reducer, StaffReducer } from './pages/staff/reducers';
 
 @NgModule({
   declarations: [
@@ -32,9 +34,11 @@ import { CommonModule } from '@angular/common';
     NbEvaIconsModule,
     NbCardModule,
     NbTabsetModule,
-    // StoreModule.forRoot({ count: exampleReducer, count2: counterReducer }),
-    // StoreModule.forRoot({}),
-    // EffectsModule.forRoot([]),
+    HttpClientModule,
+    StoreModule.forRoot({staffs: reducer }),
+
+    //  StoreModule.forRoot({ count: exampleReducer, count2: counterReducer, staff: StaffReducer }),
+    EffectsModule.forRoot([]),
   ],
   providers: [],
   bootstrap: [AppComponent],

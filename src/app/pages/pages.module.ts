@@ -26,8 +26,8 @@ import { StaffComponent } from './staff/staff.component';
     NbThemeModule.forRoot({ name: 'default' }),
     NbSidebarModule.forRoot(),
     NbMenuModule.forRoot(),
-    StoreModule.forRoot({}),
-    EffectsModule.forRoot([]),
+    // StoreModule.forRoot({}),
+    // EffectsModule.forRoot([]),
     NbLayoutModule,
     NbButtonModule,
     NbIconModule,
@@ -41,8 +41,8 @@ import { StaffComponent } from './staff/staff.component';
   declarations: [
     PagesComponent,
     ManagerComponent,
-    StaffComponent,
     UserComponent,
+    
     // StudentComponent,
     // LoginComponent,
   ],
