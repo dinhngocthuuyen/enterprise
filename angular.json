@@ -127,5 +127,8 @@
       }
     }
   },
-  "defaultProject": "enterprise-web"
+  "defaultProject": "enterprise-web",
+  "cli": {
+    "defaultCollection": "@ngrx/schematics"
+  }
 }
