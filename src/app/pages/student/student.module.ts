@@ -17,6 +17,7 @@ import { StudentComponent } from './student.component';
   exports: [StudentComponent],
   declarations: [
   StudentComponent,
+  
 
   ],
 
