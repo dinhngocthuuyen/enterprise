@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
+
 @Component({
   selector: 'app-student',
   templateUrl: './student.component.html',
@@ -7,5 +8,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class StudentComponent {
   
-
+//   toggle() {
+//     this.sidebarService.toggle(true);
+//     return false;
+// }
 }

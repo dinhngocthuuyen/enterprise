@@ -129,6 +129,7 @@
   },
   "defaultProject": "enterprise-web",
   "cli": {
-    "defaultCollection": "@ngrx/schematics"
+    "defaultCollection": "@ngrx/schematics",
+    "analytics": "edb7384d-b42f-417a-9bce-c1de6e5b69a1"
   }
 }
