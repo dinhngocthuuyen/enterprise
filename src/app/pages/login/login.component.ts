@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -8,10 +9,11 @@ import { FormControl } from '@angular/forms';
 })
 export class LoginComponent  {
 
+  
+  navigateToCodeMaster() {
+    this.route.navigate(['pages/admin'])
+}
+constructor(
 
-  // inputItemNgModel;
-  // textareaItemNgModel;
-  inputItemFormControl = new FormControl();
-  textareaItemFormControl = new FormControl();
-
+  private route: Router) { }
 }

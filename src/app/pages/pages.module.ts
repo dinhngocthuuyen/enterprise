@@ -13,14 +13,21 @@ import { StudentComponent } from './student/student.component';
 import { ExampleComponent } from './example/example.component';
 import { CommonModule } from '@angular/common';
 import { ExampleModule } from './example/example.module';
+import { UserComponent } from './user/user.component';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import { StaffComponent } from './staff/staff.component';
 
 @NgModule({
   imports: [
+    CommonModule,
     PagesRoutingModule,
     NbMenuModule,
     NbThemeModule.forRoot({ name: 'default' }),
     NbSidebarModule.forRoot(),
     NbMenuModule.forRoot(),
+    // StoreModule.forRoot({}),
+    // EffectsModule.forRoot([]),
     NbLayoutModule,
     NbButtonModule,
     NbIconModule,
@@ -34,6 +41,8 @@ import { ExampleModule } from './example/example.module';
   declarations: [
     PagesComponent,
     ManagerComponent,
+    UserComponent,
+    
     // StudentComponent,
     // LoginComponent,
   ],

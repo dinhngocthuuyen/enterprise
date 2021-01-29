@@ -2,7 +2,7 @@
   <nb-card-body>
 
     <h3>Hi</h3>
-    <ng2-smart-table [settings]="settings"></ng2-smart-table>
+    <ng2-smart-table [settings]="settings" [source]="faculties$ | async"></ng2-smart-table>
   </nb-card-body>
 </nb-card>
 
@@ -19,6 +19,7 @@
 </nb-card>
 
 <nb-card>
+<!-- <nb-card>
   <nb-card-body>
     <button nbButton (click)="increment()">Increment</button>
 
@@ -29,3 +30,4 @@
   <button nbButton (click)="reset()">Reset Counter</button>
   </nb-card-body>
 </nb-card>
+</nb-card> -->

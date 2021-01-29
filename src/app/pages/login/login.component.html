@@ -1,13 +1,12 @@
 <div class="col-md-6">
   <nb-card>
-    <nb-card-header>Basic form</nb-card-header>
+    <nb-card-header>LOGIN</nb-card-header>
     <nb-card-body>
 
-      <input type="text" nbInput fullWidth fieldSize="small" placeholder="Input">
-      <textarea nbInput fullWidth placeholder="Textarea"></textarea>
-      <input type="text" nbInput fullWidth fieldSize="small" placeholder="Input">
-      <textarea nbInput fullWidth placeholder="Textarea">
-              </textarea>
+      <input type="text" nbInput fullWidth fieldSize="small" placeholder="Username">
+      <input type="text" nbInput placeholder="First Name">
+      <input type="text" nbInput placeholder="Last Name" disabled>
+      <input type="text" nbInput fullWidth fieldSize="small" placeholder="Password">
 
     </nb-card-body>
   </nb-card>
@@ -33,3 +32,13 @@
       </nb-tabset>
     </nb-card-body>
   </nb-card>
+
+<nb-card>
+  <nb-card-body>
+    <button nbButton (click)="navigateToCodeMaster()" status="success">
+      Admin
+  </button>
+  </nb-card-body>
+ 
+</nb-card>
+

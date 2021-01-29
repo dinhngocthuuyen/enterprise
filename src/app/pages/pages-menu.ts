@@ -12,6 +12,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
     icon: 'shopping-cart-outline',
     link: '/pages/login',
   },
+
   {
     title: 'Faculty',
     icon: 'home-outline',
@@ -37,5 +38,20 @@ export const MENU_ITEMS: NbMenuItem[] = [
     title: 'Exmaple',
     icon: 'shopping-cart-outline',
     link: '/pages/example',
+  },
+  {
+    title: 'Shopping',
+    icon: 'shopping-cart-outline',
+    link: '/pages/shopping',
+  },
+  {
+    title: 'Staff',
+    icon: 'shopping-cart-outline',
+    link: '/pages/staff',
+  },
+  {
+    title: 'User',
+    icon: 'shopping-cart-outline',
+    link: '/pages/user',
   },
 ]

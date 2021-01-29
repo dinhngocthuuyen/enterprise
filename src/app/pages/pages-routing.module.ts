@@ -9,6 +9,8 @@ import { ManagerComponent } from './manager/manager.component';
 import { AdminComponent } from './admin/admin.component';
 import { StudentComponent } from './student/student.component';
 import { ExampleComponent } from './example/example.component';
+import { StaffComponent } from './staff/staff.component';
+import { UserComponent } from './user/user.component';
 
 const routes: Routes = [{
   path: '',
@@ -27,6 +29,7 @@ const routes: Routes = [{
       loadChildren: () => import('./login/login.module')
         .then(m => m.LoginModule),
     },
+  
     {
       path: 'faculty',
       component: FacultyComponent,
@@ -63,7 +66,6 @@ const routes: Routes = [{
       redirectTo: 'dashboard',
       pathMatch: 'full',
     },
-
     {
       path: 'admin',
       component: AdminComponent,
@@ -73,6 +75,31 @@ const routes: Routes = [{
       loadChildren: () => import('./admin/admin.module')
         .then(m => m.AdminModule),
     },
+    {
+      path: 'staff',
+      component:  StaffComponent,
+    },
+    {
+      path: 'staff',
+      loadChildren: () => import('./staff/staff.module')
+        .then(m => m.StaffModule),
+    },
+    {
+      path: 'user',
+      component:  UserComponent,
+    },
+    // {
+    //   path: 'user',
+    //   loadChildren: () => import('./staff/staff.module')
+    //     .then(m => m.UserModule),
+    // },
+    {
+      path: '',
+      redirectTo: 'dashboard',
+      pathMatch: 'full',
+    },
+
+  
     {
       path: '**',
     //   component: NotFoundComponent,

@@ -1,0 +1,16 @@
+{
+"faculties": [
+  {
+  "id": "1",
+  "name": "Science"
+  },
+  {
+  "id": "2",
+  "name": "History"
+  },
+  {
+  "id": "3",
+  "name": "Math"
+  }
+]
+}
