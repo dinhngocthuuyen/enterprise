@@ -4,27 +4,34 @@ import { NgModule } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 import { NbEvaIconsModule } from "@nebular/eva-icons";
 import { NbButtonModule, NbCardModule, NbIconModule, NbInputModule, NbTabsetModule } from "@nebular/theme";
+import { EffectsModule } from "@ngrx/effects";
+import { StoreModule } from "@ngrx/store";
 import { Ng2SmartTableModule } from "ng2-smart-table";
 
 import { LoginComponent } from "../login/login.component";
 import { LoginModule } from "../login/login.module";
+import { FacultyEffects } from "./effects/faculty.effects";
 import { FacultyComponent } from "./faculty.component";
+import { FeatureKey, reducer } from "./reducers";
 
+export const COMPONENTS = [
+  FacultyComponent,
+];
 @NgModule({
     imports: [
-        FormsModule,
-        NbCardModule,
-        NbTabsetModule,
-        NbIconModule,
-        NbEvaIconsModule,
-        Ng2SmartTableModule,
-        LoginModule,
-        NbInputModule,
-        NbButtonModule,
-        CommonModule
+      CommonModule,
+      FormsModule,
+      NbCardModule,
+      NbTabsetModule,
+      NbIconModule,
+      NbEvaIconsModule,
+      Ng2SmartTableModule,
+      LoginModule,
+      NbInputModule,
+      NbButtonModule,
+      StoreModule.forFeature(FeatureKey, reducer),
+      EffectsModule.forFeature([FacultyEffects])
     ],
-    declarations: [
-        FacultyComponent,
-    ],
+    declarations: [COMPONENTS],
 })
 export class FacultyModule { }

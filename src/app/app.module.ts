@@ -10,6 +10,8 @@ import { FormsModule } from '@angular/forms';
 import { StoreModule } from '@ngrx/store';
 import { exampleReducer } from './pages/example/example.reducer';
 import { counterReducer } from './pages/faculty/state/counter.reducer';
+import { EffectsModule } from '@ngrx/effects';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -17,6 +19,7 @@ import { counterReducer } from './pages/faculty/state/counter.reducer';
   ],
   imports: [
     BrowserModule,
+    CommonModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     FormsModule,
@@ -29,9 +32,9 @@ import { counterReducer } from './pages/faculty/state/counter.reducer';
     NbEvaIconsModule,
     NbCardModule,
     NbTabsetModule,
-    StoreModule.forRoot({ count: exampleReducer, count2: counterReducer }),
-
-
+    // StoreModule.forRoot({ count: exampleReducer, count2: counterReducer }),
+    // StoreModule.forRoot({}),
+    // EffectsModule.forRoot([]),
   ],
   providers: [],
   bootstrap: [AppComponent],
