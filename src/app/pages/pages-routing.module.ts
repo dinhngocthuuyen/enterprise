@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { PagesComponent } from './pages.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { LoginComponent } from './login/login.component';
-import { FacultyComponent } from './faculty/faculty.component';
+import { FacultyComponent } from './faculty/containers/faculty.component';
 import { ManagerComponent } from './manager/manager.component';
 import { AdminComponent } from './admin/admin.component';
 import { StudentComponent } from './student/student.component';
@@ -61,6 +61,10 @@ const routes: Routes = [{
       loadChildren: () => import('./example/example.module')
         .then(m => m.ExampleModule),
     },
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
     {
       path: '',
       redirectTo: 'dashboard',

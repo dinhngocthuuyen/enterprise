@@ -9,6 +9,7 @@ export interface FacultyState extends EntityState<Faculty>{
 
 export const facultyAdapter: EntityAdapter<Faculty> = createEntityAdapter<Faculty>({
   selectId: (faculty: Faculty) => faculty.id,
+  sortComparer: false,
 });
 
 export const facultyInitialState: FacultyState = facultyAdapter.getInitialState({
@@ -26,25 +27,25 @@ export const facultiesFeatureKey = 'faculties'
 export const reducer = createReducer(
   facultyInitialState,
     on(
-      FacultyApiActions.getFaculties,
+      // FacultyApiActions.getFaculties,
       FacultyCollectionApiActions.loadFacultySuccess,
         (state, { faculties }) => {
           faculties = faculties
 
-            return facultyAdapter.addMany(
-              faculties,
-                state)
+          return facultyAdapter.addMany(
+            faculties,
+              state)
         }
     ),
     on(
       FacultyApiActions.getFaculty,
       FacultyCollectionApiActions.loadSelectedFacultySuccess,
         (state, { faculty }) => {
-            faculty = faculty
+          faculty = faculty
 
-            return facultyAdapter.addOne(
-                faculty,
-                state)
+          return facultyAdapter.addOne(
+              faculty,
+              state)
         }
     ),
 )

@@ -3,7 +3,7 @@ import { Faculty } from 'src/app/models';
 
 export const getFaculties = createAction(
   '[Faculty/API] Get List Faculty',
-  props<{ faculties: Faculty[] }>(),
+  // props<{ faculties: Faculty[] }>(),
 );
 
 export const getFaculty = createAction(

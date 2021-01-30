@@ -24,6 +24,12 @@
     "@nebular/eva-icons": "^7.0.0",
     "@nebular/security": "^7.0.0",
     "@nebular/theme": "^7.0.0",
+<<<<<<< Updated upstream
+=======
+    "@ngrx/effects": "^10.1.2",
+    "@ngrx/entity": "^10.1.2",
+    "@ngrx/router-store": "^10.1.2",
+>>>>>>> Stashed changes
     "@ngrx/store": "^10.1.2",
     "body-parser": "^1.19.0",
     "eva-icons": "^1.1.3",

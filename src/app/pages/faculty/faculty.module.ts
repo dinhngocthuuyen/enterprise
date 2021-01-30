@@ -11,27 +11,20 @@ import { Ng2SmartTableModule } from "ng2-smart-table";
 import { LoginComponent } from "../login/login.component";
 import { LoginModule } from "../login/login.module";
 import { FacultyEffects } from "./effects/faculty.effects";
-import { FacultyComponent } from "./faculty.component";
+import { FacultyComponent } from "./containers/faculty.component";
 import { FeatureKey, reducer } from "./reducers";
+import { FacultyListComponent } from "./components/faculty-list.component";
+
+export const CONTAINERS = [
+  FacultyComponent,
+];
 
 export const COMPONENTS = [
-  FacultyComponent,
+  FacultyListComponent,
 ];
 @NgModule({
     imports: [
-        FormsModule,
-        NbCardModule,
-        NbTabsetModule,
-        NbIconModule,
-        NbEvaIconsModule,
-        Ng2SmartTableModule,
-        LoginModule,
-        NbInputModule,
-        NbButtonModule,
-        CommonModule
-    ],
-    declarations: [
-        FacultyComponent,
+
       CommonModule,
       FormsModule,
       NbCardModule,
@@ -45,6 +38,6 @@ export const COMPONENTS = [
       StoreModule.forFeature(FeatureKey, reducer),
       EffectsModule.forFeature([FacultyEffects])
     ],
-    declarations: [COMPONENTS],
+    declarations: [CONTAINERS, COMPONENTS],
 })
 export class FacultyModule { }

@@ -2,6 +2,11 @@ import { createSelector } from '@ngrx/store';
 import { selectFacultiesState } from './features.selectors';
 import { FacultyReducer } from '../reducers';
 import { facultyAdapter } from '../reducers/faculty.reducers';
+import * as fromRouter from '@ngrx/router-store'
+import { Faculty } from 'src/app/models';
+export interface State {
+  router: fromRouter.RouterReducerState<any>,
+}
 
 export const selectFacultyEntitiesState = createSelector(
   selectFacultiesState,
@@ -15,10 +20,10 @@ export const {
     selectTotal: selectTotalFaculties
 } = facultyAdapter.getSelectors(selectFacultyEntitiesState);
 
-// export const selectCurrentFaculty = (id) => createSelector(
-//     selectFacultyEntities,
-//     (faculties) => faculties[id]
-// )
+export const selectCurrentFaculty = (id) => createSelector(
+    selectFacultyEntities,
+    (faculties) => faculties[id]
+)
 
 export const FacultySelectors = {
     selectFacultyEntitiesState,
@@ -26,5 +31,5 @@ export const FacultySelectors = {
     selectFacultyEntities,
     selectAllFaculties,
     selectTotalFaculties,
-    // selectCurrentFaculty
+    selectCurrentFaculty
 }

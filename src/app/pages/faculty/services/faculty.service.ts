@@ -11,7 +11,7 @@ export class FacultyService {
   options = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
-      'mode': 'no-cors'
+      // 'mode': 'no-cors'
     }),
     //params: httpParam
   };
@@ -24,6 +24,9 @@ export class FacultyService {
 
   getFaculties(): Observable<Faculty[]> {
     return this.http.get<Faculty[]>(this.API_PATH, this.options);
+  }
+  getFaculty(): Observable<Faculty> {
+    return this.http.get<Faculty>(this.API_PATH, this.options);
   }
 
 }

@@ -18,7 +18,17 @@ import { counterReducer } from './pages/faculty/state/counter.reducer';
 import { EffectsModule } from '@ngrx/effects';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
+<<<<<<< Updated upstream
 import { reducer, StaffReducer } from './pages/staff/reducers';
+=======
+import { ROOT_REDUCERS, metaReducers } from './pages/reducers';
+import { reducer } from './pages/faculty/reducers';
+// import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { environment } from 'src/environments/environment';
+import { routerReducer, StoreRouterConnectingModule } from '@ngrx/router-store';
+import { RouterModule } from '@angular/router';
+import { FacultyModule } from './pages/faculty/faculty.module';
+>>>>>>> Stashed changes
 
 @NgModule({
   declarations: [
@@ -26,19 +36,20 @@ import { reducer, StaffReducer } from './pages/staff/reducers';
   ],
   imports: [
     BrowserModule,
-    CommonModule,
+    HttpClientModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     FormsModule,
     NbThemeModule.forRoot({ name: 'default' }),
     NbSidebarModule.forRoot(),
-    NbMenuModule,
+    NbMenuModule.forRoot(),
     NbLayoutModule,
     NbButtonModule,
     NbIconModule,
     NbEvaIconsModule,
     NbCardModule,
     NbTabsetModule,
+<<<<<<< Updated upstream
     StoreModule.forRoot({ count: exampleReducer, count2: counterReducer }),
 
 
@@ -47,6 +58,29 @@ import { reducer, StaffReducer } from './pages/staff/reducers';
 
     //  StoreModule.forRoot({ count: exampleReducer, count2: counterReducer, staff: StaffReducer }),
     EffectsModule.forRoot([]),
+=======
+    // StoreModule.forRoot({ count: exampleReducer, count2: counterReducer }),
+    StoreModule.forRoot(ROOT_REDUCERS, {
+      metaReducers,
+      runtimeChecks: {
+        strictStateImmutability: true,
+        strictActionImmutability: true,
+        strictStateSerializability: true,
+        strictActionSerializability: true,
+        strictActionWithinNgZone: true,
+        strictActionTypeUniqueness: true,
+      },
+    }),
+    // StoreModule.forRoot({ faculties: reducer}),
+    EffectsModule.forRoot([]),
+    FacultyModule
+    // StoreDevtoolsModule.instrument({
+    //   maxAge: 25, // Retains last 25 states
+    //   logOnly: environment.production, // Restrict extension to log-only mode
+    // }),
+    // StoreRouterConnectingModule.forRoot(),
+    // RouterModule.forRoot([])
+>>>>>>> Stashed changes
   ],
   providers: [],
   bootstrap: [AppComponent],

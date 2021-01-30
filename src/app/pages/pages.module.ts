@@ -6,7 +6,7 @@ import { PagesRoutingModule } from './pages-routing.module';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { LoginComponent } from './login/login.component';
 import { LoginModule } from './login/login.module';
-import { FacultyComponent } from './faculty/faculty.component';
+import { FacultyComponent } from './faculty/containers/faculty.component';
 import { ManagerComponent } from './manager/manager.component';
 import { AdminComponent } from './admin/admin.component';
 import { StudentComponent } from './student/student.component';
@@ -17,6 +17,7 @@ import { UserComponent } from './user/user.component';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { StaffComponent } from './staff/staff.component';
+import { ROOT_REDUCERS,metaReducers} from './reducers';
 
 @NgModule({
   imports: [
@@ -27,6 +28,18 @@ import { StaffComponent } from './staff/staff.component';
     NbSidebarModule.forRoot(),
     NbMenuModule.forRoot(),
     // StoreModule.forRoot({}),
+<<<<<<< Updated upstream
+=======
+    // StoreModule.forRoot(ROOT_REDUCERS, {
+    //   metaReducers,
+    //   runtimeChecks: {
+    //     strictStateImmutability: true,
+    //     strictActionImmutability: true,
+    //     strictStateSerializability: true,
+    //     strictActionSerializability: true,
+    //   },
+    // }),
+>>>>>>> Stashed changes
     // EffectsModule.forRoot([]),
     NbLayoutModule,
     NbButtonModule,
