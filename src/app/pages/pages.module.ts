@@ -28,8 +28,6 @@ import { ROOT_REDUCERS,metaReducers} from './reducers';
     NbSidebarModule.forRoot(),
     NbMenuModule.forRoot(),
     // StoreModule.forRoot({}),
-<<<<<<< Updated upstream
-=======
     // StoreModule.forRoot(ROOT_REDUCERS, {
     //   metaReducers,
     //   runtimeChecks: {
@@ -39,7 +37,6 @@ import { ROOT_REDUCERS,metaReducers} from './reducers';
     //     strictActionSerializability: true,
     //   },
     // }),
->>>>>>> Stashed changes
     // EffectsModule.forRoot([]),
     NbLayoutModule,
     NbButtonModule,
@@ -55,7 +52,7 @@ import { ROOT_REDUCERS,metaReducers} from './reducers';
     PagesComponent,
     ManagerComponent,
     UserComponent,
-    
+
     // StudentComponent,
     // LoginComponent,
   ],

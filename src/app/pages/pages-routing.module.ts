@@ -29,7 +29,7 @@ const routes: Routes = [{
       loadChildren: () => import('./login/login.module')
         .then(m => m.LoginModule),
     },
-  
+
     {
       path: 'faculty',
       component: FacultyComponent,
@@ -61,10 +61,6 @@ const routes: Routes = [{
       loadChildren: () => import('./example/example.module')
         .then(m => m.ExampleModule),
     },
-<<<<<<< Updated upstream
-=======
-
->>>>>>> Stashed changes
     {
       path: '',
       redirectTo: 'dashboard',
@@ -103,7 +99,7 @@ const routes: Routes = [{
       pathMatch: 'full',
     },
 
-  
+
     {
       path: '**',
     //   component: NotFoundComponent,
