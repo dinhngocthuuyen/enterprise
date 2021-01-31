@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://localhost:27017/enterprise',{ useNewUrlParser: true }).then(() =>{
-    console.log("connect mongodb success");
+    console.log("Connenting to mongodb successfully");
 }).catch((e) =>{
     console.log("Error");
     console.log(e);

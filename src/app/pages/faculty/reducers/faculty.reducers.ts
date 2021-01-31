@@ -4,11 +4,11 @@ import { Faculty } from 'src/app/models';
 import { FacultyApiActions, FacultyCollectionApiActions } from '../actions';
 
 export interface FacultyState extends EntityState<Faculty>{
-  selectedFacultyID: number | null;
+  selectedFacultyID: String | null;
 }
 
 export const facultyAdapter: EntityAdapter<Faculty> = createEntityAdapter<Faculty>({
-  selectId: (faculty: Faculty) => faculty.id,
+  selectId: (faculty: Faculty) => faculty._id,
   sortComparer: false,
 });
 
@@ -16,7 +16,7 @@ export const facultyInitialState: FacultyState = facultyAdapter.getInitialState(
   selectedFacultyID: null,
   entities: {
       0: {
-          id: 0,
+          _id: '',
           name: '',
       }
   }
