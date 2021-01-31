@@ -19,9 +19,9 @@ import { decrement, increment, reset } from '../state/counter.actions';
     faculties$: Observable<Faculty[]>;
     settings = {
       columns: {
-        id: {
+        _id: {
           title: 'ID',
-          type: 'number'
+          type: 'string'
         },
         name: {
           title: 'Name',

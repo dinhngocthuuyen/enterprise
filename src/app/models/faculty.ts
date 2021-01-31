@@ -1,5 +1,5 @@
 export interface Faculty {
-  id: number;
+  id: string;
   name: string;
 }
 
