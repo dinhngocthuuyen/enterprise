@@ -1,30 +1,33 @@
 {
-"faculties": [
-  {
-  "id": 1,
-  "name": "Science"
-  },
-  {
-  "id": 2,
-  "name": "History"
-  },
-  {
-  "id": 3,
-  "name": "Math"
-  }
-],
-"students": [
-  {
-  "id": 1,
-  "name": "Thu"
-  },
-  {
-  "id": 2,
-  "name": "Uyen"
-  },
-  {
-  "id": 3,
-  "name": "dung"
-  }
-]
+  "faculties": [
+    {
+      "id": 1,
+      "name": "Science"
+    },
+    {
+      "id": 2,
+      "name": "History"
+    },
+    {
+      "id": 3,
+      "name": "Math"
+    },
+    {
+      "id": 4
+    }
+  ],
+  "students": [
+    {
+      "id": 1,
+      "name": "Thu"
+    },
+    {
+      "id": 2,
+      "name": "Uyen"
+    },
+    {
+      "id": 3,
+      "name": "dung"
+    }
+  ]
 }

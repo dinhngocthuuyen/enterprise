@@ -13,17 +13,12 @@ import { LoginComponent } from './pages/login/login.component';
 import { FacultyModule } from './pages/faculty/faculty.module';
 import { StoreModule } from '@ngrx/store';
 import { FormsModule } from '@angular/forms';
-import { exampleReducer } from './pages/example/example.reducer';
-import { counterReducer } from './pages/faculty/state/counter.reducer';
+
 import { EffectsModule } from '@ngrx/effects';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { ROOT_REDUCERS, metaReducers } from './pages/reducers';
-import { reducer } from './pages/faculty/reducers';
-// import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { environment } from 'src/environments/environment';
-import { routerReducer, StoreRouterConnectingModule } from '@ngrx/router-store';
-import { RouterModule } from '@angular/router';
+
 
 @NgModule({
   declarations: [
