@@ -63,31 +63,6 @@ import { decrement, increment, reset } from './state/counter.actions';
       this.store.dispatch(reset());
     }
 
-    // count2$: Observable<number>;
 
-    // constructor(private store: Store<{ count2: number }>) {
-    //   this.count2$ = store.select('count2');
-    // }
-
-    // increment() {
-    //   this.store.dispatch(increment());
-    // }
-
-    // decrement() {
-    //   this.store.dispatch(decrement());
-    // }
-
-    // reset() {
-    //   this.store.dispatch(reset());
-    // }
-
-    constructor(
-      private store: Store<Faculty>
-    ){
-      this.faculties$ = this.store.pipe(select(FacultySelectors.selectAllFaculties));
-
-    }
-    ngOnInit() {
-      this.store.dispatch(FacultyApiActions.getFaculties({ faculties: [] }));
-  }
+  
   }
