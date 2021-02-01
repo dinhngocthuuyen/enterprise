@@ -12,7 +12,9 @@ import { StudentComponent } from './student.component';
     NbButtonGroupModule,
     NbSidebarModule,
     NbMenuModule.forRoot(),
-    NbCardModule
+    NbCardModule,
+    NbTableModule,
+    NbTabsetModule
   ],
   exports: [StudentComponent],
   declarations: [
