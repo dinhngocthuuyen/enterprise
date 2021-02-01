@@ -1,7 +1,7 @@
 import { Action, createReducer, on } from '@ngrx/store';
 
 
-export const userFeatureKey = 'user';
+export const reviewFeatureKey = 'review';
 
 export interface State {
 

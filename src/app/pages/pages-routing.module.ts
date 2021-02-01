@@ -8,9 +8,7 @@ import { FacultyComponent } from './faculty/containers/faculty.component';
 import { ManagerComponent } from './manager/manager.component';
 import { AdminComponent, SignInComponent } from './admin/admin.component';
 import { StudentComponent } from './student/student.component';
-import { ExampleComponent } from './example/example.component';
 import { StaffComponent } from './staff/staff.component';
-import { UserComponent } from './user/user.component';
 
 const routes: Routes = [{
   path: '',
@@ -53,15 +51,6 @@ const routes: Routes = [{
         .then(m => m.StudentModule),
     },
     {
-      path: 'example',
-      component:  ExampleComponent,
-    },
-    {
-      path: 'example',
-      loadChildren: () => import('./example/example.module')
-        .then(m => m.ExampleModule),
-    },
-    {
       path: '',
       redirectTo: 'dashboard',
       pathMatch: 'full',
@@ -84,10 +73,7 @@ const routes: Routes = [{
       loadChildren: () => import('./staff/staff.module')
         .then(m => m.StaffModule),
     },
-    {
-      path: 'user',
-      component:  UserComponent,
-    },
+
     // {
     //   path: 'user',
     //   loadChildren: () => import('./staff/staff.module')

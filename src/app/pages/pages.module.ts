@@ -10,10 +10,7 @@ import { FacultyComponent } from './faculty/containers/faculty.component';
 import { ManagerComponent } from './manager/manager.component';
 import { AdminComponent } from './admin/admin.component';
 import { StudentComponent } from './student/student.component';
-import { ExampleComponent } from './example/example.component';
 import { CommonModule } from '@angular/common';
-import { ExampleModule } from './example/example.module';
-import { UserComponent } from './user/user.component';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { StaffComponent } from './staff/staff.component';
@@ -28,17 +25,6 @@ import { ReviewComponent } from './coordinators/review/review.component';
     NbThemeModule.forRoot({ name: 'default' }),
     NbSidebarModule.forRoot(),
     NbMenuModule.forRoot(),
-    // StoreModule.forRoot({}),
-    // StoreModule.forRoot(ROOT_REDUCERS, {
-    //   metaReducers,
-    //   runtimeChecks: {
-    //     strictStateImmutability: true,
-    //     strictActionImmutability: true,
-    //     strictStateSerializability: true,
-    //     strictActionSerializability: true,
-    //   },
-    // }),
-    // EffectsModule.forRoot([]),
     NbLayoutModule,
     NbButtonModule,
     NbIconModule,
@@ -51,12 +37,7 @@ import { ReviewComponent } from './coordinators/review/review.component';
   ],
   declarations: [
     PagesComponent,
-    ManagerComponent,
-    UserComponent,
-    ReviewComponent,
 
-    // StudentComponent,
-    // LoginComponent,
   ],
 })
 export class PagesModule {

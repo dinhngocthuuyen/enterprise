@@ -18,6 +18,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { ROOT_REDUCERS, metaReducers } from './pages/reducers';
+import { ReviewModule } from './pages/coordinators/review/review.module';
 
 
 @NgModule({
@@ -39,7 +40,6 @@ import { ROOT_REDUCERS, metaReducers } from './pages/reducers';
     NbEvaIconsModule,
     NbCardModule,
     NbTabsetModule,
-    // StoreModule.forRoot({ count: exampleReducer, count2: counterReducer }),
     StoreModule.forRoot(ROOT_REDUCERS, {
       metaReducers,
       runtimeChecks: {
@@ -51,15 +51,10 @@ import { ROOT_REDUCERS, metaReducers } from './pages/reducers';
         strictActionTypeUniqueness: true,
       },
     }),
-    // StoreModule.forRoot({ faculties: reducer}),
     EffectsModule.forRoot([]),
-    FacultyModule
-    // StoreDevtoolsModule.instrument({
-    //   maxAge: 25, // Retains last 25 states
-    //   logOnly: environment.production, // Restrict extension to log-only mode
-    // }),
-    // StoreRouterConnectingModule.forRoot(),
-    // RouterModule.forRoot([])
+    FacultyModule,
+    ReviewModule,
+ 
   ],
   providers: [],
   bootstrap: [AppComponent],
