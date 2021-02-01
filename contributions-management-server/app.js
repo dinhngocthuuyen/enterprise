@@ -64,7 +64,12 @@ Faculty.findByIdAndRemove({
 });
 
 ////////////////////////////////////
-
+dateConversionStage = {
+    $addFields: {
+       convertedDate: { $toDate: "$date" }
+    }
+ };
+ 
 //GET Review
 app.get('/reviews', (req, res) => {
 
@@ -76,7 +81,7 @@ app.get('/reviews', (req, res) => {
 app.post('/reviews', (req, res) => {
     let description = req.body.description;
     let date = req.body.date;
-
+  
     let status = req.body.status;
     let pending = req.body.pending;
 
@@ -97,6 +102,10 @@ app.patch('/reviews/:id', (req, res) => {
         res.sendStatus(200);
     });
     });
+
+
+
+    
 app.listen(3000, () => {
     console.log("Connection on port 3000");
 })

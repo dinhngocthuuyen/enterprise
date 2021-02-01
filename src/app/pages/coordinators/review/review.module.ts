@@ -6,9 +6,11 @@ import { NbCardBodyComponent, NbCardHeaderComponent, NbCardModule, NbTabComponen
 import { EffectsModule } from "@ngrx/effects";
 import { StoreModule } from "@ngrx/store";
 import { Ng2SmartTableComponent, Ng2SmartTableModule } from "ng2-smart-table";
+import { AllComponent } from "./component/all.component";
 import { ReviewEffects } from "./effects/review.effects";
 import { FeatureKey, reducer } from "./reducers";
 import { ReviewComponent } from "./review.component";
+
 
 @NgModule({
     imports: [
@@ -25,7 +27,9 @@ import { ReviewComponent } from "./review.component";
    
 
     declarations: [
-        ReviewComponent,    
+        ReviewComponent,
+        AllComponent
+     
     ],
 
   })

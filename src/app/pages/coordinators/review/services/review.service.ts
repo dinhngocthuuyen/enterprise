@@ -29,4 +29,11 @@ export class ReviewService {
     return this.http.get<Contribution>(this.API_PATH, this.options);
   }
 
+  getPendings(): Observable<Contribution[]> {
+    return this.http.get<Contribution[]>(this.API_PATH, this.options);
+  }
+  getPending(): Observable<Contribution> {
+    return this.http.get<Contribution>(this.API_PATH, this.options);
+  }
+
 }

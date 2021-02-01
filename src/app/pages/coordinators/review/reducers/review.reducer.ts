@@ -40,6 +40,17 @@ export const reducer = createReducer(
             state)
       }
   ),
+  on(
+    // FacultyApiActions.getFaculties,
+    ReviewCollectionApiActions.loadPendingsSuccess,
+      (state, { contributions }) => {
+        contributions = contributions
+
+        return reviewAdapter.addMany(
+          contributions,
+            state)
+      }
+  ),
 
 );
 
