@@ -7,7 +7,7 @@ import { Contribution } from 'src/app/models';
   providedIn: 'root'
 })
 export class ReviewService {
-  API_PATH = "http://localhost:3000/contributions"
+  API_PATH = "http://localhost:3000/reviews"
   options = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',

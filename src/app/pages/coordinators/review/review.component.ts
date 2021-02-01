@@ -15,8 +15,9 @@ export class ReviewComponent implements OnInit {
   contributions$: Observable<Contribution[]> | undefined;
   settings = {
     columns: {
-      id: {
-        title: 'ID'
+      _id: {
+        title: 'ID',
+        type:'string'
       },
       date: {
         title: 'Date',
@@ -25,6 +26,14 @@ export class ReviewComponent implements OnInit {
       description: {
         title: 'description',
         type: 'string'
+      },
+      pending: {
+        title: 'Pending',
+        type: 'boolean'
+      },
+      status: {
+        title: 'Status',
+        type: 'boolean'
       },
     },
     hideSubHeader: true,
