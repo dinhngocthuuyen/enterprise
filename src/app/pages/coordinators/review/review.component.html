@@ -4,8 +4,10 @@
   
       <nb-tabset fullWidth>
         <nb-tab tabTitle="All Contribution">
-          <p>List of <strong>users</strong>.</p>
-        </nb-tab>
+          <nb-card-body>
+
+            <ng2-smart-table [settings]="settings" [source]="contributions$ | async"></ng2-smart-table>
+          </nb-card-body>        </nb-tab>
         <nb-tab tabTitle="Pending ">
           <p>List of <strong>orders</strong>.</p>
         </nb-tab>

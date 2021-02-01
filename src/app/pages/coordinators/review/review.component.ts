@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { Contribution } from 'src/app/models';
+import { ReviewApiActions } from './actions';
+import { ReviewSelectors } from './selectors';
 
 @Component({
   selector: 'app-review',
@@ -9,7 +12,7 @@ import { Contribution } from 'src/app/models';
 })
 export class ReviewComponent implements OnInit {
 
-  combutritions$: Observable<Contribution[]> | undefined;
+  contributions$: Observable<Contribution[]> | undefined;
   settings = {
     columns: {
       id: {
@@ -28,7 +31,14 @@ export class ReviewComponent implements OnInit {
     actions: false,
   };
 
-  ngOnInit(): void {
+  constructor(
+    private store: Store<Contribution>
+  ){
+    this.contributions$ = this.store.pipe(select(ReviewSelectors.selectAllReviews));
+
   }
+  ngOnInit() {
+    this.store.dispatch(ReviewApiActions.loadReviews());
+}
 
 }

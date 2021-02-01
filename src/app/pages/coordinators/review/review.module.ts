@@ -6,6 +6,8 @@ import { NbCardBodyComponent, NbCardHeaderComponent, NbCardModule, NbTabComponen
 import { EffectsModule } from "@ngrx/effects";
 import { StoreModule } from "@ngrx/store";
 import { Ng2SmartTableComponent, Ng2SmartTableModule } from "ng2-smart-table";
+import { ReviewEffects } from "./effects/review.effects";
+import { FeatureKey, reducer } from "./reducers";
 import { ReviewComponent } from "./review.component";
 
 @NgModule({
@@ -17,18 +19,14 @@ import { ReviewComponent } from "./review.component";
     HttpClientModule,
     NbTabsetModule,
     
-    // StoreModule.forFeature(FeatureKey, reducer),
-    // EffectsModule.forFeature([StaffEffects])
+    StoreModule.forFeature(FeatureKey, reducer),
+    EffectsModule.forFeature([ReviewEffects])
     ],
-    // exports:[NbTabComponent,  
-    //     NbCardHeaderComponent,
-    //     NbCardBodyComponent],
+   
 
     declarations: [
         ReviewComponent,
-        // NbCardHeaderComponent,
-        // NbCardBodyComponent,
-        // NbTabComponent
+     
     ],
 
   })

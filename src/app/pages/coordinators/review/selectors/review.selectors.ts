@@ -2,6 +2,9 @@ import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { ReviewReducer } from '../reducers';
 import { reviewAdapter } from '../reducers/review.reducer';
 import { selectReviewState } from './features.selectors';
+import * as fromRouter from '@ngrx/router-store'
+
+
 
 export const selectReviewEntitiesState = createSelector(
     selectReviewState,
