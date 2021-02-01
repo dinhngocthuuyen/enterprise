@@ -1,6 +1,5 @@
 import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
-
 import { PagesComponent } from './pages.component';
 import { DashboardComponent } from './coordinators/dashboard/dashboard.component';
 import { LoginComponent } from './login/login.component';
@@ -83,6 +82,11 @@ const routes: Routes = [{
       path: 'staff',
       loadChildren: () => import('./staff/staff.module')
         .then(m => m.StaffModule),
+    },
+
+    {
+      path: 'review',
+      component: ReviewComponent,
     },
 
     {

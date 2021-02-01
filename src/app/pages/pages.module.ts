@@ -39,7 +39,6 @@ import { GuestComponent } from './guest/guest.component';
   declarations: [
     PagesComponent,
     ManagerComponent,
-    ReviewComponent,
     GuestComponent,
 
     // StudentComponent,

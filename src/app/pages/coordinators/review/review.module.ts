@@ -25,8 +25,7 @@ import { ReviewComponent } from "./review.component";
    
 
     declarations: [
-        ReviewComponent,
-     
+        ReviewComponent,    
     ],
 
   })
