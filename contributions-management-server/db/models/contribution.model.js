@@ -10,6 +10,12 @@ const ContributionSchema = new mongoose.Schema({
   },
   date: {
     type: Date,
+  },
+  status: {
+    type: Boolean,
+  },
+  pending: {
+    type: Boolean,
   }
 })
 
