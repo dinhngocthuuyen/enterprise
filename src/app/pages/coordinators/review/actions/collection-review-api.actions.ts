@@ -1,13 +1,14 @@
 import { createAction, props } from '@ngrx/store';
+import { Contribution } from 'src/app/models';
 
 
 
 export const loadReviewsSuccess = createAction(
   '[Review] Load Reviews Success',
-  props<{ data: any }>()
+  props<{ contributions: Contribution[] }>()
 );
 
 export const loadReviewsFailure = createAction(
   '[Review] Load Reviews Failure',
-  props<{ error: any }>()
+  props<{ errorMsg: any }>()
 );

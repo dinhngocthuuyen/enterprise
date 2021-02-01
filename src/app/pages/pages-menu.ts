@@ -45,13 +45,9 @@ export const MENU_ITEMS: NbMenuItem[] = [
     link: '/pages/shopping',
   },
   {
-    title: 'Staff',
+    title: 'Review',
     icon: 'shopping-cart-outline',
-    link: '/pages/staff',
+    link: '/pages/coordinators/review',
   },
-  {
-    title: 'User',
-    icon: 'shopping-cart-outline',
-    link: '/pages/user',
-  },
+ 
 ]

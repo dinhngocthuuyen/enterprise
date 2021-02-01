@@ -20,15 +20,15 @@ import { ReviewComponent } from "./review.component";
     // StoreModule.forFeature(FeatureKey, reducer),
     // EffectsModule.forFeature([StaffEffects])
     ],
-    exports:[NbTabComponent,  
-        NbCardHeaderComponent,
-        NbCardBodyComponent],
+    // exports:[NbTabComponent,  
+    //     NbCardHeaderComponent,
+    //     NbCardBodyComponent],
 
     declarations: [
         ReviewComponent,
-        NbCardHeaderComponent,
-        NbCardBodyComponent,
-        NbTabComponent
+        // NbCardHeaderComponent,
+        // NbCardBodyComponent,
+        // NbTabComponent
     ],
 
   })

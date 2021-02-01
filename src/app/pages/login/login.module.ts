@@ -15,11 +15,12 @@ import { FormsModule } from '@angular/forms';
     NbFormFieldModule,
     NbTableModule,
     NbTabsetModule,
-    NbLayoutModule,
+    // NbLayoutModule,
     NbSidebarModule,
     FormsModule,
     NbButtonModule,
     NbTabsetModule,
+    NbLayoutModule
   ],
   exports: [LoginComponent],
   declarations: [

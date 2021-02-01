@@ -37,7 +37,8 @@ import { ReviewComponent } from './coordinators/review/review.component';
   ],
   declarations: [
     PagesComponent,
-
+    ManagerComponent,
+    //ReviewComponent,
   ],
 })
 export class PagesModule {

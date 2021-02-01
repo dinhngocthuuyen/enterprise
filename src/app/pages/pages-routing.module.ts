@@ -9,6 +9,7 @@ import { ManagerComponent } from './manager/manager.component';
 import { AdminComponent, SignInComponent } from './admin/admin.component';
 import { StudentComponent } from './student/student.component';
 import { StaffComponent } from './staff/staff.component';
+import { ReviewComponent } from './coordinators/review/review.component';
 
 const routes: Routes = [{
   path: '',
@@ -51,6 +52,15 @@ const routes: Routes = [{
         .then(m => m.StudentModule),
     },
     {
+      path: 'coordinators/review',
+      component: ReviewComponent,
+    },
+    {
+      path: 'coordinators/review',
+      loadChildren: () => import('./coordinators/review/review.module')
+        .then(m => m.ReviewModule),
+    },
+    {
       path: '',
       redirectTo: 'dashboard',
       pathMatch: 'full',
@@ -73,12 +83,6 @@ const routes: Routes = [{
       loadChildren: () => import('./staff/staff.module')
         .then(m => m.StaffModule),
     },
-
-    // {
-    //   path: 'user',
-    //   loadChildren: () => import('./staff/staff.module')
-    //     .then(m => m.UserModule),
-    // },
     {
       path: '',
       redirectTo: 'dashboard',

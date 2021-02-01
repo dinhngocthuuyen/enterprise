@@ -6,7 +6,6 @@ import { select } from '@ngrx/store';
 import { Faculty } from 'src/app/models';
 import { FacultyApiActions } from './actions';
 import { FacultySelectors } from './selectors/faculty.selectors';
-import { decrement, increment, reset } from './state/counter.actions';
 
 @Component({
   selector: 'app-faculty',
@@ -51,35 +50,10 @@ import { decrement, increment, reset } from './state/counter.actions';
     throw new Error('Method not implemented.');
   }
 
-    increment() {
-      this.store.dispatch(increment());
-    }
-
-    decrement() {
-      this.store.dispatch(decrement());
-    }
-
-    reset() {
-      this.store.dispatch(reset());
-    }
 
 
   
-    // constructor(private store: Store<{ count2: number }>) {
-    //   this.count2$ = store.select('count2');
-    // }
-
-    // increment() {
-    //   this.store.dispatch(increment());
-    // }
-
-    // decrement() {
-    //   this.store.dispatch(decrement());
-    // }
-
-    // reset() {
-    //   this.store.dispatch(reset());
-    // }
+   
 
    
   }

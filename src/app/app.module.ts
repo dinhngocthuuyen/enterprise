@@ -53,7 +53,7 @@ import { ReviewModule } from './pages/coordinators/review/review.module';
     }),
     EffectsModule.forRoot([]),
     FacultyModule,
-    ReviewModule,
+    // ReviewModule,
  
   ],
   providers: [],

@@ -1,12 +1,12 @@
 import { createAction, props } from '@ngrx/store';
-import { Faculty } from 'src/app/models';
+import { Contribution, Faculty } from 'src/app/models';
 
 export const loadReviews = createAction(
-    '[Review] Load Reviews',
+    '[Review] Loads Contribution',
 
   );
 
-export const getFaculty = createAction(
-  '[Faculty/API] Get Selected Faculty',
-  props<{ faculty: Faculty }>(),
-);
+  export const loadReview = createAction(
+    '[Review] Load Contributions',
+     props< {contribution: Contribution}>(),
+  );
