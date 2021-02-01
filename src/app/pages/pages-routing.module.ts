@@ -10,6 +10,7 @@ import { AdminComponent, SignInComponent } from './admin/admin.component';
 import { StudentComponent } from './student/student.component';
 import { StaffComponent } from './staff/staff.component';
 import { ReviewComponent } from './coordinators/review/review.component';
+import { GuestComponent } from './guest/guest.component';
 
 const routes: Routes = [{
   path: '',
@@ -83,6 +84,12 @@ const routes: Routes = [{
       loadChildren: () => import('./staff/staff.module')
         .then(m => m.StaffModule),
     },
+
+    {
+      path: 'guest',
+      component: GuestComponent,
+    },
+
     {
       path: '',
       redirectTo: 'dashboard',

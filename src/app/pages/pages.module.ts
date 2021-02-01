@@ -16,6 +16,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { StaffComponent } from './staff/staff.component';
 import { ROOT_REDUCERS,metaReducers} from './reducers';
 import { ReviewComponent } from './coordinators/review/review.component';
+import { GuestComponent } from './guest/guest.component';
 
 @NgModule({
   imports: [
@@ -38,7 +39,11 @@ import { ReviewComponent } from './coordinators/review/review.component';
   declarations: [
     PagesComponent,
     ManagerComponent,
-    //ReviewComponent,
+    ReviewComponent,
+    GuestComponent,
+
+    // StudentComponent,
+    // LoginComponent,
   ],
 })
 export class PagesModule {
