@@ -20,6 +20,11 @@ const routes: Routes = [{
       component: DashboardComponent,
     },
     {
+      path: 'dashboard',
+      loadChildren: () => import('./coordinators/dashboard/dashboard.module')
+        .then(m => m.DashboardModule),
+    },
+    {
       path: 'login',
       component: LoginComponent,
     },

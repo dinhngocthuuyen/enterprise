@@ -10,7 +10,6 @@ import { FacultySelectors } from './selectors/faculty.selectors';
 @Component({
   selector: 'app-faculty',
   templateUrl: './faculty.component.html',
-  styleUrls: ['./faculty.component.scss']
 })
 
   export class FacultyComponent implements OnInit{
@@ -52,8 +51,8 @@ import { FacultySelectors } from './selectors/faculty.selectors';
 
 
 
-  
-   
 
-   
+
+
+
   }
