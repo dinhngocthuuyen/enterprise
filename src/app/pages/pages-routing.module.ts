@@ -6,7 +6,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { LoginComponent } from './login/login.component';
 import { FacultyComponent } from './faculty/containers/faculty.component';
 import { ManagerComponent } from './manager/manager.component';
-import { AdminComponent } from './admin/admin.component';
+import { AdminComponent, SignInComponent } from './admin/admin.component';
 import { StudentComponent } from './student/student.component';
 import { ExampleComponent } from './example/example.component';
 import { StaffComponent } from './staff/staff.component';

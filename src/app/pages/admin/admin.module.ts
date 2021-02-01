@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
-import { NbButtonGroupModule, NbButtonModule, NbCardModule, NbIconModule, NbInputDirective, NbInputModule, NbLayoutModule, NbListComponent, NbListModule, NbRadioModule } from '@nebular/theme';
+import { FormsModule } from '@angular/forms';
+import { NbButtonGroupModule, NbButtonModule, NbCardModule, NbFilterInputDirective, NbIconModule, NbInputDirective, NbInputModule, NbLayoutModule, NbListComponent, NbListModule, NbRadioGroupComponent, NbRadioModule, NbSidebarModule, NbSortDirection, NbSortRequest, NbTableModule, NbTabsetModule, NbTreeGridDataSource, NbTreeGridDataSourceBuilder, NbTreeGridModule } from '@nebular/theme';
 import { AdminComponent } from './admin.component';
 
 
@@ -9,7 +10,14 @@ import { AdminComponent } from './admin.component';
       NbCardModule,
       NbButtonModule,
       NbIconModule,
-    
+      NbInputModule,
+      NbRadioModule,
+      NbTreeGridModule,
+      NbTabsetModule,
+      NbTableModule,
+      NbLayoutModule,
+      NbSidebarModule,
+      FormsModule,
   ],
   declarations: [
     AdminComponent,
@@ -17,3 +25,5 @@ import { AdminComponent } from './admin.component';
 })
 export class AdminModule {
 }
+
+

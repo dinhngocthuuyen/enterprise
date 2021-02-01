@@ -65,4 +65,21 @@ import { decrement, increment, reset } from './state/counter.actions';
 
 
   
+    // constructor(private store: Store<{ count2: number }>) {
+    //   this.count2$ = store.select('count2');
+    // }
+
+    // increment() {
+    //   this.store.dispatch(increment());
+    // }
+
+    // decrement() {
+    //   this.store.dispatch(decrement());
+    // }
+
+    // reset() {
+    //   this.store.dispatch(reset());
+    // }
+
+   
   }

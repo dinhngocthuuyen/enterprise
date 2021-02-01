@@ -24,7 +24,7 @@ export const COMPONENTS = [
 ];
 @NgModule({
     imports: [
-
+        
       CommonModule,
       FormsModule,
       NbCardModule,
@@ -39,5 +39,6 @@ export const COMPONENTS = [
       EffectsModule.forFeature([FacultyEffects])
     ],
     declarations: [CONTAINERS, COMPONENTS],
+    
 })
 export class FacultyModule { }

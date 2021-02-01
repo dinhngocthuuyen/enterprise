@@ -2,11 +2,60 @@
 <nb-card>
     <nb-card-header>Administrator Dashboard</nb-card-header>
     <nb-card-body class="example-items-rows">
-        <button nbButton status="primary"><nb-icon icon="edit-2-outline"></nb-icon>Registration</button>
+        <button nbButton status="primary" (click)="navigateToCodeMaster()"><nb-icon icon="edit-2-outline"></nb-icon>Registration</button>
         <button nbButton status="primary"><nb-icon icon="folder-outline"></nb-icon>Accounts Manage</button>
         <button nbButton status="primary"><nb-icon icon="book-outline"></nb-icon>Falcuty Manage</button>
         <button nbButton status="primary"><nb-icon icon="calendar-outline"></nb-icon>Date Manage</button>
         
     </nb-card-body>
-  </nb-card>
+</nb-card>
+
+<nb-card>
+    <nb-card-header>Registration</nb-card-header>
+    <nb-card-body class="example-items-rows">
+        <nb-radio-group >
+            <nb-radio value="1">Student</nb-radio>
+            <nb-radio value="2">Teacher</nb-radio>
+        </nb-radio-group>
+
+        <form (submit)="onSubmit(formSignIn);" #formSignIn="ngForm">
+            <p>Email</p>
+            <input type="email" nbInput [(ngModel)]="email" shape="semi-round" name="email" placeholder="Email" required>
+            <p>Password</p>
+            <input type="password" nbInput [(ngModel)]="password" shape="semi-round" name="password" placeholder="Password">
+            <br><br>
+            <button nbButton status="primary" [disabled]="formSignIn.invalid" type="submit">Submit</button>
+            
+        </form>
+    </nb-card-body>
+</nb-card>
+
+<nb-card>
+    <nb-card-header>Accounts Manage</nb-card-header>
+    
+</nb-card>
+
+<nb-card>
+    <nb-card-header>Falcuty Manage</nb-card-header>
+    <nb-card-body>
+
+        <nb-tabset>
+          <nb-tab tabTitle="Falcuty 1">
+            <p>List of <strong>users</strong>.</p>
+          </nb-tab>
+          <nb-tab tabTitle="Falcuty 2">
+            <p>List of <strong>orders</strong>.</p>
+          </nb-tab>
+          <nb-tab tabTitle="Falcuty 3">
+            
+          </nb-tab>
+        </nb-tabset>
+    
+      </nb-card-body>
+</nb-card>
+
+<nb-card>
+    <nb-card-header>Date Manage</nb-card-header>
+    
+</nb-card>
   
