@@ -5,7 +5,6 @@ import { Observable } from 'rxjs';
 import { Faculty } from 'src/app/models';
 import { FacultyApiActions } from '../actions';
 import { FacultySelectors } from '../selectors';
-import { decrement, increment, reset } from '../state/counter.actions';
 
 @Component({
   selector: 'faculty-list',

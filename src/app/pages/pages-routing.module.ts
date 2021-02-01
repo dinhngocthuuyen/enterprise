@@ -2,7 +2,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
 
 import { PagesComponent } from './pages.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
+import { DashboardComponent } from './coordinators/dashboard/dashboard.component';
 import { LoginComponent } from './login/login.component';
 import { FacultyComponent } from './faculty/containers/faculty.component';
 import { ManagerComponent } from './manager/manager.component';

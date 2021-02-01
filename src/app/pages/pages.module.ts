@@ -18,6 +18,7 @@ import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { StaffComponent } from './staff/staff.component';
 import { ROOT_REDUCERS,metaReducers} from './reducers';
+import { ReviewComponent } from './coordinators/review/review.component';
 
 @NgModule({
   imports: [
@@ -52,6 +53,7 @@ import { ROOT_REDUCERS,metaReducers} from './reducers';
     PagesComponent,
     ManagerComponent,
     UserComponent,
+    ReviewComponent,
 
     // StudentComponent,
     // LoginComponent,
