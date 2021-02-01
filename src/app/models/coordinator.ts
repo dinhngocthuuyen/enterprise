@@ -5,7 +5,7 @@ export interface Coordinator {
   name: string;
   address: string;
   phone: number;
-  dob?: Date;
+  dob: Date;
   email: string;
 }
 
