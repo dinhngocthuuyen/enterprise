@@ -10,6 +10,7 @@ import { StaffComponent } from './staff/staff.component';
 import { ReviewComponent } from './coordinators/review/review.component';
 import { GuestComponent } from './guest/guest.component';
 import { StudentmanagerComponent } from './manager/studentmanager/studentmanager.component';
+import { ProfileComponent } from './coordinators/profile/profile.component';
 
 const routes: Routes = [{
   path: '',
@@ -69,6 +70,16 @@ const routes: Routes = [{
       path: 'manager/studentmanager',
       loadChildren: () => import('./manager/studentmanager/studentmanager.module')
         .then(m => m.StudentManagerModule),
+    },
+
+    {
+      path: 'coordinators/profile',
+      component: ProfileComponent,
+    },
+    {
+      path: 'coordinators/profile',
+      loadChildren: () => import('./coordinators/profile/profile.module')
+        .then(m => m.ProfileModule),
     },
     {
       path: '',

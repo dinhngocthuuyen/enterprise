@@ -18,6 +18,7 @@ import { ReviewComponent } from './coordinators/review/review.component';
 import { GuestComponent } from './guest/guest.component';
 import { StudentmanagerComponent } from './manager/studentmanager/studentmanager.component';
 import { CoordinatorsmanagerComponent } from './manager/coordinatorsmanager/coordinatorsmanager.component';
+import { ProfileComponent } from './coordinators/profile/profile.component';
 
 @NgModule({
   imports: [
@@ -41,7 +42,6 @@ import { CoordinatorsmanagerComponent } from './manager/coordinatorsmanager/coor
     PagesComponent,
     GuestComponent,
     
-
     // StudentComponent,
     // LoginComponent,
   ],

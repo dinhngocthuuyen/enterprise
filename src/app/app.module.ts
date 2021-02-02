@@ -20,6 +20,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ROOT_REDUCERS, metaReducers } from './pages/reducers';
 import { ReviewModule } from './pages/coordinators/review/review.module';
 import { StudentManagerModule } from './pages/manager/studentmanager/studentmanager.module';
+import { ProfileModule } from './pages/coordinators/profile/profile.module';
 
 
 @NgModule({
@@ -56,6 +57,7 @@ import { StudentManagerModule } from './pages/manager/studentmanager/studentmana
     FacultyModule,
      ReviewModule,
      StudentManagerModule,
+     ProfileModule,
  
   ],
   providers: [],

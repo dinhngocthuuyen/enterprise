@@ -35,23 +35,13 @@ export const MENU_ITEMS: NbMenuItem[] = [
     link: '/pages/student',
   },
   {
-    title: 'Exmaple',
-    icon: 'shopping-cart-outline',
-    link: '/pages/example',
-  },
-  {
-    title: 'Shopping',
-    icon: 'shopping-cart-outline',
-    link: '/pages/shopping',
-  },
-  {
     title: 'Review',
     icon: 'shopping-cart-outline',
     link: '/pages/coordinators/review',
   },
   {
-    title: 'Guest',
-    icon: 'person-outline',
-    link: '/pages/guest'
-  }
+    title: 'Update Profile',
+    icon: 'shopping-cart-outline',
+    link: '/pages/coordinators/profile',
+  },
 ]

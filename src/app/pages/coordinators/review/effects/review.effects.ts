@@ -21,15 +21,7 @@ export class ReviewEffects {
     )
 ));
 
-//   faculty$ = createEffect(() => this.action$.pipe(
-//     ofType(FacultyApiActions.getFaculty),
-//     mergeMap(() => this.FacultyService.getFaculty()
-//     .pipe(
-//         map((item: Faculty) => FacultyCollectionApiActions.loadSelectedFacultySuccess({faculty: item})),
-//         catchError(error => of(FacultyCollectionApiActions.loadSelectedFacultyFailure({ errorMsg: error.message })))
-//     )
-//     )
-// ));
+
 
   constructor(
       private action$: Actions,
