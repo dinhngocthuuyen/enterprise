@@ -19,9 +19,9 @@ export const MENU_ITEMS: NbMenuItem[] = [
     link: '/pages/faculty',
   },
   {
-    title: 'Manager',
+    title: 'Manager student',
     icon: 'shopping-cart-outline',
-    link: '/pages/manager',
+    link: '/pages/manager/studentmanager',
   },
 
   {

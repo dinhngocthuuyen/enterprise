@@ -4,12 +4,12 @@ import { PagesComponent } from './pages.component';
 import { DashboardComponent } from './coordinators/dashboard/dashboard.component';
 import { LoginComponent } from './login/login.component';
 import { FacultyComponent } from './faculty/containers/faculty.component';
-import { ManagerComponent } from './manager/manager.component';
 import { AdminComponent, SignInComponent } from './admin/admin.component';
 import { StudentComponent } from './student/student.component';
 import { StaffComponent } from './staff/staff.component';
 import { ReviewComponent } from './coordinators/review/review.component';
 import { GuestComponent } from './guest/guest.component';
+import { StudentmanagerComponent } from './manager/studentmanager/studentmanager.component';
 
 const routes: Routes = [{
   path: '',
@@ -44,10 +44,6 @@ const routes: Routes = [{
         .then(m => m.FacultyModule),
     },
     {
-      path: 'manager',
-      component:  ManagerComponent,
-    },
-    {
       path: 'student',
       component: StudentComponent,
     },
@@ -64,6 +60,15 @@ const routes: Routes = [{
       path: 'coordinators/review',
       loadChildren: () => import('./coordinators/review/review.module')
         .then(m => m.ReviewModule),
+    },
+    {
+      path: 'manager/studentmanager',
+      component: StudentmanagerComponent,
+    },
+    {
+      path: 'manager/studentmanager',
+      loadChildren: () => import('./manager/studentmanager/studentmanager.module')
+        .then(m => m.StudentManagerModule),
     },
     {
       path: '',

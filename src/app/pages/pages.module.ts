@@ -7,7 +7,6 @@ import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { LoginComponent } from './login/login.component';
 import { LoginModule } from './login/login.module';
 import { FacultyComponent } from './faculty/containers/faculty.component';
-import { ManagerComponent } from './manager/manager.component';
 import { AdminComponent } from './admin/admin.component';
 import { StudentComponent } from './student/student.component';
 import { CommonModule } from '@angular/common';
@@ -17,6 +16,8 @@ import { StaffComponent } from './staff/staff.component';
 import { ROOT_REDUCERS,metaReducers} from './reducers';
 import { ReviewComponent } from './coordinators/review/review.component';
 import { GuestComponent } from './guest/guest.component';
+import { StudentmanagerComponent } from './manager/studentmanager/studentmanager.component';
+import { CoordinatorsmanagerComponent } from './manager/coordinatorsmanager/coordinatorsmanager.component';
 
 @NgModule({
   imports: [
@@ -38,8 +39,8 @@ import { GuestComponent } from './guest/guest.component';
   ],
   declarations: [
     PagesComponent,
-    ManagerComponent,
     GuestComponent,
+    
 
     // StudentComponent,
     // LoginComponent,
