@@ -17,6 +17,7 @@ import { StaffComponent } from './staff/staff.component';
 import { ROOT_REDUCERS,metaReducers} from './reducers';
 import { ReviewComponent } from './coordinators/review/review.component';
 import { GuestComponent } from './guest/guest.component';
+import { ProfileComponent } from './coordinators/profile/profile.component';
 
 @NgModule({
   imports: [
@@ -40,7 +41,7 @@ import { GuestComponent } from './guest/guest.component';
     PagesComponent,
     ManagerComponent,
     GuestComponent,
-
+    
     // StudentComponent,
     // LoginComponent,
   ],

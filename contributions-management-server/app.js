@@ -7,7 +7,7 @@ const bodyParser = require('body-parser');
 
 
 //lOAD IN MONGOOSE MODEL
-const { Faculty, Contribution } = require('./db/models')
+const { Faculty, Contribution, Coordinator } = require('./db/models')
 
 //load middleware
  app.use(bodyParser.json());
@@ -64,12 +64,7 @@ Faculty.findByIdAndRemove({
 });
 
 ////////////////////////////////////
-dateConversionStage = {
-    $addFields: {
-       convertedDate: { $toDate: "$date" }
-    }
- };
- 
+
 //GET Review
 app.get('/reviews', (req, res) => {
 
@@ -103,8 +98,33 @@ app.patch('/reviews/:id', (req, res) => {
     });
     });
 
+/////////////////////////////////
+
+//GET Profile Coordinator
+app.get('/profiles', (req, res) => {
+
+    Coordinator.find({}).then((profiles) => {
+        res.send(profiles);
+    });
+})
+//POST Profile Coordinator
+app.post('/profiles', (req, res) => {
+    let name = req.body.name;
+    let address = req.body.address;
+  
+    let phone = req.body.phone;
+    let email = req.body.email;
+    let dob = req.body.dob;
 
 
+    let newCoordinator = new Coordinator({
+        name,address,dob,email,phone
+    });
+    newCoordinator.save().then((CoordinatorDoc) => {
+
+        res.send(CoordinatorDoc);
+    })
+})
     
 app.listen(3000, () => {
     console.log("Connection on port 3000");

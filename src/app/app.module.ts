@@ -19,6 +19,7 @@ import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { ROOT_REDUCERS, metaReducers } from './pages/reducers';
 import { ReviewModule } from './pages/coordinators/review/review.module';
+import { ProfileModule } from './pages/coordinators/profile/profile.module';
 
 
 @NgModule({
@@ -54,6 +55,7 @@ import { ReviewModule } from './pages/coordinators/review/review.module';
     EffectsModule.forRoot([]),
     FacultyModule,
      ReviewModule,
+     ProfileModule,
  
   ],
   providers: [],

@@ -23,7 +23,7 @@ export const selectReviewEntitiesState = createSelector(
       (reviews) => reviews[id]
   )
   
-  export const FacultySelectors = {
+  export const ReviewSelectors = {
       selectReviewEntitiesState,
       selectReviewIds,
       selectReviewEntities,

@@ -30,7 +30,6 @@ export const reviewFeatureKey = 'contributions';
 export const reducer = createReducer(
   reviewInitialState,
   on(
-    // FacultyApiActions.getFaculties,
     ReviewCollectionApiActions.loadReviewsSuccess,
       (state, { contributions }) => {
         contributions = contributions
@@ -41,7 +40,6 @@ export const reducer = createReducer(
       }
   ),
   on(
-    // FacultyApiActions.getFaculties,
     ReviewCollectionApiActions.loadPendingsSuccess,
       (state, { contributions }) => {
         contributions = contributions
