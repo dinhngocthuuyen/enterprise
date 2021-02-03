@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NbThemeModule, NbLayoutModule, NbSidebarModule, NbButtonModule, NbIconModule, NbMenuModule, NbCardModule, NbTabsetModule, NbTreeGridModule } from '@nebular/theme';
+import { NbThemeModule, NbLayoutModule, NbSidebarModule, NbButtonModule, NbIconModule, NbMenuModule, NbCardModule, NbTabsetModule, NbTreeGridModule, NbDialogModule, NbWindowModule } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { DashboardComponent } from './pages/coordinators/dashboard/dashboard.component';
 import { PagesComponent } from './pages/pages.component';
@@ -23,9 +23,15 @@ import { StudentManagerModule } from './pages/manager/studentmanager/studentmana
 import { ProfileModule } from './pages/coordinators/profile/profile.module';
 
 
+
+
+
+
+
 @NgModule({
   declarations: [
     AppComponent,
+    
   ],
   imports: [
     BrowserModule,
@@ -42,6 +48,12 @@ import { ProfileModule } from './pages/coordinators/profile/profile.module';
     NbEvaIconsModule,
     NbCardModule,
     NbTabsetModule,
+    BrowserModule,
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    
+    NbWindowModule.forRoot(),
+    // StoreModule.forRoot({ count: exampleReducer, count2: counterReducer }),
     StoreModule.forRoot(ROOT_REDUCERS, {
       metaReducers,
       runtimeChecks: {

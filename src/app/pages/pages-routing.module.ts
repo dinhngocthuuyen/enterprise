@@ -4,7 +4,8 @@ import { PagesComponent } from './pages.component';
 import { DashboardComponent } from './coordinators/dashboard/dashboard.component';
 import { LoginComponent } from './login/login.component';
 import { FacultyComponent } from './faculty/containers/faculty.component';
-import { AdminComponent, SignInComponent } from './admin/admin.component';
+
+import { AdminComponent } from './admin/admin.component';
 import { StudentComponent } from './student/student.component';
 import { StaffComponent } from './staff/staff.component';
 import { ReviewComponent } from './coordinators/review/review.component';
@@ -95,6 +96,7 @@ const routes: Routes = [{
       loadChildren: () => import('./admin/admin.module')
         .then(m => m.AdminModule),
     },
+    
     {
       path: 'staff',
       component:  StaffComponent,

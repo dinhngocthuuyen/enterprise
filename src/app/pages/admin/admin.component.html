@@ -1,30 +1,28 @@
 <p>Administrator!</p>
 <nb-card>
     <nb-card-header>Administrator Dashboard</nb-card-header>
-    <nb-card-body class="example-items-rows">
-        <button nbButton status="primary" (click)="navigateToCodeMaster()"><nb-icon icon="edit-2-outline"></nb-icon>Registration</button>
-        <button nbButton status="primary"><nb-icon icon="folder-outline"></nb-icon>Accounts Manage</button>
-        <button nbButton status="primary"><nb-icon icon="book-outline"></nb-icon>Falcuty Manage</button>
-        <button nbButton status="primary"><nb-icon icon="calendar-outline"></nb-icon>Date Manage</button>
-        
-    </nb-card-body>
 </nb-card>
 
 <nb-card>
-    <nb-card-header>Registration</nb-card-header>
+    <nb-card-header>Create Account</nb-card-header>
     <nb-card-body class="example-items-rows">
         <nb-radio-group >
-            <nb-radio value="1">Student</nb-radio>
-            <nb-radio value="2">Teacher</nb-radio>
+            <nb-radio value="1">Administrator</nb-radio>
+            <nb-radio value="2">Coordinator</nb-radio>
+            <nb-radio value="3">Manager</nb-radio>
+            <nb-radio value="4">Student</nb-radio>
+            <nb-radio value="5">Guest</nb-radio>
         </nb-radio-group>
 
-        <form (submit)="onSubmit(formSignIn);" #formSignIn="ngForm">
+        <form (submit)="onSubmit(formCreate);" #formCreate="ngForm">
             <p>Email</p>
             <input type="email" nbInput [(ngModel)]="email" shape="semi-round" name="email" placeholder="Email" required>
+            <p>Username</p>
+            <input type="text" nbInput [(ngModel)]="username" shape="semi-round" name="user" placeholder="Username" required>
             <p>Password</p>
             <input type="password" nbInput [(ngModel)]="password" shape="semi-round" name="password" placeholder="Password">
             <br><br>
-            <button nbButton status="primary" [disabled]="formSignIn.invalid" type="submit">Submit</button>
+            <button nbButton status="primary" [disabled]="formCreate.invalid" type="submit">Create</button>
             
         </form>
     </nb-card-body>
@@ -32,7 +30,7 @@
 
 <nb-card>
     <nb-card-header>Accounts Manage</nb-card-header>
-    
+    <ng2-smart-table [settings]="settings" ></ng2-smart-table>
 </nb-card>
 
 <nb-card>
@@ -55,7 +53,7 @@
 </nb-card>
 
 <nb-card>
-    <nb-card-header>Date Manage</nb-card-header>
-    
+    <nb-card-header>Closure Date</nb-card-header>
+    <ng2-smart-table [settings]="closure" ></ng2-smart-table>
 </nb-card>
   
