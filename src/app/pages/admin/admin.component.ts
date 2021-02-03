@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NbSortDirection, NbSortRequest, NbTreeGridDataSource, NbTreeGridDataSourceBuilder, NbWindowService } from '@nebular/theme';
 import { Store } from '@ngrx/store';
@@ -14,6 +15,7 @@ import { Admin } from 'src/app/models';
 })
 export class AdminComponent implements OnInit {
   
+
   settings = {
     columns: {
       id: {
@@ -51,22 +53,21 @@ export class AdminComponent implements OnInit {
     },
       actions: false, 
   };
+  Form: any;
+  alterEgo: any;
 
  constructor(
 
-  private route: Router) { }
-     username = "";
-     email = "";
-     password = "";
-  
-     onSubmit(formCreate: any) {
-       console.log(formCreate.value);
-     }
+ ){
+
+ }
 
      ngOnInit(): void {
 
-    }
   }
+}
+  
+
 
  
 

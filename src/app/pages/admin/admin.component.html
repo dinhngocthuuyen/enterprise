@@ -1,59 +1,56 @@
 <p>Administrator!</p>
-<nb-card>
-    <nb-card-header>Administrator Dashboard</nb-card-header>
-</nb-card>
 
 <nb-card>
-    <nb-card-header>Create Account</nb-card-header>
-    <nb-card-body class="example-items-rows">
-        <nb-radio-group >
-            <nb-radio value="1">Administrator</nb-radio>
-            <nb-radio value="2">Coordinator</nb-radio>
-            <nb-radio value="3">Manager</nb-radio>
-            <nb-radio value="4">Student</nb-radio>
-            <nb-radio value="5">Guest</nb-radio>
-        </nb-radio-group>
-
-        <form (submit)="onSubmit(formCreate);" #formCreate="ngForm">
-            <p>Email</p>
-            <input type="email" nbInput [(ngModel)]="email" shape="semi-round" name="email" placeholder="Email" required>
-            <p>Username</p>
-            <input type="text" nbInput [(ngModel)]="username" shape="semi-round" name="user" placeholder="Username" required>
-            <p>Password</p>
-            <input type="password" nbInput [(ngModel)]="password" shape="semi-round" name="password" placeholder="Password">
-            <br><br>
-            <button nbButton status="primary" [disabled]="formCreate.invalid" type="submit">Create</button>
-            
-        </form>
-    </nb-card-body>
-</nb-card>
-
-<nb-card>
-    <nb-card-header>Accounts Manage</nb-card-header>
-    <ng2-smart-table [settings]="settings" ></ng2-smart-table>
-</nb-card>
-
-<nb-card>
-    <nb-card-header>Falcuty Manage</nb-card-header>
-    <nb-card-body>
-
-        <nb-tabset>
-          <nb-tab tabTitle="Falcuty 1">
-            <p>List of <strong>users</strong>.</p>
-          </nb-tab>
-          <nb-tab tabTitle="Falcuty 2">
-            <p>List of <strong>orders</strong>.</p>
-          </nb-tab>
-          <nb-tab tabTitle="Falcuty 3">
-            
-          </nb-tab>
-        </nb-tabset>
+    <nb-tabset fullWidth>
+    <nb-tab tabTitle="Create Account">
+        <nb-card-body class="example-items-rows">
+            <nb-radio-group >
+                <nb-radio value="1">Administrator</nb-radio>
+                <nb-radio value="2">Coordinator</nb-radio>
+                <nb-radio value="3">Manager</nb-radio>
+                <nb-radio value="4">Student</nb-radio>
+                <nb-radio value="5">Guest</nb-radio>
+            </nb-radio-group>
     
-      </nb-card-body>
-</nb-card>
+            <form #formCreate="ngForm" >
 
-<nb-card>
-    <nb-card-header>Closure Date</nb-card-header>
-    <ng2-smart-table [settings]="closure" ></ng2-smart-table>
+                <div class="form-group">
+                    <label for="name">Username</label>
+                    <input formControlName="name" nbInput shape="semi-round" id="name" type="text" class="form-control" required minlength="6">
+                </div>
+            
+               
+            
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input formControlName="email" nbInput shape="semi-round" id="email" type="email" class="form-control" required>
+                </div>
+            
+               
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input formControlName="password" nbInput shape="semi-round" id="password" type="password" class="form-control">
+            
+                </div>
+            
+                <button nbButton status="primary" type="submit">Create</button>
+            
+            </form>
+
+        </nb-card-body>
+      </nb-tab>
+    
+    <nb-tab tabTitle="Accounts Manage">
+        <ng2-smart-table [settings]="settings" ></ng2-smart-table>
+      </nb-tab>
+
+    <nb-tab tabTitle="Falcuty Manage">
+        <p>List of <strong>users</strong>.</p>
+      </nb-tab>
+
+    <nb-tab tabTitle="Closure Date">
+        <ng2-smart-table [settings]="closure" ></ng2-smart-table>
+      </nb-tab>
+
+</nb-tabset>
 </nb-card>
-  
