@@ -31,7 +31,6 @@
               "src/assets"
             ],
             "styles": [
-              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
               "src/styles.scss"
             ],
             "scripts": []
@@ -133,7 +132,7 @@
   "cli": {
     "defaultCollection": "@ngrx/schematics",
     "analytics": "edb7384d-b42f-417a-9bce-c1de6e5b69a1"
-    
-    
+
+
   }
 }
