@@ -20,6 +20,7 @@ import { StudentmanagerComponent } from './manager/studentmanager/studentmanager
 import { CoordinatorsmanagerComponent } from './manager/coordinatorsmanager/coordinatorsmanager.component';
 import { ProfileComponent } from './coordinators/profile/profile.component';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   imports: [
@@ -39,6 +40,7 @@ import { Ng2SmartTableModule } from 'ng2-smart-table';
     NbTabsetModule,
     NbTreeGridModule,
     Ng2SmartTableModule,
+    HttpClientModule
   ],
   declarations: [
     PagesComponent,

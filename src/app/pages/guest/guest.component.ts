@@ -1,5 +1,8 @@
+import { DataSource } from '@angular/cdk/table';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router'
+import { DataSet } from 'ng2-smart-table/lib/lib/data-set/data-set';
+import { GuestService } from './service/guest.service';
 
 @Component({
   selector: 'app-guest',
@@ -21,7 +24,7 @@ export class GuestComponent implements OnInit {
     }
   };
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private GuestService: GuestService) {}
 
   ngOnInit(): void {
   }
@@ -30,4 +33,5 @@ export class GuestComponent implements OnInit {
     this.router.navigate(['pages/login']);
   }
 
+  data = DataSource.bind(this.GuestService.viewPostService());
 }

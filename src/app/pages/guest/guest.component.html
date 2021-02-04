@@ -1,10 +1,11 @@
 <nb-card>
   <nb-card-body style="text-align: right;">
-    <button nbButton status="primary" (click)="toLoginPage()">Log in</button>
+    <!--<button nbButton status="primary" (click)="toLoginPage()">Log in</button>-->
+    <a href="#" routerLink="/pages/login">Log in</a>
   </nb-card-body>
 </nb-card>
 
-<ng2-smart-table [settings]="settings"></ng2-smart-table>
+<ng2-smart-table [settings]="settings" [source]="data"></ng2-smart-table>
 
 
 

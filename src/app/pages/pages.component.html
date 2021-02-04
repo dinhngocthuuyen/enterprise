@@ -1,7 +1,10 @@
 <nb-layout>
     <nb-layout-header fixed>
-    <nb-icon (click)="toggleCompact()" icon="menu-outline"></nb-icon>
-    <h3>Enterprise Web</h3>
+      <nb-icon (click)="toggleCompact()" icon="menu-outline"></nb-icon>
+      <h3>Enterprise Web</h3>
+      <div style="text-align:right">
+        <img src="./assets/images/greenwich-logo.jpg" width="280" height="75"/>
+      </div>
     </nb-layout-header>
 
   <nb-sidebar tag="left">
@@ -9,6 +12,18 @@
   </nb-sidebar>
 
   <nb-layout-column >
-  <router-outlet></router-outlet>
+    <router-outlet></router-outlet>
   </nb-layout-column>
+
+  <nb-layout-footer>
+  <div class="container" style="padding:0;">
+    <ul style="list-style: none; padding: 0">
+      <li><h5>University of Greenwich</h5></li>
+      <li><nb-icon icon="home-outline"></nb-icon>&nbsp; 142-144 Pham Phu Thu, HCMC, Vietnam</li> 
+      <li><nb-icon icon="phone-call-outline"></nb-icon>&nbsp; 012456789</li>     
+      <li><nb-icon icon="email-outline"></nb-icon>&nbsp; uog@gmail.com</li>
+    </ul>
+  </div>
+  </nb-layout-footer>
+
 </nb-layout>
