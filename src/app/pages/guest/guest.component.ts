@@ -1,7 +1,5 @@
-import { DataSource } from '@angular/cdk/table';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router'
-import { DataSet } from 'ng2-smart-table/lib/lib/data-set/data-set';
 import { GuestService } from './service/guest.service';
 
 @Component({
@@ -12,7 +10,7 @@ import { GuestService } from './service/guest.service';
 export class GuestComponent implements OnInit {
   settings = {
     columns: {
-      id: {
+      _id: {
         title: 'ID'
       },
       title: {
@@ -24,14 +22,20 @@ export class GuestComponent implements OnInit {
     }
   };
 
-  constructor(private router: Router, private GuestService: GuestService) {}
+  posts: any;
+
+  constructor(private router: Router, private GuestService: GuestService, ) {}
 
   ngOnInit(): void {
+    this.GuestService.getPost().subscribe((posts: any) => {
+      this.posts = posts;
+    })
   }
   
-  toLoginPage(){
-    this.router.navigate(['pages/login']);
-  }
+  //toLoginPage(){
+    //this.router.navigate(['pages/login']);
+  //}
 
-  data = DataSource.bind(this.GuestService.viewPostService());
+
+
 }
