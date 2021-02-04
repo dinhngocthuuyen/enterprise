@@ -19,6 +19,7 @@ import { GuestComponent } from './guest/guest.component';
 import { StudentmanagerComponent } from './manager/studentmanager/studentmanager.component';
 import { CoordinatorsmanagerComponent } from './manager/coordinatorsmanager/coordinatorsmanager.component';
 import { ProfileComponent } from './coordinators/profile/profile.component';
+import { Ng2SmartTableModule } from 'ng2-smart-table';
 
 @NgModule({
   imports: [
@@ -37,6 +38,7 @@ import { ProfileComponent } from './coordinators/profile/profile.component';
     LoginModule,
     NbTabsetModule,
     NbTreeGridModule,
+    Ng2SmartTableModule,
   ],
   declarations: [
     PagesComponent,
