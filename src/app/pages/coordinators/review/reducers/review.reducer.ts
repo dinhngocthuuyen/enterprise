@@ -40,6 +40,17 @@ export const reducer = createReducer(
       }
   ),
   on(
+    ReviewApiActions.loadReview,
+    ReviewCollectionApiActions.loadSelectedContributionSuccess,
+      (state, {  contribution }) => {
+        contribution = contribution
+
+        return reviewAdapter.addOne(
+          contribution,
+          state)
+      }
+  ),
+  on(
     ReviewCollectionApiActions.loadPendingsSuccess,
       (state, { contributions }) => {
         contributions = contributions

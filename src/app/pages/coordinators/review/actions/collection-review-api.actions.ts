@@ -2,15 +2,29 @@ import { createAction, props } from '@ngrx/store';
 import { Contribution } from 'src/app/models';
 
 
-
+/**
+ * Load List Contributions
+ */
 export const loadReviewsSuccess = createAction(
-  '[Review] Load All Reviews Success',
+  '[Review] Load All Contributions Success',
   props<{ contributions: Contribution[] }>()
 );
 
 export const loadReviewsFailure = createAction(
-  '[Review] Load All Reviews Failure',
+  '[Review] Load All Contributions Failure',
   props<{ errorMsg: any }>()
+);
+
+/**
+ * Load Selected Faculty
+ */
+export const loadSelectedContributionSuccess = createAction(
+  '[Review/Contribution] Load Selected Contribution Success',
+  props<{ contribution: Contribution}>(),
+);
+export const loadSelectedContributionFailure = createAction(
+  '[Review/Contribution] Load Selected Contribution Failure',
+  props<{ errorMsg: any }>(),
 );
 
 
