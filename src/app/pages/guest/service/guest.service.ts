@@ -9,7 +9,7 @@ export class GuestService {
   constructor(private WebReqService: WebRequestService) {}
 
   getPost(){
-    return this.WebReqService.get('guest/post');
+    return this.WebReqService.get('guest');
   }
 
   //createGuestService(title: String, post: String){

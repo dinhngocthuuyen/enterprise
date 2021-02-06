@@ -20,7 +20,7 @@ app.use(function(req, res, next) {
 
 /* ROUTE HANDLER */
 
-app.get('/guest/post', (req, res) => {
+app.get('/guest', (req, res) => {
   //Return an array of all the posts in database
   Post.find({}).then((post) => {
     res.send(post);
@@ -29,7 +29,7 @@ app.get('/guest/post', (req, res) => {
   });
 })
 
-app.post('/post', (req, res) => {
+app.post('/guest', (req, res) => {
   //Create a new post and return post document back to user (including post's id)
   //Post's info (fields) will be passed in via JSON request body
   let title = req.body.title

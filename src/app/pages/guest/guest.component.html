@@ -1,3 +1,5 @@
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
+
 <nb-card>
   <nb-card-body style="text-align: right;">
     <!--<button nbButton status="primary" (click)="toLoginPage()">Log in</button>-->
@@ -5,7 +7,14 @@
   </nb-card-body>
 </nb-card>
 
-<ng2-smart-table [settings]="settings" [source]="posts"></ng2-smart-table>
+<nb-card>
+  <nb-card-body>
+    <input #search class="form-control" type="text" placeholder="&#xF002; Search" style="font-family:Arial, FontAwesome" (keydown.enter)="onSearch(search.value)"><br>
+    <ng2-smart-table [settings]="settings" [source]="source"></ng2-smart-table>
+  </nb-card-body>
+</nb-card>
+
+
 
 
 
