@@ -1,10 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router'
-<<<<<<< Updated upstream
 import { LocalDataSource } from 'ng2-smart-table';
 import { GuestService } from './service/guest.service';
-=======
->>>>>>> Stashed changes
 
 @Component({
   selector: 'app-guest',
@@ -13,7 +10,6 @@ import { GuestService } from './service/guest.service';
 })
 export class GuestComponent implements OnInit {
   settings = {
-<<<<<<< Updated upstream
     hideSubHeader: true,
     actions: false,
     columns: {
@@ -25,22 +21,10 @@ export class GuestComponent implements OnInit {
       },
       post: {
         title: 'Post',
-=======
-    columns: {
-      id: {
-        title: 'ID'
-      },
-      title: {
-        title: 'Title'
-      },
-      post: {
-        title: 'Post'
->>>>>>> Stashed changes
       },
     }
   };
 
-<<<<<<< Updated upstream
   posts: any;
   post: any;
   source!: LocalDataSource;
@@ -48,9 +32,6 @@ export class GuestComponent implements OnInit {
   constructor(private router: Router, private GuestService: GuestService, ) {
       
   }
-=======
-  constructor(private router: Router) {}
->>>>>>> Stashed changes
 
   ngOnInit(): void {
     this.GuestService.getPost().subscribe((posts: any) => {

@@ -16,16 +16,12 @@ import { StaffComponent } from './staff/staff.component';
 import { ROOT_REDUCERS,metaReducers} from './reducers';
 import { ReviewComponent } from './coordinators/review/review.component';
 import { GuestComponent } from './guest/guest.component';
-<<<<<<< Updated upstream
 import { StudentmanagerComponent } from './manager/studentmanager/studentmanager.component';
 import { CoordinatorsmanagerComponent } from './manager/coordinatorsmanager/coordinatorsmanager.component';
 import { ProfileComponent } from './coordinators/profile/profile.component';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { HttpClientModule } from '@angular/common/http';
 import { GuestDetailComponent } from './guest/guest-detail/guest-detail.component';
-=======
-import { Ng2SmartTableModule } from 'ng2-smart-table';
->>>>>>> Stashed changes
 
 @NgModule({
   imports: [
@@ -45,10 +41,7 @@ import { Ng2SmartTableModule } from 'ng2-smart-table';
     NbTabsetModule,
     NbTreeGridModule,
     Ng2SmartTableModule,
-<<<<<<< Updated upstream
     HttpClientModule
-=======
->>>>>>> Stashed changes
   ],
   declarations: [
     PagesComponent,
