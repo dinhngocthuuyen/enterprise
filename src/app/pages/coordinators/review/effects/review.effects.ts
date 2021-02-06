@@ -20,7 +20,15 @@ export class ReviewEffects {
     )
     )
 ));
-
+  contribution$ = createEffect(() => this.action$.pipe(
+    ofType(ReviewApiActions.loadReview),
+    mergeMap(() => this.ReviewServices.getReview()
+    .pipe(
+        map((item: Contribution) => ReviewCollectionApiActions.loadSelectedContributionSuccess({contribution: item})),
+        catchError(error => of(ReviewCollectionApiActions.loadSelectedContributionFailure({ errorMsg: error.message })))
+    )
+    )
+  ));
 
 
   constructor(
