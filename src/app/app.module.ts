@@ -21,6 +21,7 @@ import { ROOT_REDUCERS, metaReducers } from './pages/reducers';
 import { ReviewModule } from './pages/coordinators/review/review.module';
 import { StudentManagerModule } from './pages/manager/studentmanager/studentmanager.module';
 import { ProfileModule } from './pages/coordinators/profile/profile.module';
+import { DashboardModule } from './pages/coordinators/dashboard/dashboard.module';
 
 
 
@@ -31,7 +32,6 @@ import { ProfileModule } from './pages/coordinators/profile/profile.module';
 @NgModule({
   declarations: [
     AppComponent,
-    
   ],
   imports: [
     BrowserModule,
@@ -51,7 +51,7 @@ import { ProfileModule } from './pages/coordinators/profile/profile.module';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    
+
     NbWindowModule.forRoot(),
     // StoreModule.forRoot({ count: exampleReducer, count2: counterReducer }),
     StoreModule.forRoot(ROOT_REDUCERS, {
@@ -67,10 +67,10 @@ import { ProfileModule } from './pages/coordinators/profile/profile.module';
     }),
     EffectsModule.forRoot([]),
     FacultyModule,
-     ReviewModule,
-     StudentManagerModule,
-     ProfileModule,
- 
+    ReviewModule,
+    StudentManagerModule,
+    ProfileModule,
+    DashboardModule
   ],
   providers: [],
   bootstrap: [AppComponent],

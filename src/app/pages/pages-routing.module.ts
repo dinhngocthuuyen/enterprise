@@ -13,6 +13,7 @@ import { GuestComponent } from './guest/guest.component';
 import { StudentmanagerComponent } from './manager/studentmanager/studentmanager.component';
 import { ProfileComponent } from './coordinators/profile/profile.component';
 import { GuestDetailComponent } from './guest/guest-detail/guest-detail.component';
+import { DetailComponent } from './coordinators/review/containers/detail/detail.component';
 
 const routes: Routes = [{
   path: '',
@@ -21,11 +22,6 @@ const routes: Routes = [{
     {
       path: 'dashboard',
       component: DashboardComponent,
-    },
-    {
-      path: 'dashboard',
-      loadChildren: () => import('./coordinators/dashboard/dashboard.module')
-        .then(m => m.DashboardModule),
     },
     {
       path: 'login',
@@ -60,9 +56,8 @@ const routes: Routes = [{
       component: ReviewComponent,
     },
     {
-      path: 'coordinators/review',
-      loadChildren: () => import('./coordinators/review/review.module')
-        .then(m => m.ReviewModule),
+      path: 'coordinators/review/:id',
+      component: DetailComponent,
     },
     {
       path: 'manager/studentmanager',
@@ -97,7 +92,7 @@ const routes: Routes = [{
       loadChildren: () => import('./admin/admin.module')
         .then(m => m.AdminModule),
     },
-    
+
     {
       path: 'staff',
       component:  StaffComponent,
@@ -108,10 +103,10 @@ const routes: Routes = [{
         .then(m => m.StaffModule),
     },
 
-    {
-      path: 'review',
-      component: ReviewComponent,
-    },
+    // {
+    //   path: 'review',
+    //   component: ReviewComponent,
+    // },
 
     {
       path: 'guest',

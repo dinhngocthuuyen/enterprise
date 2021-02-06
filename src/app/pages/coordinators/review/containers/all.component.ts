@@ -4,11 +4,13 @@ import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { Contribution } from 'src/app/models';
 import { ReviewApiActions } from '../actions';
+import { PendingButtonComponent } from '../components/pending-button.component';
+import { StatusButtonComponent } from '../components/status-button.component';
 import { ReviewSelectors } from '../selectors';
 
 @Component({
   selector: "all-tab",
-  template: '  <ng2-smart-table [settings]="settings" [source]="contributions$ | async" (userRowSelect)="onUserRowSelect($event)"></ng2-smart-table>',
+  template: '  <ng2-smart-table [settings]="settings" [source]="contributions$ | async"></ng2-smart-table>',
 })
 export class AllComponent implements OnInit {
 
@@ -30,12 +32,14 @@ export class AllComponent implements OnInit {
       },
       pending: {
         title: 'Pending',
-        type: 'boolean'
+        type: 'custom',
+        renderComponent: PendingButtonComponent
       },
       status: {
         title: 'Status',
-        type: 'boolean'
-      },
+        type: 'custom',
+        renderComponent: StatusButtonComponent
+      }
     },
     hideSubHeader: true,
     actions: false
@@ -43,7 +47,7 @@ export class AllComponent implements OnInit {
 
   constructor(
     private store: Store<Contribution>,
-    private route: Router,
+    private router: Router,
   ){
     this.contributions$ = this.store.pipe(select(ReviewSelectors.selectAllReviews));
 
@@ -53,7 +57,7 @@ export class AllComponent implements OnInit {
   }
 
   onUserRowSelect(event){
-    this.route.navigate(['pages/coordinators/review', event.data._id])
+    this.router.navigate(['pages/coordinators/review', event.data._id])
     alert("youre moving to " + event.data._id )
   }
 }

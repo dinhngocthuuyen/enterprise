@@ -10,22 +10,19 @@ import { ReviewSelectors } from '../../selectors';
   templateUrl: './contribution-detail.component.html',
 })
 export class ContributionDetailComponent implements OnInit {
+  @Input() contribution!: Contribution;
   contribution$;
   _id$ !: string;
-
-  @Input() contribution !: Contribution;
-  // contribution$;
-  // _id$ !: string;
   constructor(
       // private route: Router,
-      private router: ActivatedRoute,
+      private route: ActivatedRoute,
       private store: Store<Contribution>,
   ) {
-    this._id$ =  this.router.snapshot.params._id;
+    this._id$ =  this.route.snapshot.params._id;
     this.contribution$ = this.store.pipe(select(ReviewSelectors.selectCurrentReview))
   }
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.store.dispatch(ReviewApiActions.loadReviews())
   }
 

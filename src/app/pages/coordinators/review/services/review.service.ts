@@ -2,12 +2,14 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Contribution } from 'src/app/models';
+import { WebRequestService } from 'src/app/pages/guest/service/web-request.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ReviewService {
-  API_PATH = "http://localhost:3000/reviews"
+  API_PATH = "http://localhost:3000/contributions"
+
   options = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
@@ -26,7 +28,7 @@ export class ReviewService {
     return this.http.get<Contribution[]>(this.API_PATH, this.options);
   }
   getReview(): Observable<Contribution> {
-    return this.http.get<Contribution>(this.API_PATH, this.options);
+    return this.http.get<Contribution>(this.API_PATH , this.options);
   }
 
   getPendings(): Observable<Contribution[]> {
@@ -36,4 +38,12 @@ export class ReviewService {
     return this.http.get<Contribution>(this.API_PATH, this.options);
   }
 
+  // constructor(private WebReqService: WebRequestService) {}
+
+  // getReviews(){
+  //   return this.WebReqService.get('reviews');
+  // }
+  // getReview(){
+  //   return this.WebReqService.get('reviews/:_id');
+  // }
 }

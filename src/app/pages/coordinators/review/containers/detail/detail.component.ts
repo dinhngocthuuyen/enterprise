@@ -1,15 +1,15 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Store, select } from '@ngrx/store';
+import { Observable } from 'rxjs';
 import { Contribution } from 'src/app/models';
 import { ReviewApiActions } from '../../actions';
 import { ReviewSelectors } from '../../selectors/review.selectors';
 
 @Component({
-    template: `
-        <!-- <contribution-detail [contribution]="contribution$ | async"></contribution-detail> -->
-        <h1>Hello Detail</h1>
-    `
+    template: `'
+      <!-- <contribution-detail [contribution]="contribution$ | async"></contribution-detail> -->
+      '`,
 })
 
 export class DetailComponent implements OnInit {
@@ -17,10 +17,10 @@ export class DetailComponent implements OnInit {
   _id$ !: string;
 
   constructor(
-      private router: ActivatedRoute,
+      private route: ActivatedRoute,
       private store: Store<Contribution>,
   ) {
-      this._id$ = this.router.snapshot.params._id;
+      this._id$ = this.route.snapshot.params._id;
       this.contribution$ = this.store.pipe(select(ReviewSelectors.selectCurrentReview(this._id$)));
   }
 
@@ -28,3 +28,4 @@ export class DetailComponent implements OnInit {
       this.store.dispatch(ReviewApiActions.loadReviews());
   }
 }
+

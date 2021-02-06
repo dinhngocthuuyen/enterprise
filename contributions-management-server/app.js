@@ -66,14 +66,22 @@ Faculty.findByIdAndRemove({
 ////////////////////////////////////
 
 //GET Review
-app.get('/reviews', (req, res) => {
+app.get('/contributions', (req, res) => {
 
     Contribution.find({}).then((reivews) => {
         res.send(reivews);
     });
 })
+app.get('/contributions/:_id', (req, res) => {
+
+  Contribution.find({
+    _id: req.params._id
+  }).then((reivews) => {
+      res.send(reivews);
+  });
+})
 //POST Review
-app.post('/reviews', (req, res) => {
+app.post('/contributions', (req, res) => {
     let description = req.body.description;
     let date = req.body.date;
 
@@ -90,7 +98,7 @@ app.post('/reviews', (req, res) => {
     })
 })
 //PATCH Review
-app.patch('/reviews/:id', (req, res) => {
+app.patch('/contributions/:id', (req, res) => {
     Contribution.findOneAndUpdate({_id: req.params.id},{
         $set: req.body
     }).then(() =>{

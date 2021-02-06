@@ -7,7 +7,7 @@ const { mongoose } = require('./db/mongoose');
 const app = express();
 
 /* LOAD MONGOOSE MODEL */
-const { Post } = require('./db/models/post.model');
+const { Post, Contribution, Coordinator } = require('./db/models');
 
 /* LOAD MIDDLEWARE */
 app.use(bodyParser.json());
@@ -69,7 +69,100 @@ app.delete('/post/:id', (req, res) => {
     res.send(removePost);
   })
 })
+////////// COORDINATORS
+//Contributions
+app.get('/contributions', (req, res) => {
+  Contribution.find({}).then((contributions) => {
+      res.send(contributions);
+  });
+})
+// app.get('/approvedcontributions', (req, res) => {
+//   Contribution.find({pending: true}).then((contribution) => {
+//       res.send(contribution);
+//   });
+// })
+app.post('/contributions', (req, res) => {
+  let description = req.body.description;
+  let date = req.body.date;
 
+  let status = req.body.status;
+  let pending = req.body.pending;
+
+
+  let newContribution = new Contribution({
+      description,date,status,pending
+  });
+  newContribution.save().then((ContributionDoc) => {
+
+      res.send(ContributionDoc);
+  })
+})
+app.patch('/contributions/:id', (req, res) => {
+  Contribution.findOneAndUpdate({_id: req.params.id},{
+      $set: req.body
+  }).then(() =>{
+      res.sendStatus(200);
+  });
+});
+
+//GET Coordinator
+app.get('/coordinators', (req, res) => {
+  Coordinator.find({}).then((coordinators) => {
+      res.send(coordinators);
+  });
+});
+
+//POST Coordinator
+app.post('/coordinators', (req, res) => {
+  let name = req.body.name;
+  let address = req.body.address;
+  let phone = req.body.phone;
+  let dob = req.body.dob;
+  let email = req.body.email;
+
+  let newCoordinator = new Coordinator({
+      name,
+      address,
+      phone,
+      dob,
+      email
+  });
+  newCoordinator.save().then((listDoc) => {
+
+      res.send(listDoc);
+  })
+});
+
+// Get contribution which is modified by specific coordinator
+app.get('/coordinators/:coordinatorId/contributions', (req, res) => {
+  Contribution.find({
+    _coordinatorId: req.params.coordinatorId
+  }).then((contributions) => {
+    res.send(contributions);
+  })
+});
+app.post('/coordinators/:coordinatorId/contributions', (req, res) => {
+  let newContribution = new Contribution({
+      description: req.body.description,
+      date: req.body.date,
+      status: req.body.status,
+      pending: req.body.pending,
+      _coordinatorId: req.params.coordinatorId
+  });
+  newContribution.save().then((newDoc) => {
+    res.send(newDoc)
+  })
+});
+app.patch('/coordinators/:coordinatorId/contributions/:contributionId', (req, res) =>{
+  Contribution.findOneAndUpdate({
+    _id: req.params.contributionId,
+    _coordinatorId: req.params.coordinatorId
+  }, {
+    $set: req.body
+  }).then(() => {
+    res.sendStatus(200);
+  })
+})
 
 
 app.listen(3000, () => {
