@@ -16,4 +16,8 @@ export class GuestService {
     ////Send a request to create a post
     //return this.WebReqService.post('post', {title, post});
   //}
+
+  getPostDetail(id: string){
+    return this.WebReqService.get(`guest/guest-detail/${id}`);
+  }
 }

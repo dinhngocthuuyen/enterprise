@@ -21,6 +21,7 @@ import { CoordinatorsmanagerComponent } from './manager/coordinatorsmanager/coor
 import { ProfileComponent } from './coordinators/profile/profile.component';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { HttpClientModule } from '@angular/common/http';
+import { GuestDetailComponent } from './guest/guest-detail/guest-detail.component';
 
 @NgModule({
   imports: [
@@ -45,6 +46,7 @@ import { HttpClientModule } from '@angular/common/http';
   declarations: [
     PagesComponent,
     GuestComponent,
+    GuestDetailComponent,
     
     // StudentComponent,
     // LoginComponent,

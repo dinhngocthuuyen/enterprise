@@ -12,6 +12,7 @@ import { ReviewComponent } from './coordinators/review/review.component';
 import { GuestComponent } from './guest/guest.component';
 import { StudentmanagerComponent } from './manager/studentmanager/studentmanager.component';
 import { ProfileComponent } from './coordinators/profile/profile.component';
+import { GuestDetailComponent } from './guest/guest-detail/guest-detail.component';
 
 const routes: Routes = [{
   path: '',
@@ -115,6 +116,11 @@ const routes: Routes = [{
     {
       path: 'guest',
       component: GuestComponent,
+    },
+
+    {
+      path: 'guest/guest-detail/:id',
+      component: GuestDetailComponent
     },
 
     {

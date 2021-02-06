@@ -29,6 +29,15 @@ app.get('/guest', (req, res) => {
   });
 })
 
+app.get('/guest/guest-detail/:id', (req, res) => {
+  //Return an array of all the posts in database
+  Post.find({_id: req.params.id}).then((post) => {
+    res.send(post);
+  }).catch((e) => {
+    res.send(e);
+  });
+})
+
 app.post('/guest', (req, res) => {
   //Create a new post and return post document back to user (including post's id)
   //Post's info (fields) will be passed in via JSON request body

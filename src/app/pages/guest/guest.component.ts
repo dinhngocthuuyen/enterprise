@@ -26,6 +26,7 @@ export class GuestComponent implements OnInit {
   };
 
   posts: any;
+  post: any;
   source!: LocalDataSource;
 
   constructor(private router: Router, private GuestService: GuestService, ) {
@@ -62,5 +63,7 @@ export class GuestComponent implements OnInit {
     ], false); 
   }
 
-
+  onUserRowSelect(event){
+    this.router.navigate(['pages/guest/guest-detail/' + event.data._id]);
+  }
 }
