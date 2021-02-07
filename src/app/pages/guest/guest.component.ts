@@ -39,11 +39,6 @@ export class GuestComponent implements OnInit {
       this.source = new LocalDataSource(this.posts); 
     })   
   }
-  
-  //toLoginPage(){
-    //this.router.navigate(['pages/login']);
-  //}
-
 
   onSearch(query: string = '') {
     this.source.setFilter([
