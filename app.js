@@ -29,6 +29,8 @@ app.get('/guest', (req, res) => {
   });
 })
 
+/////////////////////////////////////////////////////// POST //////////////////////////////////////////////////////////////
+
 app.get('/guest/guest-detail/:id', (req, res) => {
   //Return an array of all the posts in database
   Post.find({_id: req.params.id}).then((post) => {
@@ -69,7 +71,8 @@ app.delete('/post/:id', (req, res) => {
     res.send(removePost);
   })
 })
-////////// COORDINATORS
+
+//////////////////////////////////////////////////////// COORDINATORS ////////////////////////////////////////////////////////////
 //Contributions
 app.get('/contributions', (req, res) => {
   Contribution.find({}).then((contributions) => {
@@ -164,7 +167,51 @@ app.patch('/coordinators/:coordinatorId/contributions/:contributionId', (req, re
   })
 })
 
+///////////////////////////////////////////////////////////// USER /////////////////////////////////////////////////////////////
 
+app.get('/user', (req, res) => {
+  //Return an array of all the users in database
+  User.find({_id: req.params.id}).then((user) => {
+    res.send(user);
+  }).catch((e) => {
+    res.send(e);
+  });
+})
+
+app.post('/guest', (req, res) => {
+  //Create a new user and return user document back to client (including user's id)
+  //User's info (fields) will be passed in via JSON request body
+  let username = req.body.username
+  let password = req.body.password
+  let role = req.body.role
+  let newUser = new User({
+    username, password, role
+  });
+  newUser.save().then((userDoc) => {
+    //The full user document is returned (including id)
+    res.send(userDoc);
+  })
+})
+
+app.patch('/user/:id', (req, res) => {
+  //Update a selected user (user document with id in the URL) with the new values specified in the JSON body of the request
+  User.findOneAndUpdate({_id: req.params.id}, {
+    $set: req.body
+  }).then(() => {
+    res.sendStatus(200);
+  })
+})
+
+app.delete('/user/:id', (req, res) => {
+  //Delete a selected user (document with id in the URL)
+  Post.findOneAndDelete({
+    _id: req.params.id
+  }).then((removeUser) => {
+    res.send(removeUser);
+  })
+})
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 app.listen(3000, () => {
   console.log(`App is listening at http://localhost:3000`)
 })

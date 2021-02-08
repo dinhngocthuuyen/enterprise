@@ -1,0 +1,35 @@
+<nb-layout>
+    <nb-layout-header fixed>
+      <div style="text-align:right">
+        <img src="./assets/images/greenwich-logo.jpg" width="280" height="75"/>
+      </div>
+    </nb-layout-header>
+
+    <nb-layout-column>
+    <nb-card status="danger" style="width: fit-content; margin:auto">
+        <nb-card-header style="text-align: center;">Welcome</nb-card-header>
+        <nb-card-body>
+            <form class="needs-validation" novalidate>
+              <label>Username</label>
+              <input class="form-control" type="text" required><br>
+              <label>Password</label>
+              <input class="form-control" type="password" required><br>
+              <button nbButton fullWidth status="danger" type="submit">Login</button>
+            </form>
+        </nb-card-body>
+        
+      </nb-card>
+    </nb-layout-column>
+
+  <nb-layout-footer>
+  <div class="container" style="padding:0;">
+    <ul style="list-style: none; padding: 0">
+      <li><h5>University of Greenwich</h5></li>
+      <li><nb-icon icon="pin-outline"></nb-icon>&nbsp; 142-144 Pham Phu Thu, HCMC, Vietnam</li> 
+      <li><nb-icon icon="phone-call-outline"></nb-icon>&nbsp; 012456789</li>     
+      <li><nb-icon icon="email-outline"></nb-icon>&nbsp; uog@gmail.com</li>
+    </ul>
+  </div>
+  </nb-layout-footer>
+
+</nb-layout>

@@ -4,12 +4,12 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NbThemeModule, NbLayoutModule, NbSidebarModule, NbButtonModule, NbIconModule, NbMenuModule, NbCardModule, NbTabsetModule, NbTreeGridModule, NbDialogModule, NbWindowModule } from '@nebular/theme';
+import { NbThemeModule, NbLayoutModule, NbSidebarModule, NbButtonModule, NbIconModule, NbMenuModule, NbCardModule, NbTabsetModule, NbTreeGridModule, NbDialogModule, NbWindowModule, NbInputModule } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { DashboardComponent } from './pages/coordinators/dashboard/dashboard.component';
 import { PagesComponent } from './pages/pages.component';
 import { LoginModule } from './pages/login/login.module';
-import { LoginComponent } from './pages/login/login.component';
+//import { LoginComponent } from './pages/login/login.component';
 import { FacultyModule } from './pages/faculty/faculty.module';
 import { StoreModule } from '@ngrx/store';
 import { FormsModule } from '@angular/forms';
@@ -22,6 +22,7 @@ import { ReviewModule } from './pages/coordinators/review/review.module';
 import { StudentManagerModule } from './pages/manager/studentmanager/studentmanager.module';
 import { ProfileModule } from './pages/coordinators/profile/profile.module';
 import { DashboardModule } from './pages/coordinators/dashboard/dashboard.module';
+import { LoginComponent } from './login/login.component';
 
 
 
@@ -32,6 +33,7 @@ import { DashboardModule } from './pages/coordinators/dashboard/dashboard.module
 @NgModule({
   declarations: [
     AppComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
@@ -51,6 +53,7 @@ import { DashboardModule } from './pages/coordinators/dashboard/dashboard.module
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    NbInputModule,
 
     NbWindowModule.forRoot(),
     // StoreModule.forRoot({ count: exampleReducer, count2: counterReducer }),
