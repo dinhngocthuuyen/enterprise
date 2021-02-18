@@ -1,0 +1,20 @@
+<nb-card>
+    <nb-card-header>Profile Detail</nb-card-header>
+    <nb-card-body>
+     
+          <!-- <input type="hidden" formControlName="id" class="form-control" name="id"> -->
+             <div class="col-xs-12 col-md-12">
+                 <label for="name">Name</label>
+                 <input nbInput type="text"  class="form-control" name="name" readonly [(ngModel)]="coordinators$.name">
+             </div>
+      
+             <!-- <input type="hidden" formControlName="status" class="form-control" name="status" value="A"> -->
+                 <!-- <input type="hidden" formControlName="delete1" class="form-control" name="delete1" value="false"> -->
+             
+            
+         </nb-card-body>
+         <nb-card-footer>
+             <!-- <button class="cancel" nbButton status="danger" (click)="back()" >Back</button> -->
+             <!-- <button nbButton status="success" (click)="edit()">Edit</button> -->
+         </nb-card-footer>
+ </nb-card>
