@@ -16,14 +16,15 @@ import { FormsModule } from '@angular/forms';
 
 import { EffectsModule } from '@ngrx/effects';
 import { CommonModule } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ROOT_REDUCERS, metaReducers } from './pages/reducers';
 import { ReviewModule } from './pages/coordinators/review/review.module';
 import { StudentManagerModule } from './pages/manager/studentmanager/studentmanager.module';
 import { ProfileModule } from './pages/coordinators/profile/profile.module';
 import { DashboardModule } from './pages/coordinators/dashboard/dashboard.module';
 import { LoginComponent } from './login/login.component';
-
+import { AuthGuardService } from './services/auth-guard.service';
+import { WebRequestInterceptor } from './services/web-request.interceptor';
 
 
 
@@ -54,6 +55,7 @@ import { LoginComponent } from './login/login.component';
     AppRoutingModule,
     BrowserAnimationsModule,
     NbInputModule,
+    HttpClientModule,
 
     NbWindowModule.forRoot(),
     // StoreModule.forRoot({ count: exampleReducer, count2: counterReducer }),
@@ -75,7 +77,7 @@ import { LoginComponent } from './login/login.component';
     ProfileModule,
     DashboardModule
   ],
-  providers: [],
+  providers: [AuthGuardService, {provide: HTTP_INTERCEPTORS, useClass: WebRequestInterceptor, multi: true}],
   bootstrap: [AppComponent],
 
 })

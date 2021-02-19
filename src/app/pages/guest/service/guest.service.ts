@@ -6,10 +6,10 @@ import { WebRequestService } from './web-request.service';
 })
 export class GuestService {
 
-  constructor(private WebReqService: WebRequestService) {}
+  constructor(private WebRequestService: WebRequestService) {}
 
   getPost(){
-    return this.WebReqService.get('guest');
+    return this.WebRequestService.get('post');
   }
 
   //createGuestService(title: String, post: String){
@@ -18,6 +18,6 @@ export class GuestService {
   //}
 
   getPostDetail(id: string){
-    return this.WebReqService.get(`guest/guest-detail/${id}`);
+    return this.WebRequestService.get(`guest/guest-detail/${id}`);
   }
 }

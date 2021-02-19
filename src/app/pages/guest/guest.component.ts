@@ -58,10 +58,6 @@ export class GuestComponent implements OnInit {
     ], false); 
   }
   
-  toLoginPage(){
-    this.router.navigate(['pages/login']);
-  }
-
   onUserRowSelect(event){
     this.router.navigate(['pages/guest/guest-detail/' + event.data._id]);
   }

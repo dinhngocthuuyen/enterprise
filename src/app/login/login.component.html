@@ -11,10 +11,10 @@
         <nb-card-body>
             <form class="needs-validation" novalidate>
               <label>Username</label>
-              <input class="form-control" type="text" required><br>
+              <input #txtUsername class="form-control" type="text"><br>
               <label>Password</label>
-              <input class="form-control" type="password" required><br>
-              <button nbButton fullWidth status="danger" type="submit">Login</button>
+              <input #txtPassword class="form-control" type="password"><br>
+              <button nbButton fullWidth status="danger" type="submit" (click) = 'onLoginButtonClicked(txtUsername.value, txtPassword.value)'>Login</button>
             </form>
         </nb-card-body>
         

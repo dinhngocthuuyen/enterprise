@@ -1,4 +1,7 @@
+import { HttpResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -7,22 +10,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginComponent implements OnInit {
 
-  constructor() { }
+  constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit(): void {
   }
 
-  showPassword = true;
-
-  getInputType() {
-    if (this.showPassword) {
-      return 'text';
-    }
-    return 'password';
-  }
-
-  toggleShowPassword() {
-    this.showPassword = !this.showPassword;
+  onLoginButtonClicked(username: string, password: string){
+    this.authService.login(username, password).subscribe((res: HttpResponse<any>) => {
+      console.log(res);
+      
+      this.router.navigate(['pages/guest/'+ res.body._id]);
+    })
   }
 
 }

@@ -109,7 +109,7 @@ const routes: Routes = [{
     // },
 
     {
-      path: 'guest',
+      path: 'guest/:id',
       component: GuestComponent,
     },
 
