@@ -6,23 +6,20 @@ import { AppComponent } from './app.component';
 
 export const routes: Routes = [
   {
-    path: ':id',
-    children: [{
-      path: 'pages',
-      // canActivate: [AuthGuardService],
-      loadChildren: () => import('./pages/pages.module')
-        .then(m => m.PagesModule),
-    },
+    path: 'pages',
+    // canActivate: [AuthGuardService],
+    loadChildren: () => import('./pages/pages.module')
+      .then(m => m.PagesModule),
+  },
 
-    {
-      path: 'login',
-      component: LoginComponent,
-    },
+  {
+    path: 'login',
+    component: LoginComponent,
+  },
 
-    { path: '', redirectTo: 'login', pathMatch: 'full' },
-    { path: '**', redirectTo: 'login' },
-    ]
-  }
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
+  { path: '**', redirectTo: 'login' },
+
 ]
 
 const config: ExtraOptions = {

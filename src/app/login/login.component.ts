@@ -19,7 +19,7 @@ export class LoginComponent implements OnInit {
   onLoginButtonClicked(username: string, password: string){
     this.authService.login(username, password).subscribe((res: HttpResponse<any>) => {
       console.log(res);
-      this.router.navigate([ res.body._id + '/pages/']);
+      this.router.navigate(['pages/' + res.body._id]);
     })
   }
 

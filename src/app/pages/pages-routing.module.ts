@@ -19,7 +19,7 @@ import { AuthComponent } from '../auth/auth.component';
 import { ChatComponent } from './chat/chat.component';
 
 const routes: Routes = [{
-  path: '',
+  path: ':id',
   component: PagesComponent,
   children: [
     {
