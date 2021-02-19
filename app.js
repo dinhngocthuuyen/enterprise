@@ -7,11 +7,11 @@ const { mongoose } = require('./db/mongoose');
 const app = express();
 
 /* LOAD MONGOOSE MODEL */
-const { Post, Contribution, Coordinator, User } = require('./db/models');
 const { send } = require('process');
 const { asap } = require('rxjs');
-const { JsonWebTokenError } = require('jsonwebtoken');
+// const { JsonWebTokenError } = require('jsonwebtoken');
 const jwt = require('jsonwebtoken');
+const { Post, Contribution, Coordinator, User, Role, Student } = require('./db/models');
 
 /* LOAD GLOBAL MIDDLEWARE */
 app.use(bodyParser.json());
@@ -144,6 +144,17 @@ app.get('/contributions', (req, res) => {
       res.send(contributions);
   });
 })
+
+app.get('/contributions/:id', (req, res) => {
+  Contribution.find({_id: req.params.id}).then((contributions) => {
+      res.send(contributions);
+  });
+})
+// app.get('/countcontributions', (req, res) => {
+//   Contribution.count().then((count) => {
+//       res.send(count);
+//   });
+// })
 // app.get('/approvedcontributions', (req, res) => {
 //   Contribution.find({pending: true}).then((contribution) => {
 //       res.send(contribution);
@@ -202,7 +213,7 @@ app.post('/coordinators', (req, res) => {
 });
 
 // Get contribution which is modified by specific coordinator
-app.get('/coordinators/:coordinatorId/contributions', (req, res) => {
+app.get('/coordinators/:id/contributions', (req, res) => {
   Contribution.find({
     _coordinatorId: req.params.coordinatorId
   }).then((contributions) => {
@@ -307,6 +318,35 @@ app.delete('/user/:id', (req, res) => {
     res.send(removeUser);
   })
 })
+
+app.get('/user/:id', (req, res) => {
+  User.find({_id: req.params.id}).then((user) => {
+      res.send(user);
+  }).catch((e) => {
+    res.send(e);
+  });
+})
+app.get('/users', (req, res) => {
+  User.find({}).then((user) => {
+      res.send(user);
+  });
+})
+app.get('/roles', (req, res) => {
+  Role.find({}).then((roles) => {
+      res.send(roles);
+  });
+})
+app.post('/roles', (req, res) => {
+  let name = req.body.name;
+
+  let newRole = new Role({
+    name
+  });
+  newRole.save().then((roleDoc) => {
+    res.send(roleDoc);
+  })
+})
+
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 app.listen(3000, () => {

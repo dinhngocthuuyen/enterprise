@@ -50,4 +50,11 @@ export const MENU_ITEMS: NbMenuItem[] = [
     icon: 'person-outline',
     link: '/pages/guest',
   },
+
+  {
+    title: 'Chat',
+    icon: 'message-circle-outline',
+    link: '/pages/chat',
+  },
+
 ]

@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NbThemeModule, NbLayoutModule, NbSidebarModule, NbButtonModule, NbIconModule, NbMenuModule, NbCardModule, NbTabsetModule, NbTreeGridModule, NbDialogModule, NbWindowModule, NbInputModule } from '@nebular/theme';
+import { NbThemeModule, NbLayoutModule, NbSidebarModule, NbButtonModule, NbIconModule, NbMenuModule, NbCardModule, NbTabsetModule, NbTreeGridModule, NbDialogModule, NbWindowModule, NbInputModule, NbContextMenuModule, NbChatModule } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { DashboardComponent } from './pages/coordinators/dashboard/dashboard.component';
 import { PagesComponent } from './pages/pages.component';
@@ -27,10 +27,6 @@ import { AuthGuardService } from './services/auth-guard.service';
 import { WebRequestInterceptor } from './services/web-request.interceptor';
 
 
-
-
-
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -45,6 +41,7 @@ import { WebRequestInterceptor } from './services/web-request.interceptor';
     NbThemeModule.forRoot({ name: 'default' }),
     NbSidebarModule.forRoot(),
     NbMenuModule.forRoot(),
+    // NbChatModule.forRoot({ messageGoogleMapKey: 'MAP_KEY' }),
     NbLayoutModule,
     NbButtonModule,
     NbIconModule,
@@ -56,9 +53,7 @@ import { WebRequestInterceptor } from './services/web-request.interceptor';
     BrowserAnimationsModule,
     NbInputModule,
     HttpClientModule,
-
     NbWindowModule.forRoot(),
-    // StoreModule.forRoot({ count: exampleReducer, count2: counterReducer }),
     StoreModule.forRoot(ROOT_REDUCERS, {
       metaReducers,
       runtimeChecks: {
@@ -75,7 +70,8 @@ import { WebRequestInterceptor } from './services/web-request.interceptor';
     ReviewModule,
     StudentManagerModule,
     ProfileModule,
-    DashboardModule
+    DashboardModule,
+    // AuthModule,
   ],
   providers: [AuthGuardService, {provide: HTTP_INTERCEPTORS, useClass: WebRequestInterceptor, multi: true}],
   bootstrap: [AppComponent],

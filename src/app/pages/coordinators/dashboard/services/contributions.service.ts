@@ -11,7 +11,9 @@ export class ContributionsService {
   getCoordinators(){
     return this.WebReqService.get('coordinators');
   }
-
+  getTotalContribution(){
+    return this.WebReqService.get('countcontributions');
+  }
   getContributions(coordinatorId: string){
     return this.WebReqService.get(`coordinators/${coordinatorId}`);
   }

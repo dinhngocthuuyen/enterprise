@@ -1,0 +1,26 @@
+<!-- <nb-card>
+  <nb-card-header>
+      <div class="row">
+          <div class="title">
+              <span>Contribution detail</span>
+          </div>
+      </div>
+  </nb-card-header>
+  <nb-card-body>
+      <form>
+      <div class="row">
+          <div class="col-xs-12 col-md-6">
+              <label>Contribution Code: </label>
+              <input nbInput />
+          </div>
+          <div class="col-xs-12 col-md-6">
+              <label>Description: </label>
+              <input nbInput [(ngModel)]="contribution.description" [ngModelOptions]="{standalone: true}"/>
+          </div>
+      </div>
+      <ng-container *ngFor="let contribution"></ng-container>
+      </form>
+      <br>
+  </nb-card-body>
+</nb-card> -->
+<contribution-detail [item]="contribution$ | async"></contribution-detail>

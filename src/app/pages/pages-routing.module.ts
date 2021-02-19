@@ -14,6 +14,9 @@ import { StudentmanagerComponent } from './manager/studentmanager/studentmanager
 import { ProfileComponent } from './coordinators/profile/profile.component';
 import { GuestDetailComponent } from './guest/guest-detail/guest-detail.component';
 import { DetailComponent } from './coordinators/review/containers/detail/detail.component';
+import { CorContributionComponent } from './coordinators/dashboard/containers/cor-contribution/cor-contribution.component';
+import { AuthComponent } from '../auth/auth.component';
+import { ChatComponent } from './chat/chat.component';
 
 const routes: Routes = [{
   path: '',
@@ -22,6 +25,10 @@ const routes: Routes = [{
     {
       path: 'dashboard',
       component: DashboardComponent,
+    },
+    {
+      path: 'dashboard/:coordinatorId',
+      component: CorContributionComponent,
     },
     {
       path: 'login',
@@ -116,6 +123,14 @@ const routes: Routes = [{
     {
       path: 'guest/guest-detail/:id',
       component: GuestDetailComponent
+    },
+    {
+      path: 'auth',
+      component: AuthComponent,
+    },
+    {
+      path: 'chat',
+      component: ChatComponent,
     },
 
     {

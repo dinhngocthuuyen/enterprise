@@ -18,7 +18,7 @@ const UserSchema = new mongoose.Schema({
     password: {
         type: String,
         required: true,
-        minlength: 1      
+        minlength: 1
     },
 
     role: {
@@ -172,6 +172,6 @@ let generateRefreshTokenExpiryTime = () => {
 }
 
 const User = mongoose.model('User', UserSchema);
-module.exports = { 
+module.exports = {
     User
 }

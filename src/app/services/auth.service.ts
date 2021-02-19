@@ -1,15 +1,16 @@
-import { HttpResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { shareReplay, tap } from 'rxjs/operators';
+import { Observable, throwError } from 'rxjs';
+import { catchError, map, shareReplay, tap } from 'rxjs/operators';
 import { WebRequestService } from '../pages/guest/service/web-request.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-
-  constructor(private webRequestService: WebRequestService, private router: Router) { }
+  constructor(private webRequestService: WebRequestService,
+    private router: Router) { }
 
   login(username: string, password: string) {
     return this.webRequestService.login(username, password).pipe(
@@ -48,6 +49,7 @@ export class AuthService {
   }
 
   setAccessToken(accessToken: string) {
-    return localStorage.setItem('x-access-token', accessToken);  
+    return localStorage.setItem('x-access-token', accessToken);
   }
+
 }
