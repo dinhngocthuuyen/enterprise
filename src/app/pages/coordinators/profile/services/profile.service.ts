@@ -12,7 +12,7 @@ export class ProfileService {
   options = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
-      // 'mode': 'no-cors'
+      
     }),
     //params: httpParam
   };
@@ -30,7 +30,7 @@ export class ProfileService {
     return this.http.get<Coordinator>(this.API_PATH, this.options);
   }
   updateProfiles(changes:Partial<Coordinator>){
-    return this.http.put<Coordinator>(this.API_PATH + '/' +  changes._id,changes, this.options)
+    return this.http.put<Coordinator>(this.API_PATH + '/profile-detail-update/' +  changes._id,changes, this.options)
   }
  
 }

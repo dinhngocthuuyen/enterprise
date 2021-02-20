@@ -184,6 +184,47 @@ app.patch('/contributions/:id', (req, res) => {
   });
 });
 
+//GET Profile Coordinator
+app.get('/profiles', (req, res) => {
+
+    Coordinator.find({}).then((profiles) => {
+        res.send(profiles);
+    });
+})
+
+app.get('/profiles/profile-detail-update/:id', (req, res) => {
+
+    Coordinator.find({_id: req.params.id}).then((profiles) => {
+        res.send(profiles);
+    });
+})
+//POST Profile Coordinator
+app.post('/profiles', (req, res) => {
+    let name = req.body.name;
+    let address = req.body.address;
+
+    let phone = req.body.phone;
+    let email = req.body.email;
+    let dob = req.body.dob;
+
+
+    let newCoordinator = new Coordinator({
+        name,address,dob,email,phone
+    });
+    newCoordinator.save().then((CoordinatorDoc) => {
+
+        res.send(CoordinatorDoc);
+    })
+})
+
+app.put('/profiles/profile-detail-update/:id', (req, res) => {
+  Coordinator.findOneAndUpdate({_id: req.params.id},{
+      $set: req.body
+  }).then(() =>{
+      res.sendStatus(200);
+  });
+});
+
 //GET Coordinator
 app.get('/coordinators', (req, res) => {
   Coordinator.find({}).then((coordinators) => {

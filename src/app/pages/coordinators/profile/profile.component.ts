@@ -6,7 +6,6 @@ import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { Coordinator } from 'src/app/models';
 import { ProfileApiActions } from './actions';
-import { ProfileAddComponent } from './component/profile-add/profile-add.component';
 import { ProfileSelectors } from './selectors';
 
 @Component({
@@ -67,9 +66,10 @@ export class ProfileComponent implements OnInit {
     this.store.dispatch(ProfileApiActions.loadProfiles());
 }
 onUserRowSelect(event){
-  this.router.navigate(['pages/coordinators/profile/profile-detail-update/' + event.data._id]);
+  this.router.navigate(['pages/6027b13aecb2363a9466d4ca/coordinators/profile/profile-detail-update/' + event.data._id]);
 }
-open() {
-  this.dialogService.open(ProfileAddComponent)
+
+close(){
+  this.dialogRef.close();
 }
 }

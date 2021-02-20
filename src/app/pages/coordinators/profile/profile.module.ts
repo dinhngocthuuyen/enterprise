@@ -12,7 +12,6 @@ import { ProfileEditComponent } from "./component/profile-edit/profile-edit.comp
 import { ProfileEffects } from "./effects/profile.effects";
 import { ProfileComponent } from "./profile.component";
 import { FeatureKey, reducer } from "./reducers";
-import { ProfileAddComponent } from './component/profile-add/profile-add.component';
 import { Ng2CompleterModule } from "ng2-completer";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 
@@ -24,7 +23,7 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
     BrowserAnimationsModule,
     NbCardModule,
     NbDialogModule.forRoot(),
-    NbThemeModule.forRoot({ name: 'default' }),
+    NbDialogModule.forChild(),
     CommonModule,
     NbInputModule,
     Ng2SmartTableModule,
@@ -43,11 +42,11 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
         ProfileComponent,
         ProfileDetailUpdateComponent,
         ProfileEditComponent,
-        ProfileAddComponent,
+        
     ],
-    entryComponents:[ProfileEditComponent,ProfileDetailUpdateComponent, ProfileAddComponent ],
-    exports:[ProfileEditComponent,ProfileDetailUpdateComponent, ProfileAddComponent ]
-
+    entryComponents:[ProfileEditComponent,ProfileDetailUpdateComponent ],
+    exports:[ProfileEditComponent,ProfileDetailUpdateComponent ],
+    providers: [],
   })
   export class ProfileModule {
   }
