@@ -6,12 +6,17 @@ import { AppComponent } from './app.component';
 
 export const routes: Routes = [
   {
-    path: 'pages',
+    path: 'pages/:id/manager',
     // canActivate: [AuthGuardService],
     loadChildren: () => import('./pages/pages.module')
       .then(m => m.PagesModule),
   },
-
+  {
+    path: 'pages/:id/coordinator',
+    // canActivate: [AuthGuardService],
+    loadChildren: () => import('./coordinator/coordinator.module')
+      .then(m => m.CoordinatorModule),
+  },
   {
     path: 'login',
     component: LoginComponent,

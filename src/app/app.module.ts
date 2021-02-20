@@ -25,12 +25,14 @@ import { DashboardModule } from './pages/coordinators/dashboard/dashboard.module
 import { LoginComponent } from './login/login.component';
 import { AuthGuardService } from './services/auth-guard.service';
 import { WebRequestInterceptor } from './services/web-request.interceptor';
+import { CoordinatorComponent } from './coordinator/coordinator.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
+    CoordinatorComponent,
   ],
   imports: [
     BrowserModule,

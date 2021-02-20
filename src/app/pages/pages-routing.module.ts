@@ -20,7 +20,7 @@ import { ChatComponent } from './chat/chat.component';
 import { ProfileDetailUpdateComponent } from './coordinators/profile/component/profile-detail-update/profile-detail-update.component';
 
 const routes: Routes = [{
-  path: ':id',
+  path: '',
   component: PagesComponent,
   children: [
     {
