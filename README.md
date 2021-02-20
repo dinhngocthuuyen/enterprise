@@ -39,3 +39,8 @@ git status
 git commit -m "note here"  
 npm run prepush  
 git push  
+
+Cách tạo branch trên github  
+- tạo branch trên github  
+- git fetch (update branch mới)  
+- git checkout <tên branch mình đặt> (chuyển qua branch mình)  
