@@ -4,57 +4,57 @@ export const MENU_ITEMS: NbMenuItem[] = [
   {
     title: 'Dashboard',
     icon: 'shopping-cart-outline',
-    link: '/pages/dashboard',
+    link: 'dashboard',
     home: true,
   },
   {
     title: 'Login',
     icon: 'shopping-cart-outline',
-    link: '/pages/login',
+    link: 'login',
   },
 
   {
     title: 'Faculty',
     icon: 'home-outline',
-    link: '/pages/faculty',
+    link: 'faculty',
   },
   {
     title: 'Manager student',
     icon: 'shopping-cart-outline',
-    link: '/pages/manager/studentmanager',
+    link: 'manager/studentmanager',
   },
 
   {
     title: 'Admin',
     icon: 'person-outline',
-    link: '/pages/admin',
+    link: 'admin',
   },
 
   {
     title: 'Student',
     icon: 'home-outline',
-    link: '/pages/student',
+    link: 'student',
   },
   {
     title: 'Review',
     icon: 'shopping-cart-outline',
-    link: '/pages/coordinators/review',
+    link: 'coordinators/review',
   },
   {
     title: 'Update Profile',
     icon: 'shopping-cart-outline',
-    link: '/pages/coordinators/profile',
+    link: 'coordinators/profile',
   },
   {
     title: 'Guest',
     icon: 'person-outline',
-    link: '/pages/guest',
+    link: 'guest',
   },
 
   {
     title: 'Chat',
     icon: 'message-circle-outline',
-    link: '/pages/chat',
+    link: 'chat',
   },
 
 ]

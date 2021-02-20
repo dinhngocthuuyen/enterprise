@@ -4,6 +4,7 @@ const {Role} = require("./role.model");
 const {Student} = require("./student.model");
 const {User} = require("./user.model");
 const {Coordinator} = require("./coordinator.model");
+const {Message} = require("./messages.model")
 module.exports = {
   Post,
   Contribution,
@@ -11,4 +12,5 @@ module.exports = {
   User,
   Role,
   Student,
+  Message
 }

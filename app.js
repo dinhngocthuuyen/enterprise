@@ -11,7 +11,7 @@ const { send } = require('process');
 const { asap } = require('rxjs');
 // const { JsonWebTokenError } = require('jsonwebtoken');
 const jwt = require('jsonwebtoken');
-const { Post, Contribution, Coordinator, User, Role, Student } = require('./db/models');
+const { Post, Contribution, Coordinator, User, Role, Student, Message } = require('./db/models');
 
 /* LOAD GLOBAL MIDDLEWARE */
 app.use(bodyParser.json());
@@ -213,7 +213,7 @@ app.post('/coordinators', (req, res) => {
 });
 
 // Get contribution which is modified by specific coordinator
-app.get('/coordinators/:id/contributions', (req, res) => {
+app.get('/coordinators/:coordinatorId/contributions', (req, res) => {
   Contribution.find({
     _coordinatorId: req.params.coordinatorId
   }).then((contributions) => {
