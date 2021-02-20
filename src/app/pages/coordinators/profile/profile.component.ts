@@ -1,8 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
+import { NbDialogService } from '@nebular/theme';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { Coordinator } from 'src/app/models';
 import { ProfileApiActions } from './actions';
+import { ProfileAddComponent } from './component/profile-add/profile-add.component';
 import { ProfileSelectors } from './selectors';
 
 @Component({
@@ -12,8 +16,12 @@ import { ProfileSelectors } from './selectors';
   styleUrls: ['./profile.component.scss']
 })
 export class ProfileComponent implements OnInit {
+  // public editProfileForm: FormGroup;
+  @Input()
+  coordinator!: Coordinator;
+  coordinators$: Observable<Coordinator[]>; 
+  dialogRef: any;
 
-  coordinators$: Observable<Coordinator[]> ;
   settings = {
     columns: {
       _id: {
@@ -47,7 +55,9 @@ export class ProfileComponent implements OnInit {
   };
 
   constructor(
-    private store: Store<Coordinator>
+    private store: Store<Coordinator>,
+    private router: Router,
+    private dialogService: NbDialogService,
 
   ){
     this.coordinators$ = this.store.pipe(select(ProfileSelectors.selectAllProfiles));
@@ -56,5 +66,10 @@ export class ProfileComponent implements OnInit {
   ngOnInit() {
     this.store.dispatch(ProfileApiActions.loadProfiles());
 }
-
+onUserRowSelect(event){
+  this.router.navigate(['pages/coordinators/profile/profile-detail-update/' + event.data._id]);
+}
+open() {
+  this.dialogService.open(ProfileAddComponent)
+}
 }

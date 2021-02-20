@@ -15,9 +15,9 @@ export const selectProfileEntitiesState = createSelector(
       selectTotal: selectTotalProfiles
   } = profileAdapter.getSelectors(selectProfileEntitiesState);
   
-  export const selectCurrentProfile = (id) => createSelector(
+  export const selectCurrentProfile = (_id) => createSelector(
       selectProfileEntities,
-      (coordinators) => coordinators[id]
+      (coordinators) => coordinators[_id]
   )
   
   export const ProfileSelectors = {

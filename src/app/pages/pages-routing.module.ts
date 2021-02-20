@@ -17,6 +17,7 @@ import { DetailComponent } from './coordinators/review/containers/detail/detail.
 import { CorContributionComponent } from './coordinators/dashboard/containers/cor-contribution/cor-contribution.component';
 import { AuthComponent } from '../auth/auth.component';
 import { ChatComponent } from './chat/chat.component';
+import { ProfileDetailUpdateComponent } from './coordinators/profile/component/profile-detail-update/profile-detail-update.component';
 
 const routes: Routes = [{
   path: ':id',
@@ -81,9 +82,8 @@ const routes: Routes = [{
       component: ProfileComponent,
     },
     {
-      path: 'coordinators/profile',
-      loadChildren: () => import('./coordinators/profile/profile.module')
-        .then(m => m.ProfileModule),
+      path: 'coordinators/profile/profile-detail-update/:id',
+      component: ProfileDetailUpdateComponent,
     },
     {
       path: '',

@@ -1,7 +1,7 @@
 import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
 import { Action, createReducer, on } from '@ngrx/store';
 import { Coordinator } from 'src/app/models';
-import { ProfileCollectionApiActions } from '../actions';
+import { ProfileApiActions, ProfileCollectionApiActions } from '../actions';
 
 
 export interface ProfileState extends EntityState<Coordinator>{
@@ -9,7 +9,7 @@ export interface ProfileState extends EntityState<Coordinator>{
 }
 
 export const profileAdapter: EntityAdapter<Coordinator> = createEntityAdapter<Coordinator>({
-  selectId: (coordinators: Coordinator) => coordinators._id,
+  selectId: (coordinator: Coordinator) => coordinator._id,
   sortComparer: false,
 });
 
@@ -35,6 +35,7 @@ export const profileFeatureKey = 'coordinators';
 export const reducer = createReducer(
   profileInitialState,
   on(
+    // ProfileApiActions.loadProfiles,
     ProfileCollectionApiActions.loadProfilesSuccess,
       (state, { coordinators }) => {
         coordinators = coordinators
@@ -44,5 +45,23 @@ export const reducer = createReducer(
             state)
       }
   ),
+  on(
+    // ProfileApiActions.loadProfile,
+    ProfileCollectionApiActions.loadProfileSuccess,
+    (state, { coordinator }) => {
+      coordinator = coordinator
+
+        return profileAdapter.addOne(
+          coordinator,
+            state)
+    }
+),
+  on(
+    ProfileApiActions.updateProfiles,
+    // ProfileCollectionApiActions.updateProfilesSuccess,
+    (state, { update }) => profileAdapter.updateOne(
+        update,
+        state)
+),
 );
 

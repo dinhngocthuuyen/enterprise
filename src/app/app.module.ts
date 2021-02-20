@@ -42,6 +42,7 @@ import { WebRequestInterceptor } from './services/web-request.interceptor';
     NbSidebarModule.forRoot(),
     NbMenuModule.forRoot(),
     // NbChatModule.forRoot({ messageGoogleMapKey: 'MAP_KEY' }),
+    NbDialogModule.forRoot(),
     NbLayoutModule,
     NbButtonModule,
     NbIconModule,

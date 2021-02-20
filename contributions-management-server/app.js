@@ -115,6 +115,13 @@ app.get('/profiles', (req, res) => {
         res.send(profiles);
     });
 })
+
+app.get('/profiles/profile-detail-update/:id', (req, res) => {
+
+    Coordinator.find({_id: req.params.id}).then((profiles) => {
+        res.send(profiles);
+    });
+})
 //POST Profile Coordinator
 app.post('/profiles', (req, res) => {
     let name = req.body.name;

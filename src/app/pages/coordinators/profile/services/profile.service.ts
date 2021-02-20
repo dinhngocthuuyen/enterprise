@@ -29,6 +29,8 @@ export class ProfileService {
   getProfile(): Observable<Coordinator> {
     return this.http.get<Coordinator>(this.API_PATH, this.options);
   }
-
+  updateProfiles(changes:Partial<Coordinator>){
+    return this.http.put<Coordinator>(this.API_PATH + '/' +  changes._id,changes, this.options)
+  }
  
 }

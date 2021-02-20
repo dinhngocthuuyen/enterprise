@@ -13,22 +13,20 @@ import { ProfileSelectors } from '../../selectors/profile.selectors';
   styleUrls: ['./profile-detail-update.component.scss']
 })
 export class ProfileDetailUpdateComponent implements OnInit {
-  // @Input()
-  // coordinators!: Coordinator;
-
-  coordinators$;
-  _id$;
+  coordinator$;
+  // id$: String;
   constructor(
     private router: ActivatedRoute,
     private store: Store<Coordinator>
   ) { 
-    this._id$ =  +this.router.snapshot.params.id;
-    this.coordinators$ = this.store.pipe(select(ProfileSelectors.selectCurrentProfile(this._id$)));
+    // this.id$ =  ;
+    this.coordinator$ = this.store.pipe(select(ProfileSelectors.selectCurrentProfile(this.router.snapshot.params.id)));
   }
 
   ngOnInit() {
     this.store.dispatch(ProfileApiActions.loadProfiles());
 }
+
 
   // back(){
   //   this.route.navigate(['pages/coordinators/profile']);
