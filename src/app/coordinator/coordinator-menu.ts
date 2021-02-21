@@ -6,5 +6,14 @@ export const MENU_ITEMS: NbMenuItem[] = [
     icon: 'message-circle-outline',
     link: 'chat',
   },
-
+  {
+    title: 'Review',
+    icon: 'shopping-cart-outline',
+    link: 'review',
+  },
+  {
+    title: 'Update Profile',
+    icon: 'shopping-cart-outline',
+    link: 'profile',
+  },
 ]

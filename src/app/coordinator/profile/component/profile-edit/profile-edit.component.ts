@@ -6,6 +6,7 @@ import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { Coordinator } from 'src/app/models';
 import { ProfileApiActions } from '../../actions';
+import { updateProfiles } from '../../actions/profile-api.action';
 import { ProfileSelectors } from '../../selectors/profile.selectors';
 
 @Component({
@@ -64,6 +65,6 @@ export class ProfileEditComponent implements OnInit {
       this.close();
   }
   back(){
-    this.route.navigate(['pages/coordinators/profile']);
+    this.route.navigate(['pages/coordinator/profile']);
   }
   }

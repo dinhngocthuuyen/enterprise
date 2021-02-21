@@ -33,6 +33,7 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
     ReactiveFormsModule,
     NbButtonModule,
     Ng2CompleterModule,
+    // StoreModule.forRoot('coordinators',reducer),
      StoreModule.forFeature(FeatureKey, reducer),
      EffectsModule.forFeature([ProfileEffects ])
     ],

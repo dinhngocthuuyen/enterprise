@@ -66,10 +66,11 @@ export class ProfileComponent implements OnInit {
     this.store.dispatch(ProfileApiActions.loadProfiles());
 }
 onUserRowSelect(event){
-  this.router.navigate(['pages/6027b13aecb2363a9466d4ca/coordinators/profile/profile-detail-update/' + event.data._id]);
+  this.router.navigate(['pages/6027b13aecb2363a9466d4ca/profile/' + event.data._id]);
 }
 
 close(){
   this.dialogRef.close();
 }
+
 }

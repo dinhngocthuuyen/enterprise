@@ -9,7 +9,7 @@ export interface ProfileState extends EntityState<Coordinator>{
 }
 
 export const profileAdapter: EntityAdapter<Coordinator> = createEntityAdapter<Coordinator>({
-  selectId: (coordinator: Coordinator) => coordinator._id,
+  selectId: (coordinators: Coordinator) => coordinators._id,
   sortComparer: false,
 });
 

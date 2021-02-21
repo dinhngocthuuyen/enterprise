@@ -35,16 +35,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
     icon: 'home-outline',
     link: 'student',
   },
-  {
-    title: 'Review',
-    icon: 'shopping-cart-outline',
-    link: 'coordinators/review',
-  },
-  {
-    title: 'Update Profile',
-    icon: 'shopping-cart-outline',
-    link: 'coordinators/profile',
-  },
+
   {
     title: 'Guest',
     icon: 'person-outline',
