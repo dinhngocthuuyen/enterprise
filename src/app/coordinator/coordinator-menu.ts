@@ -6,5 +6,15 @@ export const MENU_ITEMS: NbMenuItem[] = [
     icon: 'message-circle-outline',
     link: 'chat',
   },
-
+  {
+    title: 'Update Profile',
+    icon: 'shopping-cart-outline',
+    link: 'coordinators/profile',
+  },
+  {
+    title: 'Dashboard',
+    icon: 'shopping-cart-outline',
+    link: 'dashboard',
+    home: true,
+  },
 ]

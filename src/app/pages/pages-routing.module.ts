@@ -1,36 +1,27 @@
 import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { PagesComponent } from './pages.component';
-import { DashboardComponent } from './coordinators/dashboard/dashboard.component';
 import { LoginComponent } from './login/login.component';
 import { FacultyComponent } from './faculty/containers/faculty.component';
 
 import { AdminComponent } from './admin/admin.component';
 import { StudentComponent } from './student/student.component';
 import { StaffComponent } from './staff/staff.component';
-import { ReviewComponent } from './coordinators/review/review.component';
+import { ReviewComponent } from '../coordinator/review/review.component';
 import { GuestComponent } from './guest/guest.component';
 import { StudentmanagerComponent } from './manager/studentmanager/studentmanager.component';
-import { ProfileComponent } from './coordinators/profile/profile.component';
+import { ProfileComponent } from '../coordinator/profile/profile.component';
 import { GuestDetailComponent } from './guest/guest-detail/guest-detail.component';
-import { DetailComponent } from './coordinators/review/containers/detail/detail.component';
-import { CorContributionComponent } from './coordinators/dashboard/containers/cor-contribution/cor-contribution.component';
+import { DetailComponent } from '../coordinator/review/containers/detail/detail.component';
 import { AuthComponent } from '../auth/auth.component';
 import { ChatComponent } from './chat/chat.component';
-import { ProfileDetailUpdateComponent } from './coordinators/profile/component/profile-detail-update/profile-detail-update.component';
+import { ProfileDetailUpdateComponent } from '../coordinator/profile/component/profile-detail-update/profile-detail-update.component';
 
 const routes: Routes = [{
   path: '',
   component: PagesComponent,
   children: [
-    {
-      path: 'dashboard',
-      component: DashboardComponent,
-    },
-    {
-      path: 'dashboard/:coordinatorId',
-      component: CorContributionComponent,
-    },
+    
     {
       path: 'login',
       component: LoginComponent,

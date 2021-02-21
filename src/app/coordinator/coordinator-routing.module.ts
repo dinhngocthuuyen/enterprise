@@ -2,6 +2,10 @@ import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { CoordinatorComponent } from './coordinator.component';
 import { ChatComponent } from './chat/chat.component';
+import { ProfileComponent } from './profile/profile.component';
+import { ProfileDetailUpdateComponent } from './profile/component/profile-detail-update/profile-detail-update.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { CorContributionComponent } from './dashboard/containers/cor-contribution/cor-contribution.component';
 
 
 const routes: Routes = [{
@@ -12,7 +16,22 @@ const routes: Routes = [{
       path: 'chat',
       component: ChatComponent,
     },
-
+    {
+      path: 'coordinators/profile',
+      component: ProfileComponent,
+    },
+    {
+      path: 'coordinators/profile/profile-detail-update/:id',
+      component: ProfileDetailUpdateComponent,
+    },
+    {
+      path: 'dashboard',
+      component: DashboardComponent,
+    },
+    {
+      path: 'dashboard/:coordinatorId',
+      component: CorContributionComponent,
+    },
     {
       path: '',
       redirectTo: 'dashboard',

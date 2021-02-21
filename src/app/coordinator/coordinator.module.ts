@@ -7,6 +7,9 @@ import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { HttpClientModule } from '@angular/common/http';
 import { CoordinatorRoutingModule } from './coordinator-routing.module';
 import { ChatComponent } from './chat/chat.component';
+import { ProfileDetailUpdateComponent } from './profile/component/profile-detail-update/profile-detail-update.component';
+import { ProfileComponent } from './profile/profile.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 @NgModule({
   imports: [
@@ -32,7 +35,7 @@ import { ChatComponent } from './chat/chat.component';
     HttpClientModule
   ],
   declarations: [
-    ChatComponent
+    ChatComponent,
   ],
 })
 export class CoordinatorModule {

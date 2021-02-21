@@ -3,7 +3,6 @@ import { NbButtonModule, NbCardModule, NbCheckboxComponent, NbCheckboxModule, Nb
 
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { LoginComponent } from './login.component';
-import { DashboardComponent } from '../coordinators/dashboard/dashboard.component';
 import { FormsModule } from '@angular/forms';
 
 @NgModule({

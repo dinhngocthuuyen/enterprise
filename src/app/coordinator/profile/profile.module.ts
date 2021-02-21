@@ -15,6 +15,9 @@ import { FeatureKey, reducer } from "./reducers";
 import { ProfileAddComponent } from './component/profile-add/profile-add.component';
 import { Ng2CompleterModule } from "ng2-completer";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { AuthGuardService } from "src/app/services/auth-guard.service";
+import { HTTP_INTERCEPTORS } from "@angular/common/http";
+import { WebRequestInterceptor } from "src/app/services/web-request.interceptor";
 
 
 
@@ -46,7 +49,8 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
         ProfileAddComponent,
     ],
     entryComponents:[ProfileEditComponent,ProfileDetailUpdateComponent, ProfileAddComponent ],
-    exports:[ProfileEditComponent,ProfileDetailUpdateComponent, ProfileAddComponent ]
+    exports:[ProfileEditComponent,ProfileDetailUpdateComponent, ProfileAddComponent ],
+    providers: [AuthGuardService, {provide: HTTP_INTERCEPTORS, useClass: WebRequestInterceptor, multi: true}],
 
   })
   export class ProfileModule {

@@ -139,13 +139,13 @@ app.delete('/post/:id', (req, res) => {
 
 //////////////////////////////////////////////////////// COORDINATORS ////////////////////////////////////////////////////////////
 //Contributions
-app.get('/contributions', (req, res) => {
+app.get('/contributions',authenticate, (req, res) => {
   Contribution.find({}).then((contributions) => {
       res.send(contributions);
   });
 })
 
-app.get('/contributions/:id', (req, res) => {
+app.get('/contributions/:id',authenticate, (req, res) => {
   Contribution.find({_id: req.params.id}).then((contributions) => {
       res.send(contributions);
   });
@@ -160,7 +160,7 @@ app.get('/contributions/:id', (req, res) => {
 //       res.send(contribution);
 //   });
 // })
-app.post('/contributions', (req, res) => {
+app.post('/contributions', authenticate,(req, res) => {
   let description = req.body.description;
   let date = req.body.date;
 
