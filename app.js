@@ -11,7 +11,7 @@ const { send } = require('process');
 const { asap } = require('rxjs');
 // const { JsonWebTokenError } = require('jsonwebtoken');
 const jwt = require('jsonwebtoken');
-const { Post, Contribution, Coordinator, User, Role, Student, Message } = require('./db/models');
+const { Post, Contribution, Coordinator, User, Role, Student, Message, Faculty } = require('./db/models');
 
 /* LOAD GLOBAL MIDDLEWARE */
 app.use(bodyParser.json());
@@ -372,21 +372,51 @@ app.get('/users', (req, res) => {
       res.send(user);
   });
 })
-app.get('/roles', (req, res) => {
-  Role.find({}).then((roles) => {
+
+app.post('/faculties', (req, res) => {
+  let name = req.body.name;
+  let newFaculty = new Faculty({
+      name
+  });
+  newFaculty.save().then((FacultyDoc) => {
+
+      res.send(FacultyDoc);
+  })
+});
+app.get('/faculties/:facultyId/contributions', (req, res) => {
+  Contribution.find({
+    _facultyId: req.params.facultyId
+  }).then((contributions) => {
+    res.send(contributions);
+  })
+});
+/////Student create contributions////
+app.get('/users/:userId/contributions', (req, res) => {
+  Contribution.find({
+    _userId: req.params.userId
+  }).then((contributions) => {
+    res.send(contributions);
+  })
+});
+app.post('/users/:userId/contributions', (req, res) => {
+  let newContribution = new Contribution({
+      file: req.body.file,
+      date: req.body.date,
+      status: "Pending",
+      _userId: req.params.userId,
+      _facultyId: req.params.facultyId
+  });
+  newContribution.save().then((newDoc) => {
+    res.send(newDoc)
+  })
+});
+
+app.get('/contributions', (req, res) => {
+  Contribution.find({}).then((roles) => {
       res.send(roles);
   });
 })
-app.post('/roles', (req, res) => {
-  let name = req.body.name;
 
-  let newRole = new Role({
-    name
-  });
-  newRole.save().then((roleDoc) => {
-    res.send(roleDoc);
-  })
-})
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

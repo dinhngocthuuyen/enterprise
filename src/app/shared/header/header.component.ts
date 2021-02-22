@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
-import { UsersService } from '../../manager/users/user.service';
+import { UsersService } from './user.service';
 
 @Component({
   selector: 'app-header',
@@ -22,7 +22,6 @@ export class HeaderComponent implements OnInit {
     //   this.currentUser = res.msg;
     // })
   }
-  currentUser: Object = {};
   ngOnInit(): void {
     this.route.params.subscribe(
       (params: Params) => {

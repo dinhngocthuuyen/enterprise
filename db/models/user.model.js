@@ -25,10 +25,12 @@ const UserSchema = new mongoose.Schema({
       required: true,
       minlength: 2,
     },
-    faculty: String,
+    _facultyId: {
+      type: mongoose.Types.ObjectId
+    },
     role: {
-        type: String,
-        required: true
+      type: String,
+      required: true
     },
 
     sessions: [{

@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
-import { ContributionsService } from './services/contributions.service';
+import { DashboardService } from './services/dashboard.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -8,37 +8,22 @@ import { ContributionsService } from './services/contributions.service';
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
-  coordinators!: any;
-  contributions!: any;
-  count: any;
-  settings = {
-    columns: {
-      _id: {
-        title: 'ID',
-        type:'string'
-      },
-      name: {
-        title: 'Name',
-        type: 'string'
-
-      },
-      address: {
-        title: 'Address',
-        type: 'string'
-      },
-      phone: {
-        title: 'Phone Number',
-        type: 'number'
-      },
-    },
-    hideSubHeader: true,
-    actions: false
-  };
+  @Input() user;
   constructor(
     private route: ActivatedRoute,
-    private contributionService: ContributionsService) { }
+    private dashboardService: DashboardService,
+    ) { }
 
   ngOnInit() {
+    this.route.params.subscribe(
+      (params: Params) => {
+        console.log(params);
+        this.dashboardService.getUser(params.id).subscribe((user: any) => {
+          console.log(user);
+          this.user = user;
+        })
+      }
+    )
     // this.route.params.subscribe(
     //   (params: Params) => {
     //     console.log(params);
@@ -47,12 +32,11 @@ export class DashboardComponent implements OnInit {
     //     })
     //   }
     // ),
-    this.contributionService.getCoordinators().subscribe((coordinators: any) => {
-      this.coordinators = coordinators
-    })
+    // this.contributionService.getCoordinators().subscribe((coordinators: any) => {
+    //   this.coordinators = coordinators
+    // })
     // this.contributionService.getTotalContribution().subscribe((count: any) => {
     //   this.count = count
     // })
   }
-
 }

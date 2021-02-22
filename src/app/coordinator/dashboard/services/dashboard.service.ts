@@ -4,7 +4,7 @@ import { WebRequestService } from 'src/app/shared/web-request.service';
 @Injectable({
   providedIn: 'root'
 })
-export class ContributionsService {
+export class DashboardService {
 
   constructor(private WebReqService: WebRequestService) {}
 
@@ -16,5 +16,8 @@ export class ContributionsService {
   }
   getContributions(coordinatorId: string){
     return this.WebReqService.get(`coordinators/${coordinatorId}`);
+  }
+  getUser(id: string){
+    return this.WebReqService.get(`user/${id}`);
   }
 }
