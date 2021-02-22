@@ -15,6 +15,8 @@ import { ProfileEditComponent } from './profile/component/profile-edit/profile-e
 import { ProfileComponent } from './profile/profile.component';
 import { ProfileDetailUpdateComponent } from './profile/component/profile-detail-update/profile-detail-update.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   imports: [
@@ -38,6 +40,9 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     NbDialogModule.forRoot(),
     // NbChatModule,
     NbContextMenuModule,
+    // BrowserModule,
+    FormsModule,
+    ReactiveFormsModule,
     HttpClientModule,
     StoreModule.forFeature(FeatureKey, reducer),
     EffectsModule.forFeature([ProfileEffects ])

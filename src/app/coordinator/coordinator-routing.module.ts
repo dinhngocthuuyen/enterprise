@@ -17,20 +17,24 @@ const routes: Routes = [{
       component: ChatComponent,
     },
 
-    // {
-    //   path: 'profile',
-    //   component: ProfileComponent,
-    // },
+    {
+      path: 'profile',
+      component: ProfileComponent,
+    },
     // {
     //   path: 'profile',
     //   loadChildren: () => import('./profile/profile.module')
     //     .then(m => m.ProfileModule),
     // },
+    {
+      path: 'profile/:id',
+      component: ProfileDetailUpdateComponent,
+    },
     // {
     //   path: 'profile/:id',
-    //   component: ProfileDetailUpdateComponent,
+    //   loadChildren: () => import('./profile/profile.module')
+    //     .then(m => m.ProfileModule),
     // },
-  
     // {
     //   path: 'dashboard',
     //   component: DashboardComponent,
