@@ -1,0 +1,43 @@
+<nb-card>
+    <nb-card-header>Profile Detail</nb-card-header>
+    <nb-card-body>
+            <!-- <form  *ngIf="coordinator"> -->
+
+          <!-- <input type="hidden" formControlName="id" class="form-control" name="_id" [ngModel]="coordinator?._id"> -->
+
+
+          <div class="col-xs-12 col-md-12">
+            
+                 <label for="name">Name</label>
+                 <input nbInput type="text" class="form-control" name="name" readonly [ngModel]="coordinator?.name" >
+
+             </div>
+             <div class="col-xs-12 col-md-12">
+            
+                <label for="email">Email</label>
+                <input nbInput type="text"  class="form-control" name="email" readonly [ngModel]="coordinator?.email">
+            </div>
+            <div class="col-xs-12 col-md-12">
+            
+                <label for="phone">Phone</label>
+                <input nbInput type="number"  class="form-control" name="phone" readonly [ngModel]="coordinator?.phone">
+            </div>
+            <div class="col-xs-12 col-md-12">
+            
+                <label for="dob">Date of birth</label>
+                <input nbInput type="text"  class="form-control" name="dob" readonly [ngModel]="coordinator?.dob">
+            </div>
+            <div class="col-xs-12 col-md-12">
+            
+                <label for="address">Address</label>
+                <input nbInput type="text"  class="form-control" name="address" readonly [ngModel]="coordinator?.address">
+            </div>
+     <!-- </form> -->
+        <!-- </div> -->
+
+         </nb-card-body>
+         <nb-card-footer>
+             <button class="cancel" nbButton status="danger" (click)="back()" >Back</button>
+             <button nbButton status="success" (click)="edit()">Edit</button>
+         </nb-card-footer>
+ </nb-card>

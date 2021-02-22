@@ -17,6 +17,7 @@ const ContributionSchema = new mongoose.Schema({
   pending: {
     type: Boolean,
   },
+  // _userId
   _coordinatorId: {
     type: mongoose.Types.ObjectId
   }

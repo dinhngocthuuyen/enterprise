@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable, throwError } from 'rxjs';
 import { catchError, map, shareReplay, tap } from 'rxjs/operators';
-import { WebRequestService } from '../pages/guest/service/web-request.service';
+import { WebRequestService } from '../shared/web-request.service';
 
 @Injectable({
   providedIn: 'root'

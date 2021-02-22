@@ -20,7 +20,12 @@ const UserSchema = new mongoose.Schema({
         required: true,
         minlength: 1
     },
-
+    name: {
+      type: String,
+      required: true,
+      minlength: 2,
+    },
+    faculty: String,
     role: {
         type: String,
         required: true
