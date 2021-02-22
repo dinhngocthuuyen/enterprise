@@ -14,9 +14,7 @@ export class WebRequestService {
     }),
     // params: httpParam
   };
-  readonly payLoad = {
-    offset: 0
-  };
+ 
   readonly ROOT_URL;
   coordinator !: Coordinator;
   coordinators !: Coordinator[];
@@ -25,7 +23,7 @@ export class WebRequestService {
     this.ROOT_URL = "http://localhost:3000";
   }
  getProfiles(uri: string): Observable<Coordinator[]> {
-    return this.http.get<Coordinator[]>(`${this.ROOT_URL}/${uri}`);
+    return this.http.get<Coordinator[]>(`${this.ROOT_URL}/${uri}`, this.options);
   }
   // updateProfiles(changes:Partial<Coordinator>){
   //   // return this.http.patch<Coordinator>(`${this.ROOT_URL}/${id}`, this.options)
@@ -33,11 +31,9 @@ export class WebRequestService {
 
   // }
 
-  updateProfiles(uri: string,changes:Partial<Coordinator> ){
-    // return this.http.patch<Coordinator>(this.ROOT_URL + {uri} +  changes._id,changes,  this.options)
-    return this.http.patch(`${this.ROOT_URL}/${uri}/`+ changes._id,changes, this.options)
-
-  }
+  // updateProfiles(uri: string,changes:Partial<Coordinator> ){
+  //   return this.http.put<Coordinator>(`${this.ROOT_URL}/${uri}${[changes._id]}`,changes)
+  // }
   get(uri: string){
     return this.http.get(`${this.ROOT_URL}/${uri}`)
   }
@@ -49,7 +45,9 @@ export class WebRequestService {
   patch(uri: string, payload: Object ){
     return this.http.patch(`${this.ROOT_URL}/${uri}`, payload)
   }
-
+  put(uri: string, payload: Object ){
+    return this.http.put(`${this.ROOT_URL}/${uri}`, payload)
+  }
   delete(uri: string){
     return this.http.delete(`${this.ROOT_URL}/${uri}`)
   }

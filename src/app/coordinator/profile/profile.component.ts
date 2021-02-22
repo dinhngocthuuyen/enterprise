@@ -42,11 +42,11 @@ export class ProfileComponent implements OnInit {
       },
       dob: {
         title: 'Date',
-        type: 'Date'
+        type: 'string'
       },
       email: {
         title: 'Email',
-        type: 'email'
+        type: 'string'
       },
     },
     hideSubHeader: true,

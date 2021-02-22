@@ -51,10 +51,16 @@ export class ProfileService {
   getProfiles(){
     return this.WebRequestService.getProfiles(`coordinators`);
   }
-
-    updateProfiles(changes:Partial<Coordinator> ){
-    return this.WebRequestService.updateProfiles(`coordiantors`,{})
+    updateProfiles( changes:Partial<Coordinator> ){
+    return this.WebRequestService.put(`coordinators/${changes._id}`,changes)
   }
+  // updateProfiles(uri: string,changes:Partial<Coordinator> ){
+  //   return this.http.put<Coordinator>(`${this.ROOT_URL}/${uri}${[changes._id]}`,changes)
+  // }
+
+  // patch(uri: string, payload: Object ){
+  //   return this.http.patch(`${this.ROOT_URL}/${uri}`, payload)
+  // }
 
   // updateProfiles(_id:string, name: string,address: string,phone: number, dob: Date, email: string  ){
   //   return this.WebRequestService.updateProfiles(`coordiantors`,  {_id,name,address,phone, dob, email})
@@ -63,7 +69,5 @@ export class ProfileService {
     ////Send a request to create a post
     //return this.WebReqService.post('post', {title, post});
   //}
-  // updateProfiles(changes:Partial<Coordinator>){
-  //   return this.WebRequestService.updateProfiles(`coordinators/profile/${_id}`);
-  // }
+
 }
