@@ -10,7 +10,7 @@ import { CorContributionComponent } from './containers/cor-contribution/cor-cont
 @NgModule({
   imports: [
     CommonModule,
-    BrowserModule,
+    // BrowserModule,
     FormsModule,
     NbCardModule,
     NbButtonModule,
@@ -18,6 +18,6 @@ import { CorContributionComponent } from './containers/cor-contribution/cor-cont
     NbLayoutModule,
     Ng2SmartTableModule
   ],
-  declarations: [DashboardComponent, CorContributionComponent],
+  declarations: [CorContributionComponent],
 })
 export class DashboardModule { }

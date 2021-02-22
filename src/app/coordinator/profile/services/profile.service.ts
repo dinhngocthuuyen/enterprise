@@ -2,10 +2,9 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable, Input } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Coordinator } from 'src/app/models';
-import {WebRequestService} from '../../../pages/guest/service/web-request.service'
 import { CoordinatorComponent } from '../../coordinator.component';
 import { CoordinatorModule } from '../../coordinator.module';
-
+import { WebRequestService } from 'src/app/shared/web-request.service'
 @Injectable({
   providedIn: 'root'
 })
@@ -52,10 +51,13 @@ export class ProfileService {
     return this.WebRequestService.getProfiles(`coordinators`);
   }
 
-    updateProfiles(_id:string, name: string,address: string,phone: number, dob: Date, email: string  ){
-    return this.WebRequestService.updateProfiles(`coordiantors`,  {_id,name,address,phone, dob, email}
- )
+    updateProfiles(changes:Partial<Coordinator> ){
+    return this.WebRequestService.updateProfiles(`coordiantors`,{})
   }
+
+  // updateProfiles(_id:string, name: string,address: string,phone: number, dob: Date, email: string  ){
+  //   return this.WebRequestService.updateProfiles(`coordiantors`,  {_id,name,address,phone, dob, email})
+  // }
   //createGuestService(title: String, post: String){
     ////Send a request to create a post
     //return this.WebReqService.post('post', {title, post});

@@ -11,6 +11,10 @@ import { StoreModule } from '@ngrx/store';
 import { FeatureKey, reducer } from './profile/reducers';
 import { EffectsModule } from '@ngrx/effects';
 import { ProfileEffects } from './profile/effects/profile.effects';
+import { ProfileEditComponent } from './profile/component/profile-edit/profile-edit.component';
+import { ProfileComponent } from './profile/profile.component';
+import { ProfileDetailUpdateComponent } from './profile/component/profile-detail-update/profile-detail-update.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 @NgModule({
   imports: [
@@ -39,7 +43,11 @@ import { ProfileEffects } from './profile/effects/profile.effects';
     EffectsModule.forFeature([ProfileEffects ])
   ],
   declarations: [
-    ChatComponent
+    ChatComponent,
+    ProfileComponent,
+    DashboardComponent,
+    ProfileDetailUpdateComponent,
+    ProfileEditComponent,
   ],
 })
 export class CoordinatorModule {

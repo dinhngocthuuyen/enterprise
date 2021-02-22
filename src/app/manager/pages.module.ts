@@ -4,7 +4,6 @@ import { NbButtonModule, NbCardModule, NbIconModule, NbLayoutModule, NbMenuModul
 import { PagesComponent } from './pages.component';
 import { PagesRoutingModule } from './pages-routing.module';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
-import { LoginModule } from './login/login.module';
 import { CommonModule } from '@angular/common';
 import { GuestComponent } from './guest/guest.component';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
@@ -27,7 +26,6 @@ import { ChatComponent } from './chat/chat.component';
     NbEvaIconsModule,
     NbCheckboxModule,
     NbCardModule,
-    LoginModule,
     NbTabsetModule,
     NbTreeGridModule,
     Ng2SmartTableModule,
@@ -38,11 +36,8 @@ import { ChatComponent } from './chat/chat.component';
     HttpClientModule,
   ],
   declarations: [
-    // PagesComponent,
     GuestComponent,
     GuestDetailComponent,
-    // StudentComponent,
-    // LoginComponent,
     ChatComponent
   ],
 })

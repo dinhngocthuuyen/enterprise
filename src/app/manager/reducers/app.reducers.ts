@@ -1,7 +1,6 @@
 import { InjectionToken } from '@angular/core';
 
 // import * as BooksReducers from '@appbooks/reducers';
-import * as FacultiesReducer from '../faculty/reducers'
 import * as fromRouter from '@ngrx/router-store';
 import { ActionReducerMap, Action, MetaReducer, ActionReducer } from '@ngrx/store';
 import { environment } from 'src/environments/environment';

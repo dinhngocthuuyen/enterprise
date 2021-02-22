@@ -192,12 +192,12 @@ app.get('/profiles', (req, res) => {
     });
 })
 
-app.get('/profiles/profile-detail-update/:id', (req, res) => {
+// app.get('/profiles/profile-detail-update/:id', (req, res) => {
 
-    Coordinator.find({_id: req.params.id}).then((profiles) => {
-        res.send(profiles);
-    });
-})
+//     Coordinator.find({_id: req.params.id}).then((profiles) => {
+//         res.send(profiles);
+//     });
+// })
 //POST Profile Coordinator
 app.post('/profiles', (req, res) => {
     let name = req.body.name;
@@ -217,7 +217,7 @@ app.post('/profiles', (req, res) => {
     })
 })
 
-app.put('/profiles/profile-detail-update/:id', (req, res) => {
+app.patch('/coordinators/:id', (req, res) => {
   Coordinator.findOneAndUpdate({_id: req.params.id},{
       $set: req.body
   }).then(() =>{

@@ -17,23 +17,32 @@ const routes: Routes = [{
       component: ChatComponent,
     },
 
-    {
-      path: 'profile',
-      component: ProfileComponent,
-    },
-    {
-      path: 'profile/:id',
-      component: ProfileDetailUpdateComponent,
-    },
+    // {
+    //   path: 'profile',
+    //   component: ProfileComponent,
+    // },
+    // {
+    //   path: 'profile',
+    //   loadChildren: () => import('./profile/profile.module')
+    //     .then(m => m.ProfileModule),
+    // },
+    // {
+    //   path: 'profile/:id',
+    //   component: ProfileDetailUpdateComponent,
+    // },
   
-    {
-      path: 'dashboard',
-      component: DashboardComponent,
-    },
-    {
-      path: 'dashboard/:coordinatorId',
-      component: CorContributionComponent,
-    },
+    // {
+    //   path: 'dashboard',
+    //   component: DashboardComponent,
+    // },
+    // {
+    //   path: 'dashboard',
+    //   loadChildren: () => import('./dashboard/dashboard.module')
+    //   .then(m => m.DashboardModule),    },
+    // {
+    //   path: 'dashboard/:coordinatorId',
+    //   component: CorContributionComponent,
+    // },
     {
       path: '',
       redirectTo: 'dashboard',

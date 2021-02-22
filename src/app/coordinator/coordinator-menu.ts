@@ -2,6 +2,12 @@ import { NbMenuItem } from '@nebular/theme';
 
 export const MENU_ITEMS: NbMenuItem[] = [
   {
+    title: 'Dashboard',
+    icon: 'shopping-cart-outline',
+    link: 'dashboard',
+    home: true
+  },
+  {
     title: 'Chat',
     icon: 'message-circle-outline',
     link: 'chat',
@@ -16,4 +22,5 @@ export const MENU_ITEMS: NbMenuItem[] = [
     icon: 'shopping-cart-outline',
     link: 'profile',
   },
+  
 ]

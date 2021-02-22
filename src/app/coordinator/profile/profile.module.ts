@@ -19,12 +19,12 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 
 @NgModule({
     imports: [
+    CommonModule,
     BrowserModule,
-    BrowserAnimationsModule,
+    // BrowserAnimationsModule,
     NbCardModule,
     NbDialogModule.forRoot(),
     NbDialogModule.forChild(),
-    CommonModule,
     NbInputModule,
     Ng2SmartTableModule,
     HttpClientModule,
@@ -38,15 +38,13 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
      EffectsModule.forFeature([ProfileEffects ])
     ],
    
-
     declarations: [
-        ProfileComponent,
-        ProfileDetailUpdateComponent,
-        ProfileEditComponent,
-        
+      // ProfileComponent,
+      // ProfileDetailUpdateComponent,
+      // ProfileEditComponent,
     ],
-    entryComponents:[ProfileEditComponent,ProfileDetailUpdateComponent ],
-    exports:[ProfileEditComponent,ProfileDetailUpdateComponent ],
+    // entryComponents:[ProfileEditComponent,ProfileDetailUpdateComponent ],
+    // exports:[ProfileEditComponent,ProfileDetailUpdateComponent ],
     providers: [],
   })
   export class ProfileModule {
