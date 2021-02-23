@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Params } from '@angular/router';
 import { NbSidebarService } from '@nebular/theme';
+import { UsersService } from '../shared/header/user.service';
 import { MENU_ITEMS } from './coordinator-menu';
 
 @Component({
@@ -16,12 +18,26 @@ import { MENU_ITEMS } from './coordinator-menu';
 }
 `],
 })
-export class CoordinatorComponent {
+export class CoordinatorComponent implements OnInit{
   menu = MENU_ITEMS;
-  constructor(private sidebarService: NbSidebarService) { }
+  constructor(private sidebarService: NbSidebarService,
+    private route: ActivatedRoute,
+    private userService: UsersService) { }
 
   toggleCompact() {
     this.sidebarService.toggle(true, 'left');
+  }
+  user: any;
+  ngOnInit(): void {
+    this.route.params.subscribe(
+      (params: Params) => {
+        console.log(params);
+        this.userService.getUser(params.id).subscribe((user: any) => {
+          console.log("user" + user);
+          this.user = user;
+        })
+      }
+    )
   }
 
 }

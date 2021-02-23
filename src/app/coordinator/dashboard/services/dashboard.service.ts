@@ -14,8 +14,8 @@ export class DashboardService {
   getTotalContribution(){
     return this.WebReqService.get('countcontributions');
   }
-  getContributions(coordinatorId: string){
-    return this.WebReqService.get(`coordinators/${coordinatorId}`);
+  getContributions(facultyId: string){
+    return this.WebReqService.get(`coordinator/${facultyId}/contributions`);
   }
   getUser(id: string){
     return this.WebReqService.get(`user/${id}`);

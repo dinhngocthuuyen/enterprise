@@ -14,7 +14,7 @@ const ContributionSchema = new mongoose.Schema({
   status: {
     type: String,
   },
-  
+  _facultyId: { type: mongoose.Types.ObjectId },
   _userId: {
     type: mongoose.Types.ObjectId
   }

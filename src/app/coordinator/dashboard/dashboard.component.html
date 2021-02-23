@@ -1,9 +1,6 @@
 <nb-card status="warning">
     <nb-card-header>
       <nb-icon icon="star-outline"></nb-icon>
-      <!-- <div class="faculty" *ngFor="let user of user">
-        <p>{{ user.faculty }}</p>
-      </div> -->
       <nb-icon icon="star-outline"></nb-icon>
 
     </nb-card-header>
@@ -21,5 +18,13 @@
           <nb-card class="info-card">Thu</nb-card>
         </div>
       </div>
+
+      <div class="con" *ngFor="let contributions of contributions">
+        <p> {{ contributions.file}}</p>
+      </div>
+      <ng2-smart-table [settings]="settings" [source]="source"></ng2-smart-table>
+
     </nb-card-body>
+
+
 </nb-card>

@@ -384,7 +384,7 @@ app.post('/faculties', (req, res) => {
       res.send(FacultyDoc);
   })
 });
-app.get('/faculties/:facultyId/contributions', (req, res) => {
+app.get('/coordinator/:facultyId/contributions', (req, res) => {
   Contribution.find({
     _facultyId: req.params.facultyId
   }).then((contributions) => {
@@ -402,10 +402,10 @@ app.get('/users/:userId/contributions', (req, res) => {
 app.post('/users/:userId/contributions', (req, res) => {
   let newContribution = new Contribution({
       file: req.body.file,
-      date: req.body.date,
+      date: Date.now().toString(),
       status: "Pending",
       _userId: req.params.userId,
-      _facultyId: req.params.facultyId
+      _facultyId: req.body.facultyId
   });
   newContribution.save().then((newDoc) => {
     res.send(newDoc)

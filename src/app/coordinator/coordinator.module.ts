@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { NbButtonModule, NbCardModule, NbIconModule, NbLayoutModule, NbMenuModule,NbCheckboxModule, NbSidebarModule, NbTabsetModule, NbThemeModule, NbTagInputDirective, NbFilterInputDirective, NbTreeGridModule, NbActionsModule, NbUserModule, NbContextMenuModule, NbChatModule, NbDialogModule } from '@nebular/theme';
+import { NbButtonModule, NbCardModule, NbIconModule, NbLayoutModule, NbMenuModule,NbCheckboxModule, NbSidebarModule, NbTabsetModule, NbThemeModule, NbTagInputDirective, NbFilterInputDirective, NbTreeGridModule, NbActionsModule, NbUserModule, NbContextMenuModule, NbChatModule, NbDialogModule, NbAccordionModule } from '@nebular/theme';
 
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { CommonModule } from '@angular/common';
@@ -37,6 +37,7 @@ import { FormsModule,ReactiveFormsModule } from '@angular/forms';
     Ng2SmartTableModule,
     NbActionsModule,
     NbUserModule,
+    NbAccordionModule,
     NbDialogModule.forRoot(),
     // NbChatModule,
     NbContextMenuModule,
