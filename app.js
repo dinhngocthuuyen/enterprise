@@ -146,7 +146,7 @@ app.get('/contributions', (req, res) => {
   });
 })
 
-app.get('/contributions/:id', (req, res) => {
+app.get('/contribution/:id', (req, res) => {
   Contribution.find({_id: req.params.id}).then((contributions) => {
       res.send(contributions);
   });
@@ -231,27 +231,6 @@ app.get('/coordinators', (req, res) => {
   Coordinator.find({}).then((coordinators) => {
       res.send(coordinators);
   });
-});
-
-//POST Coordinator
-app.post('/coordinators', (req, res) => {
-  let name = req.body.name;
-  let address = req.body.address;
-  let phone = req.body.phone;
-  let dob = req.body.dob;
-  let email = req.body.email;
-
-  let newCoordinator = new Coordinator({
-      name,
-      address,
-      phone,
-      dob,
-      email
-  });
-  newCoordinator.save().then((listDoc) => {
-
-      res.send(listDoc);
-  })
 });
 
 // Get contribution which is modified by specific coordinator

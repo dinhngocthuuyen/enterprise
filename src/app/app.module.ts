@@ -11,7 +11,7 @@ import { StoreModule } from '@ngrx/store';
 import { FormsModule } from '@angular/forms';
 
 import { EffectsModule } from '@ngrx/effects';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { ROOT_REDUCERS, metaReducers } from './manager/reducers';
 import { StudentManagerModule } from './manager/manager/studentmanager/studentmanager.module';
 import { LoginComponent } from './login/login.component';
@@ -20,7 +20,6 @@ import { HeaderComponent } from './shared/header/header.component';
 import { AdminComponent } from './admin/admin.component';
 import { StudentComponent } from './student/student.component';
 import { GuestComponent } from './guest/guest.component';
-import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -31,7 +30,7 @@ import { CommonModule } from '@angular/common';
     PagesComponent,
     AdminComponent,
     StudentComponent,
-    GuestComponent
+    GuestComponent,
   ],
   imports: [
     BrowserModule,

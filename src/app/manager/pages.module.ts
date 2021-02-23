@@ -9,7 +9,6 @@ import { GuestComponent } from './guest/guest.component';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { HttpClientModule } from '@angular/common/http';
 import { GuestDetailComponent } from './guest/guest-detail/guest-detail.component';
-import { HeaderComponent } from '../shared/header/header.component';
 import { ChatComponent } from './chat/chat.component';
 
 @NgModule({

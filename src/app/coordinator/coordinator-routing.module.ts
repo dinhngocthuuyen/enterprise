@@ -1,15 +1,15 @@
-import { RouterModule, Routes } from '@angular/router';
-import { NgModule } from '@angular/core';
+import { ActivatedRoute, RouterModule, Routes } from '@angular/router';
+import { Input, NgModule, OnInit } from '@angular/core';
 import { CoordinatorComponent } from './coordinator.component';
 import { ChatComponent } from './chat/chat.component';
 import { ProfileComponent } from './profile/profile.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ProfileDetailUpdateComponent } from './profile/component/profile-detail-update/profile-detail-update.component';
-import { CorContributionComponent } from './dashboard/containers/cor-contribution/cor-contribution.component';
-
+import { ReviewComponent } from './review/review.component'
+import { ContributionDetailComponent } from './review/contribution-detail/contribution-detail.component';
 
 const routes: Routes = [{
-  path: '',
+  path: ':id',
   component: CoordinatorComponent,
   children: [
     {
@@ -23,38 +23,21 @@ const routes: Routes = [{
     },
     {
       path: 'dashboard',
-      component: DashboardComponent
+      component: DashboardComponent,
+      data: { title: "Dash" }
     },
-    // {
-    //   path: 'profile',
-    //   component: ProfileComponent,
-    // },
-    // {
-    //   path: 'profile',
-    //   loadChildren: () => import('./profile/profile.module')
-    //     .then(m => m.ProfileModule),
-    // },
     {
       path: 'profile/:id',
       component: ProfileDetailUpdateComponent,
     },
-    // {
-    //   path: 'profile/:id',
-    //   loadChildren: () => import('./profile/profile.module')
-    //     .then(m => m.ProfileModule),
-    // },
-    // {
-    //   path: 'dashboard',
-    //   component: DashboardComponent,
-    // },
-    // {
-    //   path: 'dashboard',
-    //   loadChildren: () => import('./dashboard/dashboard.module')
-    //   .then(m => m.DashboardModule),    },
-    // {
-    //   path: 'dashboard/:coordinatorId',
-    //   component: CorContributionComponent,
-    // },
+    {
+      path: 'review',
+      component: ReviewComponent,
+    },
+    {
+      path: 'review/:id',
+      component: ContributionDetailComponent,
+    },
     {
       path: '',
       redirectTo: 'dashboard',
@@ -73,4 +56,7 @@ const routes: Routes = [{
   exports: [RouterModule],
 })
 export class CoordinatorRoutingModule {
+  constructor(
+  ) {
+  }
 }

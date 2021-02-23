@@ -23,21 +23,10 @@ export class CoordinatorComponent implements OnInit{
   constructor(private sidebarService: NbSidebarService,
     private route: ActivatedRoute,
     private userService: UsersService) { }
-
   toggleCompact() {
     this.sidebarService.toggle(true, 'left');
   }
-  user: any;
   ngOnInit(): void {
-    this.route.params.subscribe(
-      (params: Params) => {
-        console.log(params);
-        this.userService.getUser(params.id).subscribe((user: any) => {
-          console.log("user" + user);
-          this.user = user;
-        })
-      }
-    )
   }
 
 }

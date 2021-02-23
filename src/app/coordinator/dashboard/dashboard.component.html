@@ -12,19 +12,13 @@
           </nb-card>
         </div>
         <div class="col-md-4 col-sm-12">
-          <nb-card class="info-card">Thu</nb-card>
+          <nb-card class="info-card" >Thu</nb-card>
         </div>
         <div class="col-md-4 col-sm-12">
           <nb-card class="info-card">Thu</nb-card>
         </div>
+        <input nbInput [value]="userId">
       </div>
-
-      <div class="con" *ngFor="let contributions of contributions">
-        <p> {{ contributions.file}}</p>
-      </div>
-      <ng2-smart-table [settings]="settings" [source]="source"></ng2-smart-table>
 
     </nb-card-body>
-
-
 </nb-card>

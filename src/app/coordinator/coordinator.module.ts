@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { NbButtonModule, NbCardModule, NbIconModule, NbLayoutModule, NbMenuModule,NbCheckboxModule, NbSidebarModule, NbTabsetModule, NbThemeModule, NbTagInputDirective, NbFilterInputDirective, NbTreeGridModule, NbActionsModule, NbUserModule, NbContextMenuModule, NbChatModule, NbDialogModule, NbAccordionModule } from '@nebular/theme';
+import { NbButtonModule, NbCardModule, NbIconModule, NbLayoutModule, NbMenuModule,NbCheckboxModule, NbSidebarModule, NbTabsetModule, NbThemeModule, NbTagInputDirective, NbFilterInputDirective, NbTreeGridModule, NbActionsModule, NbUserModule, NbContextMenuModule, NbChatModule, NbDialogModule, NbAccordionModule, NbInputModule } from '@nebular/theme';
 
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { CommonModule } from '@angular/common';
@@ -15,8 +15,9 @@ import { ProfileEditComponent } from './profile/component/profile-edit/profile-e
 import { ProfileComponent } from './profile/profile.component';
 import { ProfileDetailUpdateComponent } from './profile/component/profile-detail-update/profile-detail-update.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
+import { ReviewComponent } from './review/review.component';
+import { ContributionDetailComponent } from './review/contribution-detail/contribution-detail.component';
 
 @NgModule({
   imports: [
@@ -37,6 +38,7 @@ import { FormsModule,ReactiveFormsModule } from '@angular/forms';
     Ng2SmartTableModule,
     NbActionsModule,
     NbUserModule,
+    NbInputModule,
     NbAccordionModule,
     NbDialogModule.forRoot(),
     // NbChatModule,
@@ -54,6 +56,8 @@ import { FormsModule,ReactiveFormsModule } from '@angular/forms';
     DashboardComponent,
     ProfileDetailUpdateComponent,
     ProfileEditComponent,
+    ReviewComponent,
+    ContributionDetailComponent,
   ],
 })
 export class CoordinatorModule {

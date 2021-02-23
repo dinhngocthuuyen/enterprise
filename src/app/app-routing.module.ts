@@ -10,7 +10,7 @@ export const routes: Routes = [
       .then(m => m.PagesModule),
   },
   {
-    path: 'coordinator/:id',
+    path: 'coordinator',
     loadChildren: () => import('./coordinator/coordinator.module')
       .then(m => m.CoordinatorModule),
   },
