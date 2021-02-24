@@ -2,10 +2,13 @@ const mongoose = require('mongoose');
 
 const MessageSchema = new mongoose.Schema({
   text: String,
-  reply: Boolean,
   date: Date,
   _userId: {
     type: mongoose.Types.ObjectId
+  },
+  userName:{
+    type: mongoose.Types.ObjectId
+
   }
 })
 

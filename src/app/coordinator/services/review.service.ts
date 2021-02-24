@@ -36,4 +36,10 @@ export class CoorService {
   getComments(conId: string) {
     return this.WebReqService.get(`${conId}/comments`)
   }
+  postMess(text: string, userName: string, _userId: string ){
+    return this.WebReqService.post('chat',{text, userName, _userId});
+  }
+  getMess(){
+    return this.WebReqService.get('chat');
+  }
 }

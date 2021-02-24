@@ -31,8 +31,20 @@ export class WebRequestService {
 
   // }
 
-  // updateProfiles(uri: string,changes:Partial<Coordinator> ){
-  //   return this.http.put<Coordinator>(`${this.ROOT_URL}/${uri}${[changes._id]}`,changes)
+  put(uri: string,changes:Partial<Coordinator> ){
+
+    return this.http.put<Coordinator>(`${this.ROOT_URL}/${uri}${[changes._id]}`,changes, this.options)
+  }
+
+  // updateProfile(url: string, changes:Partial<Coordinator>) {
+  //   const url = `${this.ROOT_URL}/${url}` + '.json';
+  //   let body = JSON.stringify({language: language});
+
+  //   return this.http.patch(url, body, httpOptions)
+  //     .pipe(
+  //       tap(_ => console.log(`updated user ${user_id} with this entry: ${language}`)),
+  //       catchError(this.handleError)
+  //     );
   // }
   get(uri: string){
     return this.http.get(`${this.ROOT_URL}/${uri}`)
@@ -45,9 +57,9 @@ export class WebRequestService {
   patch(uri: string, payload: Object ){
     return this.http.patch(`${this.ROOT_URL}/${uri}`, payload)
   }
-  put(uri: string, payload: Object ){
-    return this.http.put(`${this.ROOT_URL}/${uri}`, payload)
-  }
+  // put(uri: string, payload: Object ){
+  //   return this.http.put(`${this.ROOT_URL}/${uri}`, payload, this.options)
+  // }
   delete(uri: string){
     return this.http.delete(`${this.ROOT_URL}/${uri}`)
   }

@@ -1,4 +1,4 @@
-<div>
+<!-- <div></div>
 <nb-chat title="Jake" size="medium" status="warning">
   <nb-chat-message *ngFor="let message of messages"
                    [type]="message.type"
@@ -11,7 +11,7 @@
                    [latitude]="message.latitude"
                    [longitude]="message.longitude"
                    [avatar]="message.user.avatar"></nb-chat-message>
-  <nb-chat-form (send)="sendMessage($event, 'Jake', 'http://www.reactiongifs.com/r/wnd1.gif', true)" [showButton]="false" [dropFiles]="true">
+  <nb-chat-form (send)="postMess('text','' , '_userId',true)" [showButton]="false" [dropFiles]="true">
   </nb-chat-form>
 </nb-chat>
 <nb-chat title="John" size="medium" status="success">
@@ -26,7 +26,50 @@
                    [latitude]="message.latitude"
                    [longitude]="message.longitude"
                    [avatar]="message.user.avatar"></nb-chat-message>
-  <nb-chat-form (send)="sendMessage($event, 'John', 'https://i.gifer.com/no.gif', false)" [showButton]="false" [dropFiles]="true">
+  <nb-chat-form (send)="sendMessage($event,'userName')" [showButton]="false" [dropFiles]="true">
   </nb-chat-form>
+</nb-chat> -->
+<!-- <nb-chat size="medium" status="warning">
+  <nb-chat-message *ngFor="let message of messages">
+    [message]="message.text"
+
+  </nb-chat-message>>
+ <nb-chat-form (send)="postMess('text','' , '_userId',true)" [showButton]="true">
+</nb-chat-form>
 </nb-chat>
+
+<nb-chat size="medium" status="primary">
+  <nb-chat-message *ngFor="let message of messages">
+    [message]="message.text"
+
+  </nb-chat-message>
+   <nb-chat-form (send)="postMess('text','' , '_userId',true)" [showButton]="true">
+  </nb-chat-form>
+</nb-chat> -->
+
+<nb-card status="primary" >
+  <nb-card-header >Chat Room</nb-card-header>
+  <nb-card-body #form>
+    <div *ngFor="let message of messages">
+      <ul *ngFor="let user of user">
+        <li>{{ user.name }}</li>
+      </ul>
+      <p>{{message.date}}</p>
+      <p>{{message.text}}</p>
+
+    </div>
+    <!-- <div [formGroup]="checkoutForm"> -->
+    <div *ngFor="let user of user"  >
+    <input #text nbInput type="text"  class="form-control" name="text" >
+    <input #username nbInput [value]="user?.name" name="userName" readonly>
+    <input #idUser nbInput [value]="userId" readonly>
+
+
 </div>
+<!-- </div> -->
+  </nb-card-body>
+  <nb-card-footer>
+    <!-- <button nbButton status="primary" (click)="postMess(checkoutForm.value)">Add</button> -->
+
+  </nb-card-footer>
+</nb-card>

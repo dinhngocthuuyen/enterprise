@@ -9,6 +9,8 @@ const app = express();
 /* LOAD MONGOOSE MODEL */
 const { send } = require('process');
 const { asap } = require('rxjs');
+
+
 // const { JsonWebTokenError } = require('jsonwebtoken');
 const jwt = require('jsonwebtoken');
 const { Post, Contribution, Coordinator, User, Role, Student, Message, Faculty, Comment } = require('./db/models');
@@ -16,8 +18,10 @@ const { Post, Contribution, Coordinator, User, Role, Student, Message, Faculty, 
 /* LOAD GLOBAL MIDDLEWARE */
 app.use(bodyParser.json());
 
+
+
 app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*"); // update to match the domain you will make the request from
+  res.header("Access-Control-Allow-Origin", "*"); // update to match the domain you will make the req from
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, x-access-token, x-refresh-token, _id");
   res.header('Access-Control-Expose-Headers', "x-access-token, x-refresh-token");
   res.header("Access-Control-Allow-Methods", "GET, POST, HEAD, OPTIONS, PUT, PATCH, DELETE");
@@ -28,9 +32,9 @@ app.use(function(req, res, next) {
 
 //Verify refresh token middleware (which will be verifying the session)
 let verifySession = ((req, res, next) => {
-  //Grab refresh token from request header
+  //Grab refresh token from req header
   let refreshToken = req.header('x-refresh-token');
-  //Grab id from request header
+  //Grab id from req header
   let _id = req.header('_id');
   User.findByIdAndToken(_id, refreshToken).then((user) => {
     if (!user) {
@@ -52,7 +56,7 @@ let verifySession = ((req, res, next) => {
       }
     })
     if (isSessionValid) {
-      //The session is valid, call next() to continue with processing this web request
+      //The session is valid, call next() to continue with processing this web req
       next();
     } else {
       return Promise.reject({
@@ -65,7 +69,7 @@ let verifySession = ((req, res, next) => {
   })
 })
 
-//Authentication middleware (check whether the request has valid JWT access token)
+//Authentication middleware (check whether the req has valid JWT access token)
 let authenticate = (req, res, next) => {
   let token = req.header('x-access-token');
   //Verify JWT
@@ -106,7 +110,7 @@ app.get('/guest/guest-detail/:id', (req, res) => {
 
 app.post('/post', authenticate, (req, res) => {
   //Create a new post and return post document back to user (including post's id)
-  //Post's info (fields) will be passed in via JSON request body
+  //Post's info (fields) will be passed in via JSON req body
   let title = req.body.title
   let post = req.body.post
   let newPost = new Post({
@@ -121,7 +125,7 @@ app.post('/post', authenticate, (req, res) => {
 })
 
 app.patch('/post/:id', (req, res) => {
-  //Update a selected post (post document with id in the URL) with the new values specified in the JSON body of the request
+  //Update a selected post (post document with id in the URL) with the new values specified in the JSON body of the req
   Post.findOneAndUpdate({_id: req.params.id}, {
     $set: req.body
   }).then(() => {
@@ -171,13 +175,36 @@ app.post('/profiles', (req, res) => {
     })
 })
 
-app.put('/coordinators/:id' ,(req, res) => {
+app.put('/coordinators/:_id' ,(req, res) => {
   Coordinator.findOneAndUpdate({_id: req.params.id},{
       $set: req.body
   }).then(() =>{
       res.sendStatus(200);
   });
 });
+
+// app.put('/coordinators/:_id' ,(req,res)=> {
+
+//   Coordinator.findByIdAndUpdate(
+//       req.body._id,
+//       {
+//          name = req.body.name,
+//          address = req.body.address,
+    
+//          phone = req.body.phone,
+//         email = req.body.email,
+//         dob = req.body.dob,
+//       },
+//       function (error, result) {
+//           if (error) {
+//               throw error;
+//           } else {
+//             res.sendStatus(200).json(result);
+//           }
+//       }
+//   )
+    
+//     });
 
 //GET Coordinator
 app.get('/coordinators', (req, res) => {
@@ -244,7 +271,7 @@ app.get('/users/me/access-token', verifySession, (req, res) => {
 })
 
 app.patch('/user/:id', (req, res) => {
-  //Update a selected user (user document with id in the URL) with the new values specified in the JSON body of the request
+  //Update a selected user (user document with id in the URL) with the new values specified in the JSON body of the req
   User.findOneAndUpdate({_id: req.params.id}, {
     $set: req.body
   }).then(() => {
@@ -359,6 +386,38 @@ app.post('/users/:userId/contributions', (req, res) => {
     res.send(newDoc)
   })
 });
+
+app.get('/contributions', (req, res) => {
+  Contribution.find({}).then((roles) => {
+      res.send(roles);
+  });
+})
+/////////////////message//////////////////
+app.get('/chat', (req, res) => {
+  Message.find({
+    _coordinatorId: req.params.coordinatorId
+  }).then((contributions) => {
+    res.send(contributions);
+  })
+});
+
+app.post('/chat', (req, res) => {
+  let text = req.body.text;
+  let userName = req.body.userName;
+
+  let date = req.body.date;
+  let _userId = req.body._userId;
+
+
+  let newMess = new Message({
+    text,date,userName,_userId
+  });
+  newMess.save().then((MessageDoc) => {
+
+      res.send(MessageDoc);
+  })
+})
+
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 app.listen(3000, () => {
