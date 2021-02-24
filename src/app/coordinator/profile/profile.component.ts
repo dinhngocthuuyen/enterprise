@@ -18,7 +18,7 @@ export class ProfileComponent implements OnInit {
   // public editProfileForm: FormGroup;
   @Input()
   coordinator!: Coordinator;
-  coordinators$: Observable<Coordinator[]>; 
+  coordinators$: Observable<Coordinator[]>;
   dialogRef: any;
 
   settings = {
@@ -30,7 +30,7 @@ export class ProfileComponent implements OnInit {
       name: {
         title: 'Name',
         type: 'string'
-        
+
       },
       address: {
         title: 'Address',

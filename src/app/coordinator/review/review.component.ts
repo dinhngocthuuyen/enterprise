@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LocalDataSource } from 'ng2-smart-table';
+import { FileDetector } from 'protractor';
 import { CoorService } from '../services/review.service';
 
 @Component({
@@ -35,25 +36,23 @@ export class ReviewComponent implements OnInit {
   ){
 
   }
-  facultyId = "60335cd8418c2621094f021e";
+  facId: any;
   contributions: any;
   source!: LocalDataSource;
-  currentUser: any;
-  userId!: string;
+  userId: any;
   ngOnInit() {
-    // this.userId = this.route.snapshot.params.id;
-    // console.log("coor id " + this.userId);
-    this.reviewService.getContributions(this.facultyId).subscribe((contributions: any) => {
+    /// load contributions by faculyID
+    this.facId = localStorage.getItem('facultyId');
+    this.reviewService.getContributions(this.facId).subscribe((contributions: any) => {
       this.contributions = contributions;
       this.source = new LocalDataSource(this.contributions)
     });
-    this.reviewService.getUsers().subscribe((users: any) =>{
-      this.users = users;
-    })
+    //// load user id
+    this.userId = localStorage.getItem('userId');
   }
 
   navigateToDetail(event) {
-    this.router.navigate(['coordinator/6033627369441323b60eb900/review/' + event.data._id])
+    this.router.navigate(['coordinator/' + this.userId + '/review/' + event.data._id])
   }
 
 }

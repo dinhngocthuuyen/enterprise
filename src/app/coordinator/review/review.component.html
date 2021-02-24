@@ -4,10 +4,10 @@
 
       <nb-tabset fullWidth>
         <nb-tab tabTitle="All Contributions">
-          <input #facultyId nbInput value="60335cd8418c2621094f021e">
-          <!-- <div class="con" *ngFor="let users of users">
-            <p> {{ users.name }}</p>
-          </div> -->
+          <!-- <div class="con" >
+            <p> {{ facId }}</p>
+          </div>
+          <input id="getfacultyId" type="text" [value]="facId"> -->
           <ng2-smart-table [settings]="settings" [source]="source" (userRowSelect)="navigateToDetail($event)"></ng2-smart-table>
 
         </nb-tab>
