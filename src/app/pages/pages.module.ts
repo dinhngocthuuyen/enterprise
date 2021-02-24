@@ -22,6 +22,10 @@ import { ProfileComponent } from './coordinators/profile/profile.component';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { HttpClientModule } from '@angular/common/http';
 import { GuestDetailComponent } from './guest/guest-detail/guest-detail.component';
+<<<<<<< Updated upstream:src/app/pages/pages.module.ts
+=======
+import { ChatComponent } from './chat/chat.component';
+>>>>>>> Stashed changes:src/app/manager/pages.module.ts
 
 @NgModule({
   imports: [

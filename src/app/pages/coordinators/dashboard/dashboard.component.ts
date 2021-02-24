@@ -1,7 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
+<<<<<<< Updated upstream:src/app/pages/coordinators/dashboard/dashboard.component.ts
 import { LocalDataSource } from 'ng2-smart-table';
 import { ContributionsService } from './services/contributions.service';
+=======
+>>>>>>> Stashed changes:src/app/coordinator/dashboard/dashboard.component.ts
 
 @Component({
   selector: 'app-dashboard',
@@ -9,6 +12,7 @@ import { ContributionsService } from './services/contributions.service';
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
+<<<<<<< Updated upstream:src/app/pages/coordinators/dashboard/dashboard.component.ts
   coordinators: any;
   contributions: any;
   settings = {
@@ -20,22 +24,12 @@ export class DashboardComponent implements OnInit {
       name: {
         title: 'Name',
         type: 'string'
+=======
+>>>>>>> Stashed changes:src/app/coordinator/dashboard/dashboard.component.ts
 
-      },
-      address: {
-        title: 'Address',
-        type: 'string'
-      },
-      phone: {
-        title: 'Phone Number',
-        type: 'number'
-      },
-    },
-    hideSubHeader: true,
-    actions: false
-  };
   constructor(
     private route: ActivatedRoute,
+<<<<<<< Updated upstream:src/app/pages/coordinators/dashboard/dashboard.component.ts
     private contributionService: ContributionsService) { }
 
   ngOnInit() {
@@ -49,7 +43,16 @@ export class DashboardComponent implements OnInit {
     ),
     this.contributionService.getCoordinators().subscribe((coordinators: any) => {
       this.coordinators = coordinators
+=======
+    ) {
+    }
+  public pageTitle!: string;
+  user: any;
+  ngOnInit(): void {
+    this.route.data.subscribe(data => {
+      this.user = data,
+      console.log("user " + this.user.role)
+>>>>>>> Stashed changes:src/app/coordinator/dashboard/dashboard.component.ts
     })
   }
-
 }

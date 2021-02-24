@@ -4,7 +4,11 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+<<<<<<< Updated upstream
 import { NbThemeModule, NbLayoutModule, NbSidebarModule, NbButtonModule, NbIconModule, NbMenuModule, NbCardModule, NbTabsetModule, NbTreeGridModule, NbDialogModule, NbWindowModule, NbInputModule } from '@nebular/theme';
+=======
+import { NbThemeModule, NbLayoutModule, NbSidebarModule, NbButtonModule, NbIconModule, NbMenuModule, NbCardModule, NbTabsetModule, NbTreeGridModule, NbDialogModule, NbWindowModule, NbInputModule, NbContextMenuModule, NbChatModule, NbActionsModule, NbUserModule, NbAccordionModule } from '@nebular/theme';
+>>>>>>> Stashed changes
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { DashboardComponent } from './pages/coordinators/dashboard/dashboard.component';
 import { PagesComponent } from './pages/pages.component';
@@ -23,6 +27,7 @@ import { StudentManagerModule } from './pages/manager/studentmanager/studentmana
 import { ProfileModule } from './pages/coordinators/profile/profile.module';
 import { DashboardModule } from './pages/coordinators/dashboard/dashboard.module';
 import { LoginComponent } from './login/login.component';
+<<<<<<< Updated upstream
 import { AuthGuardService } from './services/auth-guard.service';
 import { WebRequestInterceptor } from './services/web-request.interceptor';
 
@@ -30,6 +35,15 @@ import { WebRequestInterceptor } from './services/web-request.interceptor';
 
 
 
+=======
+import { CoordinatorComponent } from './coordinator/coordinator.component';
+import { HeaderComponent } from './shared/header/header.component';
+import { AdminComponent } from './admin/admin.component';
+import { StudentComponent } from './student/student.component';
+import { GuestComponent } from './guest/guest.component';
+import { WebRequestInterceptor } from './services/web-request.interceptor';
+import { Ng2SmartTableModule } from 'ng2-smart-table';
+>>>>>>> Stashed changes
 
 @NgModule({
   declarations: [
@@ -54,6 +68,14 @@ import { WebRequestInterceptor } from './services/web-request.interceptor';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+<<<<<<< Updated upstream
+=======
+    NbActionsModule,
+    NbUserModule,
+    // NbChatModule,
+    NbContextMenuModule,
+    NbAccordionModule,
+>>>>>>> Stashed changes
     NbInputModule,
     HttpClientModule,
 
@@ -74,10 +96,16 @@ import { WebRequestInterceptor } from './services/web-request.interceptor';
     FacultyModule,
     ReviewModule,
     StudentManagerModule,
+<<<<<<< Updated upstream
     ProfileModule,
     DashboardModule
   ],
   providers: [AuthGuardService, {provide: HTTP_INTERCEPTORS, useClass: WebRequestInterceptor, multi: true}],
+=======
+    Ng2SmartTableModule,
+  ],
+  providers: [{provide: HTTP_INTERCEPTORS, useClass: WebRequestInterceptor, multi: true}],
+>>>>>>> Stashed changes
   bootstrap: [AppComponent],
 
 })

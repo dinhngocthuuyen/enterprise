@@ -12,6 +12,14 @@ import { ProfileSelectors } from './selectors';
   styleUrls: ['./profile.component.scss']
 })
 export class ProfileComponent implements OnInit {
+<<<<<<< Updated upstream:src/app/pages/coordinators/profile/profile.component.ts
+=======
+  // public editProfileForm: FormGroup;
+  @Input()
+  coordinator!: Coordinator;
+  coordinators$: Observable<Coordinator[]>;
+  dialogRef: any;
+>>>>>>> Stashed changes:src/app/coordinator/profile/profile.component.ts
 
   coordinators$: Observable<Coordinator[]> ;
   settings = {
@@ -23,7 +31,7 @@ export class ProfileComponent implements OnInit {
       name: {
         title: 'Name',
         type: 'string'
-        
+
       },
       address: {
         title: 'Address',
@@ -35,11 +43,11 @@ export class ProfileComponent implements OnInit {
       },
       dob: {
         title: 'Date',
-        type: 'Date'
+        type: 'string'
       },
       email: {
         title: 'Email',
-        type: 'email'
+        type: 'string'
       },
     },
     hideSubHeader: true,
@@ -56,5 +64,15 @@ export class ProfileComponent implements OnInit {
   ngOnInit() {
     this.store.dispatch(ProfileApiActions.loadProfiles());
 }
+<<<<<<< Updated upstream:src/app/pages/coordinators/profile/profile.component.ts
+=======
+onUserRowSelect(event){
+  this.router.navigate(['pages/profile/' + event.data._id]);
+}
+
+close(){
+  this.dialogRef.close();
+}
+>>>>>>> Stashed changes:src/app/coordinator/profile/profile.component.ts
 
 }

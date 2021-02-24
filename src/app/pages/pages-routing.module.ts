@@ -109,11 +109,6 @@ const routes: Routes = [{
     // },
 
     {
-      path: 'guest/:id',
-      component: GuestComponent,
-    },
-
-    {
       path: 'guest/guest-detail/:id',
       component: GuestDetailComponent
     },

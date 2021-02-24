@@ -1,0 +1,28 @@
+<nb-layout>
+  <nb-layout-header fixed >
+    <h3>Enterprise Web</h3>
+    <div style="text-align:right">
+      <img src="./assets/images/greenwich-logo.jpg" width="280" height="75"/>
+    </div>
+    <div style="position: absolute; right: 0px">
+      <app-header></app-header>
+    </div>
+  </nb-layout-header>
+
+<nb-layout-column>
+<nb-card>
+  <nb-card-body>
+    <input #search class="form-control" type="text" placeholder="&#xF002; Search" style="font-family:Arial, FontAwesome" (keydown.enter)="onSearch(search.value)"><br>
+    <ng2-smart-table [settings]="settings" [source]="source" (userRowSelect)="onUserRowSelect($event)"></ng2-smart-table>
+  </nb-card-body>
+</nb-card>
+</nb-layout-column>
+
+</nb-layout>
+
+
+
+
+
+
+

@@ -20,10 +20,17 @@ const UserSchema = new mongoose.Schema({
         required: true,
         minlength: 1      
     },
-
+    name: {
+      type: String,
+      required: true,
+      minlength: 2,
+    },
+    _facultyId: {
+      type: mongoose.Types.ObjectId
+    },
     role: {
-        type: String,
-        required: true
+      type: String,
+      required: true
     },
 
     sessions: [{
@@ -51,7 +58,7 @@ UserSchema.methods.generateAccessAuthToken = function() {
     const user = this;
     return new Promise((resolve, reject) => {
         //Create JSON web token and return that
-        jwt.sign({_id: user._id.toHexString()}, jwtSecret, {expiresIn: '15m'}, (err, token) => {
+        jwt.sign({_id: user._id.toHexString()}, jwtSecret, {expiresIn: '10s'}, (err, token) => {
             if (!err) {
                 resolve(token);
             } else {

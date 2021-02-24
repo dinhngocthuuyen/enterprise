@@ -87,7 +87,7 @@ let authenticate = (req, res, next) => {
 
 app.get('/post', authenticate, (req, res) => {
   //Return an array of all the posts in database that belongs to the authenticated user
-  Post.find({_userId: req._id}).then((post) => {
+  Post.find({}).then((post) => {
     res.send(post);
   }).catch((e) => {
     res.send(e);

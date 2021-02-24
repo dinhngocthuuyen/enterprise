@@ -3,9 +3,9 @@ const mongoose = require('mongoose');
 const CoordinatorSchema = new mongoose.Schema({
     name: {
     type: String,
-    required: true,
-    minlength: 1,
-    trim: true,
+    // required: true,
+    // minlength: 1,
+    // trim: true,
 
   },
   address: {

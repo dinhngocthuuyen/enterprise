@@ -1,23 +1,22 @@
 const mongoose = require('mongoose');
 
 const ContributionSchema = new mongoose.Schema({
-  description: {
+  file: {
     type: String,
     required: true,
     minlength: 1,
     trim: true,
-
   },
   date: {
     type: Date,
   },
   status: {
-    type: Boolean,
+    type: String,
   },
-  pending: {
-    type: Boolean,
+  _facultyId: { 
+    type: mongoose.Types.ObjectId 
   },
-  _coordinatorId: {
+  _userId: {
     type: mongoose.Types.ObjectId
   }
 })

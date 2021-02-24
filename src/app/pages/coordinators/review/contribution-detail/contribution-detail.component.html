@@ -1,0 +1,7 @@
+<nb-card>
+  <nb-card-header>Contribution Detail</nb-card-header>
+  <nb-card-body *ngFor="let contribution of contribution">
+    <label>File</label>
+    <input nbInput [value]="contribution?.file" readonly>
+  </nb-card-body>
+</nb-card>
