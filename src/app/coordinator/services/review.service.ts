@@ -30,4 +30,10 @@ export class CoorService {
   updateStatus(id: string, status: string) {
     return this.WebReqService.patch(`contributions/${id}`, {status})
   }
+  postComment(conId: string, comment: string) {
+    return this.WebReqService.post(`${conId}/comments`, {comment})
+  }
+  getComments(conId: string) {
+    return this.WebReqService.get(`${conId}/comments`)
+  }
 }

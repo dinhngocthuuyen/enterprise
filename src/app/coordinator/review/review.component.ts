@@ -71,5 +71,4 @@ export class ReviewComponent implements OnInit {
   navigateToDetail(event) {
     this.router.navigate(['coordinator/' + this.userId + '/review/' + event.data._id])
   }
-
 }

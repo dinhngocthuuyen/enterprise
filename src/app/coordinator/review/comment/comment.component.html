@@ -1,0 +1,10 @@
+<nb-card>
+  <nb-card-header>Enter your comment</nb-card-header>
+  <nb-card-body>
+    <textarea #cmt nbInput type="text" placeholder="Comment"></textarea>
+  </nb-card-body>
+  <nb-card-footer>
+    <button class="cancel" nbButton status="danger" (click)="cancel()">Cancel</button>
+    <button nbButton status="success" (click)="submit(cmt.value)">Submit</button>
+  </nb-card-footer>
+</nb-card>

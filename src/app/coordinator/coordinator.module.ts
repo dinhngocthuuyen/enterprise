@@ -18,6 +18,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { ReviewComponent } from './review/review.component';
 import { ContributionDetailComponent } from './review/contribution-detail/contribution-detail.component';
+import { CommentComponent } from './review/comment/comment.component';
 
 @NgModule({
   imports: [
@@ -42,9 +43,8 @@ import { ContributionDetailComponent } from './review/contribution-detail/contri
     NbInputModule,
     NbAccordionModule,
     NbDialogModule.forRoot(),
-    // NbChatModule,
+    NbChatModule,
     NbContextMenuModule,
-    // BrowserModule,
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
@@ -59,6 +59,7 @@ import { ContributionDetailComponent } from './review/contribution-detail/contri
     ProfileEditComponent,
     ReviewComponent,
     ContributionDetailComponent,
+    CommentComponent,
   ],
 })
 export class CoordinatorModule {

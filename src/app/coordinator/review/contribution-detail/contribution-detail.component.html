@@ -19,3 +19,17 @@
     </div>
   </nb-card-footer>
 </nb-card>
+
+<nb-card>
+  <nb-card-header>
+    <div style="display: flex; justify-content: space-between;">
+      Comments
+      <button nbButton status="primary" (click)="openDialogComment()">Add Comment</button>
+    </div>
+  </nb-card-header>
+  <nb-card-body>
+    <ul>
+      <li *ngFor="let cmt of cmts">{{ cmt.comment }}</li>
+    </ul>
+  </nb-card-body>
+</nb-card>

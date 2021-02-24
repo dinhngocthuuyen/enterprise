@@ -7,6 +7,12 @@ const CommentSchema = new mongoose.Schema({
     minlength: 1,
     trim: true,
   },
+  date: {
+    type: Date,
+  },
+  _contributionId: {
+    type: mongoose.Types.ObjectId,
+  }
 });
 
 const Comment = mongoose.model('Comment', CommentSchema);

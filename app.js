@@ -138,53 +138,6 @@ app.delete('/post/:id', (req, res) => {
   })
 })
 
-//////////////////////////////////////////////////////// COORDINATORS ////////////////////////////////////////////////////////////
-//Contributions
-app.get('/contributions', (req, res) => {
-  Contribution.find({}).then((contributions) => {
-      res.send(contributions);
-  });
-})
-
-app.get('/contribution/:id', (req, res) => {
-  Contribution.find({_id: req.params.id}).then((contributions) => {
-      res.send(contributions);
-  });
-})
-// app.get('/countcontributions', (req, res) => {
-//   Contribution.count().then((count) => {
-//       res.send(count);
-//   });
-// })
-// app.get('/approvedcontributions', (req, res) => {
-//   Contribution.find({pending: true}).then((contribution) => {
-//       res.send(contribution);
-//   });
-// })
-app.post('/contributions', (req, res) => {
-  let description = req.body.description;
-  let date = req.body.date;
-
-  let status = req.body.status;
-  let pending = req.body.pending;
-
-
-  let newContribution = new Contribution({
-      description,date,status,pending
-  });
-  newContribution.save().then((ContributionDoc) => {
-
-      res.send(ContributionDoc);
-  })
-})
-app.patch('/contributions/:id', (req, res) => {
-  Contribution.findOneAndUpdate({_id: req.params.id},{
-      $set: req.body
-  }).then(() =>{
-      res.sendStatus(200);
-  });
-});
-
 //GET Profile Coordinator
 app.get('/profiles', (req, res) => {
 
@@ -233,39 +186,7 @@ app.get('/coordinators', (req, res) => {
   });
 });
 
-// Get contribution which is modified by specific coordinator
-app.get('/coordinators/:coordinatorId/contributions', (req, res) => {
-  Contribution.find({
-    _coordinatorId: req.params.coordinatorId
-  }).then((contributions) => {
-    res.send(contributions);
-  })
-});
-app.post('/coordinators/:coordinatorId/contributions', (req, res) => {
-  let newContribution = new Contribution({
-      description: req.body.description,
-      date: req.body.date,
-      status: req.body.status,
-      pending: req.body.pending,
-      _coordinatorId: req.params.coordinatorId
-  });
-  newContribution.save().then((newDoc) => {
-    res.send(newDoc)
-  })
-});
-app.patch('/coordinators/:coordinatorId/contributions/:contributionId', (req, res) =>{
-  Contribution.findOneAndUpdate({
-    _id: req.params.contributionId,
-    _coordinatorId: req.params.coordinatorId
-  }, {
-    $set: req.body
-  }).then(() => {
-    res.sendStatus(200);
-  })
-})
-
 ///////////////////////////////////////////////////////////// USER /////////////////////////////////////////////////////////////
-
 app.post('/users', (req, res) => {
   //Create a new user
   let body = req.body;
@@ -363,6 +284,7 @@ app.post('/faculties', (req, res) => {
       res.send(FacultyDoc);
   })
 });
+
 //////  Coordinator get contributions and send approve
 app.get('/coordinator/:facultyId/contributions', (req, res) => {
   Contribution.find({
@@ -370,6 +292,18 @@ app.get('/coordinator/:facultyId/contributions', (req, res) => {
   }).then((contributions) => {
     res.send(contributions);
   })
+});
+app.get('/contribution/:id', (req, res) => {
+  Contribution.find({_id: req.params.id}).then((contributions) => {
+      res.send(contributions);
+  });
+})
+app.patch('/contributions/:id', (req, res) => {
+  Contribution.findOneAndUpdate({_id: req.params.id},{
+      $set: req.body
+  }).then(() =>{
+      res.sendStatus(200);
+  });
 });
 app.get('/pending/:facultyId/contributions', (req, res) => {
   Contribution.find({
@@ -385,6 +319,24 @@ app.get('/approved/:facultyId/contributions', (req, res) => {
     status: {$ne: "Pending"}
   }).then((contributions) => {
     res.send(contributions);
+  })
+});
+/////// Comment
+app.get('/:contributionId/comments', (req, res) => {
+  Comment.find({
+    _contributionId: req.params.contributionId,
+  }).then((comments) => {
+    res.send(comments);
+  })
+});
+app.post('/:contributionId/comments', (req, res) => {
+  let newCmt = new Comment({
+      comment: req.body.comment,
+      date: Date.now().toString(),
+      _contributionId: req.params.contributionId,
+  });
+  newCmt.save().then((newDoc) => {
+    res.send(newDoc)
   })
 });
 /////Student create contributions////

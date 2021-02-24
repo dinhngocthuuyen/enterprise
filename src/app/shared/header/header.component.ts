@@ -31,7 +31,7 @@ export class HeaderComponent implements OnInit {
     //   }
     // )
     this.userId = this.route.snapshot.params.id;
-    console.log("id: " + this.userId)
+    // console.log("id: " + this.userId)
     this.userService.getUser(this.userId).subscribe((user: any) => {
       this.user = user;
     })
