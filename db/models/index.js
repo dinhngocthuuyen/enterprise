@@ -4,8 +4,10 @@ const {Role} = require("./role.model");
 const {Student} = require("./student.model");
 const {User} = require("./user.model");
 const {Coordinator} = require("./coordinator.model");
-const {Message} = require("./messages.model")
-const {Faculty} = require("./faculty.model")
+const {Message} = require("./messages.model");
+const {Faculty} = require("./faculty.model");
+const {Comment} = require("./comment.model");
+
 module.exports = {
   Post,
   Contribution,
@@ -14,5 +16,6 @@ module.exports = {
   Role,
   Student,
   Message,
-  Faculty
+  Faculty,
+  Comment
 }

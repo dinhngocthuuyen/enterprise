@@ -9,15 +9,12 @@
           </div>
           <input id="getfacultyId" type="text" [value]="facId"> -->
           <ng2-smart-table [settings]="settings" [source]="source" (userRowSelect)="navigateToDetail($event)"></ng2-smart-table>
-
         </nb-tab>
         <nb-tab tabTitle="Pending ">
-          <div *ngFor="let users of users">
-          <p> {{users.name}} </p>
-        </div>
+          <ng2-smart-table [settings]="settings" [source]="pending" (userRowSelect)="navigateToDetail($event)"></ng2-smart-table>
         </nb-tab>
         <nb-tab tabTitle="Approved" >
-          <p>List of <strong>transactions</strong>.</p>
+          <ng2-smart-table [settings]="settings" [source]="approved" (userRowSelect)="navigateToDetail($event)"></ng2-smart-table>
         </nb-tab>
       </nb-tabset>
 

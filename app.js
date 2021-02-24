@@ -11,7 +11,7 @@ const { send } = require('process');
 const { asap } = require('rxjs');
 // const { JsonWebTokenError } = require('jsonwebtoken');
 const jwt = require('jsonwebtoken');
-const { Post, Contribution, Coordinator, User, Role, Student, Message, Faculty } = require('./db/models');
+const { Post, Contribution, Coordinator, User, Role, Student, Message, Faculty, Comment } = require('./db/models');
 
 /* LOAD GLOBAL MIDDLEWARE */
 app.use(bodyParser.json());
@@ -363,9 +363,26 @@ app.post('/faculties', (req, res) => {
       res.send(FacultyDoc);
   })
 });
+//////  Coordinator get contributions and send approve
 app.get('/coordinator/:facultyId/contributions', (req, res) => {
   Contribution.find({
     _facultyId: req.params.facultyId
+  }).then((contributions) => {
+    res.send(contributions);
+  })
+});
+app.get('/pending/:facultyId/contributions', (req, res) => {
+  Contribution.find({
+    _facultyId: req.params.facultyId,
+    status: "Pending"
+  }).then((contributions) => {
+    res.send(contributions);
+  })
+});
+app.get('/approved/:facultyId/contributions', (req, res) => {
+  Contribution.find({
+    _facultyId: req.params.facultyId,
+    status: {$ne: "Pending"}
   }).then((contributions) => {
     res.send(contributions);
   })
@@ -390,14 +407,6 @@ app.post('/users/:userId/contributions', (req, res) => {
     res.send(newDoc)
   })
 });
-
-app.get('/contributions', (req, res) => {
-  Contribution.find({}).then((roles) => {
-      res.send(roles);
-  });
-})
-
-
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 app.listen(3000, () => {

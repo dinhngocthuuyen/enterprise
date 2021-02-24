@@ -21,7 +21,8 @@ export class AuthService {
         this.setSession(res.body._id, res.headers.get('x-access-token'), res.headers.get('x-refresh-token'));
         console.log('LOGGED IN!!!');
         localStorage.setItem('userId', res.body._id);
-        localStorage.setItem('facultyId', res.body._facultyId)
+        localStorage.setItem('facultyId', res.body._facultyId);
+        localStorage.setItem('status', res.body.status)
       })
     )
   }

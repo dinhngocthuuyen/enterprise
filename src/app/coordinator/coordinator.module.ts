@@ -27,6 +27,7 @@ import { ContributionDetailComponent } from './review/contribution-detail/contri
     NbThemeModule.forRoot({ name: 'default' }),
     NbSidebarModule.forRoot(),
     NbMenuModule.forRoot(),
+    NbDialogModule.forChild(),
     NbLayoutModule,
     NbButtonModule,
     NbIconModule,

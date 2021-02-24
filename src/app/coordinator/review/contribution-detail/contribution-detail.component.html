@@ -3,5 +3,19 @@
   <nb-card-body *ngFor="let contribution of contribution">
     <label>File</label>
     <input nbInput [value]="contribution?.file" readonly>
+    <label>Status</label>
+    <input nbInput [value]="contribution?.status" readonly>
   </nb-card-body>
+  <nb-card-footer>
+    <div class="btn" *ngFor="let contribution of contribution">
+    <ng-template [ngIf]="contribution.status === 'Pending'" [ngIfElse]="passButton">
+      <button nbButton status="success" (click)="openApproved()">Approve</button>
+      <button nbButton status="warning" (click)="openNotApproved()">Not Approve</button>
+    </ng-template>
+    <ng-template #passButton>
+      <button nbButton disabled>Approve</button>
+      <button nbButton disabled>Not Approve</button>
+    </ng-template>
+    </div>
+  </nb-card-footer>
 </nb-card>

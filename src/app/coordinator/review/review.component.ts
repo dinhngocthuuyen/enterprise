@@ -25,6 +25,7 @@ export class ReviewComponent implements OnInit {
       },
       status: {
         title: 'Status',
+        config: true
       }
     }
   };
@@ -39,13 +40,29 @@ export class ReviewComponent implements OnInit {
   facId: any;
   contributions: any;
   source!: LocalDataSource;
+
+  pendingC: any;
+  pending!: LocalDataSource;
+
+  approvedC: any;
+  approved!: LocalDataSource;
   userId: any;
   ngOnInit() {
-    /// load contributions by faculyID
+    /// load all contributions by faculyID
     this.facId = localStorage.getItem('facultyId');
     this.reviewService.getContributions(this.facId).subscribe((contributions: any) => {
       this.contributions = contributions;
       this.source = new LocalDataSource(this.contributions)
+    });
+    /// load pending contributions by faculyID
+    this.reviewService.getPendingCs(this.facId).subscribe((contributions: any) => {
+      this.contributions = contributions;
+      this.pending = new LocalDataSource(this.contributions)
+    });
+    /// load pending contributions by faculyID
+    this.reviewService.getApprovedCs(this.facId).subscribe((contributions: any) => {
+      this.contributions = contributions;
+      this.approved = new LocalDataSource(this.contributions)
     });
     //// load user id
     this.userId = localStorage.getItem('userId');
