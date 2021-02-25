@@ -1,25 +1,14 @@
 <nb-card>
-  <nb-tabset>
-    <nb-tab tabTitle="Profile">
-        <nb-layout-column left class="colored-column-danger">Name</nb-layout-column> 
-        <nb-layout-column left class="colored-column-danger">Address</nb-layout-column> 
-        <nb-layout-column left class="colored-column-danger">Phone number</nb-layout-column> 
-    </nb-tab>
+  <nb-card-body>
     <nb-tab tabTitle="Upload file">
       <form action="/action_page.php">
         <label for="myfile">Select a file:</label>
         <input type="file" id="myfile" name="myfile"><br><br>
-        <input type="submit">
+        <input type="submit" value="Submit" class="btn btn-primary btn-blo">
       </form>      
     </nb-tab>
     <nb-tab tabTitle="History">
       Tab content 2
     </nb-tab>
-  </nb-tabset>
-</nb-card>
-
-<nb-card>
-  <nb-card-header class="example-items-rows">
-  <button nbButton fullWidth status="danger">Logout</button>
-  </nb-card-header>
+  </nb-card-body>
 </nb-card>
