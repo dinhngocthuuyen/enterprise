@@ -7,6 +7,8 @@ import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { HttpClientModule } from '@angular/common/http';
 import { ChatComponent } from './chat/chat.component';
 import { StudentRoutingModule } from './student-routing.module';
+import { SendMailComponent } from './send-mail/send-mail.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   imports: [
@@ -27,12 +29,13 @@ import { StudentRoutingModule } from './student-routing.module';
     Ng2SmartTableModule,
     NbActionsModule,
     NbUserModule,
-    // NbChatModule,
+    ReactiveFormsModule,
     NbContextMenuModule,
     HttpClientModule
   ],
   declarations: [
-    ChatComponent
+    ChatComponent,
+    SendMailComponent
   ],
 })
 export class StudentModule {

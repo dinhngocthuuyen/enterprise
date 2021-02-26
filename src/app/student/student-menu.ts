@@ -18,5 +18,10 @@ export const MENU_ITEMS: NbMenuItem[] = [
     icon: 'user-outline',
     link: 'profile',
   },
+  {
+    title: 'sendMail',
+    icon: 'user-outline',
+    link: 'sendMail',
+  },
 
 ]

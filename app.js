@@ -441,8 +441,14 @@ app.post('/chat', (req, res) => {
       res.send(MessageDoc);
   })
 })
-
-
+//////////////////////send mail/////////////
+app.get('/sendMail/:id', (req, res) => {
+  User.find({_id: req.params.id}).then((user) => {
+      res.send(user);
+  }).catch((e) => {
+    res.send(e);
+  });
+})
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 app.listen(3000, () => {
   console.log(`App is listening at http://localhost:3000`)
