@@ -5,7 +5,7 @@ import { StudentComponent } from './student.component';
 import { SendMailComponent } from './send-mail/send-mail.component';
 
 const routes: Routes = [{
-  path: ':id',
+  path: '',
   component: StudentComponent,
   children: [
     {
