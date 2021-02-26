@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NbDialogRef, NbDialogService } from '@nebular/theme';
 import { select, Store } from '@ngrx/store';
@@ -16,6 +16,12 @@ import { CoorService } from '../../services/review.service';
 export class ProfileEditComponent implements OnInit {
   userId: any;
   user: any[]=[];
+  // @Input() user;
+editForm = new FormGroup({
+  name: new FormControl(''),
+  username: new FormControl(''),
+
+})
     constructor(
       private store: Store<User>,
       private router: Router,
@@ -31,10 +37,14 @@ export class ProfileEditComponent implements OnInit {
       });
     }
  
-    edit( username: string, password: string,name: string ){
+    edit(){
+      this.profileService.updateProfile(this.userId,this.editForm.value).subscribe((result)=>
+      console.log(result,"data update success")
+      )
       
-      this.profileService.updateProfile(this.userId, username,password,name).subscribe()
       this.router.navigate(['coordinator/'+this.userId +'/profile'])
-
+    }
+    back() {
+      this.router.navigate([ 'coordinator/'+this.userId +'/profile'])
     }
 }

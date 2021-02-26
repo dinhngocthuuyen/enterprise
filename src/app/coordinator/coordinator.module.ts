@@ -16,6 +16,7 @@ import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { ReviewComponent } from './review/review.component';
 import { ContributionDetailComponent } from './review/contribution-detail/contribution-detail.component';
 import { CommentComponent } from './review/comment/comment.component';
+import { ResetPasswordComponent } from './profile/reset-password/reset-password.component';
 
 @NgModule({
   imports: [
@@ -54,6 +55,7 @@ import { CommentComponent } from './review/comment/comment.component';
     ReviewComponent,
     ContributionDetailComponent,
     CommentComponent,
+    ResetPasswordComponent,
   ],
 })
 export class CoordinatorModule {

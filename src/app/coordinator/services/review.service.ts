@@ -48,7 +48,7 @@ export class CoorService {
   getFaculty(id: string){
     return this.WebReqService.get(`faculty/${id}`);
   }
-  updateProfile(id: string, username: string, password: string,name: string ) {
-    return this.WebReqService.patch(`profile/${id}`, {username,password,name })
+  updateProfile(id: string, body ) {
+    return this.WebReqService.patch(`profile/${id}`, body)
   }
 }

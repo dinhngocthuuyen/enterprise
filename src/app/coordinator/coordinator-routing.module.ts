@@ -7,6 +7,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { ReviewComponent } from './review/review.component'
 import { ContributionDetailComponent } from './review/contribution-detail/contribution-detail.component';
 import { ProfileEditComponent } from './profile/profile-edit/profile-edit.component';
+import { ResetPasswordComponent } from './profile/reset-password/reset-password.component';
 
 const routes: Routes = [{
   path: ':id',
@@ -29,6 +30,10 @@ const routes: Routes = [{
     {
       path: 'profile/profile-edit',
       component: ProfileEditComponent,
+    },
+    {
+      path: 'profile/reset-password',
+      component: ResetPasswordComponent,
     },
     {
       path: 'review',

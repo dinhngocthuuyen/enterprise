@@ -4,7 +4,7 @@
         <div class="post" *ngFor="let user of user">
             <p><strong>Id:</strong> {{ user._id }}</p>
             <p><strong>User Name: </strong>{{ user.username }}</p>
-            <p> <strong>Password: </strong>{{ user.password }}</p>
+            <!-- <p> <strong>Password: </strong>{{ user.password }}</p> -->
             <p><strong>Name: </strong>{{ user.name }}</p>
             <p><strong>Faculty id: </strong>{{ user._facultyId }}</p>
             <p><strong>Role: </strong>{{ user.role }}</p>
@@ -16,7 +16,10 @@
     </nb-card-body>
  
         <nb-card-footer>
-        <button nbButton status="primary" (click)="profileEdit()">Edit profile</button>
+        <button nbButton status="primary" (click)="back()">Back</button>
+        <button nbButton status="success" (click)="profileEdit()">Update profile</button>
+        <button nbButton status="danger" (click)="resetPassword()">Reset Password</button>
+
         </nb-card-footer>
 </nb-card>
 

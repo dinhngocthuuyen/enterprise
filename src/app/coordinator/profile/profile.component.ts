@@ -46,4 +46,10 @@ export class ProfileComponent implements OnInit {
 profileEdit() {
   this.router.navigate([ 'coordinator/'+this.userId +'/profile/profile-edit'])
 }
+resetPassword() {
+  this.router.navigate([ 'coordinator/'+this.userId +'/profile/reset-password'])
+}
+back() {
+  this.router.navigate([ 'coordinator/'+this.userId +'/dashboard'])
+}
 }

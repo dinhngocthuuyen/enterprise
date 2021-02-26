@@ -62,7 +62,10 @@ export class WebRequestService {
   // }
   delete(uri: string){
     return this.http.delete(`${this.ROOT_URL}/${uri}`)
-  }
+  }  
+  // getcurrentData(id: string){
+  //   return this.http.get(`${this.ROOT_URL}/${id}`)
+  // }
 
   login(username: string, password: string){
     return this.http.post(`${this.ROOT_URL}/users/login`,{ username, password }, { observe: 'response' });

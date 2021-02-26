@@ -1,25 +1,25 @@
 <nb-card>
     <nb-card-header>Update Profile</nb-card-header>
-    <nb-card-body *ngFor=" let user of user">
+    <nb-card-body [formGroup]="editForm" *ngFor=" let user of user" (ngSubmit)="edit()">
         <div class="col-xs-12 col-md-12">
             <label>Username</label>
-            <input class="form-control" nbInput [value]="user?.username" >
+            <input class="form-control" nbInput formControlName="username" [ngModel]="user?.username" >
         </div>
-        <div class="col-xs-12 col-md-12">
+        <!-- <div class="col-xs-12 col-md-12">
             <label>Password</label>
-            <input type="password" class="form-control" nbInput [value]="user?.password" >
-        </div>
+            <input type="password" class="form-control" nbInput [ngModel]="user?.password" >
+        </div> -->
         <div class="col-xs-12 col-md-12">
             <label>Name</label>
-            <input  class="form-control" nbInput [value]="user?.name" >
+            <input #name class="form-control" formControlName="name" nbInput [ngModel]="user?.name" >
         </div>
-        <div class="col-xs-12 col-md-12">
+        <!-- <div class="col-xs-12 col-md-12">
             <label>Role</label>
-            <input class="form-control" nbInput [value]="user?.role" readonly>
-        </div>
+            <input class="form-control" nbInput [ngModel]="user?.role" readonly>
+        </div> -->
     </nb-card-body>
     <nb-card-footer *ngFor=" let user of user">
-        <button nbButton status="warning" (click)="edit(user?.username, user?.password, user?.name)">Edit</button>
-
+        <button nbButton status="warning" (click)="edit()">Edit</button>
+        <button nbButton status="primary" (click)="back()">Back</button>
     </nb-card-footer>
 </nb-card>
