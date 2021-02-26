@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Store } from '@ngrx/store';
+import { User } from 'src/app/models/user';
 import { StudentService } from '../services/student.servies';
 
 @Component({
@@ -13,14 +14,14 @@ export class SendMailComponent implements OnInit {
   user: any[]=[];
 
   constructor(
-    private store: Store,
+    private store: Store<User>,
     private studentService: StudentService,
 
     ) { }
 
   ngOnInit(): void {
     this.userId = localStorage.getItem('userId');
-    this.studentService.getUsename(this.userId).subscribe((user: any) => {
+    this.studentService.getUser(this.userId).subscribe((user: any) => {
       this.user = user;
     });
   }
