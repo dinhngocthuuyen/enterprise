@@ -6,10 +6,6 @@ const MessageSchema = new mongoose.Schema({
   _userId: {
     type: mongoose.Types.ObjectId
   },
-  userName:{
-    type: mongoose.Types.ObjectId
-
-  }
 })
 
 const Message = mongoose.model('Message', MessageSchema)

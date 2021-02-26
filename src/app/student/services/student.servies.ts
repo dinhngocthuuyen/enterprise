@@ -23,5 +23,13 @@ export class StudentService {
   getUsename(id: string){
     return this.WebReqService.get(`sendMail/${id}`);
   }
-
+  getCoor(id: string){
+    return this.WebReqService.get(`${id}/coordinator`)
+  }
+  getMess(id: string){
+    return this.WebReqService.get(`messages/${id}`);
+  }
+  postMess(id: string, text){
+    return this.WebReqService.post(`messages/${id}`, {text})
+  }
 }

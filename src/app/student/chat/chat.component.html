@@ -1,32 +1,29 @@
-<!-- <div>
-<nb-chat title="Jake" size="medium" status="warning">
+<div *ngFor="let coor of coordinator">
+<nb-chat [title]="coor?.name" size="medium" status="warning">
   <nb-chat-message *ngFor="let message of messages"
                    [type]="message.type"
                    [message]="message.text"
                    [reply]="message.reply"
-                   [sender]="message.user.name"
+                   [sender]="coor?.name"
                    [date]="message.date"
-                   [files]="message.files"
                    [quote]="message.quote"
                    [latitude]="message.latitude"
-                   [longitude]="message.longitude"
-                   [avatar]="message.user.avatar"></nb-chat-message>
-  <nb-chat-form (send)="sendMessage($event, 'Jake', 'http://www.reactiongifs.com/r/wnd1.gif', true)" [showButton]="false" [dropFiles]="true">
+                   [longitude]="message.longitude"></nb-chat-message>
+  <nb-chat-form (send)="sendMessage($event, true)" [showButton]="true">
   </nb-chat-form>
 </nb-chat>
-<nb-chat title="John" size="medium" status="success">
+</div>
+<div *ngFor="let stu of student">
+<nb-chat title="Coordinator" size="medium" status="success">
   <nb-chat-message *ngFor="let message of messages"
                    [type]="message.type"
                    [message]="message.text"
                    [reply]="!message.reply"
-                   [sender]="message.user.name"
+                   [sender]="stu?.name"
                    [date]="message.date"
-                   [files]="message.files"
                    [quote]="message.quote"
                    [latitude]="message.latitude"
-                   [longitude]="message.longitude"
-                   [avatar]="message.user.avatar"></nb-chat-message>
-  <nb-chat-form (send)="sendMessage($event, 'John', 'https://i.gifer.com/no.gif', false)" [showButton]="false" [dropFiles]="true">
+                   [longitude]="message.longitude"></nb-chat-message>
+  <nb-chat-form (send)="sendMessage($event, false)" [showButton]="true" >
   </nb-chat-form>
 </nb-chat>
-</div> -->
