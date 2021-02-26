@@ -1,8 +1,23 @@
- <nb-card>
+<nb-card>
+    <nb-card-header>Profile</nb-card-header>
+    <nb-card-body>
+        <div class="post" *ngFor="let user of user">
+            <p><strong>Id:</strong> {{ user._id }}</p>
+            <p><strong>User Name: </strong>{{ user.username }}</p>
+            <p> <strong>Password: </strong>{{ user.password }}</p>
+            <p><strong>Name: </strong>{{ user.name }}</p>
+            <p><strong>Faculty id: </strong>{{ user._facultyId }}</p>
+            <p><strong>Role: </strong>{{ user.role }}</p>
+            <!-- <ul class="faculty" *ngFor="let faculty of faculty">
+                <p>aaa</p>
+                <li><strong>Faculty Name: </strong>{{faculty.name}}</li>
+            </ul> -->
+            </div>
+    </nb-card-body>
+ 
+        <nb-card-footer>
+        <button nbButton status="primary" (click)="profileEdit()">Edit profile</button>
+        </nb-card-footer>
+</nb-card>
 
-     <nb-card-body>
-        <ng2-smart-table [settings]="settings" [source]="coordinators$ | async"></ng2-smart-table>
-
-     </nb-card-body>
-
- </nb-card>
+    

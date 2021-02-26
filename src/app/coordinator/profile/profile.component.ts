@@ -1,12 +1,12 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NbDialogService } from '@nebular/theme';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { Coordinator } from 'src/app/models';
-import { ProfileApiActions } from './actions';
-import { ProfileSelectors } from './selectors';
+import { User } from 'src/app/models/user';
+import { CoorService } from '../services/review.service';
 
 @Component({
   selector: 'app-profile',
@@ -15,62 +15,35 @@ import { ProfileSelectors } from './selectors';
   styleUrls: ['./profile.component.scss']
 })
 export class ProfileComponent implements OnInit {
+  userId: any;
+  user: any[]=[];
+  facId: any;
+  faculty: any[]=[];
+
   // public editProfileForm: FormGroup;
-  @Input()
-  coordinator!: Coordinator;
-  coordinators$: Observable<Coordinator[]>;
-  dialogRef: any;
-
-  settings = {
-    columns: {
-      _id: {
-        title: 'ID',
-        type:'string'
-      },
-      name: {
-        title: 'Name',
-        type: 'string'
-
-      },
-      address: {
-        title: 'Address',
-        type: 'string'
-      },
-      phone: {
-        title: 'Phone',
-        type: 'number'
-      },
-      dob: {
-        title: 'Date',
-        type: 'string'
-      },
-      email: {
-        title: 'Email',
-        type: 'string'
-      },
-    },
-    hideSubHeader: true,
-    actions: false,
-  };
 
   constructor(
-    private store: Store<Coordinator>,
+    private store: Store<User>,
     private router: Router,
-    private dialogService: NbDialogService,
+    private route: ActivatedRoute,
+    private profileService: CoorService,
 
   ){
-    this.coordinators$ = this.store.pipe(select(ProfileSelectors.selectAllProfiles));
 
   }
   ngOnInit() {
-    this.store.dispatch(ProfileApiActions.loadProfiles());
-}
-onUserRowSelect(event){
-  this.router.navigate(['pages/profile/' + event.data._id]);
+    this.userId = localStorage.getItem('userId');
+    this.profileService.getProfile(this.userId).subscribe((user: any) => {
+      this.user = user;
+    });
+        // this.facId = localStorage.getItem('facId');
+        // this.profileService.getFaculty(this.facId).subscribe((faculty: any) => {
+        //   this.faculty = faculty;
+        // });
 }
 
-close(){
-  this.dialogRef.close();
-}
 
+profileEdit() {
+  this.router.navigate([ 'coordinator/'+this.userId +'/profile/profile-edit'])
+}
 }

@@ -2,9 +2,12 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const { mongoose } = require('./db/mongoose');
+const conn = mongoose.createConnection('mongodb+srv://dbUser:db123456@cluster0.ulahg.mongodb.net/EnterpriseDB?retryWrites=true&w=majority');
+
 const multer = require('multer');
 const GridFsStorage = require('multer-gridfs-storage');
-const GridFsStorage = require('multer-gridfs-storage');
+const Grid = require('gridfs-stream') ;
+// const GridFsStorage = require('multer-gridfs-storage');
 Grid.mongo = mongoose.mongo;
 const gfs = Grid(conn.db);
 
@@ -213,13 +216,14 @@ app.delete('/post/:id', (req, res) => {
 })
 
 //GET Profile Coordinator
-app.get('/profiles', (req, res) => {
-
-    Coordinator.find({}).then((profiles) => {
-        res.send(profiles);
-    });
+app.get('/profile/profile-detail/:id', (req, res) => {
+  //Return an array of all the posts in database
+  User.find({_id: req.params.id}).then((user) => {
+    res.send(user);
+  }).catch((e) => {
+    res.send(e);
+  });
 })
-
 app.get('/coordinators/:id', (req, res) => {
 
     Coordinator.find({_id: req.params.id}).then((profiles) => {
@@ -243,6 +247,14 @@ app.post('/profiles', (req, res) => {
 
         res.send(CoordinatorDoc);
     })
+})
+app.patch('/profile/:id', (req, res) => {
+  //Update a selected post (post document with id in the URL) with the new values specified in the JSON body of the req
+  User.findOneAndUpdate({_id: req.params.id}, {
+    $set: req.body
+  }).then(() => {
+    res.sendStatus(200);
+  })
 })
 
 app.put('/coordinators/:_id' ,(req, res) => {
@@ -359,6 +371,14 @@ app.delete('/user/:id', (req, res) => {
 })
 
 app.get('/user/:id', (req, res) => {
+  User.find({_id: req.params.id}).then((user) => {
+      res.send(user);
+  }).catch((e) => {
+    res.send(e);
+  });
+})
+
+app.get('/faculty/:id', (req, res) => {
   User.find({_id: req.params.id}).then((user) => {
       res.send(user);
   }).catch((e) => {

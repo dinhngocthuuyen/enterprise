@@ -42,4 +42,13 @@ export class CoorService {
   getMess(){
     return this.WebReqService.get('chat');
   }
+  getProfile(id: string){
+    return this.WebReqService.get(`profile/profile-detail/${id}`);
+  }
+  getFaculty(id: string){
+    return this.WebReqService.get(`faculty/${id}`);
+  }
+  updateProfile(id: string, username: string, password: string,name: string ) {
+    return this.WebReqService.patch(`profile/${id}`, {username,password,name })
+  }
 }

@@ -4,9 +4,9 @@ import { CoordinatorComponent } from './coordinator.component';
 import { ChatComponent } from './chat/chat.component';
 import { ProfileComponent } from './profile/profile.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { ProfileDetailUpdateComponent } from './profile/component/profile-detail-update/profile-detail-update.component';
 import { ReviewComponent } from './review/review.component'
 import { ContributionDetailComponent } from './review/contribution-detail/contribution-detail.component';
+import { ProfileEditComponent } from './profile/profile-edit/profile-edit.component';
 
 const routes: Routes = [{
   path: ':id',
@@ -27,8 +27,8 @@ const routes: Routes = [{
       data: { title: "Dash" }
     },
     {
-      path: 'profile/:id',
-      component: ProfileDetailUpdateComponent,
+      path: 'profile/profile-edit',
+      component: ProfileEditComponent,
     },
     {
       path: 'review',

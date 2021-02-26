@@ -1,0 +1,25 @@
+<nb-card>
+    <nb-card-header>Update Profile</nb-card-header>
+    <nb-card-body *ngFor=" let user of user">
+        <div class="col-xs-12 col-md-12">
+            <label>Username</label>
+            <input class="form-control" nbInput [value]="user?.username" >
+        </div>
+        <div class="col-xs-12 col-md-12">
+            <label>Password</label>
+            <input type="password" class="form-control" nbInput [value]="user?.password" >
+        </div>
+        <div class="col-xs-12 col-md-12">
+            <label>Name</label>
+            <input  class="form-control" nbInput [value]="user?.name" >
+        </div>
+        <div class="col-xs-12 col-md-12">
+            <label>Role</label>
+            <input class="form-control" nbInput [value]="user?.role" readonly>
+        </div>
+    </nb-card-body>
+    <nb-card-footer *ngFor=" let user of user">
+        <button nbButton status="warning" (click)="edit(user?.username, user?.password, user?.name)">Edit</button>
+
+    </nb-card-footer>
+</nb-card>
