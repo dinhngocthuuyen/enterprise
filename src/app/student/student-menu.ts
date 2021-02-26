@@ -13,4 +13,10 @@ export const MENU_ITEMS: NbMenuItem[] = [
     link: 'upload',
   },
 
+  {
+    title: 'Profile',
+    icon: 'user-outline',
+    link: 'profile',
+  },
+
 ]
