@@ -26,15 +26,6 @@ app.use(function(req, res, next) {
   next();
 });
 
-// app.use(function(req, res, next) { //allow cross origin requests
-//   res.setHeader("Access-Control-Allow-Methods", "POST, PUT, OPTIONS, DELETE, GET");
-//   res.header("Access-Control-Allow-Origin", "http://localhost:3000");
-//   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-//   res.header("Access-Control-Allow-Credentials", true);
-//   next();
-// });
-
-
 /* MIDDLEWARES APPLY TO USER ONLY */
 
 //Verify refresh token middleware (which will be verifying the session)
@@ -403,7 +394,7 @@ app.get('/:facultyId/coordinator', (req, res) => {
   })
 });
 /////////////////message//////////////////
-app.get('/messages/:id', (req, res) => {
+app.get('/messages/:id', authenticate, (req, res) => {
   Message.find({
     _userId: req.params.id
   }).then((msg) => {
