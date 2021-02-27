@@ -6,5 +6,15 @@ export const MENU_ITEMS: NbMenuItem[] = [
     icon: 'message-circle-outline',
     link: 'chat',
   },
+  {
+    title: 'Accounts',
+    icon: 'person-add-outline',
+    link: 'account',
+  },
+  {
+    title: 'Closure Date',
+    icon: 'clock-outline',
+    link: 'closure',
+  },
 
 ]

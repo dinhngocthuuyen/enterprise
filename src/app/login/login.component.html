@@ -11,7 +11,7 @@
         <nb-card-body>
             <form class="needs-validation" novalidate>
               <label>Username</label>
-              <input #txtUsername class="form-control" type="text"><br>
+              <input #txtUsername class="form-control" type="email"><br>
               <label>Password</label>
               <input #txtPassword class="form-control" type="password"><br>
               <button nbButton fullWidth status="danger" type="submit" (click) = 'onLoginButtonClicked(txtUsername.value, txtPassword.value)'>Login</button>

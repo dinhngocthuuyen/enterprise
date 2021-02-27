@@ -14,8 +14,8 @@ module.exports = {
   Coordinator,
   User,
   Role,
+  Faculty,
   Student,
   Message,
-  Faculty,
   Comment
 }

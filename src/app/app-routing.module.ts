@@ -10,7 +10,7 @@ export const routes: Routes = [
       .then(m => m.PagesModule),
   },
   {
-    path: 'coordinator',
+    path: 'coordinator/:id',
     loadChildren: () => import('./coordinator/coordinator.module')
       .then(m => m.CoordinatorModule),
   },
@@ -18,6 +18,16 @@ export const routes: Routes = [
     path: 'admin/:id',
     loadChildren: () => import('./admin/admin.module')
       .then(m => m.AdminModule),
+  },
+  {
+    path: 'account/:id',
+    loadChildren: () => import('./admin/account/account.module')
+      .then(m => m.AccountModule),
+  },
+  {
+    path: 'closure/:id',
+    loadChildren: () => import('./admin/closure/closure.module')
+      .then(m => m.ClosureModule),
   },
   {
     path: 'student/:id',

@@ -1,0 +1,33 @@
+<p>Administrator!</p>
+
+<nb-card status="primary">
+  <nb-card-header>
+    <nb-icon icon="person-add-outline"></nb-icon>
+  </nb-card-header>
+        
+            <form id="Form-create" class="form-group" >
+                    <label for="email">Username</label>
+                    <input nbInput shape="semi-round" #emailInput type="email" class="form-control" required>
+                    <label for="name">Name</label>
+                    <input nbInput shape="semi-round" #nameInput type="text" class="form-control" required>
+                    <label for="password">Password</label>
+                    <input nbInput shape="semi-round" #passInput type="password" class="form-control" required>
+                    <label for="role">Role</label><br>
+                    <nb-select #roleSelect placeholder="Select">
+                      <nb-option *ngFor="let item of roleList" [value]="item.role">{{ item.name }}</nb-option>
+                    </nb-select><br><br>
+                    <label for="falcuty">Faculty</label><br>
+                    <nb-select #facultySelect placeholder="Select" >
+                      <nb-option *ngFor="let item of facultyList" [value]="item.faculty">{{ item.name }}</nb-option>
+                    </nb-select><br><br>
+
+                    <!--<select class="faculty" name="faculties" list="faculties" [(ngModel)]="facultyValue1" [value]="faculties" (change)="saveCode(codeValue)">
+                      <option *ngFor="let c of faculty" [value]="c.faculty" >{{c.name}}</option>
+                    </select><br><br> -->
+                <button nbButton status="primary" type="submit" (click) = 'onCreateButtonClicked(emailInput.value, nameInput.value, passInput.value, roleSelect.selected, facultySelect.selected)'>Create</button>
+            </form>
+  
+
+
+</nb-card>
+

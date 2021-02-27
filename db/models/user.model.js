@@ -21,16 +21,16 @@ const UserSchema = new mongoose.Schema({
         minlength: 1
     },
     name: {
-      type: String,
-      required: true,
-      minlength: 2,
-    },
+        type: String,
+        required: true,
+        minlength: 2,
+      },
     _facultyId: {
-      type: mongoose.Types.ObjectId
-    },
+        type: mongoose.Types.ObjectId,
+      },
     role: {
-      type: String,
-      required: true
+        type: String,
+        required: true
     },
 
     sessions: [{
