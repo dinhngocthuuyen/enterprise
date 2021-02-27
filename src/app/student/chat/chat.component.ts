@@ -12,9 +12,7 @@ export class ChatComponent implements OnInit {
   stuId: any;
   student: any;
 
-  constructor(
-    private chatService: StudentService
-  ) {}
+  constructor(private chatService: StudentService) {}
   messages: any;
   ngOnInit(): void {
     // get coordinator
