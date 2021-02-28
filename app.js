@@ -501,9 +501,9 @@ async function sendMail(){
 
     const mailOption = {
       from: 'Dung <dungndtgcs17091@fpt.edu.vn>',// sender address
-      to: "ndtd30121999@gmail.com",
+      to: "uyendntgcs17619@fpt.edu.vn",
      subject: "New submission" , // Subject line
-      html: "<b>a new report has been submitted </b>", // html body
+      html: "<b>a new report has been submitted http://localhost:4200/coordinator/60335f75415f78217707d45d/review/60336c3eee28af28831ad73b</b>", // html body
     }
     transporter.sendMail(mailOption, function(error){
       if(error){

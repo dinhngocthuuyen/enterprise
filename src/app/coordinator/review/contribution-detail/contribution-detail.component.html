@@ -4,8 +4,11 @@
   </nb-card-header>
   <nb-card-body *ngFor="let contribution of contribution">
     <label>File: </label>
-    <span>{{contribution.file}}</span>
-    <!-- <input nbInput [value]="contribution?.file" readonly> -->
+    <span>{{contribution.file}}</span><br>
+
+    <span>{{contribution.date}}</span>
+      <br>
+      <p #color:#00FF00>{{showTime}}</p>
     <br>
     <label>Status: </label>
     <span>{{contribution.status}}</span>

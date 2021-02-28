@@ -1,4 +1,5 @@
 import { AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NbDialogService } from '@nebular/theme';
 import { USER_PROVIDED_EFFECTS } from '@ngrx/effects';
@@ -61,4 +62,26 @@ export class ContributionDetailComponent implements OnInit, AfterViewInit {
         // console.log("cmts comment " + this.cmts)
       });
   }
+  // countDownForm = new FormGroup({
+  //   date: new FormControl(''),
+  
+  // })
+  SubmitTime = new Date("2021-02-23T04:21:59.159Z").getTime();
+  Deadline = this.SubmitTime +(14*24*60*60*1000);
+  showTime: any;
+  x = setInterval(() =>{
+    var now = new Date().getTime();
+    var distance= this.Deadline - now;
+    var days = Math.floor(distance/(1000*60*60*24))
+    var hours = Math.floor((distance %(1000*60*60*24))/(1000*60*60));
+    var minutes = Math.floor((distance % (1000*60*60))/(1000*60));
+    var seconds = Math.floor((distance % (1000*60))/1000);
+    this.showTime = days + " days " + hours + " hours " + minutes + " minutes " +seconds + " seconds ";
+    if(distance= 0 && distance<0){
+      this.openNotApproved()
+      {
+      status = "Not Approved";
+      this.reviewService.updateStatus(this.conId, status).subscribe()   
+      } }
+  })
 }
