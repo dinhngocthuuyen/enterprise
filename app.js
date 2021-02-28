@@ -53,6 +53,7 @@ let verifySession = ((req, res, next) => {
         }
       }
     })
+
     if (isSessionValid) {
       //The session is valid, call next() to continue with processing this web req
       next();
