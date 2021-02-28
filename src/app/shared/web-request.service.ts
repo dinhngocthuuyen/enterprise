@@ -64,6 +64,10 @@ export class WebRequestService {
     return this.http.post(`${this.ROOT_URL}/users/`,{ username, name, password, role, _facultyId }, { observe: 'response' });
   }
 
+  submit(startdate: Date, deadline1:Date, deadline2: Date){
+    return this.http.post(`${this.ROOT_URL}/closure/`,{ startdate, deadline1, deadline2 }, { observe: 'response' });
+  }
+
   getDepDropDownValues():Observable<any> {
     return this.http.get<Account[]>(`${this.ROOT_URL}/account`);
   }

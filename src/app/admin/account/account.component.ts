@@ -7,9 +7,9 @@ import { Observable } from 'rxjs';
 import { HttpResponse } from '@angular/common/http';
 import { AuthService } from 'src/app/services/auth.service';
 import { FacultyService } from 'src/app/admin/services/faculty.service';
-import { Falcuty} from 'db/models/'
 import {Role} from 'db/models'
 import { Faculty } from 'src/app/models';
+
 
 
 @Component({
@@ -18,16 +18,13 @@ import { Faculty } from 'src/app/models';
   styleUrls: ['./account.component.scss']
 })
 export class AccountComponent implements OnInit {
+  
 
  constructor(private authService: AuthService,private facultyService: FacultyService,) {
 
  }
-    facultyList: Falcuty [] = [
-      { faculty: '', name: 'None' },
-      { faculty: '603356d4af00f21d0d30d3b2', name: 'Math' },
-      { faculty: '60335cd8418c2621094f021e', name: 'Information Technology' },
-      { faculty: '6035e7e427a3bb3a91b99987', name: 'History' }
-    ];
+
+    facultyList: Faculty [] = [];
     roleList: Role [] = [
       { role: 'admin', name: 'Admin'},
       { role: 'manager', name: 'Manager'},
@@ -35,16 +32,27 @@ export class AccountComponent implements OnInit {
       { role: 'student', name: 'Student'},
       { role: 'guest', name: 'Guest'}
     ];
+  
+
 
   ngOnInit(): void {
-   
-     
+    
+     this.getFaculty();
   }
+
+  getFaculty(): void {
+    this.facultyService.getFaculties().subscribe((res: Faculty[]) => {
+      this.facultyList = res;
+    });
+  }
+
   onCreateButtonClicked(username: string, name:string, password: string, role:string, _facultyId: string){
     this.authService.create(username, name, password, role, _facultyId).subscribe((res: HttpResponse<any>) => {
       console.log(res);
     })
   }
+
+  
 }
 
 

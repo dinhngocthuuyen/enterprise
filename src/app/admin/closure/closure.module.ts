@@ -5,6 +5,7 @@ import { NbButtonGroupModule, NbButtonModule, NbCardModule, NbDatepickerModule, 
 import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { ClosureComponent } from './closure.component';
 
+
 @NgModule({
   imports: [
       NbButtonModule,
@@ -21,6 +22,8 @@ import { ClosureComponent } from './closure.component';
       NbSelectModule,
       NbDatepickerModule,
       NbTimepickerModule
+      
+
   ],
   declarations: [
       

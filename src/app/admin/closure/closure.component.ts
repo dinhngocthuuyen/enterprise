@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import { NbSortDirection, NbSortRequest, NbTreeGridDataSource, NbTreeGridDataSourceBuilder, NbWindowService } from '@nebular/theme';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
+import { HttpResponse } from '@angular/common/http';
+import { AuthService } from 'src/app/services/auth.service';
 
 
 
@@ -14,15 +16,18 @@ import { Observable } from 'rxjs';
   styleUrls: ['./closure.component.scss']
 })
 export class ClosureComponent implements OnInit {
+
+
+ constructor(private authService: AuthService){
+   
   
-
- constructor(){
-
  }
 
      ngOnInit(): void {
 
   }
+  
+  
 }
   
 

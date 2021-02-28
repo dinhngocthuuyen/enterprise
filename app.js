@@ -224,6 +224,7 @@ app.post('/users', (req, res) => {
   }).catch((e) => {
     res.status(400).send(e);
   })
+
 })
 
 //User logins
@@ -294,6 +295,12 @@ app.get('/users', (req, res) => {
   User.find({}).then((user) => {
       res.send(user);
   });
+})
+
+app.get('/faculties', (req, res) => {
+  Faculty.find({}).then((user) => {
+    res.send(user);
+ });
 })
 
 app.post('/faculties', (req, res) => {
@@ -415,6 +422,7 @@ app.post('/messages/:id', (req, res) => {
     res.send(MessageDoc);
   })
 })
+
 //////////////////////send mail/////////////
 // app.post('/sendMail', (req, res) => {
 //   console.log("request came")
