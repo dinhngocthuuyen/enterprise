@@ -7,11 +7,11 @@ export const MENU_ITEMS: NbMenuItem[] = [
     link: 'dashboard',
     home: true
   },
-  {
-    title: 'Chat',
-    icon: 'message-circle-outline',
-    link: 'chat',
-  },
+  // {
+  //   title: 'Chat',
+  //   icon: 'message-circle-outline',
+  //   link: 'chat',
+  // },
   {
     title: 'Review',
     icon: 'shopping-cart-outline',
@@ -22,5 +22,5 @@ export const MENU_ITEMS: NbMenuItem[] = [
     icon: 'shopping-cart-outline',
     link: 'profile',
   },
-  
+
 ]

@@ -26,10 +26,10 @@ export class StudentService {
   getCoor(id: string){
     return this.WebReqService.get(`${id}/coordinator`)
   }
-  getMess(id: string){
-    return this.WebReqService.get(`messages/${id}`);
+  getMess( facultyId: string, id: string){
+    return this.WebReqService.get(`messages/${facultyId}/${id}`);
   }
-  postMess(id: string, text){
-    return this.WebReqService.post(`messages/${id}`, {text})
+  postMess( facultyId: string, id: string, text, reply){
+    return this.WebReqService.post(`messages/${facultyId}/${id}`, {text, reply})
   }
 }

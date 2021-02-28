@@ -14,7 +14,10 @@ export class DashboardComponent implements OnInit {
     }
   public pageTitle!: string;
   user: any;
+  facId: any;
   ngOnInit(): void {
+    this.facId = localStorage.getItem('facultyId');
+
     this.route.data.subscribe(data => {
       this.user = data,
       console.log("user " + this.user.role)

@@ -1,26 +1,15 @@
-
-
-<!-- <nb-card status="primary" >
-  <nb-card-header >Chat Room</nb-card-header>
-  <nb-card-body #form>
-    <div *ngFor="let message of messages">
-      <ul *ngFor="let user of user">
-        <li>{{ user.name }}</li>
-      </ul>
-      <p>{{message.date}}</p>
-      <p>{{message.text}}</p>
-
-    </div>
-    <div [formGroup]="checkoutForm">
-    <div *ngFor="let user of user"  >
-    <input #text nbInput type="text"  class="form-control" name="text" >
-    <input #username nbInput [value]="user?.name" name="userName" readonly>
-    <input #idUser nbInput [value]="userId" readonly>
+<div *ngFor="let student of student">
+  <nb-chat [title]="student.name" size="medium" status="warning">
+    <nb-chat-message *ngFor="let message of messages"
+                     [type]="message.type"
+                     [message]="message.text"
+                     [reply]="message.reply"
+                     sender=""
+                     [date]="message.date"
+                     [quote]="message.quote"
+                     [latitude]="message.latitude"
+                     [longitude]="message.longitude"></nb-chat-message>
+    <nb-chat-form (send)="coorSendMessage($event,  true)" [showButton]="true">
+    </nb-chat-form>
+  </nb-chat>
 </div>
-</div>
-  </nb-card-body>
-  <nb-card-footer>
-    <button nbButton status="primary" (click)="postMess(checkoutForm.value)">Add</button>
-
-  </nb-card-footer>
-</nb-card> -->

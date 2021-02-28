@@ -284,8 +284,8 @@ app.get('/user/:id', (req, res) => {
 })
 
 app.get('/faculty/:id', (req, res) => {
-  User.find({_id: req.params.id}).then((user) => {
-      res.send(user);
+  Faculty.find({_id: req.params.id}).then((faculty) => {
+      res.send(faculty);
   }).catch((e) => {
     res.send(e);
   });
@@ -396,20 +396,43 @@ app.get('/:facultyId/coordinator', (req, res) => {
     res.send(coor);
   })
 });
+// app.get('/coormessages/:facultyId/:studentId', (req, res) => {
+//   Message.find({
+//     _studentId: req.params.studentId,
+//     _facultyId: req.params.facultyId
+//   }).then((msg) => {
+//     res.send(msg);
+//   })
+// });
+
+// app.post('/coormessages/:facultyId', (req, res) => {
+//   let newMess = new Message({
+//     text: req.body.text,
+//     date: Date.now().toString(),
+//     // _coordinatorId: req.params.coordinatorId,
+//     _facultyId: req.params.facultyId
+// });
+//   newMess.save().then((MessageDoc) => {
+//     res.send(MessageDoc);
+//   })
+// })
 /////////////////message//////////////////
-app.get('/messages/:id', authenticate, (req, res) => {
+app.get('/messages/:facultyId/:studentId', (req, res) => {
   Message.find({
-    _userId: req.params.id
+    _studentId: req.params.studentId,
+    _facultyId: req.params.facultyId
   }).then((msg) => {
     res.send(msg);
   })
 });
 
-app.post('/messages/:id', (req, res) => {
+app.post('/messages/:facultyId/:studentId', (req, res) => {
   let newMess = new Message({
     text: req.body.text,
     date: Date.now().toString(),
-    _userId: req.params.id,
+    reply: req.body.reply,
+    _studentId: req.params.studentId,
+    _facultyId: req.params.facultyId
 });
   newMess.save().then((MessageDoc) => {
     res.send(MessageDoc);
@@ -465,7 +488,7 @@ async function sendMail(){
         user: 'dungndtgcs17091@fpt.edu.vn',
         // Your Gmail password or App Password
         pass: '30121999'
-  
+
         // type: 'OAuth2',
         // user: 'dungndtgcs17091@fpt.edu.vn',
         // clientId: CLIENTID,
@@ -474,8 +497,8 @@ async function sendMail(){
         // refreshToken:REFRESHTOKEN,
       }
       })
-    
-   
+
+
     const mailOption = {
       from: 'Dung <dungndtgcs17091@fpt.edu.vn>',// sender address
       to: "ndtd30121999@gmail.com",

@@ -14,7 +14,7 @@ const routes: Routes = [{
   component: CoordinatorComponent,
   children: [
     {
-      path: 'chat',
+      path: 'chat/:id',
       component: ChatComponent,
     },
 

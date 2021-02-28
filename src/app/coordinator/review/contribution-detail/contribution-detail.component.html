@@ -1,5 +1,7 @@
 <nb-card>
-  <nb-card-header>Contribution Detail</nb-card-header>
+  <nb-card-header *ngFor="let contribution of contribution">Contribution Detail
+    <nb-action class="control-item" icon="email-outline" [routerLink]="['../../chat', contribution._userId]"></nb-action>
+  </nb-card-header>
   <nb-card-body *ngFor="let contribution of contribution">
     <label>File: </label>
     <span>{{contribution.file}}</span>

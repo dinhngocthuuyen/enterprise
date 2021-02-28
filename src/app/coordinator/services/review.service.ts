@@ -36,11 +36,11 @@ export class CoorService {
   getComments(conId: string) {
     return this.WebReqService.get(`${conId}/comments`)
   }
-  postMess(text: string, userName: string, _userId: string ){
-    return this.WebReqService.post('chat',{text, userName, _userId});
+  getMess( facultyId: string, id: string){
+    return this.WebReqService.get(`messages/${facultyId}/${id}`);
   }
-  getMess(){
-    return this.WebReqService.get('chat');
+  postMess( facultyId: string, id: string, text, reply){
+    return this.WebReqService.post(`messages/${facultyId}/${id}`, {text, reply})
   }
   getProfile(id: string){
     return this.WebReqService.get(`profile/profile-detail/${id}`);
