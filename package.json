@@ -42,6 +42,7 @@
     "multer-gridfs-storage": "^4.2.0",
     "ng2-completer": "^9.0.1",
     "ng2-smart-table": "^1.7.2",
+    "nodemailer": "^6.5.0",
     "rxjs": "~6.6.0",
     "ts": "^0.2.2",
     "tslib": "^2.0.0",

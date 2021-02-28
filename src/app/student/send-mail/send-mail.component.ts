@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { User } from 'src/app/models/user';
 import { StudentService } from '../services/student.servies';
@@ -12,10 +13,10 @@ import { StudentService } from '../services/student.servies';
 export class SendMailComponent implements OnInit {
   userId: any;
   user: any[]=[];
-
   constructor(
     private store: Store<User>,
     private studentService: StudentService,
+    private route: ActivatedRoute,
 
     ) { }
 
@@ -25,9 +26,20 @@ export class SendMailComponent implements OnInit {
       this.user = user;
     });
   }
-  getMail = new FormGroup({
+  email = new FormGroup({
     username: new FormControl(''),
   
   })
+  sendMail(){
+ 
+    this.studentService.sendMail( this.email.value).subscribe(
+      data =>{
+        let res:any = data;
+        console.log(
+          `Students have just submitted the report`
+        )
+      }
+    )
+  }
 
 }

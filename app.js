@@ -2,7 +2,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const { mongoose } = require('./db/mongoose');
-
+const nodemailer = require("nodemailer");
 /* LOAD EXPRESS MODEL */
 const app = express();
 
@@ -14,6 +14,8 @@ const { asap } = require('rxjs');
 // const { JsonWebTokenError } = require('jsonwebtoken');
 const jwt = require('jsonwebtoken');
 const { Post, Contribution, Coordinator, User, Role, Student, Message, Faculty, Comment } = require('./db/models');
+const { info } = require('console');
+const { result } = require('lodash');
 
 /* LOAD GLOBAL MIDDLEWARE */
 app.use(bodyParser.json());
@@ -442,13 +444,84 @@ app.post('/chat', (req, res) => {
   })
 })
 //////////////////////send mail/////////////
-// app.get('/sendMail/:id', (req, res) => {
+// app.post('/sendMail', (req, res) => {
+//   console.log("request came")
 //   User.find({_id: req.params.id}).then((user) => {
 //       res.send(user);
 //   }).catch((e) => {
 //     res.send(e);
 //   });
 // })
+app.get('/sendMail/:id', (req, res) => {
+  User.find({  _userId: req.params.userId,
+  }).then((user) => {
+      res.send(user);
+  }).catch((e) => {
+    res.send(e);
+  });
+})
+
+app.post('/sendMail', (req, res) => {
+  console.log("request came")
+  let username = req.body.username;
+  let name = req.body.name;
+
+
+  let email = new Message({
+    username,name
+  });
+  sendMail(email, info =>{
+    res.send(info)
+  })
+})
+// const CLIENTID='263011216435-sk4g07kjfrb4mt0t5dpml2fkvimv89s1.apps.googleusercontent.com';
+// const CLIENTSECRET ='xdatDMw7ET7cTCoPiLJsmcFg';
+// const REDIRECTURI ='https://developers.google.com/oauthplayground';
+// const REFRESHTOKEN ='//04MMc5Bqs-QsjCgYIARAAGAQSNwF-L9IrCg-1VUaT8zq4A76uj8uXsq7i-FKOpWZVSkG4yvD-49S5ZClJG6CX7PDrv8apzvy80O8';
+
+async function sendMail(){
+
+    // const accessToken = await oAuth2Client.generateAccessAuthToken
+    const transporter = nodemailer.createTransport({
+
+      host: "smtp.ethereal.email",
+      port: 587,
+      secure: false, // true for 465, false for other ports
+      service:'gmail',
+      auth: {
+        // Your full email address
+        user: 'dungndtgcs17091@fpt.edu.vn',
+        // Your Gmail password or App Password
+        pass: '30121999'
+  
+        // type: 'OAuth2',
+        // user: 'dungndtgcs17091@fpt.edu.vn',
+        // clientId: CLIENTID,
+        // clientSecret: CLIENTSECRET,
+        // redirectUri:REDIRECTURI,
+        // refreshToken:REFRESHTOKEN,
+      }
+      })
+    
+   
+    const mailOption = {
+      from: 'Dung <dungndtgcs17091@fpt.edu.vn>',// sender address
+      to: "ndtd30121999@gmail.com",
+     subject: "New submission" , // Subject line
+      html: "<b>a new report has been submitted </b>", // html body
+    }
+    transporter.sendMail(mailOption, function(error){
+      if(error){
+        console.log(error);
+      }else{
+        console.log('Email send success ')
+      }
+    })
+}
+
+
+
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 app.listen(3000, () => {
   console.log(`App is listening at http://localhost:3000`)

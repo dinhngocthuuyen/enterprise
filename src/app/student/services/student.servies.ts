@@ -18,7 +18,7 @@ export class StudentService {
     return this.WebReqService.get(`users`)
   }
   sendMail(data){
-      return this.WebReqService.post(`student`,data)
+      return this.WebReqService.post(`sendMail`,data)
   }
   getUsename(id: string){
     return this.WebReqService.get(`sendMail/${id}`);
