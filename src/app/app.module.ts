@@ -20,6 +20,8 @@ import { HeaderComponent } from './shared/header/header.component';
 import { AdminComponent } from './admin/admin.component';
 import { StudentComponent } from './student/student.component';
 import { GuestComponent } from './guest/guest.component';
+import { WebRequestInterceptor } from './services/web-request.interceptor';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -74,7 +76,7 @@ import { GuestComponent } from './guest/guest.component';
     EffectsModule.forRoot([]),
     StudentManagerModule,
   ],
-  providers: [/*AuthGuardService, {provide: HTTP_INTERCEPTORS, useClass: WebRequestInterceptor, multi: true}*/],
+  providers: [{provide: HTTP_INTERCEPTORS, useClass: WebRequestInterceptor, multi: true}],
   bootstrap: [AppComponent],
 
 })

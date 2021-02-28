@@ -2,6 +2,8 @@ import { Component, Input, OnInit, Output } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { UsersService } from './user.service';
+import { NbMenuService } from '@nebular/theme';
+import { filter, map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-header',
@@ -11,12 +13,13 @@ import { UsersService } from './user.service';
 export class HeaderComponent implements OnInit {
   userMenu = [{
     title: 'Log out',
-    link: 'login'
    }];
   @Input() user;
   constructor(
     private route: ActivatedRoute,
     private userService: UsersService,
+    private nbMenuService: NbMenuService,
+    private authService: AuthService
   ) {
   }
   userId!: string;
@@ -35,6 +38,11 @@ export class HeaderComponent implements OnInit {
     this.userService.getUser(this.userId).subscribe((user: any) => {
       this.user = user;
     })
-  };
 
+    this.nbMenuService.onItemClick().pipe(
+      filter(({ tag }) => tag === 'my-context-menu'),
+      map(({ item: { title } }) => title),
+    ).subscribe(() => this.authService.logout())
+  //logout = this.authService.logout();
+  }
 }

@@ -28,15 +28,6 @@ app.use(function(req, res, next) {
   next();
 });
 
-// app.use(function(req, res, next) { //allow cross origin requests
-//   res.setHeader("Access-Control-Allow-Methods", "POST, PUT, OPTIONS, DELETE, GET");
-//   res.header("Access-Control-Allow-Origin", "http://localhost:3000");
-//   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-//   res.header("Access-Control-Allow-Credentials", true);
-//   next();
-// });
-
-
 /* MIDDLEWARES APPLY TO USER ONLY */
 
 //Verify refresh token middleware (which will be verifying the session)
@@ -64,6 +55,7 @@ let verifySession = ((req, res, next) => {
         }
       }
     })
+
     if (isSessionValid) {
       //The session is valid, call next() to continue with processing this web req
       next();
@@ -101,7 +93,7 @@ let authenticate = (req, res, next) => {
 
 app.get('/post', authenticate, (req, res) => {
   //Return an array of all the posts in database that belongs to the authenticated user
-  Post.find({_userId: req._id}).then((post) => {
+  Post.find({}).then((post) => {
     res.send(post);
   }).catch((e) => {
     res.send(e);
@@ -201,29 +193,6 @@ app.put('/coordinators/:_id' ,(req, res) => {
   });
 });
 
-// app.put('/coordinators/:_id' ,(req,res)=> {
-
-//   Coordinator.findByIdAndUpdate(
-//       req.body._id,
-//       {
-//          name = req.body.name,
-//          address = req.body.address,
-    
-//          phone = req.body.phone,
-//         email = req.body.email,
-//         dob = req.body.dob,
-//       },
-//       function (error, result) {
-//           if (error) {
-//               throw error;
-//           } else {
-//             res.sendStatus(200).json(result);
-//           }
-//       }
-//   )
-    
-//     });
-
 //GET Coordinator
 app.get('/coordinators', (req, res) => {
   Coordinator.find({}).then((coordinators) => {
@@ -272,9 +241,9 @@ app.post('/users/login', (req, res) => {
           .header('x-refresh-token', authTokens.refreshToken)
           .header('x-access-token', authTokens.accessToken)
           .send(user);
-    }).catch((e) => {
-      res.status(400).send(e);
     })
+  }).catch((e) => {
+    res.status(400).send();
   })
 })
 
@@ -418,29 +387,32 @@ app.get('/contributions', (req, res) => {
       res.send(roles);
   });
 })
+
+app.get('/:facultyId/coordinator', (req, res) => {
+  User.find({
+    _facultyId: req.params.facultyId,
+    role: "coordinator",
+  }).then((coor) => {
+    res.send(coor);
+  })
+});
 /////////////////message//////////////////
-app.get('/chat', (req, res) => {
+app.get('/messages/:id', authenticate, (req, res) => {
   Message.find({
-    _coordinatorId: req.params.coordinatorId
-  }).then((contributions) => {
-    res.send(contributions);
+    _userId: req.params.id
+  }).then((msg) => {
+    res.send(msg);
   })
 });
 
-app.post('/chat', (req, res) => {
-  let text = req.body.text;
-  let userName = req.body.userName;
-
-  let date = req.body.date;
-  let _userId = req.body._userId;
-
-
+app.post('/messages/:id', (req, res) => {
   let newMess = new Message({
-    text,date,userName,_userId
-  });
+    text: req.body.text,
+    date: Date.now().toString(),
+    _userId: req.params.id,
+});
   newMess.save().then((MessageDoc) => {
-
-      res.send(MessageDoc);
+    res.send(MessageDoc);
   })
 })
 //////////////////////send mail/////////////

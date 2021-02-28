@@ -9,12 +9,12 @@
     <nb-card status="danger" style="width: fit-content; margin:auto">
         <nb-card-header style="text-align: center;">Welcome</nb-card-header>
         <nb-card-body>
-            <form class="needs-validation" novalidate>
+            <form class="needs-validation" novalidate #form>
               <label>Username</label>
-              <input #txtUsername class="form-control" type="text"><br>
+              <input #txtUsername class="form-control" type="text" ><br>
               <label>Password</label>
               <input #txtPassword class="form-control" type="password"><br>
-              <button nbButton fullWidth status="danger" type="submit" (click) = 'onLoginButtonClicked(txtUsername.value, txtPassword.value)'>Login</button>
+              <button nbButton fullWidth status="danger" type="submit" (click) = 'onLoginButtonClicked(txtUsername.value, txtPassword.value); form.reset();'>Login</button>
             </form>
         </nb-card-body>
 

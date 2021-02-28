@@ -1,10 +1,14 @@
 <nb-card>
   <nb-card-header>Contribution Detail</nb-card-header>
   <nb-card-body *ngFor="let contribution of contribution">
-    <label>File</label>
-    <input nbInput [value]="contribution?.file" readonly>
-    <label>Status</label>
-    <input nbInput [value]="contribution?.status" readonly>
+    <label>File: </label>
+    <span>{{contribution.file}}</span>
+    <!-- <input nbInput [value]="contribution?.file" readonly> -->
+    <br>
+    <label>Status: </label>
+    <span>{{contribution.status}}</span>
+    <br>
+    <input #userID nbInput ngModel [value]="contribution?._userId" readonly>
   </nb-card-body>
   <nb-card-footer>
     <div class="btn" *ngFor="let contribution of contribution">

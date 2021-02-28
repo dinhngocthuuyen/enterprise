@@ -34,9 +34,7 @@ export class ReviewComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private reviewService: CoorService,
-  ){
-
-  }
+  ){}
   facId: any;
   contributions: any;
   source!: LocalDataSource;
