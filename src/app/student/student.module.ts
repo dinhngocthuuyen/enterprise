@@ -31,6 +31,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     NbUserModule,
     ReactiveFormsModule,
     NbContextMenuModule,
+    NbChatModule,
     HttpClientModule
   ],
   declarations: [

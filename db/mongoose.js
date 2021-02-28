@@ -14,6 +14,3 @@ mongoose.set('useCreateIndex', true);
 mongoose.set('useFindAndModify', false);
 
 module.exports = { mongoose };
-
-//mongodb://localhost:27017/PostDB
-//mongodb+srv://dbUser:db123456@cluster0.ulahg.mongodb.net/EnterpriseDB?retryWrites=true&w=majority

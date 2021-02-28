@@ -2,7 +2,7 @@ import { HttpClient, HttpErrorResponse, HttpHeaders, HttpResponse } from '@angul
 import { Injectable } from '@angular/core';
 import { resetFakeAsyncZone } from '@angular/core/testing';
 import { Router } from '@angular/router';
-import { Observable, throwError } from 'rxjs';
+import { empty, Observable, throwError } from 'rxjs';
 import { catchError, map, shareReplay, tap } from 'rxjs/operators';
 import { WebRequestService } from '../shared/web-request.service';
 
@@ -10,8 +10,7 @@ import { WebRequestService } from '../shared/web-request.service';
   providedIn: 'root'
 })
 export class AuthService {
-  constructor(private webRequestService: WebRequestService,
-    private router: Router) { }
+  constructor(private webRequestService: WebRequestService, private router: Router, private http: HttpClient) { }
 
   login(username: string, password: string) {
     return this.webRequestService.login(username, password).pipe(
@@ -49,9 +48,7 @@ export class AuthService {
   }
 
   private removeSession() {
-    localStorage.removeItem('id');
-    localStorage.removeItem('x-access-token');
-    localStorage.removeItem('x-refresh-token');
+    localStorage.clear();
   }
 
   getAccessToken() {
@@ -62,8 +59,26 @@ export class AuthService {
     return localStorage.getItem('x-refresh-token');
   }
 
-  setAccessToken(accessToken: string) {
+  setAccessToken(accessToken) {
     return localStorage.setItem('x-access-token', accessToken);
+  }
+
+  getUserId() {
+    return localStorage.getItem('id');
+  }
+
+  getNewAccessToken() {
+    return this.http.get(`${this.webRequestService.ROOT_URL}/users/me/access-token`,{
+      headers: {
+        'x-refresh-token': this.getRefreshToken(),
+        '_id': this.getUserId()
+      },
+      observe: 'response'
+    }).pipe(
+      tap((res: HttpResponse<any>) => {
+        this.setAccessToken(res.headers.get('x-access-token'))
+      })
+    )
   }
 
 }

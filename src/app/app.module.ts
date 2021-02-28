@@ -11,7 +11,7 @@ import { StoreModule } from '@ngrx/store';
 import { FormsModule } from '@angular/forms';
 
 import { EffectsModule } from '@ngrx/effects';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { ROOT_REDUCERS, metaReducers } from './manager/reducers';
 import { StudentManagerModule } from './manager/manager/studentmanager/studentmanager.module';
 import { LoginComponent } from './login/login.component';
@@ -23,6 +23,8 @@ import { GuestComponent } from './guest/guest.component';
 import { CommonModule } from '@angular/common';
 import { AccountComponent } from './admin/account/account.component';
 import { ClosureComponent } from './admin/closure/closure.component';
+import { WebRequestInterceptor } from './services/web-request.interceptor';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -80,7 +82,7 @@ import { ClosureComponent } from './admin/closure/closure.component';
     EffectsModule.forRoot([]),
     StudentManagerModule,
   ],
-  providers: [/*AuthGuardService, {provide: HTTP_INTERCEPTORS, useClass: WebRequestInterceptor, multi: true}*/],
+  providers: [{provide: HTTP_INTERCEPTORS, useClass: WebRequestInterceptor, multi: true}],
   bootstrap: [AppComponent],
 
 })

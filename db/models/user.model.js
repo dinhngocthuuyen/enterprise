@@ -58,7 +58,7 @@ UserSchema.methods.generateAccessAuthToken = function() {
     const user = this;
     return new Promise((resolve, reject) => {
         //Create JSON web token and return that
-        jwt.sign({_id: user._id.toHexString()}, jwtSecret, {expiresIn: '15m'}, (err, token) => {
+        jwt.sign({_id: user._id.toHexString()}, jwtSecret, {expiresIn: '10s'}, (err, token) => {
             if (!err) {
                 resolve(token);
             } else {
@@ -162,7 +162,11 @@ UserSchema.pre('save', function(next) {
 let saveSessionToDatabase = (user, refreshToken) => {
     return new Promise((resolve, reject) => {
         let expiresAt = generateRefreshTokenExpiryTime();
-        user.sessions.push({'token' : refreshToken, expiresAt});
+        if (user.sessions.length === 0){
+            user.sessions.push({'token' : refreshToken, expiresAt});
+        } else {
+            user.sessions.set(0 ,{'token' : refreshToken, expiresAt})
+        }       
         user.save().then(() => {
             //Saved session successfully
             return resolve(refreshToken);

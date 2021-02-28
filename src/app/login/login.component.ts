@@ -3,6 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 import { NgForm } from '@angular/forms';
+import { throwError } from 'rxjs';
+import { resetFakeAsyncZone } from '@angular/core/testing';
 
 @Component({
   selector: 'app-login',
@@ -20,11 +22,10 @@ export class LoginComponent implements OnInit {
     this.authService.login(username, password).subscribe((res: HttpResponse<any>) => {
       console.log(res);
       this.router.navigate([res.body.role +"/" + res.body._id]);
+    },(err) =>{
+      alert('Wrong username or password');
+      
     })
   }
 
-  onSubmit(form: NgForm){
-    console.log(form.value);
-    form.reset();
-  }
 }

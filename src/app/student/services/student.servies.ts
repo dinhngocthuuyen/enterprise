@@ -18,10 +18,18 @@ export class StudentService {
     return this.WebReqService.get(`users`)
   }
   sendMail(data){
-      return this.WebReqService.post(`student`,data)
+      return this.WebReqService.post(`sendMail`,data)
   }
   getUsename(id: string){
     return this.WebReqService.get(`sendMail/${id}`);
   }
-
+  getCoor(id: string){
+    return this.WebReqService.get(`${id}/coordinator`)
+  }
+  getMess(id: string){
+    return this.WebReqService.get(`messages/${id}`);
+  }
+  postMess(id: string, text){
+    return this.WebReqService.post(`messages/${id}`, {text})
+  }
 }
