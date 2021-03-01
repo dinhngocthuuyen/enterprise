@@ -9,7 +9,7 @@ import { ChatComponent } from './chat/chat.component';
 import { StudentRoutingModule } from './student-routing.module';
 import { SendMailComponent } from './send-mail/send-mail.component';
 import { ReactiveFormsModule } from '@angular/forms';
-
+import { UploadComponent} from './upload/upload.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -36,7 +36,8 @@ import { ReactiveFormsModule } from '@angular/forms';
   ],
   declarations: [
     ChatComponent,
-    SendMailComponent
+    SendMailComponent,
+    UploadComponent
   ],
 })
 export class StudentModule {

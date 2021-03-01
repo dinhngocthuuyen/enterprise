@@ -15,12 +15,12 @@ export const MENU_ITEMS: NbMenuItem[] = [
 
   {
     title: 'Profile',
-    icon: 'user-outline',
+    icon: 'person-outline',
     link: 'profile',
   },
   {
     title: 'sendMail',
-    icon: 'user-outline',
+    icon: 'email-outline',
     link: 'sendMail',
   },
 

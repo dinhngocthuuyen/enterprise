@@ -6,6 +6,12 @@ const nodemailer = require("nodemailer");
 /* LOAD EXPRESS MODEL */
 const app = express();
 
+/** UPLOAD */
+const cors = require('cors');
+const multer = require ('multer');
+var corsOptions = {};
+const upload = multer({desk: "uploads"});
+
 /* LOAD MONGOOSE MODEL */
 const { send } = require('process');
 const { asap } = require('rxjs');
@@ -16,6 +22,9 @@ const jwt = require('jsonwebtoken');
 const { Post, Contribution, Coordinator, User, Role, Student, Message, Faculty, Comment } = require('./db/models');
 const { info } = require('console');
 const { result } = require('lodash');
+
+/* UPLOAD */
+app.use(cors(corsOptions));
 
 /* LOAD GLOBAL MIDDLEWARE */
 app.use(bodyParser.json());
@@ -88,6 +97,12 @@ let authenticate = (req, res, next) => {
 /* END MIDDLEWARE*/
 
 /* ROUTE HANDLER */
+
+/* UPLOAD */
+app.get("/upload", (req, res) => {
+  res.send()
+})
+
 
 /////////////////////////////////////////////////////// POST //////////////////////////////////////////////////////////////
 
@@ -362,25 +377,25 @@ app.post('/:contributionId/comments', (req, res) => {
   })
 });
 /////Student create contributions////
-app.get('/users/:userId/contributions', (req, res) => {
-  Contribution.find({
-    _userId: req.params.userId
-  }).then((contributions) => {
-    res.send(contributions);
-  })
-});
-app.post('/users/:userId/contributions', (req, res) => {
-  let newContribution = new Contribution({
-      file: req.body.file,
-      date: Date.now().toString(),
-      status: "Pending",
-      _userId: req.params.userId,
-      _facultyId: req.body.facultyId
-  });
-  newContribution.save().then((newDoc) => {
-    res.send(newDoc)
-  })
-});
+// app.get('/users/:userId/contributions', (req, res) => {
+//   Contribution.find({
+//     _userId: req.params.userId
+//   }).then((contributions) => {
+//     res.send(contributions);
+//   })
+// });
+// app.post('/users/:userId/contributions', (req, res) => {
+//   let newContribution = new Contribution({
+//       file: req.body.file,
+//       date: Date.now().toString(),
+//       status: "Pending",
+//       _userId: req.params.userId,
+//       _facultyId: req.body.facultyId
+//   });
+//   newContribution.save().then((newDoc) => {
+//     res.send(newDoc)
+//   })
+// });
 
 app.get('/contributions', (req, res) => {
   Contribution.find({}).then((roles) => {
@@ -438,6 +453,33 @@ app.post('/messages/:facultyId/:studentId', (req, res) => {
     res.send(MessageDoc);
   })
 })
+
+/*UPLOAD*/
+app.post("/file", upload.single("file"),(req, res) => {
+  // let newFile = new Contribution({
+
+  //  file = req.body.file,
+  // })
+   file = req.body.file;
+
+  let file = new Contribution({
+    file
+  });
+
+
+  // })
+  if(file){
+    res.json(file);
+
+
+  } else {
+    throw new Error("File upload unsuccessful");
+
+  }
+
+})
+
+
 //////////////////////send mail/////////////
 // app.post('/sendMail', (req, res) => {
 //   console.log("request came")
@@ -462,7 +504,7 @@ app.post('/sendMail', (req, res) => {
   let name = req.body.name;
 
 
-  let email = new Message({
+  let email = new User({
     username,name
   });
   sendMail(email, info =>{
@@ -501,7 +543,7 @@ async function sendMail(){
 
     const mailOption = {
       from: 'Dung <dungndtgcs17091@fpt.edu.vn>',// sender address
-      to: "uyendntgcs17619@fpt.edu.vn",
+      to: "ndtd3012199@gmail.com",
      subject: "New submission" , // Subject line
       html: "<b>a new report has been submitted http://localhost:4200/coordinator/60335f75415f78217707d45d/review/60336c3eee28af28831ad73b</b>", // html body
     }

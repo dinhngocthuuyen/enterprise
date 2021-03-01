@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { ChatComponent } from './chat/chat.component';
 import { StudentComponent } from './student.component';
 import { SendMailComponent } from './send-mail/send-mail.component';
+import { UploadComponent} from './upload/upload.component';
 
 const routes: Routes = [{
   path: '',
@@ -17,6 +18,10 @@ const routes: Routes = [{
       component: SendMailComponent,
     },
     {
+      path: 'upload',
+      component: UploadComponent,
+    },
+    {
       path: '',
       redirectTo: 'dashboard',
       pathMatch: 'full',
@@ -26,6 +31,8 @@ const routes: Routes = [{
       path: '**',
     //   component: NotFoundComponent,
     },
+
+
   ],
 }];
 
