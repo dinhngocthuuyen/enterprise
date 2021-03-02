@@ -15,7 +15,6 @@ export class ChatComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private chatService: CoorService,
-    private formBuilder: FormBuilder,
   ) { }
   source!: LocalDataSource;
   messages: any[] = [];
@@ -33,12 +32,6 @@ export class ChatComponent implements OnInit {
       this.student = student
     })
   }
-  // postMess(text: string, userName: string, _userId: string) {
-
-  //   this.ChatService.postMess(text, userName, _userId).subscribe((response: any) =>{
-  //     console.log(response)
-  //   });
-  // }
   coorSendMessage(event: any, reply: boolean) {
     console.log("text", event.message)
     console.log("reply coor: ", reply);

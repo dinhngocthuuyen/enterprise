@@ -16,7 +16,7 @@ export class ChatComponent implements OnInit {
   ngOnInit(): void {
     // get coordinator
     this.facId = localStorage.getItem('facultyId');
-    this.stuId = localStorage.getItem('id');
+    this.stuId = localStorage.getItem('userId');
     this.chatService.getUser(this.stuId).subscribe((student: any)=>{
       this.student = student
     })

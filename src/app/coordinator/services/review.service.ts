@@ -22,25 +22,25 @@ export class CoorService {
     return this.WebReqService.get(`user/${id}`);
   }
   getContributionDetail(id: string){
-    return this.WebReqService.get(`contribution/${id}`)
+    return this.WebReqService.get(`contribution/${id}`);
   }
   getUsers(){
-    return this.WebReqService.get(`users`)
+    return this.WebReqService.get(`users`);
   }
   updateStatus(id: string, status: string) {
-    return this.WebReqService.patch(`contributions/${id}`, {status})
+    return this.WebReqService.patch(`contributions/${id}`, {status});
   }
   postComment(conId: string, comment: string) {
-    return this.WebReqService.post(`${conId}/comments`, {comment})
+    return this.WebReqService.post(`${conId}/comments`, {comment});
   }
   getComments(conId: string) {
-    return this.WebReqService.get(`${conId}/comments`)
+    return this.WebReqService.get(`${conId}/comments`);
   }
   getMess( facultyId: string, id: string){
     return this.WebReqService.get(`messages/${facultyId}/${id}`);
   }
   postMess( facultyId: string, id: string, text, reply){
-    return this.WebReqService.post(`messages/${facultyId}/${id}`, {text, reply})
+    return this.WebReqService.post(`messages/${facultyId}/${id}`, {text, reply});
   }
   getProfile(id: string){
     return this.WebReqService.get(`profile/profile-detail/${id}`);
@@ -49,6 +49,9 @@ export class CoorService {
     return this.WebReqService.get(`faculty/${id}`);
   }
   updateProfile(id: string, body ) {
-    return this.WebReqService.patch(`profile/${id}`, body)
+    return this.WebReqService.patch(`profile/${id}`, body);
+  }
+  getStudents(id: string){
+    return this.WebReqService.get(`${id}/students`);
   }
 }

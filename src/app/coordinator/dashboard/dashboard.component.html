@@ -1,8 +1,8 @@
 <nb-card status="warning">
-    <nb-card-header>
+    <nb-card-header style="display: flex; justify-content: center;">
+      <nb-icon icon="star-outline"></nb-icon> &nbsp;
+      <span *ngFor="let faculty of faculty">{{ faculty.name }}</span> &nbsp;
       <nb-icon icon="star-outline"></nb-icon>
-      <nb-icon icon="star-outline"></nb-icon>
-
     </nb-card-header>
     <nb-card-body>
       <div class="row " >

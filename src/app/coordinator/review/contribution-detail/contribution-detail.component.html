@@ -13,7 +13,7 @@
     <label>Status: </label>
     <span>{{contribution.status}}</span>
     <br>
-    <input #userID nbInput ngModel [value]="contribution?._userId" readonly>
+    <input #userID nbInput [value]="contribution?._userId" readonly>
   </nb-card-body>
   <nb-card-footer>
     <div class="btn" *ngFor="let contribution of contribution">

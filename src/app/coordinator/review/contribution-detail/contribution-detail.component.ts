@@ -23,18 +23,22 @@ export class ContributionDetailComponent implements OnInit, AfterViewInit {
     private dialogService: NbDialogService,
   ) { }
   status: any;
-  studentId!: string
+  studentId!: string;
+  numOfCmt: any;
   @Input() contribution;
   ngOnInit() {
     // this.facId = localStorage.getItem('facultyId');
     this.conId = this.route.snapshot.params.id;
-    console.log('student id: ', this.studentId);
+    // console.log('student id: ', this.studentId);
     // console.log("contribution id: ", this.conId);
     this.reviewService.getContributionDetail(this.conId).subscribe((contribution: any) => {
       this.contribution = contribution;
+      this.studentId = this.contribution._id;
+      console.log("student Id"+this.studentId)
     });
     this.reviewService.getComments(this.conId).subscribe((cmts: any) => {
       this.cmts = cmts
+      this.numOfCmt = this.cmts.length
     });
     //// load user id
     this.userId = localStorage.getItem('userId');

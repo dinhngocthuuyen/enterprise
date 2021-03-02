@@ -411,26 +411,15 @@ app.get('/:facultyId/coordinator', (req, res) => {
     res.send(coor);
   })
 });
-// app.get('/coormessages/:facultyId/:studentId', (req, res) => {
-//   Message.find({
-//     _studentId: req.params.studentId,
-//     _facultyId: req.params.facultyId
-//   }).then((msg) => {
-//     res.send(msg);
-//   })
-// });
 
-// app.post('/coormessages/:facultyId', (req, res) => {
-//   let newMess = new Message({
-//     text: req.body.text,
-//     date: Date.now().toString(),
-//     // _coordinatorId: req.params.coordinatorId,
-//     _facultyId: req.params.facultyId
-// });
-//   newMess.save().then((MessageDoc) => {
-//     res.send(MessageDoc);
-//   })
-// })
+app.get('/:facultyId/students', (req, res) => {
+  User.find({
+    _facultyId: req.params.facultyId,
+    role: "student",
+  }).then((coor) => {
+    res.send(coor);
+  })
+});
 /////////////////message//////////////////
 app.get('/messages/:facultyId/:studentId', (req, res) => {
   Message.find({
