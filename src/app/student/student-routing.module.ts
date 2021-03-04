@@ -5,6 +5,8 @@ import { StudentComponent } from './student.component';
 import { SendMailComponent } from './send-mail/send-mail.component';
 import { UploadContributionsComponent } from './upload-contributions/upload-contributions.component';
 
+import { UploadComponent } from './upload/upload.component';
+
 const routes: Routes = [{
   path: '',
   component: StudentComponent,
@@ -20,6 +22,9 @@ const routes: Routes = [{
     {
       path: 'upload-contributions',
       component: UploadContributionsComponent
+      
+      path: 'upload',
+      component: UploadComponent,
     },
     {
       path: '',

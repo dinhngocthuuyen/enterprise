@@ -10,6 +10,7 @@ import { StudentRoutingModule } from './student-routing.module';
 import { SendMailComponent } from './send-mail/send-mail.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { UploadContributionsComponent } from './upload-contributions/upload-contributions.component';
+import { UploadComponent } from './upload/upload.component';
 
 @NgModule({
   imports: [
@@ -39,6 +40,9 @@ import { UploadContributionsComponent } from './upload-contributions/upload-cont
     ChatComponent,
     SendMailComponent,
     UploadContributionsComponent
+    
+    
+    UploadComponent
   ],
 })
 export class StudentModule {

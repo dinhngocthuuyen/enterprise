@@ -25,6 +25,33 @@ export class AuthService {
     )
   }
 
+  create(username: string, name: string, password: string, role: string, _facultyId: any) {
+    let facultyId: any = _facultyId;
+    if (_facultyId._id === '') {
+      facultyId = undefined;
+    }
+
+    return this.webRequestService.create(username, name, password, role, facultyId).pipe(
+      shareReplay(),
+      tap((res: HttpResponse<any>) => {
+        //The auth tokens will be in the header of this response
+        this.setSession(res.body._id, res.headers.get('x-access-token'), res.headers.get('x-refresh-token'));
+        console.log('CREATE SUCCESSFULLY!!!');
+      })
+    )
+  }
+
+  submit(startdate: String, deadline1:String, deadline2: String) {
+    return this.webRequestService.submit(startdate, deadline1, deadline2).pipe(
+      shareReplay(),
+      tap((res: HttpResponse<any>) => {
+        //The auth tokens will be in the header of this response
+        this.setSession(res.body._id, res.headers.get('x-access-token'), res.headers.get('x-refresh-token'));
+        console.log('SUBMIT SUCCESSFULLY!!!');
+      })
+    )
+  }
+
   private setSession(id: string, accessToken, refreshToken){
     localStorage.setItem('id', id);
     localStorage.setItem('x-access-token', accessToken);

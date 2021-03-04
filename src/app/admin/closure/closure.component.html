@@ -1,0 +1,28 @@
+<p>Closure Date!</p>
+
+<nb-card status="primary">
+  <nb-card-header>
+    <nb-icon icon="clock-outline"></nb-icon>
+  </nb-card-header>
+
+  <nb-card-body>
+    <label for="date">Start Date</label>
+    <input class="dati" nbInput #startdateSelect placeholder="Pick Date" type="datetime-local" ><br><br>
+
+    <label for="date">Deadline 1</label>
+    <input class="dati" nbInput #deadline1Select placeholder="Pick Date" type="datetime-local" >
+    <button nbButton status="primary" type="submit">Update</button><br><br>
+
+    <label for="date">Deadline 2</label>
+    <input class="dati" nbInput #deadline2Select placeholder="Pick Date" type="datetime-local">
+    <button nbButton status="primary" type="submit">Update</button><br><br>
+    
+
+    
+    <button nbButton status="primary" type="submit" (click) = 'onSubmitButtonClicked(startdateSelect.value, deadline1Select.value, deadline2Select.value)' >Submit</button>
+  </nb-card-body>
+  
+            
+  
+</nb-card>
+

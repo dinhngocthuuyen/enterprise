@@ -16,6 +16,9 @@ const app = express();
 /* LOAD MONGOOSE MODEL */
 const jwt = require('jsonwebtoken');
 const { Post, Contribution, Coordinator, User, Role, Student, Message, Faculty, Comment} = require('./db/models');
+const { Post, Contribution, Coordinator, User, Role, Student, Message, Faculty, Comment, Closure } = require('./db/models');
+const { info } = require('console');
+const { result } = require('lodash');
 
 /* LOAD GLOBAL MIDDLEWARE */
 app.use(bodyParser.json());
@@ -406,6 +409,26 @@ app.post('/faculties', (req, res) => {
   })
 });
 
+app.post('/closure', (req, res) => {
+  let newClosure = new Closure(req.body);
+  newClosure.save().then((ClosureDoc) => {
+
+    res.send(ClosureDoc);
+  })
+});
+
+app.get('/closure', (req, res) => {
+  Closure.find({}).then((closure) => {
+    res.send(closure);
+ });
+})
+
+//app.controller('MainClosure', function($scope) {
+//  $scope.Date = '20210313T00:00:00';
+  
+ // $scope.DateTimeEnd = '20210313T00:00:00';
+//});
+
 //////  Coordinator get contributions and send approve
 
 app.get('/coordinator/:facultyId/contributions', (req, res) => {
@@ -640,10 +663,9 @@ app.get('/viewcoor', authenticate, (req, res) => {
   });
 })
 
-
-
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 app.listen(3000, () => {
   console.log(`App is listening at http://localhost:3000`)
 })
 
+})
