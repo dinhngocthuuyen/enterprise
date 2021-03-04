@@ -620,7 +620,25 @@ async function sendMail(){
       }
     })
 }
+////////////////////////////////////////viewprofile/////////////////////////////
+app.get('/viewprofile', authenticate, (req, res) => {
+  //Return an array of all the posts in database that belongs to the authenticated user
+  User.find({role:"student"}).then((viewprofile) => {
+    res.send(viewprofile)
+  }).catch((e) => {
+    res.send(e);
+  });
+})
 
+
+app.get('/viewcoor', authenticate, (req, res) => {
+  //Return an array of all the posts in database that belongs to the authenticated user
+  User.find({role:"coordinator"}).then((viewcoor) => {
+    res.send(viewcoor)
+  }).catch((e) => {
+    res.send(e);
+  });
+})
 
 
 

@@ -10,6 +10,7 @@ import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { HttpClientModule } from '@angular/common/http';
 import { GuestDetailComponent } from './guest/guest-detail/guest-detail.component';
 import { ChatComponent } from './chat/chat.component';
+import { viewComponent } from './viewprofile/viewprofile.component';
 
 @NgModule({
   imports: [
@@ -37,7 +38,9 @@ import { ChatComponent } from './chat/chat.component';
   declarations: [
     GuestComponent,
     GuestDetailComponent,
-    ChatComponent
+    ChatComponent,
+    viewComponent
+    
   ],
 })
 export class PagesModule {
