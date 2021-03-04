@@ -2,7 +2,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const { mongoose } = require('./db/mongoose');
-<<<<<<< HEAD
 const path = require('path');
 const crypto = require('crypto');
 const multer = require('multer');
@@ -10,9 +9,7 @@ const GridFsStorage = require('multer-gridfs-storage');
 const Grid = require('gridfs-stream');
 const methodOverride = require('method-override');
 
-=======
 const nodemailer = require("nodemailer");
->>>>>>> 3133c257194bc0eeaa1f17a0bb5846321d4321e7
 /* LOAD EXPRESS MODEL */
 const app = express();
 
@@ -24,16 +21,7 @@ const upload = multer({desk: "uploads"});
 
 /* LOAD MONGOOSE MODEL */
 const jwt = require('jsonwebtoken');
-<<<<<<< HEAD
 const { Post, Contribution, Coordinator, User, Role, Student, Message, Faculty, Comment} = require('./db/models');
-=======
-const { Post, Contribution, Coordinator, User, Role, Student, Message, Faculty, Comment } = require('./db/models');
-const { info } = require('console');
-const { result } = require('lodash');
-
-/* UPLOAD */
-app.use(cors(corsOptions));
->>>>>>> 3133c257194bc0eeaa1f17a0bb5846321d4321e7
 
 /* LOAD GLOBAL MIDDLEWARE */
 app.use(bodyParser.json());
