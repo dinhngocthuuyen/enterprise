@@ -13,12 +13,6 @@ const nodemailer = require("nodemailer");
 /* LOAD EXPRESS MODEL */
 const app = express();
 
-/** UPLOAD */
-const cors = require('cors');
-const multer = require ('multer');
-var corsOptions = {};
-const upload = multer({desk: "uploads"});
-
 /* LOAD MONGOOSE MODEL */
 const jwt = require('jsonwebtoken');
 const { Post, Contribution, Coordinator, User, Role, Student, Message, Faculty, Comment} = require('./db/models');

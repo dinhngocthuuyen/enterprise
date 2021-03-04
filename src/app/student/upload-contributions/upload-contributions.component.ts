@@ -41,7 +41,7 @@ export class UploadContributionsComponent implements OnInit {
     hideSubHeader: true,
     actions: {
       add: false,
-      edit: {editButtonContent: 'Download'},
+      edit: false,
       position: 'right'
     },
     columns: {
