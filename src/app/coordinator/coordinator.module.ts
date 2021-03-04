@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { NbButtonModule, NbCardModule, NbIconModule, NbLayoutModule, NbMenuModule,NbCheckboxModule, NbSidebarModule, NbTabsetModule, NbThemeModule, NbTagInputDirective, NbFilterInputDirective, NbTreeGridModule, NbActionsModule, NbUserModule, NbContextMenuModule, NbChatModule, NbDialogModule, NbAccordionModule, NbInputModule, NbListModule } from '@nebular/theme';
+import { NbButtonModule, NbCardModule, NbIconModule, NbLayoutModule, NbMenuModule,NbCheckboxModule, NbSidebarModule, NbTabsetModule, NbThemeModule, NbTagInputDirective, NbFilterInputDirective, NbTreeGridModule, NbActionsModule, NbUserModule, NbContextMenuModule, NbChatModule, NbDialogModule, NbAccordionModule, NbInputModule, NbListModule, NbOptionModule, NbSelectModule } from '@nebular/theme';
 
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { CommonModule } from '@angular/common';
@@ -18,6 +18,9 @@ import { ContributionDetailComponent } from './review/contribution-detail/contri
 import { CommentComponent } from './review/comment/comment.component';
 import { ResetPasswordComponent } from './profile/reset-password/reset-password.component';
 import { ChatListComponent } from './chat/chat-list.component';
+import { ConsService } from './services/cons.service';
+import { ContributionData } from '../models';
+import { PeriodsService } from './services/periods.service';
 
 @NgModule({
   imports: [
@@ -44,10 +47,12 @@ import { ChatListComponent } from './chat/chat-list.component';
     NbAccordionModule,
     NbDialogModule.forRoot(),
     NbChatModule,
+    NbOptionModule,
     NbContextMenuModule,
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    NbSelectModule,
   ],
   declarations: [
     ChatComponent,
@@ -60,6 +65,7 @@ import { ChatListComponent } from './chat/chat-list.component';
     ResetPasswordComponent,
     ChatListComponent,
   ],
+  providers: [{provide: ContributionData, useClass: ConsService}, PeriodsService ]
 })
 export class CoordinatorModule {
 }

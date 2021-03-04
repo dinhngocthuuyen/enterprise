@@ -8,6 +8,7 @@ import { WebRequestService } from 'src/app/shared/web-request.service';
   providedIn: 'root'
 })
 export class CoorService {
+
   constructor(private WebReqService: WebRequestService) {}
   getContributions(facultyId: string){
     return this.WebReqService.get(`coordinator/${facultyId}/contributions`);
@@ -53,5 +54,8 @@ export class CoorService {
   }
   getStudents(id: string){
     return this.WebReqService.get(`${id}/students`);
+  } 
+  getMonth(facultyId: string){
+    return this.WebReqService.get(`getMonth/${facultyId}/contributions`);
   }
 }

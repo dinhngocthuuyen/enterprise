@@ -25,11 +25,11 @@ export class ContributionDetailComponent implements OnInit, AfterViewInit {
   status: any;
   studentId!: string;
   numOfCmt: any;
+  file!: string;
   @Input() contribution;
   ngOnInit() {
     // this.facId = localStorage.getItem('facultyId');
     this.conId = this.route.snapshot.params.id;
-    // console.log('student id: ', this.studentId);
     // console.log("contribution id: ", this.conId);
     this.reviewService.getContributionDetail(this.conId).subscribe((contribution: any) => {
       this.contribution = contribution;

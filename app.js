@@ -323,6 +323,7 @@ app.post('/faculties', (req, res) => {
 });
 
 //////  Coordinator get contributions and send approve
+
 app.get('/coordinator/:facultyId/contributions', (req, res) => {
   Contribution.find({
     _facultyId: req.params.facultyId
@@ -341,6 +342,20 @@ app.patch('/contributions/:id', (req, res) => {
   }).then(() =>{
       res.sendStatus(200);
   });
+});
+app.get('/getMonth/:facultyId/contributions', (req, res) => {
+  Contribution.find({
+    _facultyId: req.params.facultyId
+  }, {month: {$month: "$date"}, _id: 0}).then((contributions) => {
+    res.send(contributions);
+  })
+});
+app.get('/getYear/:facultyId/contributions', (req, res) => {
+  Contribution.find({
+    _facultyId: req.params.facultyId
+  }, {year: {$year: "$date"}, _id: 0}).then((contributions) => {
+    res.send(contributions);
+  })
 });
 app.get('/pending/:facultyId/contributions', (req, res) => {
   Contribution.find({
@@ -443,30 +458,7 @@ app.post('/messages/:facultyId/:studentId', (req, res) => {
   })
 })
 
-/*UPLOAD*/
-app.post("/file", upload.single("file"),(req, res) => {
-  // let newFile = new Contribution({
 
-  //  file = req.body.file,
-  // })
-   file = req.body.file;
-
-  let file = new Contribution({
-    file
-  });
-
-
-  // })
-  if(file){
-    res.json(file);
-
-
-  } else {
-    throw new Error("File upload unsuccessful");
-
-  }
-
-})
 
 
 //////////////////////send mail/////////////

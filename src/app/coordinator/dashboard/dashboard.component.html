@@ -18,5 +18,41 @@
           <nb-card class="info-card">Thu</nb-card>
         </div>
       </div>
-    </nb-card-body>
+      </nb-card-body>
+
+<!-- report -->
+<!-- <nb-card-body style="display: flex; justify-content: center;"> 
+<span>Contributions Report</span>
+</nb-card-body>
+
+<nb-list class="contribution-list">
+  <nb-list-item *ngFor="let item of contribution">
+
+  </nb-list-item>
+  </nb-list> -->
 </nb-card>
+
+<nb-card size="medium" status="info">
+
+  <nb-card-header >
+    <span>Contributions</span>
+    <nb-select [selected]="type" (selectedChange)="getCons($event); type = $event">
+      <nb-option *ngFor="let t of types"   [value]="t">{{ t }}</nb-option>
+    </nb-select>
+  </nb-card-header>
+
+  <nb-list class="user-activity-list">
+    <nb-list-item *ngFor="let item of cons" class= "row">
+      <div class="col-md-6 col-sm-12">
+        {{ item.date }}
+      </div>
+
+      <div class="col-md-6 col-sm-12">
+        <div class="caption">Contribution Count</div>
+        <div class="value">{{ numOfCon }}</div>
+      </div>
+    </nb-list-item>
+  </nb-list>
+
+</nb-card>
+
