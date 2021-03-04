@@ -2,18 +2,19 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const { mongoose } = require('./db/mongoose');
+const path = require('path');
+const crypto = require('crypto');
+const multer = require('multer');
+const GridFsStorage = require('multer-gridfs-storage');
+const Grid = require('gridfs-stream');
+const methodOverride = require('method-override');
 
 /* LOAD EXPRESS MODEL */
 const app = express();
 
 /* LOAD MONGOOSE MODEL */
-const { send } = require('process');
-const { asap } = require('rxjs');
-
-
-// const { JsonWebTokenError } = require('jsonwebtoken');
 const jwt = require('jsonwebtoken');
-const { Post, Contribution, Coordinator, User, Role, Student, Message, Faculty, Comment } = require('./db/models');
+const { Post, Contribution, Coordinator, User, Role, Student, Message, Faculty, Comment} = require('./db/models');
 
 /* LOAD GLOBAL MIDDLEWARE */
 app.use(bodyParser.json());
@@ -85,12 +86,105 @@ let authenticate = (req, res, next) => {
 }
 /* END MIDDLEWARE*/
 
-/* ROUTE HANDLER */
+
+/* CONNECT TO MONGODB */
+const connectionString = 'mongodb+srv://dbUser:db123456@cluster0.ulahg.mongodb.net/EnterpriseDB?retryWrites=true&w=majority';
+const conn = mongoose.createConnection(connectionString, { useNewUrlParser: true, useUnifiedTopology: true });
+
+/* LOAD GRIDFS*/
+let gfs;
+conn.once('open', () => {
+  // Initialize stream
+  gfs = Grid(conn.db, mongoose.mongo);
+  gfs.collection('uploads');
+});
+
+// Create storage engine
+const storage = new GridFsStorage({
+  url: connectionString,
+  file: (req, file) => {
+    return new Promise((resolve, reject) => {
+      // crypto.randomBytes(16, (err, buf) => {
+      //   if (err) {
+      //     return reject(err);
+      //   }
+        // const filename = buf.toString('hex') + path.extname(file.originalname);
+        const filename = file.originalname;
+        const fileInfo = {
+          filename: filename,
+          bucketName: 'uploads',
+          metadata: {
+            _userId: 'dljsf',
+            _facultyId: 'lskhkg'
+          }
+        };
+        resolve(fileInfo);
+      // });
+    });
+  }
+});
+
+const upload = multer({ storage });
+
+/***************************************************** ROUTE HANDLER **********************************************************/
+
+/////////////////////////////////////////////////////// UPLOAD //////////////////////////////////////////////////////////////
+
+//Return an array of uploaded files
+app.get('/upload', (req, res) => {
+  gfs.files.find().toArray((err, files) => {
+    if (!files || files.length  === 0) {
+      return res.status(404).json({
+        err: 'No files exist'
+      })
+    }
+    return res.json(files);
+  })
+})
+
+app.get('/upload/:filename', (req, res) => {
+  gfs.files.findOne({filename : req.params.filename}, (err, file) => {
+    if (!file || file.length  === 0) {
+      return res.status(404).json({
+        err: 'No file exists'
+      })
+    }
+    return res.json(file);
+  })
+})
+
+//Download file
+app.get('/upload/download/:filename', (req, res) => {
+  gfs.files.findOne({filename : req.params.filename}, (err, file) => {
+    if (!file || file.length  === 0) {
+      return res.status(404).json({
+        err: 'No file exists'
+      })
+    }
+    const readstream = gfs.createReadStream(file.filename);
+    readstream.pipe(res); 
+  })
+})
+
+//Upload a single file to MongoDB
+app.post('/upload', upload.single('uploaded_file'), (req, res) => {
+  res.send('File uploaded successfully')
+})
+
+app.delete('/upload/:id', (req, res) => {
+  gfs.remove({_id : req.params.id, root: 'uploads'}, (err, gridStore) => {
+    if (err) {
+      return res.status(404).json({ err: err });
+    }
+    res.send('Delete successfully')
+  })
+})
+
 
 /////////////////////////////////////////////////////// POST //////////////////////////////////////////////////////////////
 
-app.get('/post', authenticate, (req, res) => {
-  //Return an array of all the posts in database that belongs to the authenticated user
+//Return an array of all the posts in database that belongs to the authenticated user
+app.get('/post', (req, res) => {
   Post.find({}).then((post) => {
     res.send(post);
   }).catch((e) => {
@@ -98,7 +192,7 @@ app.get('/post', authenticate, (req, res) => {
   });
 })
 
-app.get('/guest/guest-detail/:id', (req, res) => {
+app.get('/post/:id', (req, res) => {
   //Return an array of all the posts in database
   Post.find({_id: req.params.id}).then((post) => {
     res.send(post);

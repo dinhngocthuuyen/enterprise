@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { ChatComponent } from './chat/chat.component';
 import { StudentComponent } from './student.component';
 import { SendMailComponent } from './send-mail/send-mail.component';
+import { UploadContributionsComponent } from './upload-contributions/upload-contributions.component';
 
 const routes: Routes = [{
   path: '',
@@ -15,6 +16,10 @@ const routes: Routes = [{
     {
       path: 'sendMail',
       component: SendMailComponent,
+    },
+    {
+      path: 'upload-contributions',
+      component: UploadContributionsComponent
     },
     {
       path: '',

@@ -17,5 +17,5 @@ module.exports = {
   Student,
   Message,
   Faculty,
-  Comment
+  Comment,
 }

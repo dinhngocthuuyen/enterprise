@@ -10,7 +10,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
   {
     title: 'Upload',
     icon: 'folder-outline',
-    link: 'upload',
+    link: 'upload-contributions',
   },
 
   {

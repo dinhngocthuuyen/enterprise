@@ -9,6 +9,7 @@ import { ChatComponent } from './chat/chat.component';
 import { StudentRoutingModule } from './student-routing.module';
 import { SendMailComponent } from './send-mail/send-mail.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { UploadContributionsComponent } from './upload-contributions/upload-contributions.component';
 
 @NgModule({
   imports: [
@@ -36,7 +37,8 @@ import { ReactiveFormsModule } from '@angular/forms';
   ],
   declarations: [
     ChatComponent,
-    SendMailComponent
+    SendMailComponent,
+    UploadContributionsComponent
   ],
 })
 export class StudentModule {
