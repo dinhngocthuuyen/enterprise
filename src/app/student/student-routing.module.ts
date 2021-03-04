@@ -3,7 +3,11 @@ import { NgModule } from '@angular/core';
 import { ChatComponent } from './chat/chat.component';
 import { StudentComponent } from './student.component';
 import { SendMailComponent } from './send-mail/send-mail.component';
+<<<<<<< HEAD
 import { UploadContributionsComponent } from './upload-contributions/upload-contributions.component';
+=======
+import { UploadComponent} from './upload/upload.component';
+>>>>>>> 3133c257194bc0eeaa1f17a0bb5846321d4321e7
 
 const routes: Routes = [{
   path: '',
@@ -18,8 +22,13 @@ const routes: Routes = [{
       component: SendMailComponent,
     },
     {
+<<<<<<< HEAD
       path: 'upload-contributions',
       component: UploadContributionsComponent
+=======
+      path: 'upload',
+      component: UploadComponent,
+>>>>>>> 3133c257194bc0eeaa1f17a0bb5846321d4321e7
     },
     {
       path: '',
@@ -31,6 +40,8 @@ const routes: Routes = [{
       path: '**',
     //   component: NotFoundComponent,
     },
+
+
   ],
 }];
 

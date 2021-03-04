@@ -2,6 +2,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const { mongoose } = require('./db/mongoose');
+<<<<<<< HEAD
 const path = require('path');
 const crypto = require('crypto');
 const multer = require('multer');
@@ -9,12 +10,30 @@ const GridFsStorage = require('multer-gridfs-storage');
 const Grid = require('gridfs-stream');
 const methodOverride = require('method-override');
 
+=======
+const nodemailer = require("nodemailer");
+>>>>>>> 3133c257194bc0eeaa1f17a0bb5846321d4321e7
 /* LOAD EXPRESS MODEL */
 const app = express();
 
+/** UPLOAD */
+const cors = require('cors');
+const multer = require ('multer');
+var corsOptions = {};
+const upload = multer({desk: "uploads"});
+
 /* LOAD MONGOOSE MODEL */
 const jwt = require('jsonwebtoken');
+<<<<<<< HEAD
 const { Post, Contribution, Coordinator, User, Role, Student, Message, Faculty, Comment} = require('./db/models');
+=======
+const { Post, Contribution, Coordinator, User, Role, Student, Message, Faculty, Comment } = require('./db/models');
+const { info } = require('console');
+const { result } = require('lodash');
+
+/* UPLOAD */
+app.use(cors(corsOptions));
+>>>>>>> 3133c257194bc0eeaa1f17a0bb5846321d4321e7
 
 /* LOAD GLOBAL MIDDLEWARE */
 app.use(bodyParser.json());
@@ -178,6 +197,12 @@ app.delete('/upload/:id', (req, res) => {
     }
     res.send('Delete successfully')
   })
+})
+
+
+/* UPLOAD */
+app.get("/upload", (req, res) => {
+  res.send()
 })
 
 
@@ -376,8 +401,8 @@ app.get('/user/:id', (req, res) => {
 })
 
 app.get('/faculty/:id', (req, res) => {
-  User.find({_id: req.params.id}).then((user) => {
-      res.send(user);
+  Faculty.find({_id: req.params.id}).then((faculty) => {
+      res.send(faculty);
   }).catch((e) => {
     res.send(e);
   });
@@ -400,6 +425,7 @@ app.post('/faculties', (req, res) => {
 });
 
 //////  Coordinator get contributions and send approve
+
 app.get('/coordinator/:facultyId/contributions', (req, res) => {
   Contribution.find({
     _facultyId: req.params.facultyId
@@ -418,6 +444,20 @@ app.patch('/contributions/:id', (req, res) => {
   }).then(() =>{
       res.sendStatus(200);
   });
+});
+app.get('/getMonth/:facultyId/contributions', (req, res) => {
+  Contribution.find({
+    _facultyId: req.params.facultyId
+  }, {month: {$month: "$date"}, _id: 0}).then((contributions) => {
+    res.send(contributions);
+  })
+});
+app.get('/getYear/:facultyId/contributions', (req, res) => {
+  Contribution.find({
+    _facultyId: req.params.facultyId
+  }, {year: {$year: "$date"}, _id: 0}).then((contributions) => {
+    res.send(contributions);
+  })
 });
 app.get('/pending/:facultyId/contributions', (req, res) => {
   Contribution.find({
@@ -454,25 +494,25 @@ app.post('/:contributionId/comments', (req, res) => {
   })
 });
 /////Student create contributions////
-app.get('/users/:userId/contributions', (req, res) => {
-  Contribution.find({
-    _userId: req.params.userId
-  }).then((contributions) => {
-    res.send(contributions);
-  })
-});
-app.post('/users/:userId/contributions', (req, res) => {
-  let newContribution = new Contribution({
-      file: req.body.file,
-      date: Date.now().toString(),
-      status: "Pending",
-      _userId: req.params.userId,
-      _facultyId: req.body.facultyId
-  });
-  newContribution.save().then((newDoc) => {
-    res.send(newDoc)
-  })
-});
+// app.get('/users/:userId/contributions', (req, res) => {
+//   Contribution.find({
+//     _userId: req.params.userId
+//   }).then((contributions) => {
+//     res.send(contributions);
+//   })
+// });
+// app.post('/users/:userId/contributions', (req, res) => {
+//   let newContribution = new Contribution({
+//       file: req.body.file,
+//       date: Date.now().toString(),
+//       status: "Pending",
+//       _userId: req.params.userId,
+//       _facultyId: req.body.facultyId
+//   });
+//   newContribution.save().then((newDoc) => {
+//     res.send(newDoc)
+//   })
+// });
 
 app.get('/contributions', (req, res) => {
   Contribution.find({}).then((roles) => {
@@ -488,33 +528,120 @@ app.get('/:facultyId/coordinator', (req, res) => {
     res.send(coor);
   })
 });
+
+app.get('/:facultyId/students', (req, res) => {
+  User.find({
+    _facultyId: req.params.facultyId,
+    role: "student",
+  }).then((coor) => {
+    res.send(coor);
+  })
+});
 /////////////////message//////////////////
-app.get('/messages/:id', authenticate, (req, res) => {
+app.get('/messages/:facultyId/:studentId', (req, res) => {
   Message.find({
-    _userId: req.params.id
+    _studentId: req.params.studentId,
+    _facultyId: req.params.facultyId
   }).then((msg) => {
     res.send(msg);
   })
 });
 
-app.post('/messages/:id', (req, res) => {
+app.post('/messages/:facultyId/:studentId', (req, res) => {
   let newMess = new Message({
     text: req.body.text,
     date: Date.now().toString(),
-    _userId: req.params.id,
+    reply: req.body.reply,
+    _studentId: req.params.studentId,
+    _facultyId: req.params.facultyId
 });
   newMess.save().then((MessageDoc) => {
     res.send(MessageDoc);
   })
 })
+
+
+
+
 //////////////////////send mail/////////////
-// app.get('/sendMail/:id', (req, res) => {
+// app.post('/sendMail', (req, res) => {
+//   console.log("request came")
 //   User.find({_id: req.params.id}).then((user) => {
 //       res.send(user);
 //   }).catch((e) => {
 //     res.send(e);
 //   });
 // })
+app.get('/sendMail/:id', (req, res) => {
+  User.find({  _userId: req.params.userId,
+  }).then((user) => {
+      res.send(user);
+  }).catch((e) => {
+    res.send(e);
+  });
+})
+
+app.post('/sendMail', (req, res) => {
+  console.log("request came")
+  let username = req.body.username;
+  let name = req.body.name;
+
+
+  let email = new User({
+    username,name
+  });
+  sendMail(email, info =>{
+    res.send(info)
+  })
+})
+// const CLIENTID='263011216435-sk4g07kjfrb4mt0t5dpml2fkvimv89s1.apps.googleusercontent.com';
+// const CLIENTSECRET ='xdatDMw7ET7cTCoPiLJsmcFg';
+// const REDIRECTURI ='https://developers.google.com/oauthplayground';
+// const REFRESHTOKEN ='//04MMc5Bqs-QsjCgYIARAAGAQSNwF-L9IrCg-1VUaT8zq4A76uj8uXsq7i-FKOpWZVSkG4yvD-49S5ZClJG6CX7PDrv8apzvy80O8';
+
+async function sendMail(){
+
+    // const accessToken = await oAuth2Client.generateAccessAuthToken
+    const transporter = nodemailer.createTransport({
+
+      host: "smtp.ethereal.email",
+      port: 587,
+      secure: false, // true for 465, false for other ports
+      service:'gmail',
+      auth: {
+        // Your full email address
+        user: 'dungndtgcs17091@fpt.edu.vn',
+        // Your Gmail password or App Password
+        pass: '30121999'
+
+        // type: 'OAuth2',
+        // user: 'dungndtgcs17091@fpt.edu.vn',
+        // clientId: CLIENTID,
+        // clientSecret: CLIENTSECRET,
+        // redirectUri:REDIRECTURI,
+        // refreshToken:REFRESHTOKEN,
+      }
+      })
+
+
+    const mailOption = {
+      from: 'Dung <dungndtgcs17091@fpt.edu.vn>',// sender address
+      to: "ndtd3012199@gmail.com",
+     subject: "New submission" , // Subject line
+      html: "<b>a new report has been submitted http://localhost:4200/coordinator/60335f75415f78217707d45d/review/60336c3eee28af28831ad73b</b>", // html body
+    }
+    transporter.sendMail(mailOption, function(error){
+      if(error){
+        console.log(error);
+      }else{
+        console.log('Email send success ')
+      }
+    })
+}
+
+
+
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 app.listen(3000, () => {
   console.log(`App is listening at http://localhost:3000`)

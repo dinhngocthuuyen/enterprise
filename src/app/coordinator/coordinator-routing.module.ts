@@ -8,13 +8,18 @@ import { ReviewComponent } from './review/review.component'
 import { ContributionDetailComponent } from './review/contribution-detail/contribution-detail.component';
 import { ProfileEditComponent } from './profile/profile-edit/profile-edit.component';
 import { ResetPasswordComponent } from './profile/reset-password/reset-password.component';
+import { ChatListComponent } from './chat/chat-list.component';
 
 const routes: Routes = [{
   path: ':id',
   component: CoordinatorComponent,
   children: [
     {
-      path: 'chat',
+      path: 'chatlist',
+      component: ChatListComponent,
+    },
+    {
+      path: 'chat/:id',
       component: ChatComponent,
     },
 

@@ -9,8 +9,12 @@ import { ChatComponent } from './chat/chat.component';
 import { StudentRoutingModule } from './student-routing.module';
 import { SendMailComponent } from './send-mail/send-mail.component';
 import { ReactiveFormsModule } from '@angular/forms';
+<<<<<<< HEAD
 import { UploadContributionsComponent } from './upload-contributions/upload-contributions.component';
 
+=======
+import { UploadComponent} from './upload/upload.component';
+>>>>>>> 3133c257194bc0eeaa1f17a0bb5846321d4321e7
 @NgModule({
   imports: [
     CommonModule,
@@ -38,7 +42,11 @@ import { UploadContributionsComponent } from './upload-contributions/upload-cont
   declarations: [
     ChatComponent,
     SendMailComponent,
+<<<<<<< HEAD
     UploadContributionsComponent
+=======
+    UploadComponent
+>>>>>>> 3133c257194bc0eeaa1f17a0bb5846321d4321e7
   ],
 })
 export class StudentModule {

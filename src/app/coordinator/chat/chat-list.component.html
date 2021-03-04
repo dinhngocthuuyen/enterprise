@@ -1,0 +1,15 @@
+<nb-card status="info">
+  <nb-card-header >
+    <span>Student List</span>
+  </nb-card-header>
+  <nb-card-body>
+    <nb-list-item class="contact" *ngFor="let student of students">
+      <nb-user [name]="student?.name" size="large"></nb-user>
+      <div style="position: absolute; right: 40px">
+      <nb-action class="control-item" style="text-align: right;" icon="email-outline" [routerLink]="['../chat', student._id]"></nb-action>
+      </div>
+    </nb-list-item>
+  </nb-card-body>
+</nb-card>
+<nb-list>
+</nb-list>
