@@ -1,14 +1,19 @@
 <nb-card>
-  <nb-card-header>Contribution Detail</nb-card-header>
+  <nb-card-header *ngFor="let contribution of contribution">Contribution Detail
+    <nb-action class="control-item" icon="email-outline" [routerLink]="['../../chat', contribution._userId]"></nb-action>
+  </nb-card-header>
   <nb-card-body *ngFor="let contribution of contribution">
     <label>File: </label>
-    <span>{{contribution.file}}</span>
-    <!-- <input nbInput [value]="contribution?.file" readonly> -->
+    <span>{{contribution.file}}</span><br>
+
+    <span>{{contribution.date}}</span>
+      <br>
+      <p #color:#00FF00>{{showTime}}</p>
     <br>
     <label>Status: </label>
     <span>{{contribution.status}}</span>
     <br>
-    <input #userID nbInput ngModel [value]="contribution?._userId" readonly>
+    <input #userID nbInput [value]="contribution?._userId" readonly>
   </nb-card-body>
   <nb-card-footer>
     <div class="btn" *ngFor="let contribution of contribution">

@@ -3,7 +3,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { User } from 'src/app/models/user';
-import { StudentService } from '../services/student.servies';
+import { StudentService } from '../services/student.service';
 
 @Component({
   selector: 'app-send-mail',

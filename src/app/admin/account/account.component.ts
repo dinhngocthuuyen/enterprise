@@ -11,7 +11,6 @@ import {Role} from 'db/models'
 import { Faculty } from 'src/app/models';
 
 
-
 @Component({
   selector: 'app-account',
   templateUrl: './account.component.html',
@@ -42,7 +41,14 @@ export class AccountComponent implements OnInit {
 
   getFaculty(): void {
     this.facultyService.getFaculties().subscribe((res: Faculty[]) => {
-      this.facultyList = res;
+      const newFaculty = [
+        {
+          _id: '',
+          name: 'None',
+        },
+        ...res,
+      ]
+      this.facultyList = newFaculty;
     });
   }
 

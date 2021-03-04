@@ -1,27 +1,9 @@
-<div *ngFor="let coor of coordinator">
-<nb-chat [title]="coor?.name" size="medium" status="warning">
-  <nb-chat-message *ngFor="let message of messages"
-                   [type]="message.type"
-                   [message]="message.text"
-                   [reply]="message.reply"
-                   [sender]="coor?.name"
-                   [date]="message.date"
-                   [quote]="message.quote"
-                   [latitude]="message.latitude"
-                   [longitude]="message.longitude"></nb-chat-message>
-  <nb-chat-form (send)="sendMessage($event, true)" [showButton]="true">
-  </nb-chat-form>
-</nb-chat>
-</div>
-<div *ngFor="let stu of student">
 <nb-chat title="Coordinator" size="medium" status="success">
   <nb-chat-message *ngFor="let message of messages"
                    [type]="message.type"
                    [message]="message.text"
                    [reply]="!message.reply"
-                   [sender]="stu?.name"
                    [date]="message.date"
                    [quote]="message.quote"></nb-chat-message>
   <nb-chat-form (send)="sendMessage($event, false)" [showButton]="true" >
   </nb-chat-form>
-</nb-chat>

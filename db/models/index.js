@@ -7,7 +7,7 @@ const {Coordinator} = require("./coordinator.model");
 const {Message} = require("./messages.model");
 const {Faculty} = require("./faculty.model");
 const {Comment} = require("./comment.model");
-const {Deadline} = require("./deadline.model");
+const {Closure} = require("./closure.model");
 
 module.exports = {
   Post,
@@ -18,6 +18,7 @@ module.exports = {
   Faculty,
   Student,
   Message,
-  Deadline,
+  Faculty,
+  Closure,
   Comment
 }

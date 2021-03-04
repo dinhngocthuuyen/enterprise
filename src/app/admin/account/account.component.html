@@ -19,6 +19,7 @@
                     <label for="falcuty">Faculty</label><br>
                     <nb-select #facultySelect placeholder="Select" >
                       <nb-option *ngFor="let faculty of facultyList" [value]="faculty">{{ faculty.name }}</nb-option>
+                      
                     </nb-select><br><br>
 
                     <!--<select class="faculty" name="faculties" list="faculties" [(ngModel)]="facultyValue1" [value]="faculties" (change)="saveCode(codeValue)">

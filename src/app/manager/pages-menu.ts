@@ -57,4 +57,15 @@ export const MENU_ITEMS: NbMenuItem[] = [
     link: 'chat',
   },
 
+  {
+    title: 'View Profile',
+    icon: 'eye-outline',
+    link: 'viewprofile',
+  },
+
+  {
+    title: 'Download',
+    icon: 'download-outline',
+    link: 'download',
+  },
 ]

@@ -20,11 +20,14 @@ export class ClosureComponent implements OnInit {
 
  constructor(private authService: AuthService){
    
-  
  }
-
-     ngOnInit(): void {
-
+  ngOnInit(): void {
+  }
+  
+  onSubmitButtonClicked(startdate: String, deadline1:String, deadline2: String){
+    this.authService.submit(startdate, deadline1, deadline2).subscribe((res: HttpResponse<any>) => {
+      console.log(res);
+    })
   }
   
   

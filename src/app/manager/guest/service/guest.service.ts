@@ -18,6 +18,6 @@ export class GuestService {
   //}
 
   getPostDetail(id: string){
-    return this.WebRequestService.get(`guest/guest-detail/${id}`);
+    return this.WebRequestService.get(`post/${id}`);
   }
 }

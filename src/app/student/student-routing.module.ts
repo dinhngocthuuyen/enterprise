@@ -3,6 +3,8 @@ import { NgModule } from '@angular/core';
 import { ChatComponent } from './chat/chat.component';
 import { StudentComponent } from './student.component';
 import { SendMailComponent } from './send-mail/send-mail.component';
+import { UploadContributionsComponent } from './upload-contributions/upload-contributions.component';
+import { UploadComponent } from './upload/upload.component';
 
 const routes: Routes = [{
   path: '',
@@ -17,6 +19,10 @@ const routes: Routes = [{
       component: SendMailComponent,
     },
     {
+      path: 'upload-contributions',
+      component: UploadContributionsComponent
+    },
+    {
       path: '',
       redirectTo: 'dashboard',
       pathMatch: 'full',
@@ -26,6 +32,8 @@ const routes: Routes = [{
       path: '**',
     //   component: NotFoundComponent,
     },
+
+
   ],
 }];
 

@@ -9,6 +9,7 @@ import { GuestComponent } from './guest/guest.component';
 import { StudentmanagerComponent } from './manager/studentmanager/studentmanager.component';
 import { GuestDetailComponent } from './guest/guest-detail/guest-detail.component';
 import { ChatComponent } from './chat/chat.component';
+import { viewComponent } from './viewprofile/viewprofile.component';
 
 const routes: Routes = [{
   path: '',
@@ -76,6 +77,16 @@ const routes: Routes = [{
     {
       path: 'chat',
       component: ChatComponent,
+    },
+
+    {
+      path: 'viewprofile',
+      component:  viewComponent,
+    },
+
+    {
+      path: 'viewcoordinator',
+      component:  viewComponent,
     },
 
     {

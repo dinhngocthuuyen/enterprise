@@ -2,18 +2,20 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const { mongoose } = require('./db/mongoose');
+const path = require('path');
+const crypto = require('crypto');
+const multer = require('multer');
+const GridFsStorage = require('multer-gridfs-storage');
+const Grid = require('gridfs-stream');
+const methodOverride = require('method-override');
+
 const nodemailer = require("nodemailer");
 /* LOAD EXPRESS MODEL */
 const app = express();
 
 /* LOAD MONGOOSE MODEL */
-const { send } = require('process');
-const { asap } = require('rxjs');
-
-
-// const { JsonWebTokenError } = require('jsonwebtoken');
 const jwt = require('jsonwebtoken');
-const { Post, Contribution, Coordinator, User, Role, Student, Message, Faculty, Comment } = require('./db/models');
+const { Post, Contribution, Coordinator, User, Role, Student, Message, Faculty, Comment, Closure } = require('./db/models');
 const { info } = require('console');
 const { result } = require('lodash');
 
@@ -87,12 +89,111 @@ let authenticate = (req, res, next) => {
 }
 /* END MIDDLEWARE*/
 
-/* ROUTE HANDLER */
+
+/* CONNECT TO MONGODB */
+const connectionString = 'mongodb+srv://dbUser:db123456@cluster0.ulahg.mongodb.net/EnterpriseDB?retryWrites=true&w=majority';
+const conn = mongoose.createConnection(connectionString, { useNewUrlParser: true, useUnifiedTopology: true });
+
+/* LOAD GRIDFS*/
+let gfs;
+conn.once('open', () => {
+  // Initialize stream
+  gfs = Grid(conn.db, mongoose.mongo);
+  gfs.collection('uploads');
+});
+
+// Create storage engine
+const storage = new GridFsStorage({
+  url: connectionString,
+  file: (req, file) => {
+    return new Promise((resolve, reject) => {
+      // crypto.randomBytes(16, (err, buf) => {
+      //   if (err) {
+      //     return reject(err);
+      //   }
+        // const filename = buf.toString('hex') + path.extname(file.originalname);
+        const filename = file.originalname;
+        const fileInfo = {
+          filename: filename,
+          bucketName: 'uploads',
+          metadata: {
+            _userId: 'dljsf',
+            _facultyId: 'lskhkg'
+          }
+        };
+        resolve(fileInfo);
+      // });
+    });
+  }
+});
+
+const upload = multer({ storage });
+
+/***************************************************** ROUTE HANDLER **********************************************************/
+
+/////////////////////////////////////////////////////// UPLOAD //////////////////////////////////////////////////////////////
+
+//Return an array of uploaded files
+app.get('/upload', (req, res) => {
+  gfs.files.find().toArray((err, files) => {
+    if (!files || files.length  === 0) {
+      return res.status(404).json({
+        err: 'No files exist'
+      })
+    }
+    return res.json(files);
+  })
+})
+
+app.get('/upload/:filename', (req, res) => {
+  gfs.files.findOne({filename : req.params.filename}, (err, file) => {
+    if (!file || file.length  === 0) {
+      return res.status(404).json({
+        err: 'No file exists'
+      })
+    }
+    return res.json(file);
+  })
+})
+
+//Download file
+app.get('/upload/download/:filename', (req, res) => {
+  gfs.files.findOne({filename : req.params.filename}, (err, file) => {
+    if (!file || file.length  === 0) {
+      return res.status(404).json({
+        err: 'No file exists'
+      })
+    }
+    const readstream = gfs.createReadStream(file.filename);
+    readstream.pipe(res); 
+  })
+})
+
+//Upload a single file to MongoDB
+app.post('/upload', upload.single('uploaded_file'), (req, res) => {
+  res.send('File uploaded successfully')
+})
+
+app.delete('/upload/:id', (req, res) => {
+  gfs.remove({_id : req.params.id, root: 'uploads'}, (err, gridStore) => {
+    if (err) {
+      return res.status(404).json({ err: err });
+    }
+    res.send('Delete successfully')
+  })
+})
+
+
+/* UPLOAD */
+app.get("/upload", (req, res) => {
+  res.send()
+})
+
 
 /////////////////////////////////////////////////////// POST //////////////////////////////////////////////////////////////
 
-app.get('/post', authenticate, (req, res) => {
-  //Return an array of all the posts in database that belongs to the authenticated user
+//Return an array of all the posts in database that belongs to the authenticated user
+app.get('/post', (req, res) => {
   Post.find({}).then((post) => {
     res.send(post);
   }).catch((e) => {
@@ -100,7 +201,7 @@ app.get('/post', authenticate, (req, res) => {
   });
 })
 
-app.get('/guest/guest-detail/:id', (req, res) => {
+app.get('/post/:id', (req, res) => {
   //Return an array of all the posts in database
   Post.find({_id: req.params.id}).then((post) => {
     res.send(post);
@@ -285,8 +386,8 @@ app.get('/user/:id', (req, res) => {
 })
 
 app.get('/faculty/:id', (req, res) => {
-  User.find({_id: req.params.id}).then((user) => {
-      res.send(user);
+  Faculty.find({_id: req.params.id}).then((faculty) => {
+      res.send(faculty);
   }).catch((e) => {
     res.send(e);
   });
@@ -314,7 +415,28 @@ app.post('/faculties', (req, res) => {
   })
 });
 
+app.post('/closure', (req, res) => {
+  let newClosure = new Closure(req.body);
+  newClosure.save().then((ClosureDoc) => {
+
+    res.send(ClosureDoc);
+  })
+});
+
+app.get('/closure', (req, res) => {
+  Closure.find({}).then((closure) => {
+    res.send(closure);
+ });
+})
+
+//app.controller('MainClosure', function($scope) {
+//  $scope.Date = '20210313T00:00:00';
+  
+ // $scope.DateTimeEnd = '20210313T00:00:00';
+//});
+
 //////  Coordinator get contributions and send approve
+
 app.get('/coordinator/:facultyId/contributions', (req, res) => {
   Contribution.find({
     _facultyId: req.params.facultyId
@@ -333,6 +455,20 @@ app.patch('/contributions/:id', (req, res) => {
   }).then(() =>{
       res.sendStatus(200);
   });
+});
+app.get('/getMonth/:facultyId/contributions', (req, res) => {
+  Contribution.find({
+    _facultyId: req.params.facultyId
+  }, {month: {$month: "$date"}, _id: 0}).then((contributions) => {
+    res.send(contributions);
+  })
+});
+app.get('/getYear/:facultyId/contributions', (req, res) => {
+  Contribution.find({
+    _facultyId: req.params.facultyId
+  }, {year: {$year: "$date"}, _id: 0}).then((contributions) => {
+    res.send(contributions);
+  })
 });
 app.get('/pending/:facultyId/contributions', (req, res) => {
   Contribution.find({
@@ -369,25 +505,25 @@ app.post('/:contributionId/comments', (req, res) => {
   })
 });
 /////Student create contributions////
-app.get('/users/:userId/contributions', (req, res) => {
-  Contribution.find({
-    _userId: req.params.userId
-  }).then((contributions) => {
-    res.send(contributions);
-  })
-});
-app.post('/users/:userId/contributions', (req, res) => {
-  let newContribution = new Contribution({
-      file: req.body.file,
-      date: Date.now().toString(),
-      status: "Pending",
-      _userId: req.params.userId,
-      _facultyId: req.body.facultyId
-  });
-  newContribution.save().then((newDoc) => {
-    res.send(newDoc)
-  })
-});
+// app.get('/users/:userId/contributions', (req, res) => {
+//   Contribution.find({
+//     _userId: req.params.userId
+//   }).then((contributions) => {
+//     res.send(contributions);
+//   })
+// });
+// app.post('/users/:userId/contributions', (req, res) => {
+//   let newContribution = new Contribution({
+//       file: req.body.file,
+//       date: Date.now().toString(),
+//       status: "Pending",
+//       _userId: req.params.userId,
+//       _facultyId: req.body.facultyId
+//   });
+//   newContribution.save().then((newDoc) => {
+//     res.send(newDoc)
+//   })
+// });
 
 app.get('/contributions', (req, res) => {
   Contribution.find({}).then((roles) => {
@@ -403,25 +539,40 @@ app.get('/:facultyId/coordinator', (req, res) => {
     res.send(coor);
   })
 });
+
+app.get('/:facultyId/students', (req, res) => {
+  User.find({
+    _facultyId: req.params.facultyId,
+    role: "student",
+  }).then((coor) => {
+    res.send(coor);
+  })
+});
 /////////////////message//////////////////
-app.get('/messages/:id', authenticate, (req, res) => {
+app.get('/messages/:facultyId/:studentId', (req, res) => {
   Message.find({
-    _userId: req.params.id
+    _studentId: req.params.studentId,
+    _facultyId: req.params.facultyId
   }).then((msg) => {
     res.send(msg);
   })
 });
 
-app.post('/messages/:id', (req, res) => {
+app.post('/messages/:facultyId/:studentId', (req, res) => {
   let newMess = new Message({
     text: req.body.text,
     date: Date.now().toString(),
-    _userId: req.params.id,
+    reply: req.body.reply,
+    _studentId: req.params.studentId,
+    _facultyId: req.params.facultyId
 });
   newMess.save().then((MessageDoc) => {
     res.send(MessageDoc);
   })
 })
+
+
+
 
 //////////////////////send mail/////////////
 // app.post('/sendMail', (req, res) => {
@@ -447,7 +598,7 @@ app.post('/sendMail', (req, res) => {
   let name = req.body.name;
 
 
-  let email = new Message({
+  let email = new User({
     username,name
   });
   sendMail(email, info =>{
@@ -473,7 +624,7 @@ async function sendMail(){
         user: 'dungndtgcs17091@fpt.edu.vn',
         // Your Gmail password or App Password
         pass: '30121999'
-  
+
         // type: 'OAuth2',
         // user: 'dungndtgcs17091@fpt.edu.vn',
         // clientId: CLIENTID,
@@ -482,13 +633,13 @@ async function sendMail(){
         // refreshToken:REFRESHTOKEN,
       }
       })
-    
-   
+
+
     const mailOption = {
       from: 'Dung <dungndtgcs17091@fpt.edu.vn>',// sender address
-      to: "ndtd30121999@gmail.com",
+      to: "ndtd3012199@gmail.com",
      subject: "New submission" , // Subject line
-      html: "<b>a new report has been submitted </b>", // html body
+      html: "<b>a new report has been submitted http://localhost:4200/coordinator/60335f75415f78217707d45d/review/60336c3eee28af28831ad73b</b>", // html body
     }
     transporter.sendMail(mailOption, function(error){
       if(error){
@@ -498,14 +649,32 @@ async function sendMail(){
       }
     })
 }
+////////////////////////////////////////viewprofile/////////////////////////////
+app.get('/viewprofile', authenticate, (req, res) => {
+  //Return an array of all the posts in database that belongs to the authenticated user
+  User.find({role:"student"}).then((viewprofile) => {
+    res.send(viewprofile)
+  }).catch((e) => {
+    res.send(e);
+  });
+})
 
 
+app.get('/viewcoor', authenticate, (req, res) => {
+  //Return an array of all the posts in database that belongs to the authenticated user
+  User.find({role:"coordinator"}).then((viewcoor) => {
+    res.send(viewcoor)
+  }).catch((e) => {
+    res.send(e);
+  });
+})
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 app.listen(3000, () => {
   console.log(`App is listening at http://localhost:3000`)
 })
+
 
 
 

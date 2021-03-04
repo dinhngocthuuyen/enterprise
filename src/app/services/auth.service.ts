@@ -25,9 +25,12 @@ export class AuthService {
     )
   }
 
-  create(username: string, name: string, password: string, role: string, _facultyId: string) {
-    return this.webRequestService.create(username, name, password, role, _facultyId).pipe(
-      shareReplay(),
+  create(username: string, name: string, password: string, role: string, _facultyId: any) {
+    let facultyId: any = _facultyId;
+    if (_facultyId._id === '') {
+      facultyId = undefined;
+    }
+    return this.webRequestService.create(username, name, password, role, facultyId).pipe(
       tap((res: HttpResponse<any>) => {
         //The auth tokens will be in the header of this response
         this.setSession(res.body._id, res.headers.get('x-access-token'), res.headers.get('x-refresh-token'));
@@ -36,7 +39,7 @@ export class AuthService {
     )
   }
 
-  submit(startdate: Date, deadline1:Date, deadline2: Date) {
+  submit(startdate: String, deadline1:String, deadline2: String) {
     return this.webRequestService.submit(startdate, deadline1, deadline2).pipe(
       shareReplay(),
       tap((res: HttpResponse<any>) => {

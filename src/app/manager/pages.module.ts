@@ -11,6 +11,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { GuestDetailComponent } from './guest/guest-detail/guest-detail.component';
 import { HeaderComponent } from '../shared/header/header.component';
 import { ChatComponent } from './chat/chat.component';
+import { viewComponent } from './viewprofile/viewprofile.component';
 
 @NgModule({
   imports: [
@@ -40,7 +41,10 @@ import { ChatComponent } from './chat/chat.component';
     GuestDetailComponent,
     // StudentComponent,
     // LoginComponent,
-    ChatComponent
+
+    ChatComponent,
+    viewComponent
+    
   ],
 })
 export class PagesModule {

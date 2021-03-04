@@ -7,6 +7,8 @@ import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { HttpClientModule } from '@angular/common/http';
 import { ChatComponent } from './chat/chat.component';
 import { GuestRoutingModule } from './guest-routing.module';
+import { GuestComponent } from '../manager/guest/guest.component';
+import { GuestHomeComponent } from './guest-home/guest-home.component';
 
 @NgModule({
   imports: [
@@ -32,7 +34,8 @@ import { GuestRoutingModule } from './guest-routing.module';
     HttpClientModule
   ],
   declarations: [
-    ChatComponent
+    ChatComponent,
+    GuestHomeComponent,
   ],
 })
 export class GuestModule {
