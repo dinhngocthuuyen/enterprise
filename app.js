@@ -405,6 +405,52 @@ app.post('/faculties', (req, res) => {
       res.send(FacultyDoc);
   })
 });
+///////////////////CHANGE PASSWORD///////////
+// app.patch('/profile/:id', (req, res) => {
+//   User.findOneAndUpdate({id: req.params.id},{
+//     password = req.body.password
+//    })
+//       let username = req.body.username;
+//       let password = req.body.password;
+//         User.findByCredentials(username, password).then((user) => {
+//       return user.createSession().then((refreshToken) => {
+//               return user.generateAccessAuthToken().then((accessToken) => {
+//                 return { accessToken, refreshToken }
+//               })
+//   }).then((authTokens) => {
+//           //Now construct and send respond to user with their auth tokens in the header and user object in the body
+//           res
+//               .header('x-refresh-token', authTokens.refreshToken)
+//               .header('x-access-token', authTokens.accessToken)
+//               .send(user);
+//         })
+//           }).catch((e) => {
+//     res.status(400).send();
+//   })
+// })
+// });
+
+// app.post('/users/login', (req, res) => {
+//   let username = req.body.username;
+//   let password = req.body.password;
+//   User.findByCredentials(username, password).then((user) => {
+//     return user.createSession().then((refreshToken) => {
+//       return user.generateAccessAuthToken().then((accessToken) => {
+//         return { accessToken, refreshToken }
+//       })
+//     }).then((authTokens) => {
+//       //Now construct and send respond to user with their auth tokens in the header and user object in the body
+//       res
+//           .header('x-refresh-token', authTokens.refreshToken)
+//           .header('x-access-token', authTokens.accessToken)
+//           .send(user);
+//     })
+//   }).catch((e) => {
+//     res.status(400).send();
+//   })
+// })
+
+
 
 //////  Coordinator get contributions and send approve
 
