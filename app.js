@@ -163,7 +163,7 @@ app.get('/upload/download/:filename', (req, res) => {
       })
     }
     const readstream = gfs.createReadStream(file.filename);
-    readstream.pipe(res); 
+    readstream.pipe(res);
   })
 })
 
@@ -473,10 +473,19 @@ app.patch('/contributions/:id', (req, res) => {
       res.sendStatus(200);
   });
 });
-app.get('/getMonth/:facultyId/contributions', (req, res) => {
-  Contribution.find({
-    _facultyId: req.params.facultyId
-  }, {month: {$month: "$date"}, _id: 0}).then((contributions) => {
+app.get('/getMonth/:facultyId/contributions/:cmonth', (req, res) => {
+  // Contribution.aggregate({
+  //   _facultyId: req.params.facultyId
+  // }, {month: [{$month: "$date"}, 2], _id: 0})
+  Contribution.aggregate([
+    {
+      $project: {month: {$month: "$date"}}
+    },
+    {
+      $match: {month: parseInt(req.params.cmonth)}
+    }
+  ])
+  .then((contributions) => {
     res.send(contributions);
   })
 });

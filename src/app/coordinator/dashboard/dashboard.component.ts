@@ -65,13 +65,13 @@ export class DashboardComponent implements OnInit, OnDestroy {
         .subscribe(contributionData => {
           this.cons = contributionData;
           console.log("cons date: ", this.cons);
-          this.dashboardService.getContributions(this.facId).subscribe((contribution: any) => {
+          this.dashboardService.getMonth(this.facId, 3).subscribe((contribution: any) => {
             this.contribution = contribution;
             this.numOfCon = this.contribution.length
           })
         });
     }
-  
+
 
   ngOnDestroy() {
     this.alive = false;
