@@ -639,7 +639,16 @@ app.get('/viewcoor', authenticate, (req, res) => {
     res.send(e);
   });
 })
+////////////////////////////////////////viewprofile-detail/////////////////////////////
 
+app.get('/viewdetail/:id', (req, res) => {
+  User.find({  _id: req.params.id,
+  }).then((viewdetail) => {
+      res.send(viewdetail);
+  }).catch((e) => {
+    res.send(e);
+  });
+})
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

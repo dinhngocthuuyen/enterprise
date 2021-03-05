@@ -10,6 +10,7 @@ import { StudentmanagerComponent } from './manager/studentmanager/studentmanager
 import { GuestDetailComponent } from './guest/guest-detail/guest-detail.component';
 import { ChatComponent } from './chat/chat.component';
 import { viewComponent } from './viewprofile/viewprofile.component';
+import { viewdetailComponent } from './viewprofile/viewprofile-detail/viewdetail.component';
 
 const routes: Routes = [{
   path: '',
@@ -87,6 +88,10 @@ const routes: Routes = [{
     {
       path: 'viewcoordinator',
       component:  viewComponent,
+    },
+    {
+      path: 'viewdetail/:id',
+      component: viewdetailComponent,
     },
 
     {

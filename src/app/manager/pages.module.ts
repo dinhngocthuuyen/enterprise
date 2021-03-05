@@ -11,6 +11,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { GuestDetailComponent } from './guest/guest-detail/guest-detail.component';
 import { ChatComponent } from './chat/chat.component';
 import { viewComponent } from './viewprofile/viewprofile.component';
+import { viewdetailComponent } from './viewprofile/viewprofile-detail/viewdetail.component';
 
 @NgModule({
   imports: [
@@ -39,7 +40,8 @@ import { viewComponent } from './viewprofile/viewprofile.component';
     GuestComponent,
     GuestDetailComponent,
     ChatComponent,
-    viewComponent
+    viewComponent,
+    viewdetailComponent
     
   ],
 })
