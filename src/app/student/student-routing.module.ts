@@ -4,7 +4,6 @@ import { ChatComponent } from './chat/chat.component';
 import { StudentComponent } from './student.component';
 import { SendMailComponent } from './send-mail/send-mail.component';
 import { UploadContributionsComponent } from './upload-contributions/upload-contributions.component';
-import { UploadComponent } from './upload/upload.component';
 
 const routes: Routes = [{
   path: '',

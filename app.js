@@ -8,6 +8,7 @@ const multer = require('multer');
 const GridFsStorage = require('multer-gridfs-storage');
 const Grid = require('gridfs-stream');
 const methodOverride = require('method-override');
+const dayjs = require('dayjs')
 
 const nodemailer = require("nodemailer");
 /* LOAD EXPRESS MODEL */
@@ -15,9 +16,7 @@ const app = express();
 
 /* LOAD MONGOOSE MODEL */
 const jwt = require('jsonwebtoken');
-const { Post, Contribution, Coordinator, User, Role, Student, Message, Faculty, Comment, Closure } = require('./db/models');
-const { info } = require('console');
-const { result } = require('lodash');
+const { Post, Contribution, Coordinator, User, Role, Student, Message, Faculty, Comment, Closure} = require('./db/models');
 
 /* LOAD GLOBAL MIDDLEWARE */
 app.use(bodyParser.json());
@@ -325,7 +324,6 @@ app.post('/users', (req, res) => {
   }).catch((e) => {
     res.status(400).send(e);
   })
-
 })
 
 //User logins
@@ -398,12 +396,6 @@ app.get('/users', (req, res) => {
   });
 })
 
-app.get('/faculties', (req, res) => {
-  Faculty.find({}).then((user) => {
-    res.send(user);
- });
-})
-
 app.post('/faculties', (req, res) => {
   let name = req.body.name;
   let newFaculty = new Faculty({
@@ -461,6 +453,12 @@ app.post('/faculties', (req, res) => {
 
 
 
+app.get('/faculties', (req, res) => {
+  Faculty.find({}).then((user) => {
+    res.send(user);
+ });
+})
+
 app.post('/closure', (req, res) => {
   let newClosure = new Closure(req.body);
   newClosure.save().then((ClosureDoc) => {
@@ -475,11 +473,6 @@ app.get('/closure', (req, res) => {
  });
 })
 
-//app.controller('MainClosure', function($scope) {
-//  $scope.Date = '20210313T00:00:00';
-  
- // $scope.DateTimeEnd = '20210313T00:00:00';
-//});
 
 //////  Coordinator get contributions and send approve
 
@@ -734,14 +727,8 @@ app.get('/viewdetail/:id', (req, res) => {
   });
 })
 
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 app.listen(3000, () => {
   console.log(`App is listening at http://localhost:3000`)
 })
-
-
-
-
-
-
-

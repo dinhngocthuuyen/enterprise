@@ -9,11 +9,7 @@ import { ChatComponent } from './chat/chat.component';
 import { StudentRoutingModule } from './student-routing.module';
 import { SendMailComponent } from './send-mail/send-mail.component';
 import { ReactiveFormsModule } from '@angular/forms';
-<<<<<<< Updated upstream
 import { UploadContributionsComponent } from './upload-contributions/upload-contributions.component';
-=======
-import { UploadComponent } from './upload/upload.component';
->>>>>>> Stashed changes
 
 @NgModule({
   imports: [
@@ -42,11 +38,7 @@ import { UploadComponent } from './upload/upload.component';
   declarations: [
     ChatComponent,
     SendMailComponent,
-<<<<<<< Updated upstream
     UploadContributionsComponent
-=======
-    UploadComponent
->>>>>>> Stashed changes
   ],
 })
 export class StudentModule {
