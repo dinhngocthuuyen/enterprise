@@ -12,6 +12,7 @@ import { GuestDetailComponent } from './guest/guest-detail/guest-detail.componen
 import { HeaderComponent } from '../shared/header/header.component';
 import { ChatComponent } from './chat/chat.component';
 import { viewComponent } from './viewprofile/viewprofile.component';
+import { viewdetailComponent } from './viewprofile/viewprofile-detail/viewdetail.component';
 
 @NgModule({
   imports: [
@@ -43,7 +44,8 @@ import { viewComponent } from './viewprofile/viewprofile.component';
     // LoginComponent,
 
     ChatComponent,
-    viewComponent
+    viewComponent,
+    viewdetailComponent
     
   ],
 })

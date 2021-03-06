@@ -25,7 +25,7 @@ export class viewComponent implements OnInit {
       }
     }
   };
-
+  userId:any;
   posts: any;
   post: any;
   source!: LocalDataSource;
@@ -47,6 +47,8 @@ export class viewComponent implements OnInit {
         this.profile = new LocalDataSource(this.posts); }
       
     )})   
+    this.userId = localStorage.getItem('userId');
+
   }
 
   onSearch(query: string = '') {
@@ -67,7 +69,13 @@ export class viewComponent implements OnInit {
     ], false); 
   }
   
-//   onUserRowSelect(event){
-//     this.router.navigate(['/' + event.data._id]);
-//   }
+   onUserRowSelect(event){
+     this.router.navigate(['manager/'+this.userId+'/viewdetail/' + event.data._id]);
+    
+   }
+
+   studentdetail(event){
+    this.router.navigate(['manager/'+this.userId+'/viewdetail/' + event.data._id]);
+   
+  }
 }

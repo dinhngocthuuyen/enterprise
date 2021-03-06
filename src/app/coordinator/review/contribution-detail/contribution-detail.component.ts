@@ -22,11 +22,14 @@ export class ContributionDetailComponent implements OnInit, AfterViewInit {
     private reviewService: CoorService,
     private dialogService: NbDialogService,
   ) { }
+  val:any;
   status: any;
   studentId!: string;
   numOfCmt: any;
   file!: string;
   @Input() contribution;
+  @Input() contributions;
+
   ngOnInit() {
     // this.facId = localStorage.getItem('facultyId');
     this.conId = this.route.snapshot.params.id;
@@ -47,6 +50,7 @@ export class ContributionDetailComponent implements OnInit, AfterViewInit {
     // this.reviewService.getUser(this.studentId).subscribe(() => {
 
     // })
+  
   }
   ngAfterViewInit() {
   }
@@ -66,10 +70,17 @@ export class ContributionDetailComponent implements OnInit, AfterViewInit {
         // console.log("cmts comment " + this.cmts)
       });
   }
-  // countDownForm = new FormGroup({
-  //   date: new FormControl(''),
-  
-  // })
+  getdate = new FormGroup({
+  date: new FormControl
+  })
+  getVal(val){
+    console.log("aaaa" +val)
+  }
+  // countDownForm = new FormControl();
+
+  //  getdate(){
+  //    this.reviewService
+  //  }
   SubmitTime = new Date("2021-02-23T04:21:59.159Z").getTime();
   Deadline = this.SubmitTime +(14*24*60*60*1000);
   showTime: any;

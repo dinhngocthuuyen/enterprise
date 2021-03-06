@@ -54,8 +54,11 @@ export class CoorService {
   }
   getStudents(id: string){
     return this.WebReqService.get(`${id}/students`);
-  } 
-  getMonth(facultyId: string){
-    return this.WebReqService.get(`getMonth/${facultyId}/contributions`);
+  }
+  getMonth(facultyId: string, cmonth: number){
+    return this.WebReqService.get(`getMonth/${facultyId}/contributions/${cmonth}`);
+  }
+  changePassword(id: string,body){
+    return this.WebReqService.patch(`profile/${id}`,body );
   }
 }
