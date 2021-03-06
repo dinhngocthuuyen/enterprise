@@ -8,7 +8,7 @@ import { NbThemeModule, NbLayoutModule, NbSidebarModule, NbButtonModule, NbIconM
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { PagesComponent } from './manager/pages.component';
 import { StoreModule } from '@ngrx/store';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { EffectsModule } from '@ngrx/effects';
 import { HttpClientModule } from '@angular/common/http';
@@ -84,6 +84,8 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
     }),
     EffectsModule.forRoot([]),
     StudentManagerModule,
+    ReactiveFormsModule,
+    FormsModule,
   ],
   providers: [{provide: HTTP_INTERCEPTORS, useClass: WebRequestInterceptor, multi: true}],
   bootstrap: [AppComponent],

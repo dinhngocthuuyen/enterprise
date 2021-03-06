@@ -1,8 +1,8 @@
 <form ngNoForm  [action]="url" method="post" enctype="multipart/form-data">
   <input class="form-control" type="file" name="uploaded_file" />
-  <button nbButton status="danger" type="submit" disabled >Upload</button>
+  <button nbButton status="danger" type="submit" >Upload</button>
 </form>
-
+<!--*ngIf="deadline1; else deadline2" -->
 <nb-card>
   <nb-card-body>
     <!-- <input #search class="form-control" type="text" placeholder="&#xF002; Search" style="font-family:Arial, FontAwesome" (keydown.enter)="onSearch(search.value)"><br> -->
