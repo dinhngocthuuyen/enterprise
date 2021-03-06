@@ -19,10 +19,10 @@ import { Faculty } from 'src/app/models';
 export class AccountComponent implements OnInit {
 
   signupForm = new FormGroup({
-    nameInput: new FormControl(''),
-    passInput: new FormControl(''),
-    roleSelect: new FormControl(''),
-    facultySelect: new FormControl(''),
+    name: new FormControl(''),
+    password: new FormControl(''),
+    role: new FormControl(''),
+    _facultyId: new FormControl(''),
   })
     submitted = false;
 
@@ -45,10 +45,13 @@ export class AccountComponent implements OnInit {
 
     this.signupForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email,Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]],
-      
-  });
+      name: [],
+      password: [],
+      role: [],
+      _facultyId: [],
+    });
     
-     this.getFaculty();
+    this.getFaculty();
   }
 
   getFaculty(): void {
@@ -64,28 +67,45 @@ export class AccountComponent implements OnInit {
     });
   }
 
-  
-     // convenience getter for easy access to form fields
-     get f() { return this.signupForm.controls; }
+  // convenience getter for easy access to form fields
+  get f() { return this.signupForm.controls; }
 
-     onSubmit() {
-         this.submitted = true;
- 
-         // stop here if form is invalid
-         if (this.signupForm.invalid) {
-             return;
-         }
- 
-        //  alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.signupForm.value))
-     }
+  onSubmit() {
+      this.submitted = true;
 
+      // stop here if form is invalid
+      if (this.signupForm.invalid) {
+          return;
+      }
 
-  onCreateButtonClicked(username: string, name:string, password: string, role:string, _facultyId: string){
-    this.authService.create(username, name, password, role, _facultyId).subscribe((res: HttpResponse<any>) => {
-      console.log(res);
-      alert('SUCCESS');
-    })
+      const username: string = this.signupForm.value.email;
+      const name: string = this.signupForm.value.name;
+      const password: string = this.signupForm.value.password;
+      const role: string = this.signupForm.value.role;
+      const _facultyId: any = this.signupForm.value._facultyId;
+
+      this.authService.create(username, name, password, role, _facultyId).subscribe((res: HttpResponse<any>) => {
+        console.log(res);
+        alert('SUCCESS');
+      })
+
+    //  alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.signupForm.value))
   }
+
+
+  // onCreateButtonClicked(username: string, name:string, password: string, role:string, _facultyId: string){
+  //   this.submitted = true;
+
+  //   // stop here if form is invalid
+  //   if (this.signupForm.invalid) {
+  //     return;
+  //   }
+
+  //   this.authService.create(username, name, password, role, _facultyId).subscribe((res: HttpResponse<any>) => {
+  //     console.log(res);
+  //     alert('SUCCESS');
+  //   })
+  // }
 
   
 }
