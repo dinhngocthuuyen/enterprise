@@ -13,8 +13,8 @@ export class ConsService extends ContributionData {
     private WebReqService: WebRequestService) {
     super();
     this.data = {
-      week: this.getDataWeek(),
-      month: this.getDataMonth(),
+      // week: this.getDataWeek(),
+      // month: this.getDataMonth(),
       year: this.getDataYear(),
     };
   }
@@ -28,7 +28,7 @@ export class ConsService extends ContributionData {
       _id: "scjsb"
     };
   }
-  
+
   private getDataWeek(): Contribution[] {
       return this.periods.getWeeks().map((week) => {
         return this.generateContributionData(week);

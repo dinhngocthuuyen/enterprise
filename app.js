@@ -473,16 +473,16 @@ app.patch('/contributions/:id', (req, res) => {
       res.sendStatus(200);
   });
 });
-app.get('/getMonth/:facultyId/contributions/:cmonth', (req, res) => {
+app.get('/getYear/:facultyId/contributions/:cyear', (req, res) => {
   // Contribution.aggregate({
   //   _facultyId: req.params.facultyId
   // }, {month: [{$month: "$date"}, 2], _id: 0})
   Contribution.aggregate([
     {
-      $project: {month: {$month: "$date"}}
+      $project: {year: {$year: "$date"}}
     },
     {
-      $match: {month: parseInt(req.params.cmonth)}
+      $match: {year: parseInt(req.params.cyear)}
     }
   ])
   .then((contributions) => {
