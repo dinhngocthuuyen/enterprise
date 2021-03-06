@@ -114,10 +114,7 @@ const storage = new GridFsStorage({
         const fileInfo = {
           filename: filename,
           bucketName: 'uploads',
-          metadata: {
-            _userId: 'dljsf',
-            _facultyId: 'lskhkg'
-          }
+          metadata: req.body
         };
         resolve(fileInfo);
       // });
@@ -131,9 +128,27 @@ const upload = multer({ storage });
 
 /////////////////////////////////////////////////////// UPLOAD //////////////////////////////////////////////////////////////
 
-//Return an array of uploaded files
-app.get('/upload', (req, res) => {
-  gfs.files.find().toArray((err, files) => {
+// student gets files
+app.get('/upload/:facultyId/:userId', (req, res) => {
+  gfs.files.find({
+    metadata: {
+      _facultyId: req.params.facultyId,
+      _userId: req.params.userId,
+    }
+  }).toArray((err, files) => {
+    if (!files || files.length  === 0) {
+      return res.status(404).json({
+        err: 'No files exist'
+      })
+    }
+    return res.json(files);
+  })
+})
+// coordinator gets files
+app.get('/upload/:facultyId', (req, res) => {
+  gfs.files.find({
+    "metadata._facultyId": req.params.facultyId,
+  }).toArray((err, files) => {
     if (!files || files.length  === 0) {
       return res.status(404).json({
         err: 'No files exist'
@@ -143,20 +158,15 @@ app.get('/upload', (req, res) => {
   })
 })
 
-app.get('/upload/:filename', (req, res) => {
-  gfs.files.findOne({filename : req.params.filename}, (err, file) => {
-    if (!file || file.length  === 0) {
-      return res.status(404).json({
-        err: 'No file exists'
-      })
-    }
-    return res.json(file);
-  })
-})
-
 //Download file
-app.get('/upload/download/:filename', (req, res) => {
-  gfs.files.findOne({filename : req.params.filename}, (err, file) => {
+app.get('/upload/download/:facultyId/:userId/:filename', (req, res) => {
+  gfs.files.findOne({
+    metadata: {
+      _facultyId: req.params.facultyId,
+      _userId: req.params.userId,
+    },
+    filename : req.params.filename
+  }, (err, file) => {
     if (!file || file.length  === 0) {
       return res.status(404).json({
         err: 'No file exists'
@@ -179,12 +189,6 @@ app.delete('/upload/:id', (req, res) => {
     }
     res.send('Delete successfully')
   })
-})
-
-
-/* UPLOAD */
-app.get("/upload", (req, res) => {
-  res.send()
 })
 
 

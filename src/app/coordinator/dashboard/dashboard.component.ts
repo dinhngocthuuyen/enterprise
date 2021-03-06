@@ -71,9 +71,9 @@ export class DashboardComponent implements OnInit, OnDestroy {
           this.cons = contributionData;
           // const conYear = document.getElementById('#conYear') as HTMLScriptElement;
           // this.conY = conYear.nodeValue;
-          const date = this.cons.map(i => i.date)
+          // const date = this.cons.map(i => i.date)
           // console.log("cons date: ", date);
-          console.log("con year: ", this.conYear)
+          // console.log("con year: ", this.conYear)
           // for (var val of date) {
           //   this.val = parseInt(val);
           //   console.log(val);

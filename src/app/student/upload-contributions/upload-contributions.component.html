@@ -2,6 +2,8 @@
 
 <form ngNoForm  [action]="url" method="post" enctype="multipart/form-data">
     <input class="form-control" type="file" name="uploaded_file" />
+    <input name="_facultyId" [value]="facultyId"/>
+    <input name="_userId" [value]="userId"/>
     <button nbButton status="danger" type="submit">Upload</button>
 </form>
 
