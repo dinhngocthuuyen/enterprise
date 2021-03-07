@@ -15,12 +15,16 @@ module.exports = {
   Coordinator,
   User,
   Role,
+  Faculty,
   Student,
   Message,
   Faculty,
+<<<<<<< HEAD
   Comment,
   Closure,
  
+=======
+>>>>>>> 3b0042d482dacf9dd9d611b56bde9a0c753a0f69
   Closure,
   Comment
 }

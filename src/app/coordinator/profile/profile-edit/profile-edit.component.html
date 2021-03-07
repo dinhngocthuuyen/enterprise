@@ -18,7 +18,7 @@
             <input class="form-control" nbInput [ngModel]="user?.role" readonly>
         </div> -->
     </nb-card-body>
-    <nb-card-footer *ngFor=" let user of user">
+    <nb-card-footer>
         <button nbButton status="warning" (click)="edit()">Edit</button>
         <button nbButton status="primary" (click)="back()">Back</button>
     </nb-card-footer>

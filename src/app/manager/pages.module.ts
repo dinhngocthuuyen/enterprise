@@ -9,8 +9,10 @@ import { GuestComponent } from './guest/guest.component';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { HttpClientModule } from '@angular/common/http';
 import { GuestDetailComponent } from './guest/guest-detail/guest-detail.component';
+import { HeaderComponent } from '../shared/header/header.component';
 import { ChatComponent } from './chat/chat.component';
 import { viewComponent } from './viewprofile/viewprofile.component';
+import { viewdetailComponent } from './viewprofile/viewprofile-detail/viewdetail.component';
 
 @NgModule({
   imports: [
@@ -38,8 +40,12 @@ import { viewComponent } from './viewprofile/viewprofile.component';
   declarations: [
     GuestComponent,
     GuestDetailComponent,
+    // StudentComponent,
+    // LoginComponent,
+
     ChatComponent,
-    viewComponent
+    viewComponent,
+    viewdetailComponent
     
   ],
 })

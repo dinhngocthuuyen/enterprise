@@ -15,7 +15,11 @@ const app = express();
 
 /* LOAD MONGOOSE MODEL */
 const jwt = require('jsonwebtoken');
+<<<<<<< HEAD
 const { Post, Contribution, Coordinator, User, Role, Student, Message, Faculty, Comment} = require('./db/models');
+=======
+
+>>>>>>> 3b0042d482dacf9dd9d611b56bde9a0c753a0f69
 const { Post, Contribution, Coordinator, User, Role, Student, Message, Faculty, Comment, Closure } = require('./db/models');
 const { info } = require('console');
 const { result } = require('lodash');
@@ -385,6 +389,9 @@ app.get('/user/:id', (req, res) => {
   });
 })
 
+
+
+
 app.get('/faculty/:id', (req, res) => {
   Faculty.find({_id: req.params.id}).then((faculty) => {
       res.send(faculty);
@@ -409,6 +416,15 @@ app.post('/faculties', (req, res) => {
   })
 });
 
+<<<<<<< HEAD
+=======
+app.get('/faculties', (req, res) => {
+  Faculty.find({}).then((user) => {
+    res.send(user);
+ });
+})
+
+>>>>>>> 3b0042d482dacf9dd9d611b56bde9a0c753a0f69
 app.post('/closure', (req, res) => {
   let newClosure = new Closure(req.body);
   newClosure.save().then((ClosureDoc) => {
@@ -668,4 +684,8 @@ app.listen(3000, () => {
   console.log(`App is listening at http://localhost:3000`)
 })
 
+<<<<<<< HEAD
 })
+=======
+
+>>>>>>> 3b0042d482dacf9dd9d611b56bde9a0c753a0f69

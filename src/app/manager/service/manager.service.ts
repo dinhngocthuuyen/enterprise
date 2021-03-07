@@ -14,13 +14,17 @@ export class ViewProfile {
   getviewcoordinator(){
     return this.WebRequestService.get('viewcoor');
   }
+  
+}
 
-  //createGuestService(title: String, post: String){
-    ////Send a request to create a post
-    //return this.WebReqService.post('post', {title, post});
-  //}
 
-//   getPostDetail(id: string){
-//     return this.WebRequestService.get(`guest/guest-detail/${id}`);
-//   }
+@Injectable({
+  providedIn: 'root'
+})
+export class ViewDetail {
+
+  constructor(private WebRequestService: WebRequestService) {}
+  getviewdetail(id: string){
+    return this.WebRequestService.get(`viewdetail/${id}`);
+}
 }

@@ -74,6 +74,7 @@ export class UploadContributionsComponent implements OnInit {
   files: any;
   file: any;
   source!: LocalDataSource;
+  http: any;
 
   constructor(private StudentService: StudentService, private router: Router) { }
 
@@ -82,6 +83,7 @@ export class UploadContributionsComponent implements OnInit {
       this.files = files;
       this.source = new LocalDataSource(this.files);
     })
+  
   }
   
   onUserRowSelect(event){
@@ -95,4 +97,7 @@ export class UploadContributionsComponent implements OnInit {
       this.file = file;
     })
   }
+
+  
+
 }

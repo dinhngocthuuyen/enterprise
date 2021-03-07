@@ -27,11 +27,11 @@ export class SendMailComponent implements OnInit {
     });
   }
   email = new FormGroup({
-    username: new FormControl(''),
-  
+  username: new FormControl(''),
+
   })
   sendMail(){
- 
+
     this.studentService.sendMail( this.email.value).subscribe(
       data =>{
         let res:any = data;

@@ -30,9 +30,13 @@ export class AuthService {
     if (_facultyId._id === '') {
       facultyId = undefined;
     }
+<<<<<<< HEAD
 
     return this.webRequestService.create(username, name, password, role, facultyId).pipe(
       shareReplay(),
+=======
+    return this.webRequestService.create(username, name, password, role, facultyId).pipe(
+>>>>>>> 3b0042d482dacf9dd9d611b56bde9a0c753a0f69
       tap((res: HttpResponse<any>) => {
         //The auth tokens will be in the header of this response
         this.setSession(res.body._id, res.headers.get('x-access-token'), res.headers.get('x-refresh-token'));
