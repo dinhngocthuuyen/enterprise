@@ -1,10 +1,6 @@
 import { Injectable } from '@angular/core';
-<<<<<<< HEAD
-import {HttpClient} from '@angular/common/http';
-=======
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { Coordinator } from '../models';
->>>>>>> 3b0042d482dacf9dd9d611b56bde9a0c753a0f69
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -77,8 +73,4 @@ export class WebRequestService {
   }
 
   
-<<<<<<< HEAD
-=======
-
->>>>>>> 3b0042d482dacf9dd9d611b56bde9a0c753a0f69
 }

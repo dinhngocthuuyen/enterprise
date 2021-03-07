@@ -39,10 +39,10 @@ import { UploadComponent } from './upload/upload.component';
   declarations: [
     ChatComponent,
     SendMailComponent,
-    UploadContributionsComponent
+    UploadContributionsComponent,
     
     
-    UploadComponent
+    UploadComponent,
   ],
 })
 export class StudentModule {

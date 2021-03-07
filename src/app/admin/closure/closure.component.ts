@@ -7,12 +7,9 @@ import { Observable } from 'rxjs';
 import { HttpResponse } from '@angular/common/http';
 import { AuthService } from 'src/app/services/auth.service';
 
-<<<<<<< HEAD
-=======
 
 
 
->>>>>>> 3b0042d482dacf9dd9d611b56bde9a0c753a0f69
 @Component({
   selector: 'app-closure',
   templateUrl: './closure.component.html',
@@ -32,17 +29,4 @@ export class ClosureComponent implements OnInit {
       console.log(res);
     })
   }
-  
-<<<<<<< HEAD
-=======
-  
->>>>>>> 3b0042d482dacf9dd9d611b56bde9a0c753a0f69
 }
-  
-
-
- 
-
-
-
-

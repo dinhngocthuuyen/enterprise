@@ -15,11 +15,7 @@ const app = express();
 
 /* LOAD MONGOOSE MODEL */
 const jwt = require('jsonwebtoken');
-<<<<<<< HEAD
-const { Post, Contribution, Coordinator, User, Role, Student, Message, Faculty, Comment} = require('./db/models');
-=======
 
->>>>>>> 3b0042d482dacf9dd9d611b56bde9a0c753a0f69
 const { Post, Contribution, Coordinator, User, Role, Student, Message, Faculty, Comment, Closure } = require('./db/models');
 const { info } = require('console');
 const { result } = require('lodash');
@@ -420,15 +416,12 @@ app.post('/faculties', (req, res) => {
   })
 });
 
-<<<<<<< HEAD
-=======
 app.get('/faculties', (req, res) => {
   Faculty.find({}).then((user) => {
     res.send(user);
  });
 })
 
->>>>>>> 3b0042d482dacf9dd9d611b56bde9a0c753a0f69
 app.post('/closure', (req, res) => {
   let newClosure = new Closure(req.body);
   newClosure.save().then((ClosureDoc) => {
@@ -470,12 +463,6 @@ app.patch('/contributions/:id', (req, res) => {
       res.sendStatus(200);
   });
 });
-<<<<<<< HEAD
-app.get('/getMonth/:facultyId/contributions', (req, res) => {
-  Contribution.find({
-    _facultyId: req.params.facultyId
-  }, {month: {$month: "$date"}, _id: 0}).then((contributions) => {
-=======
 app.get('/getYear/:facultyId/contributions/:cyear', (req, res) => {
   // Contribution.aggregate({
   //   _facultyId: req.params.facultyId
@@ -489,7 +476,6 @@ app.get('/getYear/:facultyId/contributions/:cyear', (req, res) => {
     }
   ])
   .then((contributions) => {
->>>>>>> 245c6594b526988184b81f282fc79a63debbe5ee
     res.send(contributions);
   })
 });
@@ -704,8 +690,4 @@ app.listen(3000, () => {
   console.log(`App is listening at http://localhost:3000`)
 })
 
-<<<<<<< HEAD
-})
-=======
 
->>>>>>> 3b0042d482dacf9dd9d611b56bde9a0c753a0f69
