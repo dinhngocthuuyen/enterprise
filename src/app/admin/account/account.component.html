@@ -1,9 +1,12 @@
-<p>Administrator!</p>
 
 <nb-card status="primary">
   <nb-card-header>
     <nb-icon icon="person-add-outline"></nb-icon>
   </nb-card-header>
+
+  <nb-alert status="success" *ngIf="isAlert">
+    You have been successfully authenticated!
+  </nb-alert>
         
     <form id="Form-create" class="form-cr" [formGroup]="signupForm" (ngSubmit)="onSubmit()">
       <div class="form-group">

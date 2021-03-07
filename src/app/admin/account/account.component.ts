@@ -1,32 +1,30 @@
 import { Component, OnInit, Input, ChangeDetectionStrategy } from '@angular/core';
-import { FormControl, FormGroup, NgForm, Validators, ReactiveFormsModule, FormBuilder, EmailValidator  } from '@angular/forms';
-import { Router } from '@angular/router';
-import { NbSortDirection, NbSortRequest, NbTreeGridDataSource, NbTreeGridDataSourceBuilder, NbWindowService } from '@nebular/theme';
-import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
+import { FormControl, FormGroup, NgForm, Validators, FormBuilder, EmailValidator  } from '@angular/forms';
 import { HttpResponse } from '@angular/common/http';
 import { AuthService } from 'src/app/services/auth.service';
 import { FacultyService } from 'src/app/admin/services/faculty.service';
 import {Role} from 'db/models'
 import { Faculty } from 'src/app/models';
 
-
 @Component({
   selector: 'app-account',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './account.component.html',
-  styleUrls: ['./account.component.scss']
+  styleUrls: ['./account.component.scss'],
 })
 export class AccountComponent implements OnInit {
+  
 
   signupForm = new FormGroup({
-    name: new FormControl(''),
-    password: new FormControl(''),
-    role: new FormControl(''),
-    _facultyId: new FormControl(''),
+    name: new FormControl(),
+    password: new FormControl(),
+    role: new FormControl(),
+    _facultyId: new FormControl(),
   })
-    submitted = false;
+  submitted = false;
+  isAlert: boolean = false;
 
- constructor(private authService: AuthService,private facultyService: FacultyService,private formBuilder: FormBuilder) {
+ constructor(private authService: AuthService, private facultyService: FacultyService, private formBuilder: FormBuilder) {
 
  }
 
@@ -51,7 +49,7 @@ export class AccountComponent implements OnInit {
       _facultyId: [],
     });
     
-    this.getFaculty();
+     this.getFaculty();
   }
 
   getFaculty(): void {
@@ -70,8 +68,12 @@ export class AccountComponent implements OnInit {
   // convenience getter for easy access to form fields
   get f() { return this.signupForm.controls; }
 
+  showAlert() {
+    this.isAlert = true;
+  }
+
   onSubmit() {
-      this.submitted = true;
+    this.submitted = true;
 
       // stop here if form is invalid
       if (this.signupForm.invalid) {
@@ -83,12 +85,13 @@ export class AccountComponent implements OnInit {
       const password: string = this.signupForm.value.password;
       const role: string = this.signupForm.value.role;
       const _facultyId: any = this.signupForm.value._facultyId;
-
+      
       this.authService.create(username, name, password, role, _facultyId).subscribe((res: HttpResponse<any>) => {
-        console.log(res);
-        alert('SUCCESS');
-      })
+        console.log('res', res);
+        
+      });
 
+      this.isAlert = true;
     //  alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.signupForm.value))
   }
 
@@ -106,7 +109,9 @@ export class AccountComponent implements OnInit {
   //     alert('SUCCESS');
   //   })
   // }
-
+  doSomething() {
+    this.isAlert = true;
+  }
   
 }
 

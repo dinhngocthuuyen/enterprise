@@ -9,14 +9,16 @@ const GridFsStorage = require('multer-gridfs-storage');
 const Grid = require('gridfs-stream');
 const methodOverride = require('method-override');
 
-
 const nodemailer = require("nodemailer");
 /* LOAD EXPRESS MODEL */
 const app = express();
 
 /* LOAD MONGOOSE MODEL */
 const jwt = require('jsonwebtoken');
-const { Post, Contribution, Coordinator, User, Role, Student, Message, Faculty, Comment, Closure} = require('./db/models');
+
+const { Post, Contribution, Coordinator, User, Role, Student, Message, Faculty, Comment, Closure } = require('./db/models');
+const { info } = require('console');
+const { result } = require('lodash');
 
 /* LOAD GLOBAL MIDDLEWARE */
 app.use(bodyParser.json());
@@ -164,7 +166,7 @@ app.get('/upload/download/:filename', (req, res) => {
       })
     }
     const readstream = gfs.createReadStream(file.filename);
-    readstream.pipe(res);
+    readstream.pipe(res); 
   })
 })
 
@@ -383,6 +385,9 @@ app.get('/user/:id', (req, res) => {
   });
 })
 
+
+
+
 app.get('/faculty/:id', (req, res) => {
   Faculty.find({_id: req.params.id}).then((faculty) => {
       res.send(faculty);
@@ -406,52 +411,6 @@ app.post('/faculties', (req, res) => {
       res.send(FacultyDoc);
   })
 });
-///////////////////CHANGE PASSWORD///////////
-// app.patch('/profile/:id', (req, res) => {
-//   User.findOneAndUpdate({id: req.params.id},{
-//     password = req.body.password
-//    })
-//       let username = req.body.username;
-//       let password = req.body.password;
-//         User.findByCredentials(username, password).then((user) => {
-//       return user.createSession().then((refreshToken) => {
-//               return user.generateAccessAuthToken().then((accessToken) => {
-//                 return { accessToken, refreshToken }
-//               })
-//   }).then((authTokens) => {
-//           //Now construct and send respond to user with their auth tokens in the header and user object in the body
-//           res
-//               .header('x-refresh-token', authTokens.refreshToken)
-//               .header('x-access-token', authTokens.accessToken)
-//               .send(user);
-//         })
-//           }).catch((e) => {
-//     res.status(400).send();
-//   })
-// })
-// });
-
-// app.post('/users/login', (req, res) => {
-//   let username = req.body.username;
-//   let password = req.body.password;
-//   User.findByCredentials(username, password).then((user) => {
-//     return user.createSession().then((refreshToken) => {
-//       return user.generateAccessAuthToken().then((accessToken) => {
-//         return { accessToken, refreshToken }
-//       })
-//     }).then((authTokens) => {
-//       //Now construct and send respond to user with their auth tokens in the header and user object in the body
-//       res
-//           .header('x-refresh-token', authTokens.refreshToken)
-//           .header('x-access-token', authTokens.accessToken)
-//           .send(user);
-//     })
-//   }).catch((e) => {
-//     res.status(400).send();
-//   })
-// })
-
-
 
 app.get('/faculties', (req, res) => {
   Faculty.find({}).then((user) => {
@@ -473,6 +432,11 @@ app.get('/closure', (req, res) => {
  });
 })
 
+//app.controller('MainClosure', function($scope) {
+//  $scope.Date = '20210313T00:00:00';
+  
+ // $scope.DateTimeEnd = '20210313T00:00:00';
+//});
 
 //////  Coordinator get contributions and send approve
 
@@ -495,19 +459,10 @@ app.patch('/contributions/:id', (req, res) => {
       res.sendStatus(200);
   });
 });
-app.get('/getMonth/:facultyId/contributions/:cmonth', (req, res) => {
-  // Contribution.aggregate({
-  //   _facultyId: req.params.facultyId
-  // }, {month: [{$month: "$date"}, 2], _id: 0})
-  Contribution.aggregate([
-    {
-      $project: {month: {$month: "$date"}}
-    },
-    {
-      $match: {month: parseInt(req.params.cmonth)}
-    }
-  ])
-  .then((contributions) => {
+app.get('/getMonth/:facultyId/contributions', (req, res) => {
+  Contribution.find({
+    _facultyId: req.params.facultyId
+  }, {month: {$month: "$date"}, _id: 0}).then((contributions) => {
     res.send(contributions);
   })
 });
@@ -618,8 +573,6 @@ app.post('/messages/:facultyId/:studentId', (req, res) => {
     res.send(MessageDoc);
   })
 })
- ///////Validate////
-
 
 
 
@@ -718,19 +671,10 @@ app.get('/viewcoor', authenticate, (req, res) => {
     res.send(e);
   });
 })
-////////////////////////////////////////viewprofile-detail/////////////////////////////
-
-app.get('/viewdetail/:id', (req, res) => {
-  User.find({  _id: req.params.id,
-  }).then((viewdetail) => {
-      res.send(viewdetail);
-  }).catch((e) => {
-    res.send(e);
-  });
-})
-
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 app.listen(3000, () => {
   console.log(`App is listening at http://localhost:3000`)
 })
+
+

@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NbThemeModule, NbLayoutModule, NbSidebarModule, NbButtonModule, NbIconModule, NbMenuModule, NbCardModule, NbTabsetModule, NbTreeGridModule, NbDialogModule, NbWindowModule, NbInputModule, NbContextMenuModule, NbChatModule, NbActionsModule, NbUserModule, NbOptionModule, NbSelectModule, NbDatepickerModule, NbListModule } from '@nebular/theme';
+import { NbThemeModule, NbLayoutModule, NbSidebarModule, NbButtonModule, NbIconModule, NbMenuModule, NbCardModule, NbTabsetModule, NbTreeGridModule, NbDialogModule, NbWindowModule, NbInputModule, NbContextMenuModule, NbChatModule, NbActionsModule, NbUserModule, NbOptionModule, NbSelectModule, NbDatepickerModule, NbListModule, NbAlertModule } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { PagesComponent } from './manager/pages.component';
 import { StoreModule } from '@ngrx/store';
@@ -20,11 +20,10 @@ import { HeaderComponent } from './shared/header/header.component';
 import { AdminComponent } from './admin/admin.component';
 import { StudentComponent } from './student/student.component';
 import { GuestComponent } from './guest/guest.component';
-import { CommonModule } from '@angular/common';
-import { AccountComponent } from './admin/account/account.component';
-import { ClosureComponent } from './admin/closure/closure.component';
 import { WebRequestInterceptor } from './services/web-request.interceptor';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AccountComponent } from './admin/account/account.component';
+import { ClosureComponent } from './admin/closure/closure.component';
 
 @NgModule({
   declarations: [
@@ -36,8 +35,6 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
     AdminComponent,
     StudentComponent,
     GuestComponent,
-    AccountComponent,
-    ClosureComponent
   ],
   imports: [
     BrowserModule,
@@ -50,7 +47,6 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
     NbMenuModule.forRoot(),
     // NbChatModule.forRoot({ messageGoogleMapKey: 'MAP_KEY' }),
     NbDialogModule.forRoot(),
-    NbDatepickerModule.forRoot(),
     NbLayoutModule,
     NbButtonModule,
     NbIconModule,
@@ -62,10 +58,9 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
     BrowserAnimationsModule,
     NbActionsModule,
     NbUserModule,
-    NbOptionModule,
-    NbSelectModule,
     // NbChatModule,
     NbContextMenuModule,
+   // NbAccordionModule,
     NbInputModule,
     NbListModule,
     NbOptionModule,
@@ -86,6 +81,8 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
     StudentManagerModule,
     ReactiveFormsModule,
     FormsModule,
+    NbAlertModule,
+
   ],
   providers: [{provide: HTTP_INTERCEPTORS, useClass: WebRequestInterceptor, multi: true}],
   bootstrap: [AppComponent],
