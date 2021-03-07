@@ -63,33 +63,31 @@ export class UploadContributionsComponent implements OnInit {
         renderComponent: ButtonViewComponent,
         onComponentInitFunction(instance) {
           instance.save.subscribe(row => {
-            window.location.href = "http://localhost:3000/upload/download/" + row.filename;
+            window.location.href = "http://localhost:3000/upload/download/"+ row.metadata._facultyId + "/" + row.metadata._userId + "/" + row.filename;
           });
         }
       }
     },
-    
+
   };
 
   files: any;
   file: any;
   source!: LocalDataSource;
-  http: any;
+  facultyId: any;
+  userId: any;
 
   constructor(private StudentService: StudentService, private router: Router) { }
 
   ngOnInit(): void {
-    this.StudentService.getUpload().subscribe((files: any) => {
+    this.facultyId = localStorage.getItem('facultyId');
+    this.userId = localStorage.getItem('userId');
+
+    this.StudentService.getUpload(this.facultyId, this.userId).subscribe((files: any) => {
       this.files = files;
       this.source = new LocalDataSource(this.files);
     })
   
-  }
-  
-  onUserRowSelect(event){
-    this.StudentService.viewUpload(event.data.filename).subscribe((file: any) => {
-      this.file = file;
-    })
   }
 
   onDeleteButtonClicked(event){

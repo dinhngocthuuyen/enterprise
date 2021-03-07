@@ -35,11 +35,8 @@ export class StudentService {
     return this.WebReqService.post(`messages/${facultyId}/${id}`, {text, reply})
   }
 
-  getUpload(){
-    return this.WebReqService.get('upload');
-  }
-  viewUpload(filename: string){
-    return this.WebReqService.get(`upload/image/${filename}`);
+  getUpload(facultyId: string, userId: string){
+    return this.WebReqService.get(`upload/${facultyId}/${userId}`);
   }
   deleteUpload(id: string) {
     return this.WebReqService.delete(`upload/${id}`);
