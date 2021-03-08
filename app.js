@@ -15,7 +15,10 @@ const app = express();
 
 /* LOAD MONGOOSE MODEL */
 const jwt = require('jsonwebtoken');
-const { Post, Contribution, Coordinator, User, Role, Student, Message, Faculty, Comment} = require('./db/models');
+
+const { Post, Contribution, Coordinator, User, Role, Student, Message, Faculty, Comment, Closure } = require('./db/models');
+const { info } = require('console');
+const { result } = require('lodash');
 
 /* LOAD GLOBAL MIDDLEWARE */
 app.use(bodyParser.json());
@@ -114,10 +117,7 @@ const storage = new GridFsStorage({
         const fileInfo = {
           filename: filename,
           bucketName: 'uploads',
-          metadata: {
-            _userId: 'dljsf',
-            _facultyId: 'lskhkg'
-          }
+          metadata: req.body
         };
         resolve(fileInfo);
       // });
@@ -131,9 +131,27 @@ const upload = multer({ storage });
 
 /////////////////////////////////////////////////////// UPLOAD //////////////////////////////////////////////////////////////
 
-//Return an array of uploaded files
-app.get('/upload', (req, res) => {
-  gfs.files.find().toArray((err, files) => {
+// student gets files
+app.get('/upload/:facultyId/:userId', (req, res) => {
+  gfs.files.find({
+    metadata: {
+      _facultyId: req.params.facultyId,
+      _userId: req.params.userId,
+    }
+  }).toArray((err, files) => {
+    if (!files || files.length  === 0) {
+      return res.status(404).json({
+        err: 'No files exist'
+      })
+    }
+    return res.json(files);
+  })
+})
+// coordinator gets files
+app.get('/upload/:facultyId', (req, res) => {
+  gfs.files.find({
+    "metadata._facultyId": req.params.facultyId,
+  }).toArray((err, files) => {
     if (!files || files.length  === 0) {
       return res.status(404).json({
         err: 'No files exist'
@@ -143,20 +161,15 @@ app.get('/upload', (req, res) => {
   })
 })
 
-app.get('/upload/:filename', (req, res) => {
-  gfs.files.findOne({filename : req.params.filename}, (err, file) => {
-    if (!file || file.length  === 0) {
-      return res.status(404).json({
-        err: 'No file exists'
-      })
-    }
-    return res.json(file);
-  })
-})
-
 //Download file
-app.get('/upload/download/:filename', (req, res) => {
-  gfs.files.findOne({filename : req.params.filename}, (err, file) => {
+app.get('/upload/download/:facultyId/:userId/:filename', (req, res) => {
+  gfs.files.findOne({
+    metadata: {
+      _facultyId: req.params.facultyId,
+      _userId: req.params.userId,
+    },
+    filename : req.params.filename
+  }, (err, file) => {
     if (!file || file.length  === 0) {
       return res.status(404).json({
         err: 'No file exists'
@@ -179,12 +192,6 @@ app.delete('/upload/:id', (req, res) => {
     }
     res.send('Delete successfully')
   })
-})
-
-
-/* UPLOAD */
-app.get("/upload", (req, res) => {
-  res.send()
 })
 
 
@@ -382,6 +389,9 @@ app.get('/user/:id', (req, res) => {
   });
 })
 
+
+
+
 app.get('/faculty/:id', (req, res) => {
   Faculty.find({_id: req.params.id}).then((faculty) => {
       res.send(faculty);
@@ -405,52 +415,32 @@ app.post('/faculties', (req, res) => {
       res.send(FacultyDoc);
   })
 });
-///////////////////CHANGE PASSWORD///////////
-// app.patch('/profile/:id', (req, res) => {
-//   User.findOneAndUpdate({id: req.params.id},{
-//     password = req.body.password
-//    })
-//       let username = req.body.username;
-//       let password = req.body.password;
-//         User.findByCredentials(username, password).then((user) => {
-//       return user.createSession().then((refreshToken) => {
-//               return user.generateAccessAuthToken().then((accessToken) => {
-//                 return { accessToken, refreshToken }
-//               })
-//   }).then((authTokens) => {
-//           //Now construct and send respond to user with their auth tokens in the header and user object in the body
-//           res
-//               .header('x-refresh-token', authTokens.refreshToken)
-//               .header('x-access-token', authTokens.accessToken)
-//               .send(user);
-//         })
-//           }).catch((e) => {
-//     res.status(400).send();
-//   })
-// })
-// });
 
-// app.post('/users/login', (req, res) => {
-//   let username = req.body.username;
-//   let password = req.body.password;
-//   User.findByCredentials(username, password).then((user) => {
-//     return user.createSession().then((refreshToken) => {
-//       return user.generateAccessAuthToken().then((accessToken) => {
-//         return { accessToken, refreshToken }
-//       })
-//     }).then((authTokens) => {
-//       //Now construct and send respond to user with their auth tokens in the header and user object in the body
-//       res
-//           .header('x-refresh-token', authTokens.refreshToken)
-//           .header('x-access-token', authTokens.accessToken)
-//           .send(user);
-//     })
-//   }).catch((e) => {
-//     res.status(400).send();
-//   })
-// })
+app.get('/faculties', (req, res) => {
+  Faculty.find({}).then((user) => {
+    res.send(user);
+ });
+})
 
+app.post('/closure', (req, res) => {
+  let newClosure = new Closure(req.body);
+  newClosure.save().then((ClosureDoc) => {
 
+    res.send(ClosureDoc);
+  })
+});
+
+app.get('/closure', (req, res) => {
+  Closure.find({}).then((closure) => {
+    res.send(closure);
+ });
+})
+
+//app.controller('MainClosure', function($scope) {
+//  $scope.Date = '20210313T00:00:00';
+  
+ // $scope.DateTimeEnd = '20210313T00:00:00';
+//});
 
 //////  Coordinator get contributions and send approve
 
@@ -473,10 +463,19 @@ app.patch('/contributions/:id', (req, res) => {
       res.sendStatus(200);
   });
 });
-app.get('/getMonth/:facultyId/contributions', (req, res) => {
-  Contribution.find({
-    _facultyId: req.params.facultyId
-  }, {month: {$month: "$date"}, _id: 0}).then((contributions) => {
+app.get('/getYear/:facultyId/contributions/:cyear', (req, res) => {
+  // Contribution.aggregate({
+  //   _facultyId: req.params.facultyId
+  // }, {month: [{$month: "$date"}, 2], _id: 0})
+  Contribution.aggregate([
+    {
+      $project: {year: {$year: "$date"}}
+    },
+    {
+      $match: {year: parseInt(req.params.cyear)}
+    }
+  ])
+  .then((contributions) => {
     res.send(contributions);
   })
 });
@@ -686,10 +685,9 @@ app.get('/viewcoor', authenticate, (req, res) => {
   });
 })
 
-
-
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 app.listen(3000, () => {
   console.log(`App is listening at http://localhost:3000`)
 })
+
 

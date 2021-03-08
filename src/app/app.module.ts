@@ -4,11 +4,11 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NbThemeModule, NbLayoutModule, NbSidebarModule, NbButtonModule, NbIconModule, NbMenuModule, NbCardModule, NbTabsetModule, NbTreeGridModule, NbDialogModule, NbWindowModule, NbInputModule, NbContextMenuModule, NbChatModule, NbActionsModule, NbUserModule, NbAccordionModule, NbListModule, NbOptionModule } from '@nebular/theme';
+import { NbThemeModule, NbLayoutModule, NbSidebarModule, NbButtonModule, NbIconModule, NbMenuModule, NbCardModule, NbTabsetModule, NbTreeGridModule, NbDialogModule, NbWindowModule, NbInputModule, NbContextMenuModule, NbChatModule, NbActionsModule, NbUserModule, NbOptionModule, NbSelectModule, NbDatepickerModule, NbListModule, NbAlertModule } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { PagesComponent } from './manager/pages.component';
 import { StoreModule } from '@ngrx/store';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { EffectsModule } from '@ngrx/effects';
 import { HttpClientModule } from '@angular/common/http';
@@ -22,6 +22,8 @@ import { StudentComponent } from './student/student.component';
 import { GuestComponent } from './guest/guest.component';
 import { WebRequestInterceptor } from './services/web-request.interceptor';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AccountComponent } from './admin/account/account.component';
+import { ClosureComponent } from './admin/closure/closure.component';
 
 @NgModule({
   declarations: [
@@ -58,7 +60,7 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
     NbUserModule,
     // NbChatModule,
     NbContextMenuModule,
-    NbAccordionModule,
+   // NbAccordionModule,
     NbInputModule,
     NbListModule,
     NbOptionModule,
@@ -77,6 +79,10 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
     }),
     EffectsModule.forRoot([]),
     StudentManagerModule,
+    ReactiveFormsModule,
+    FormsModule,
+    NbAlertModule,
+
   ],
   providers: [{provide: HTTP_INTERCEPTORS, useClass: WebRequestInterceptor, multi: true}],
   bootstrap: [AppComponent],

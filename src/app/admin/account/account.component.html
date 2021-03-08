@@ -1,0 +1,44 @@
+
+<nb-card status="primary">
+  <nb-card-header>
+    <nb-icon icon="person-add-outline"></nb-icon>
+  </nb-card-header>
+
+  <nb-alert status="success" *ngIf="isAlert">
+    You have been successfully authenticated!
+  </nb-alert>
+        
+    <form id="Form-create" class="form-cr" [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="email">Username</label>
+        <input nbInput shape="semi-round" type="text" #emailInput formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
+        <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+            <div *ngIf="f.email.errors.required">Email is required</div>
+            <div *ngIf="f.email.errors.email">Email must be a valid email address</div>
+        </div>
+      </div>
+        
+      <label for="name">Name</label>
+      <input nbInput shape="semi-round" #nameInput formControlName="name" type="text" class="form-control" required>
+
+      <label for="password">Password</label>
+      <input nbInput shape="semi-round" #passInput formControlName="password" type="password" class="form-control" required>
+
+      <label for="role">Role</label><br>
+      <nb-select #roleSelect formControlName="role" placeholder="Select">
+          <nb-option *ngFor="let item of roleList" [value]="item.role">{{ item.name }}</nb-option>
+      </nb-select><br><br>
+
+      <label for="falcuty">Faculty</label><br>
+      <nb-select #facultySelect placeholder="Select" formControlName="_facultyId" >
+          <nb-option *ngFor="let faculty of facultyList" [value]="faculty">{{ faculty.name }}</nb-option>             
+      </nb-select><br><br>
+
+      <button nbButton status="primary" type="submit">Create</button>
+                
+    </form>
+  
+
+
+</nb-card>
+

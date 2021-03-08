@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, ElementRef, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { takeWhile } from 'rxjs/operators';
 import { NbThemeService } from '@nebular/theme';
@@ -58,22 +58,38 @@ export class DashboardComponent implements OnInit, OnDestroy {
     //     this.contribution = contribution;
     //   })
     // }
+    val!: number;
+    // conY: any;
+    @ViewChild("conYear")
+    conY!: ElementRef;
+    conYear!: number;
 
     getCons(period: string) {
       this.contributionService.getContributionData(period)
         .pipe(takeWhile(() => this.alive))
         .subscribe(contributionData => {
           this.cons = contributionData;
-          console.log("cons date: ", this.cons);
-          this.dashboardService.getContributions(this.facId).subscribe((contribution: any) => {
+          // const conYear = document.getElementById('#conYear') as HTMLScriptElement;
+          // this.conY = conYear.nodeValue;
+          // const date = this.cons.map(i => i.date)
+          // console.log("cons date: ", date);
+          // console.log("con year: ", this.conYear)
+          // for (var val of date) {
+          //   this.val = parseInt(val);
+          //   console.log(val);
+          // }
+
+          this.dashboardService.getYear(this.facId, 2021).subscribe((contribution: any) => {
             this.contribution = contribution;
-            this.numOfCon = this.contribution.length
-          })
+            this.numOfCon = this.contribution.length;
+            // console.log("con year", this.contribution);
+            // console.log("number of cons",this.numOfCon)
+          });
         });
     }
-  
 
   ngOnDestroy() {
     this.alive = false;
   }
+
 }

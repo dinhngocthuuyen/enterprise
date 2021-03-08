@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 export interface Contribution {
   _id: string;
   file: string;
-  date: Date;
+  date: string;
   status: string;
   _facultyId: string;
   _userId: string;
