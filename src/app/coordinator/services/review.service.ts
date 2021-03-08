@@ -49,12 +49,12 @@ export class CoorService {
   getFaculty(id: string){
     return this.WebReqService.get(`faculty/${id}`);
   }
-  updateProfile(id: string, body ) {
+   updateProfile(id: string, body ) {
     return this.WebReqService.patch(`profile/${id}`, body);
   }
   getStudents(id: string){
     return this.WebReqService.get(`${id}/students`);
-  } 
+  }
   getMonth(facultyId: string){
     return this.WebReqService.get(`getMonth/${facultyId}/contributions`);
   }
