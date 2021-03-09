@@ -22,6 +22,7 @@ export class ReviewComponent implements OnInit {
       },
       date: {
         title: 'Date',
+        type: Date,
       },
       status: {
         title: 'Status',
@@ -41,6 +42,7 @@ export class ReviewComponent implements OnInit {
 
   pendingC: any;
   pending!: LocalDataSource;
+  numOfP: any;
 
   approvedC: any;
   approved!: LocalDataSource;
@@ -55,7 +57,8 @@ export class ReviewComponent implements OnInit {
     /// load pending contributions by faculyID
     this.reviewService.getPendingCs(this.facId).subscribe((contributions: any) => {
       this.contributions = contributions;
-      this.pending = new LocalDataSource(this.contributions)
+      this.pending = new LocalDataSource(this.contributions);
+      this.numOfP = this.contributions.length;
     });
     /// load pending contributions by faculyID
     this.reviewService.getApprovedCs(this.facId).subscribe((contributions: any) => {

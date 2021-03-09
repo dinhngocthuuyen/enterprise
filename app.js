@@ -176,7 +176,7 @@ app.get('/upload/download/:facultyId/:userId/:filename', (req, res) => {
       })
     }
     const readstream = gfs.createReadStream(file.filename);
-    readstream.pipe(res); 
+    readstream.pipe(res);
   })
 })
 
@@ -291,7 +291,7 @@ app.patch('/profile/:id', (req, res) => {
   })
 })
 
-app.put('/coordinators/:_id' ,(req, res) => {
+app.put('/coordinators/:id' ,(req, res) => {
   Coordinator.findOneAndUpdate({_id: req.params.id},{
       $set: req.body
   }).then(() =>{
@@ -438,7 +438,7 @@ app.get('/closure', (req, res) => {
 
 //app.controller('MainClosure', function($scope) {
 //  $scope.Date = '20210313T00:00:00';
-  
+
  // $scope.DateTimeEnd = '20210313T00:00:00';
 //});
 
@@ -451,11 +451,23 @@ app.get('/coordinator/:facultyId/contributions', (req, res) => {
     res.send(contributions);
   })
 });
+
 app.get('/contribution/:id', (req, res) => {
   Contribution.find({_id: req.params.id}).then((contributions) => {
       res.send(contributions);
   });
 })
+app.get('/contribution/studentId/:id', (req, res) => {
+  Contribution.findOne({_id: req.params.id}).then((contributions) => {
+      res.send(contributions._userId);
+  });
+})
+app.get('/contribution/date/:id', (req, res) => {
+  Contribution.findOne({_id: req.params.id}).then((contributions) => {
+      res.send(contributions.date);
+  });
+})
+
 app.patch('/contributions/:id', (req, res) => {
   Contribution.findOneAndUpdate({_id: req.params.id},{
       $set: req.body
