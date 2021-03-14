@@ -36,10 +36,6 @@ export class ProfileComponent implements OnInit {
     this.profileService.getProfile(this.userId).subscribe((user: any) => {
       this.user = user;
     });
-        // this.facId = localStorage.getItem('facId');
-        // this.profileService.getFaculty(this.facId).subscribe((faculty: any) => {
-        //   this.faculty = faculty;
-        // });
 }
 
 

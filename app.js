@@ -176,7 +176,7 @@ app.get('/upload/download/:facultyId/:userId/:filename', (req, res) => {
       })
     }
     const readstream = gfs.createReadStream(file.filename);
-    readstream.pipe(res); 
+    readstream.pipe(res);
   })
 })
 
@@ -438,7 +438,7 @@ app.get('/closure', (req, res) => {
 
 //app.controller('MainClosure', function($scope) {
 //  $scope.Date = '20210313T00:00:00';
-  
+
  // $scope.DateTimeEnd = '20210313T00:00:00';
 //});
 
@@ -684,6 +684,16 @@ app.get('/viewcoor', authenticate, (req, res) => {
     res.send(e);
   });
 })
+
+app.get('/viewdetail/:id', (req, res) => {
+  //Return an array of all the posts in database
+  User.find({_id: req.params.id}).then((post) => {
+    res.send(post);
+  }).catch((e) => {
+    res.send(e);
+  });
+})
+
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 app.listen(3000, () => {

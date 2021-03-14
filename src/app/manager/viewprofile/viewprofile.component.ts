@@ -8,21 +8,21 @@ import { ViewProfile} from '../service/manager.service'
 })
 export class viewComponent implements OnInit {
   settings = {
-    hideSubHeader: true,
+    hideSubHeader: false,
     actions: false,
     columns: {
-      _id: {
-        title: 'ID',
-      },
+      // _id: {
+      //   title: 'ID',
+      // },
       username: {
         title: 'username',
       },
       name: {
         title: 'Name',
       },
-      role: {
-          title: 'Role',
-      }
+      // role: {
+      //     title: 'Role',
+      // }
     }
   };
   userId:any;
@@ -34,48 +34,30 @@ export class viewComponent implements OnInit {
   profile!: LocalDataSource;
 
   constructor(private router: Router, private ViewProfile : ViewProfile, ) {
-      
+
   }
 
   ngOnInit(): void {
     this.ViewProfile.getPost().subscribe((posts: any) => {
       this.posts = posts;
-      this.source = new LocalDataSource(this.posts); 
+      this.source = new LocalDataSource(this.posts);
 
       this.ViewProfile.getviewcoordinator().subscribe((posts: any) => {
         this.posts = posts;
         this.profile = new LocalDataSource(this.posts); }
-      
-    )})   
+
+    )})
     this.userId = localStorage.getItem('userId');
 
   }
 
-  onSearch(query: string = '') {
-    this.source.setFilter([
-      // fields we want to include in the search
-      {
-        field: '_id',
-        search: query
-      },
-      {
-        field: 'name',
-        search: query
-      },
-      {
-        field: 'role',
-        search: query
-      },
-    ], false); 
-  }
-  
    onUserRowSelect(event){
      this.router.navigate(['manager/'+this.userId+'/viewdetail/' + event.data._id]);
-    
+
    }
 
    studentdetail(event){
     this.router.navigate(['manager/'+this.userId+'/viewdetail/' + event.data._id]);
-   
+
   }
 }

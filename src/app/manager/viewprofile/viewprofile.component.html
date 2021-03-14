@@ -3,32 +3,29 @@
       <a href="#" routerLink="/pages/login">Log in</a>
     </nb-card-body> -->
   </nb-card>
-  
+
   <nb-card>
     <nb-card-body>
-  
+
       <nb-tabset>
         <nb-tab tabTitle="Student">
             <nb-card>
                 <nb-card-body>
-                  <input  class="form-control" type="text" placeholder="&#xF002; Search" style="font-family:Arial, FontAwesome" >
                   <ng2-smart-table [settings]="settings" [source]="source" (userRowSelect)="studentdetail($event)"></ng2-smart-table>
                 </nb-card-body>
-              </nb-card>        
+              </nb-card>
       </nb-tab>
         <nb-tab tabTitle="Coordinator">
-            <input  class="form-control" type="text" placeholder="&#xF002; Search" style="font-family:Arial, FontAwesome" >
-            <ng2-smart-table [settings]="settings" [source]="profile"  (userRowSelect)="onUserRowSelect($event)"></ng2-smart-table>
+          <ng2-smart-table [settings]="settings" [source]="profile"  (userRowSelect)="onUserRowSelect($event)" ></ng2-smart-table>
         </nb-tab>
       </nb-tabset>
-  
+
     </nb-card-body>
   </nb-card>
 
 
-  
-  
-  
-  
-  
-  
+
+
+
+
+

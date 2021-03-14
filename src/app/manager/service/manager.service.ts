@@ -14,16 +14,6 @@ export class ViewProfile {
   getviewcoordinator(){
     return this.WebRequestService.get('viewcoor');
   }
-  
-}
-
-
-@Injectable({
-  providedIn: 'root'
-})
-export class ViewDetail {
-
-  constructor(private WebRequestService: WebRequestService) {}
   getviewdetail(id: string){
     return this.WebRequestService.get(`viewdetail/${id}`);
 }

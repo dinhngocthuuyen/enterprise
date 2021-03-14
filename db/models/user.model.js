@@ -167,7 +167,7 @@ let saveSessionToDatabase = (user, refreshToken) => {
             user.sessions.push({'token' : refreshToken, expiresAt});
         } else {
             user.sessions.set(0 ,{'token' : refreshToken, expiresAt})
-        }       
+        }
         user.save().then(() => {
             //Saved session successfully
             return resolve(refreshToken);
