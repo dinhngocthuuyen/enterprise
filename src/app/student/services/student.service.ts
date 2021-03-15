@@ -43,5 +43,10 @@ export class StudentService {
   }
   getClosure(facultyId: string, userId: string){
     return this.WebReqService.get(`closure/${facultyId}/${userId}`);
+  
   }
+createContribution(studentId: string, facultyId: string) {
+  // We want to send a web request to create a task
+  return this.WebReqService.post(`${studentId}/contribution`, { facultyId });
+ } 
 }

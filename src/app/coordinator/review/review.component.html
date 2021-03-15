@@ -10,7 +10,7 @@
           <input id="getfacultyId" type="text" [value]="facId"> -->
           <ng2-smart-table [settings]="settings" [source]="source" (userRowSelect)="navigateToDetail($event)"></ng2-smart-table>
         </nb-tab>
-        <nb-tab tabTitle="Pending ">
+        <nb-tab tabTitle="Pending " [badgeText]="numOfP" badgeStatus="danger">
           <ng2-smart-table [settings]="settings" [source]="pending" (userRowSelect)="navigateToDetail($event)"></ng2-smart-table>
         </nb-tab>
         <nb-tab tabTitle="Approved" >

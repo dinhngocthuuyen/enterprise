@@ -1,12 +1,6 @@
 const mongoose = require('mongoose');
 
 const ContributionSchema = new mongoose.Schema({
-  file: {
-    type: String,
-    // required: true,
-    // minlength: 1,
-    // trim: true,
-  },
   date: {
     type: Date,
   },

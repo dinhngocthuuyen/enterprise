@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { NgForm } from '@angular/forms';
-import { throwError } from 'rxjs';
-import { resetFakeAsyncZone } from '@angular/core/testing';
+import { ActivatedRoute, Router } from '@angular/router';
+import { StudentService } from '../services/student.service'
 
 @Component({
   selector: 'app-upload',
@@ -10,10 +8,24 @@ import { resetFakeAsyncZone } from '@angular/core/testing';
   styleUrls: ['./upload.component.scss']
 })
 export class UploadComponent implements OnInit {
-
-  constructor() { }
+  studentId!: any;
+  facultyId: any;
+  checked: boolean = true;
+  constructor(
+    private StudentService: StudentService,
+    private route: ActivatedRoute,
+    private router: Router) { }
 
   ngOnInit(): void {
+  }
+  createTask() {
+    this.studentId = localStorage.getItem('userId');
+    this.facultyId = localStorage.getItem('facultyId');
+    this.StudentService.createContribution(this.studentId, this.facultyId).subscribe(() => {
+      console.log('create successully', this.route);
+      this.router.navigate(['student/' + this.studentId + '/upload-contributions']);
+      this.checked = false;
+    })
   }
 
 }

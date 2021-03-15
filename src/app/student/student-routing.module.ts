@@ -23,7 +23,10 @@ const routes: Routes = [{
       path: 'upload-contributions',
       component: UploadContributionsComponent
     },
-  
+    {
+      path: 'upload',
+      component: UploadComponent
+    },
     {
       path: '',
       redirectTo: 'dashboard',

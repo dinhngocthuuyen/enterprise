@@ -1,11 +1,19 @@
 <nb-card>
-  
-    <!-- <nb-tab tabTitle="Upload file"> -->
-      <form action="/action_page.php">
-        <label for="myfile">Select a file:</label>
-        <input type="file" id="myfile" name="myfile"><br><br>
-        <button nbButton status="primary">Upload</button>
-      </form>      
-    <!-- </nb-tab> -->
-  
+  <nb-card-header>Topic Title</nb-card-header>
+  <nb-card-body>
+    <label>Start date: </label>
+    <br>
+    <label>Deadline 1: </label>
+    <br>
+    <label>Deadline 2: </label>
+    <br>
+  </nb-card-body>
+  <nb-card-footer>
+    <ng-template [ngIf]="checked == true" [ngIfElse]="editButton">
+    <button nbButton status="primary" (click)="createTask()">Contribute</button>
+    </ng-template>
+    <ng-template #editButton>
+      <button nbButton status="primary">Edit</button>
+    </ng-template>
+  </nb-card-footer>
 </nb-card>

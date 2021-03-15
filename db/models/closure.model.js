@@ -17,7 +17,7 @@ const ClosureSchema = new mongoose.Schema({
   _userId: {
     type: mongoose.Types.ObjectId,
   },
-});
+})
 
 const Closure = mongoose.model('Closure', ClosureSchema);
 module.exports = {
