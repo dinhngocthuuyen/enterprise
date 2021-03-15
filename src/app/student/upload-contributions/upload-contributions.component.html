@@ -1,7 +1,10 @@
+
 <form ngNoForm  [action]="url" method="post" enctype="multipart/form-data">
     <input class="form-control" type="file" name="uploaded_file" />
     <input name="_facultyId" [value]="facultyId"/>
     <input name="_userId" [value]="userId"/>
+    <input [value]="contributionId"/>
+
     <button nbButton status="danger" type="submit">Upload</button>
 </form>
 <!--*ngIf="deadline1; else deadline2" -->

@@ -41,4 +41,8 @@ export class StudentService {
   deleteUpload(id: string) {
     return this.WebReqService.delete(`upload/${id}`);
   }
+  createContribution(studentId: string, facultyId: string) {
+    // We want to send a web request to create a task
+    return this.WebReqService.post(`${studentId}/contribution`, { facultyId });
+  }
 }

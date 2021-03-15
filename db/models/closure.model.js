@@ -10,7 +10,7 @@ const ClosureSchema = new mongoose.Schema({
     type: String,
   },
   deadline2: {
-    type: String,
+    type: Date,
   }
 });
 

@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { LocalDataSource, ViewCell } from 'ng2-smart-table';
 import { StudentService } from '../services/student.service'
 
@@ -76,18 +76,19 @@ export class UploadContributionsComponent implements OnInit {
   source!: LocalDataSource;
   facultyId: any;
   userId: any;
-
-  constructor(private StudentService: StudentService, private router: Router) { }
+  contributionId: any;
+  constructor(private StudentService: StudentService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.facultyId = localStorage.getItem('facultyId');
     this.userId = localStorage.getItem('userId');
-
+    this.contributionId = this.route.snapshot.params.id;
+    
     this.StudentService.getUpload(this.facultyId, this.userId).subscribe((files: any) => {
       this.files = files;
       this.source = new LocalDataSource(this.files);
     })
-  
+
   }
 
   onDeleteButtonClicked(event){
@@ -96,6 +97,6 @@ export class UploadContributionsComponent implements OnInit {
     })
   }
 
-  
+
 
 }

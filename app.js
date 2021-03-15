@@ -431,7 +431,7 @@ app.post('/closure', (req, res) => {
 });
 
 app.get('/closure', (req, res) => {
-  Closure.find({}).then((closure) => {
+  Closure.find({}).limit(1).then((closure) => {
     res.send(closure);
  });
 })
@@ -540,22 +540,21 @@ app.post('/:contributionId/comments', (req, res) => {
 //     res.send(contributions);
 //   })
 // });
-// app.post('/users/:userId/contributions', (req, res) => {
-//   let newContribution = new Contribution({
-//       file: req.body.file,
-//       date: Date.now().toString(),
-//       status: "Pending",
-//       _userId: req.params.userId,
-//       _facultyId: req.body.facultyId
-//   });
-//   newContribution.save().then((newDoc) => {
-//     res.send(newDoc)
-//   })
-// });
+app.post('/:userId/contribution', (req, res) => {
+  let newContribution = new Contribution({
+      date: Date.now().toString(),
+      status: "Pending",
+      _userId: req.params.userId,
+      _facultyId: req.body.facultyId
+  });
+  newContribution.save().then((newDoc) => {
+    res.send(newDoc)
+  })
+});
 
 app.get('/contributions', (req, res) => {
-  Contribution.find({}).then((roles) => {
-      res.send(roles);
+  Contribution.find({}).then((contributions) => {
+      res.send(contributions);
   });
 })
 
