@@ -8,6 +8,7 @@ const {Message} = require("./messages.model");
 const {Faculty} = require("./faculty.model");
 const {Comment} = require("./comment.model");
 const {Closure} = require("./closure.model");
+const {Topic} = require("./topic.model");
 
 module.exports = {
   Post,
@@ -20,5 +21,6 @@ module.exports = {
   Message,
   Faculty,
   Closure,
-  Comment
+  Comment,
+  Topic
 }

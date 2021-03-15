@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { NbButtonModule, NbCardModule, NbIconModule, NbLayoutModule, NbMenuModule,NbCheckboxModule, NbSidebarModule, NbTabsetModule, NbThemeModule, NbTagInputDirective, NbFilterInputDirective, NbTreeGridModule, NbActionsModule, NbUserModule, NbContextMenuModule, NbChatModule, NbDatepickerModule, NbOptionModule, NbSelectModule, NbAlertModule } from '@nebular/theme';
+import { NbButtonModule, NbCardModule, NbIconModule, NbLayoutModule, NbMenuModule,NbCheckboxModule, NbSidebarModule, NbTabsetModule, NbThemeModule, NbTagInputDirective, NbFilterInputDirective, NbTreeGridModule, NbActionsModule, NbUserModule, NbContextMenuModule, NbChatModule, NbDatepickerModule, NbOptionModule, NbSelectModule, NbAlertModule, NbInputModule } from '@nebular/theme';
 
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { CommonModule } from '@angular/common';
@@ -11,6 +11,7 @@ import { AccountComponent } from './account/account.component';
 import { ClosureComponent } from './closure/closure.component';
 import { AccountModule } from './account/account.module';
 import { ReactiveFormsModule } from '@angular/forms';
+import { CreateTopicComponent } from './create-topic/create-topic.component';
 
 @NgModule({
   imports: [
@@ -37,13 +38,14 @@ import { ReactiveFormsModule } from '@angular/forms';
     NbContextMenuModule,
     HttpClientModule,
     ReactiveFormsModule,
-    NbAlertModule
-    
+    NbAlertModule,
+    NbInputModule
   ],
   declarations: [
     ChatComponent,   
-     AccountComponent,
-    ClosureComponent
+    AccountComponent,
+    ClosureComponent,
+    CreateTopicComponent
   ],
 })
 export class AdminModule {

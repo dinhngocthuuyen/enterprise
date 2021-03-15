@@ -1,11 +1,18 @@
 
 <form ngNoForm  [action]="url" method="post" enctype="multipart/form-data">
     <input class="form-control" type="file" name="uploaded_file" />
+<<<<<<< Updated upstream
     <input name="_facultyId" [value]="facultyId"/>
     <input name="_userId" [value]="userId"/>
     <button  nbButton status="danger" type="submit" [disabled]="isSubmit">Upload</button>
     <input [value]="contributionId"/>
 
+=======
+    <input hidden name="_facultyId" [value]="facultyId"/>
+    <input hidden name="_userId" [value]="userId"/>
+    <input hidden name="status" value="pending"/>
+    <button nbButton status="danger" type="submit">Upload</button>
+>>>>>>> Stashed changes
 </form>
 <!--*ngIf="deadline1; else deadline2" -->
 <nb-card>

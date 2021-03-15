@@ -17,7 +17,7 @@ const app = express();
 /* LOAD MONGOOSE MODEL */
 const jwt = require('jsonwebtoken');
 
-const { Post, Contribution, Coordinator, User, Role, Student, Message, Faculty, Comment, Closure } = require('./db/models');
+const { Post, Contribution, Coordinator, User, Role, Student, Message, Faculty, Comment, Closure, Topic } = require('./db/models');
 const { info } = require('console');
 const { result } = require('lodash');
 
@@ -135,10 +135,8 @@ const upload = multer({ storage });
 // student gets files
 app.get('/upload/:facultyId/:userId', (req, res) => {
   gfs.files.find({
-    metadata: {
-      _facultyId: req.params.facultyId,
-      _userId: req.params.userId,
-    }
+      "metadata._facultyId": req.params.facultyId,
+      "metadata._userId": req.params.userId,
   }).toArray((err, files) => {
     if (!files || files.length  === 0) {
       return res.status(404).json({
@@ -163,12 +161,10 @@ app.get('/upload/:facultyId', (req, res) => {
 })
 
 //Download file
-app.get('/upload/download/:facultyId/:userId/:filename', (req, res) => {
+app.get('/upload/download/:filename', (req, res) => {
   gfs.files.findOne({
-    metadata: {
-      _facultyId: req.params.facultyId,
-      _userId: req.params.userId,
-    },
+    "metadata._facultyId": req.params.facultyId,
+    "metadata._userId": req.params.userId,
     filename : req.params.filename
   }, (err, file) => {
     if (!file || file.length  === 0) {
@@ -195,6 +191,27 @@ app.delete('/upload/:id', (req, res) => {
   })
 })
 
+/////////////////////////////////////////////////////// TOPIC /////////////////////////////////////////////////////////////
+
+app.get('/topic', (req, res) => {
+  Topic.find({}).then((post) => {
+    res.send(post);
+  }).catch((e) => {
+    res.send(e);
+  });
+})
+
+app.post('/topic', (req, res) => {
+  let title = req.body.title
+  let deadline1 = req.body.deadline1
+  let deadline2 = req.body.deadline2
+  let newTopic = new Topic({
+    title, deadline1, deadline2 
+  });
+  newTopic.save().then((topicDoc) => {
+    res.send(topicDoc);
+  })
+})
 
 /////////////////////////////////////////////////////// POST //////////////////////////////////////////////////////////////
 
