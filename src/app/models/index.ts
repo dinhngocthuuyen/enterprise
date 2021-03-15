@@ -4,4 +4,5 @@ export * from './coordinator';
 export * from './student';
 export * from './contribution';
 export * from './chat';
+export * from './closure';
 

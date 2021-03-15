@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LocalDataSource, ViewCell } from 'ng2-smart-table';
-import { StudentService } from '../services/student.service'
+import { StudentService } from '../services/student.service';
 
 @Component({
   selector: 'button-view',
@@ -76,6 +76,7 @@ export class UploadContributionsComponent implements OnInit {
   source!: LocalDataSource;
   facultyId: any;
   userId: any;
+  isSubmit: boolean = false;
 
   constructor(private StudentService: StudentService, private router: Router) { }
 
@@ -87,7 +88,10 @@ export class UploadContributionsComponent implements OnInit {
       this.files = files;
       this.source = new LocalDataSource(this.files);
     })
-  
+
+    this.StudentService.getClosure(this.facultyId, this.userId).subscribe((res: any) => {
+      this.isSubmit = !res.isSubmit;
+    })
   }
 
   onDeleteButtonClicked(event){
@@ -95,7 +99,4 @@ export class UploadContributionsComponent implements OnInit {
       this.file = file;
     })
   }
-
-  
-
 }

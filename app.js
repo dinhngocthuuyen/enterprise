@@ -8,6 +8,7 @@ const multer = require('multer');
 const GridFsStorage = require('multer-gridfs-storage');
 const Grid = require('gridfs-stream');
 const methodOverride = require('method-override');
+const dayjs = require('dayjs');
 
 const nodemailer = require("nodemailer");
 /* LOAD EXPRESS MODEL */
@@ -18,7 +19,7 @@ const jwt = require('jsonwebtoken');
 
 const { Post, Contribution, Coordinator, User, Role, Student, Message, Faculty, Comment, Closure } = require('./db/models');
 const { info } = require('console');
-const { result } = require('lodash');
+const { result, last } = require('lodash');
 
 /* LOAD GLOBAL MIDDLEWARE */
 app.use(bodyParser.json());
@@ -422,17 +423,79 @@ app.get('/faculties', (req, res) => {
  });
 })
 
+app.get('/closure', (req, res) => {
+  Closure.find({}).then((user) => {
+    res.send(user);
+ });
+})
+
 app.post('/closure', (req, res) => {
   let newClosure = new Closure(req.body);
   newClosure.save().then((ClosureDoc) => {
-
     res.send(ClosureDoc);
   })
 });
 
-app.get('/closure', (req, res) => {
+/**
+ * Startdate tới deadline 1 là được nộp bài với sửa bài
+ * Deadline 1 tới deadline 2 chỉ được nộp bài sửa nếu trước đó đã nộp file r
+ */
+
+app.get('/closure/:facultyId/:userId', async (req, res) => {
+  const getFileUpload = await gfs.files.find({
+    metadata: {
+      _facultyId: req.params.facultyId,
+      _userId: req.params.userId,
+    }
+  }).toArray();
+
+  const checkFileUpload = (fileUpload) => {
+    if (fileUpload.length !== 0) {
+      return true;
+    }
+    return false;
+  }
+
   Closure.find({}).then((closure) => {
-    res.send(closure);
+    const lastClosure = closure[closure.length -1];
+    const currentDate = dayjs();
+    const startdate = dayjs(lastClosure.startdate);
+    const deadline1 = dayjs(lastClosure.deadline1);
+    const deadline2 = dayjs(lastClosure.deadline2);
+
+    const isSubmit = () => {
+      const diffStartDate = deadline1.diff(startdate, 'DD-MM-YYY HH:mm');
+      const diffDeadline1 = deadline1.diff(currentDate, 'DD-MM-YYY HH:mm');
+      const diffDeadline2 = deadline2.diff(currentDate, 'DD-MM-YYY HH:mm');
+      const isFileUpload = checkFileUpload(getFileUpload);
+
+      // console.log('diffStartDate', diffStartDate);
+      // console.log('diffDeadline1', diffDeadline1);
+      // console.log('diffDeadline2', diffDeadline2);
+
+      if (diffStartDate > diffDeadline1 && diffDeadline1 > 0) {
+        console.log('Trường hợp 1 tính từ startdate -> deadline1: Mở form');
+        return true;
+      }
+
+      if (diffDeadline2 < 0) {
+        console.log('Trường hợp 3 quá hạn deadline2 & đã nộp bài: Đóng form');
+        return false;
+      }
+
+      if (diffDeadline2 > diffDeadline1 && isFileUpload) {
+        console.log('Trường hợp 2 tính từ deadline1 -> deadline2 & đã nộp bài: Mở form');
+        return true;
+      }
+
+      return false;
+    }
+      
+    res.send({
+      closure: lastClosure,
+      isSubmit: isSubmit(),
+      filesUpload: getFileUpload,
+    });
  });
 })
 

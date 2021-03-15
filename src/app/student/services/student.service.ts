@@ -41,4 +41,7 @@ export class StudentService {
   deleteUpload(id: string) {
     return this.WebReqService.delete(`upload/${id}`);
   }
+  getClosure(facultyId: string, userId: string){
+    return this.WebReqService.get(`closure/${facultyId}/${userId}`);
+  }
 }

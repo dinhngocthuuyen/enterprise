@@ -43,8 +43,8 @@ export class AccountComponent implements OnInit {
 
     this.signupForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email,Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]],
-      name: [],
-      password: [],
+      name: ['', [Validators.required,]],
+      password: ['', [Validators.required, Validators.minLength(8)]],
       role: [],
       _facultyId: [],
     });
