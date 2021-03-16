@@ -20,19 +20,8 @@
       </div>
       <input nbInput type="numer" value="Thu" #conYear>
       </nb-card-body>
-
-<!-- report -->
-<!-- <nb-card-body style="display: flex; justify-content: center;">
-<span>Contributions Report</span>
-</nb-card-body>
-
-<nb-list class="contribution-list">
-  <nb-list-item *ngFor="let item of contribution">
-
-  </nb-list-item>
-  </nb-list> -->
 </nb-card>
-
+<!-- Count Contribution -->
 <nb-card size="medium" status="info">
 
   <nb-card-header >
@@ -56,4 +45,12 @@
   </nb-list>
 
 </nb-card>
-
+<!-- Chart -->
+<nb-card status="primary">
+  <nb-card-header style="display: flex; justify-content: center;">
+    DATA CHART
+  </nb-card-header>
+  <div id="divChart">
+    <canvas id="myChart"></canvas>
+  </div>
+</nb-card>

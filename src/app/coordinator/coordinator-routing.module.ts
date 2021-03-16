@@ -11,7 +11,7 @@ import { ResetPasswordComponent } from './profile/reset-password/reset-password.
 import { ChatListComponent } from './chat/chat-list.component';
 
 const routes: Routes = [{
-  path: '',
+  path: ':id',
   component: CoordinatorComponent,
   children: [
     {
