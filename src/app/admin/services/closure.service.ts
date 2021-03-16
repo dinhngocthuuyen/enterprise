@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { of as observableOf, Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Closure } from 'db/models';
+import { WebRequestService } from 'src/app/shared/web-request.service';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +19,7 @@ export class ClosureService {
   closure !: Closure;
   closures !: Closure[];
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private WebReqService: WebRequestService) {
 
   }
 
@@ -27,6 +28,10 @@ export class ClosureService {
   }
   getClosure(): Observable<Closure> {
     return this.http.get<Closure>(this.API_PATH, this.options);
+  }
+
+  deleteClosure(id: string) {
+    return this.WebReqService.delete(`closure/${id}`);
   }
 
 }

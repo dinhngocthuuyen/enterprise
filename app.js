@@ -448,6 +448,15 @@ app.post('/closure', (req, res) => {
   })
 });
 
+app.delete('/closure/:id', (req, res) => {
+  //Delete a selected closure (document with id in the URL)
+  Closure.findOneAndDelete({
+    _id: req.params.id
+  }).then((removePost) => {
+    res.send(removePost);
+  })
+})
+
 /**
  * Startdate tới deadline 1 là được nộp bài với sửa bài
  * Deadline 1 tới deadline 2 chỉ được nộp bài sửa nếu trước đó đã nộp file r
@@ -512,7 +521,7 @@ app.post('/closure', (req, res) => {
 
 
 app.get('/closure', (req, res) => {
-  Closure.find({}).limit(1).then((closure) => {
+  Closure.find({}).then((closure) => {
     res.send(closure);
  });
 })
@@ -622,6 +631,9 @@ app.post('/:contributionId/comments', (req, res) => {
 //   })
 // });
 app.post('/:userId/contribution', (req, res) => {
+
+  console.log('req', req.body);
+
   let newContribution = new Contribution({
       date: Date.now().toString(),
       status: "Pending",

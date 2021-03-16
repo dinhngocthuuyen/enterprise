@@ -1,11 +1,13 @@
 <nb-card>
   <nb-card-header>Topic Title</nb-card-header>
   <nb-card-body>
-    <label>Start date: </label>
+    <label>Start date: {{ startdate }}</label>
     <br>
-    <label>Deadline 1: </label>
+    <div>
+      Deadline 1: {{ countDownDeadline1Time }}
+    </div>
     <br>
-    <label>Deadline 2: </label>
+    <label>Deadline 2: {{ countDownDeadline2Time }}</label>
     <br>
   </nb-card-body>
   <nb-card-footer>
@@ -17,3 +19,4 @@
     </ng-template>
   </nb-card-footer>
 </nb-card>
+

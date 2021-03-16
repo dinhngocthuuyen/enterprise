@@ -5,6 +5,9 @@ import { AuthService } from 'src/app/services/auth.service';
 import { FacultyService } from 'src/app/admin/services/faculty.service';
 import {Role} from 'db/models'
 import { Faculty } from 'src/app/models';
+import { LocalDataSource } from 'ng2-smart-table';
+import { UserService } from '../services/user.service';
+import { User } from 'src/app/models/user';
 
 @Component({
   selector: 'app-account',
@@ -14,6 +17,40 @@ import { Faculty } from 'src/app/models';
 })
 export class AccountComponent implements OnInit {
   
+  url = "http://localhost:3000/account"
+
+  settings = {
+    mode: 'external',
+    hideSubHeader: true,
+    actions: {
+      add: false,
+      edit: false,
+      position: 'right'
+    },
+    delete: {
+      confirmDelete: true,
+    },
+    columns: {
+      _id: {
+        title: 'id',
+        hide: true,
+      },
+      username: {
+        title: 'Username',
+      },
+      name: {
+        title: 'Name',
+      },
+      role: {
+        title: 'Role',
+      },
+      facultyName: {
+        title: 'Faculty',
+      }
+   
+    },
+
+  };
 
   signupForm = new FormGroup({
     name: new FormControl(),
@@ -23,11 +60,24 @@ export class AccountComponent implements OnInit {
   })
   submitted = false;
   isAlert: boolean = false;
+  files: any;
+  file: any;
+  _facultyId: any;
+  username: any ;
+  name: any ;
+  role: any ;
+  sourceUsers!: LocalDataSource;
 
- constructor(private authService: AuthService, private facultyService: FacultyService, private formBuilder: FormBuilder) {
+ constructor(
+   private authService: AuthService, 
+   private facultyService: FacultyService, 
+   private formBuilder: FormBuilder,
+   private userService: UserService
+       
+  ) {
 
  }
-
+    // usersList: any = [];
     facultyList: Faculty [] = [];
     roleList: Role [] = [
       { role: 'admin', name: 'Admin'},
@@ -39,7 +89,16 @@ export class AccountComponent implements OnInit {
   
 
 
-  ngOnInit() {
+  ngOnInit():void {
+    // this.username = localStorage.getItem('username');
+    // this.name = localStorage.getItem('name');
+    // this.role = localStorage.getItem('role');
+    // this._facultyId = localStorage.getItem('facultyId');
+    
+    // this.userService.getUpload(this.username,this.name,this.role,this._facultyId).subscribe((files: any) => {
+    //   this.files = files;
+    //   this.source = new LocalDataSource(this.files);
+    // })
 
     this.signupForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email,Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]],
@@ -50,6 +109,8 @@ export class AccountComponent implements OnInit {
     });
     
      this.getFaculty();
+
+     this.getUser();
   }
 
   getFaculty(): void {
@@ -62,6 +123,23 @@ export class AccountComponent implements OnInit {
         ...res,
       ]
       this.facultyList = newFaculty;
+    });
+    this.getUser();
+  }
+
+  getUser(): void {
+    this.userService.getUsers().subscribe((res: User[]) => {
+      const result = res.map(item => {
+        const faculty = this.facultyList.find(v => v._id === item._facultyId);
+        return {
+          _id: item._id,
+          username: item.username,
+          name: item.name,
+          role: item.role,
+          facultyName: faculty?.name,
+        }
+      });
+      this.sourceUsers = new LocalDataSource(result);
     });
   }
 
@@ -111,6 +189,13 @@ export class AccountComponent implements OnInit {
   // }
   doSomething() {
     this.isAlert = true;
+  }
+
+  onDeleteButtonClicked(event){
+    console.log('hihihi', event.data._id)
+    this.userService.deleteUser(event.data._id).subscribe((res: any) => {
+      this.getUser();
+    });
   }
   
 }

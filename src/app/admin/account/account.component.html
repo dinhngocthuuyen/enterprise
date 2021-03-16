@@ -49,7 +49,11 @@
                 
     </form>
   
+</nb-card>
 
-
+<nb-card>
+  <nb-card-body>
+    <ng2-smart-table [settings]="settings" [source]="sourceUsers" (delete)="onDeleteButtonClicked($event)"></ng2-smart-table>
+  </nb-card-body>
 </nb-card>
 

@@ -101,7 +101,4 @@ export class UploadContributionsComponent implements OnInit {
       this.file = file;
     })
   }
-
-
-
 }

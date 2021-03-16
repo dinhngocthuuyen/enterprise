@@ -4,7 +4,7 @@
     <nb-icon icon="clock-outline"></nb-icon>
   </nb-card-header>
 
-  <nb-alert status="success" *ngIf="isAlert">
+  <nb-alert status="success" closable (close)="onCloseAlert()" *ngIf="isAlert">
     Submit successfully.
   </nb-alert>
 
@@ -29,10 +29,16 @@
         <nb-option *ngFor="let faculty of facultyList" [value]="faculty">{{ faculty.name }}</nb-option>             
     </nb-select><br><br>
     
-    <button nbButton status="primary" type="submit" >Submit</button>
+    <button nbButton status="primary" type="submit" >Submit</button><br>
+    <button nbButton status="warning" type="update" >Update</button>
 
-    <button nbButton status="warning" type="update">Update</button>
+    
+
 </form>
+
+<nb-card-body>
+  <ng2-smart-table [settings]="settings" [source]="sourceClosures" (delete)="onDeleteButtonClicked($event)"></ng2-smart-table>
+</nb-card-body>
 
 
     

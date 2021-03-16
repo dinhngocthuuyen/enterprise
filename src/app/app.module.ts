@@ -82,7 +82,6 @@ import { ClosureComponent } from './admin/closure/closure.component';
     ReactiveFormsModule,
     FormsModule,
     NbAlertModule,
-
   ],
   providers: [{provide: HTTP_INTERCEPTORS, useClass: WebRequestInterceptor, multi: true}],
   bootstrap: [AppComponent],
