@@ -1,0 +1,16 @@
+:host {
+    display: block;
+    max-height: 25rem;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+  
+  .card-row {
+    display: flex;
+    margin: 0 -0.5rem;
+  }
+  
+  .card-col {
+    flex: 1 1 calc(50% - 50%);
+    margin: 0 0.5rem;
+  }

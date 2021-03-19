@@ -41,24 +41,36 @@ export class DashboardComponent implements OnInit, OnDestroy {
     var myChart = new Chart("myChart", {
       type: 'bar',
       data: {
-        labels: ['Math', 'Information Technology', 'History', 'Green', 'Purple', 'Orange'],
+        labels: ['Jan','Feb', 'Mar', 'Apr','May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
         datasets: [{
           label: 'Faculty Contributions',
-          data: [12, 19, 3, 5, 2, 3],
+          data: [12, 19, 3, 5, 2, 3, 5, 7, 9, 7, 10, 11],
           backgroundColor: [
             'rgba(255, 99, 132, 0.2)',
+            'rgba(90, 99, 132, 0.2)',
+            'rgba(23, 100, 132, 0.2)',
             'rgba(54, 162, 235, 0.2)',
             'rgba(255, 206, 86, 0.2)',
             'rgba(75, 192, 192, 0.2)',
             'rgba(153, 102, 255, 0.2)',
+            'rgba(123, 162, 235, 0.2)',
+            'rgba(69, 162, 135, 0.2)',
+            'rgba(285, 62, 135, 0.2)',
+            'rgba(85, 62, 35, 0.2)',
             'rgba(255, 159, 64, 0.2)'
           ],
           borderColor: [
             'rgba(255, 99, 132, 1)',
+            'rgba(90, 99, 132, 1)',
+            'rgba(23, 100, 132, 1)',
             'rgba(54, 162, 235, 1)',
             'rgba(255, 206, 86, 1)',
             'rgba(75, 192, 192, 1)',
             'rgba(153, 102, 255, 1)',
+            'rgba(123, 162, 235, 1)',
+            'rgba(69, 162, 135, 1)',
+            'rgba(285, 62, 135, 1)',
+            'rgba(85, 62, 35, 1)',
             'rgba(255, 159, 64, 1)'
           ],
           borderWidth: 1
