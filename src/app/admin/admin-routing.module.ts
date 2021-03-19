@@ -4,7 +4,7 @@ import { ChatComponent } from './chat/chat.component';
 import { AdminComponent } from './admin.component';
 import { AccountComponent } from './account/account.component';
 import { ClosureComponent } from './closure/closure.component';
-import { CreateTopicComponent } from './create-topic/create-topic.component';
+import { ViewUsersComponent } from './view-users/view-users.component';
 
 const routes: Routes = [{
   path: '',
@@ -23,10 +23,9 @@ const routes: Routes = [{
       component: ClosureComponent,
     },
     {
-      path: 'create-topic',
-      component: CreateTopicComponent,
+      path: 'view-user',
+      component: ViewUsersComponent,
     },
-
     {
       path: '',
       redirectTo: 'dashboard',

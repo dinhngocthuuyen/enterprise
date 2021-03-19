@@ -80,5 +80,4 @@ export class ViewContributionsComponent implements OnInit {
       this.source = new LocalDataSource(this.files);
     })
   }
-
 }

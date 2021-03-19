@@ -11,7 +11,7 @@ import { AccountComponent } from './account/account.component';
 import { ClosureComponent } from './closure/closure.component';
 import { AccountModule } from './account/account.module';
 import { ReactiveFormsModule } from '@angular/forms';
-import { CreateTopicComponent } from './create-topic/create-topic.component';
+import { ViewUsersComponent } from './view-users/view-users.component';
 
 @NgModule({
   imports: [
@@ -34,7 +34,6 @@ import { CreateTopicComponent } from './create-topic/create-topic.component';
     NbOptionModule,
     NbSelectModule,
     NbUserModule,
-    // NbChatModule,
     NbContextMenuModule,
     HttpClientModule,
     ReactiveFormsModule,
@@ -45,7 +44,7 @@ import { CreateTopicComponent } from './create-topic/create-topic.component';
     ChatComponent,   
     AccountComponent,
     ClosureComponent,
-    CreateTopicComponent
+    ViewUsersComponent,
   ],
 })
 export class AdminModule {

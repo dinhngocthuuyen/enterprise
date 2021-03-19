@@ -16,9 +16,6 @@ import { User } from 'src/app/models/user';
   styleUrls: ['./account.component.scss'],
 })
 export class AccountComponent implements OnInit {
-  
-  url = "http://localhost:3000/account"
-
   settings = {
     mode: 'external',
     hideSubHeader: true,
@@ -47,12 +44,11 @@ export class AccountComponent implements OnInit {
       facultyName: {
         title: 'Faculty',
       }
-   
     },
-
   };
 
   signupForm = new FormGroup({
+    email: new FormControl(),
     name: new FormControl(),
     password: new FormControl(),
     role: new FormControl(),
@@ -66,7 +62,7 @@ export class AccountComponent implements OnInit {
   username: any ;
   name: any ;
   role: any ;
-  sourceUsers!: LocalDataSource;
+  sourceUsers!: any;
 
  constructor(
    private authService: AuthService, 
@@ -99,6 +95,9 @@ export class AccountComponent implements OnInit {
     //   this.files = files;
     //   this.source = new LocalDataSource(this.files);
     // })
+    this.getFaculty();
+
+    this.getUser();
 
     this.signupForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email,Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]],
@@ -108,9 +107,7 @@ export class AccountComponent implements OnInit {
       _facultyId: [],
     });
     
-     this.getFaculty();
 
-     this.getUser();
   }
 
   getFaculty(): void {
@@ -127,7 +124,7 @@ export class AccountComponent implements OnInit {
     this.getUser();
   }
 
-  getUser(): void {
+  getUser(){
     this.userService.getUsers().subscribe((res: User[]) => {
       const result = res.map(item => {
         const faculty = this.facultyList.find(v => v._id === item._facultyId);
@@ -139,7 +136,7 @@ export class AccountComponent implements OnInit {
           facultyName: faculty?.name,
         }
       });
-      this.sourceUsers = new LocalDataSource(result);
+      this.sourceUsers = new LocalDataSource(result)
     });
   }
 
@@ -152,12 +149,10 @@ export class AccountComponent implements OnInit {
 
   onSubmit() {
     this.submitted = true;
-
       // stop here if form is invalid
       if (this.signupForm.invalid) {
           return;
       }
-
       const username: string = this.signupForm.value.email;
       const name: string = this.signupForm.value.name;
       const password: string = this.signupForm.value.password;

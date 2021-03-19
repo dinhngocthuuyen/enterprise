@@ -9,6 +9,7 @@ import { ContributionDetailComponent } from './review/contribution-detail/contri
 import { ProfileEditComponent } from './profile/profile-edit/profile-edit.component';
 import { ResetPasswordComponent } from './profile/reset-password/reset-password.component';
 import { ChatListComponent } from './chat/chat-list.component';
+import { ViewTopicComponent } from './review/view-topic/view-topic.component';
 
 const routes: Routes = [{
   path: ':id',
@@ -41,12 +42,16 @@ const routes: Routes = [{
       component: ResetPasswordComponent,
     },
     {
-      path: 'review',
-      component: ReviewComponent,
-    },
-    {
       path: 'review/:id',
       component: ContributionDetailComponent,
+    },
+    {
+      path: 'topic',
+      component: ViewTopicComponent,
+    },
+    {
+      path: 'topic/:id/review',
+      component: ReviewComponent,
     },
     {
       path: '',

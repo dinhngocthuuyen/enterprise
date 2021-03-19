@@ -8,7 +8,10 @@ export class FileService {
 
   constructor(private WebRequestService:WebRequestService) { }
 
-  getUpload(fid){
-    return this.WebRequestService.get(`upload/${fid}`);
+  getUpload(facultyId){
+    return this.WebRequestService.get(`upload/${facultyId}`);
+  }
+  getFile(filename){
+    return this.WebRequestService.get(`upload/${filename}`)
   }
 }

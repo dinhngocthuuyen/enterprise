@@ -35,18 +35,19 @@ export class StudentService {
     return this.WebReqService.post(`messages/${facultyId}/${id}`, {text, reply})
   }
 
-  getUpload(facultyId: string, userId: string){
-    return this.WebReqService.get(`upload/${facultyId}/${userId}`);
+  getUpload(userId: string, topicId: string){
+    return this.WebReqService.get(`upload/${userId}/${topicId}`);
   }
   deleteUpload(id: string) {
     return this.WebReqService.delete(`upload/${id}`);
   }
   getClosure(facultyId: string, userId: string){
     return this.WebReqService.get(`closure/${facultyId}/${userId}`);
-  
   }
-createContribution(studentId: string, facultyId: string) {
-  // We want to send a web request to create a task
-  return this.WebReqService.post(`${studentId}/contribution`, { facultyId });
- } 
+  createContribution(userId: string, facultyId: string) {
+    return this.WebReqService.post(`contribution`, {userId, facultyId});
+  } 
+  getTopic(){
+    return this.WebReqService.get(`topic`)
+  }
 }

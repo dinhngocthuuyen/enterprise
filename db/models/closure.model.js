@@ -2,6 +2,9 @@ const { getLocaleDateTimeFormat } = require('@angular/common');
 const mongoose = require('mongoose');
 
 const ClosureSchema = new mongoose.Schema({
+  topic: {
+    type: String,
+  },
   startdate: {
     type: String,
   },
@@ -10,13 +13,7 @@ const ClosureSchema = new mongoose.Schema({
   },
   deadline2: {
     type: String,
-  },
-  _facultyId: {
-    type: mongoose.Types.ObjectId,
-  },
-  _userId: {
-    type: mongoose.Types.ObjectId,
-  },
+  }
 })
 
 const Closure = mongoose.model('Closure', ClosureSchema);

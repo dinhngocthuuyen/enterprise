@@ -76,6 +76,7 @@ export class UploadContributionsComponent implements OnInit {
   source!: LocalDataSource;
   facultyId: any;
   userId: any;
+  topicId: any;
   contributionId: any;
   isSubmit: boolean = false;
   constructor(private StudentService: StudentService, private route: ActivatedRoute) { }
@@ -83,9 +84,9 @@ export class UploadContributionsComponent implements OnInit {
   ngOnInit(): void {
     this.facultyId = localStorage.getItem('facultyId');
     this.userId = localStorage.getItem('userId');
-    this.contributionId = this.route.snapshot.params.id;
+    this.topicId = this.route.snapshot.params.id;
     
-    this.StudentService.getUpload(this.facultyId, this.userId).subscribe((files: any) => {
+    this.StudentService.getUpload(this.userId, this.topicId).subscribe((files: any) => {
       this.files = files;
       this.source = new LocalDataSource(this.files);
     })
@@ -93,7 +94,6 @@ export class UploadContributionsComponent implements OnInit {
     this.StudentService.getClosure(this.facultyId, this.userId).subscribe((res: any) => {
       this.isSubmit = !res.isSubmit;
     })
-
   }
 
   onDeleteButtonClicked(event){

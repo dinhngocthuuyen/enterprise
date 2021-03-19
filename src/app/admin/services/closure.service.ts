@@ -34,4 +34,8 @@ export class ClosureService {
     return this.WebReqService.delete(`closure/${id}`);
   }
 
+  editClosure(id: string, startdate: string, deadline1: string, deadline2: string){
+    return this.WebReqService.patch(`closure/${id}`, {startdate, deadline1, deadline2});
+  }
+
 }

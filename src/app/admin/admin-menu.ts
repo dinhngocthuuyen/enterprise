@@ -17,9 +17,8 @@ export const MENU_ITEMS: NbMenuItem[] = [
     link: 'closure',
   },
   {
-    title: 'Create topic',
+    title: 'User',
     icon: 'clock-outline',
-    link: 'create-topic',
+    link: 'view-user',
   },
-
 ]

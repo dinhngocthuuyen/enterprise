@@ -17,7 +17,7 @@ export class AuthService {
       shareReplay(),
       tap((res: HttpResponse<any>) => {
         //The auth tokens will be in the header of this response
-        this.setSession(res.body._id, res.headers.get('x-access-token'), res.headers.get('x-refresh-token'));
+        this.setSession(res.headers.get('x-access-token'), res.headers.get('x-refresh-token'));
         console.log('LOGGED IN!!!');
         localStorage.setItem('userId', res.body._id);
         localStorage.setItem('facultyId', res.body._facultyId);
@@ -33,18 +33,15 @@ export class AuthService {
     return this.webRequestService.create(username, name, password, role, facultyId).pipe(
       shareReplay(),
       tap((res: HttpResponse<any>) => {
-        this.setSession(res.body._id, res.headers.get('x-access-token'), res.headers.get('x-refresh-token'));
         console.log('CREATE SUCCESSFULLY!!!');
       })
     )
   }
 
-  submit(startdate: String, deadline1:String, deadline2: String, _facultyId: string) {
-    return this.webRequestService.submit(startdate, deadline1, deadline2, _facultyId).pipe(
+  submit(topic: string, startdate: String, deadline1:String, deadline2: String) {
+    return this.webRequestService.submit(topic, startdate, deadline1, deadline2).pipe(
       shareReplay(),
       tap((res: HttpResponse<any>) => {
-        //The auth tokens will be in the header of this response
-        this.setSession(res.body._id, res.headers.get('x-access-token'), res.headers.get('x-refresh-token'));
         console.log('SUBMIT SUCCESSFULLY!!!');
       })
     )
@@ -54,15 +51,12 @@ export class AuthService {
     return this.webRequestService.update(startdate, deadline1, deadline2, _facultyId).pipe(
       shareReplay(),
       tap((res: HttpResponse<any>) => {
-        //The auth tokens will be in the header of this response
-        this.setSession(res.body._id, res.headers.get('x-access-token'), res.headers.get('x-refresh-token'));
         console.log('UPDATE SUCCESSFULLY!!!');
       })
     )
   }
 
-  private setSession(id: string, accessToken, refreshToken){
-    localStorage.setItem('id', id);
+  private setSession(accessToken, refreshToken){
     localStorage.setItem('x-access-token', accessToken);
     localStorage.setItem('x-refresh-token', refreshToken);
   }
@@ -89,7 +83,7 @@ export class AuthService {
   }
 
   getUserId() {
-    return localStorage.getItem('id');
+    return localStorage.getItem('userId');
   }
 
   getNewAccessToken() {

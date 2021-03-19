@@ -38,6 +38,9 @@ export class ClosureComponent implements OnInit {
         title: 'id',
         hide: true,
       },
+      topic:{
+        title: 'Topic'
+      },
       startdate: {
         title: 'Start Date',
       },
@@ -46,9 +49,6 @@ export class ClosureComponent implements OnInit {
       },
       deadline2: {
         title: 'Deadline 2'
-      },
-      facultyName: {
-        title: 'Faculty'
       }
     },
 
@@ -58,14 +58,13 @@ export class ClosureComponent implements OnInit {
     startdate: new FormControl(),
     deadline1: new FormControl(),
     deadline2: new FormControl(),
-    _facultyId: new FormControl(),
+    topic: new FormControl(),
   })
   
   isAlert: boolean = false;
   file: any;
   sourceClosures!: LocalDataSource;
   files: any;
-  _facultyId: any;
   startdate: any ;
   deadline1: any ;
   deadline2: any ;
@@ -73,9 +72,6 @@ export class ClosureComponent implements OnInit {
  constructor(private authService: AuthService, private facultyService: FacultyService, private closureService: ClosureService,){
    
  }
-
-  facultyList: any [] = [];
-  // closuresList: any = [];
 
   ngOnInit(): void {
     // this._facultyId = localStorage.getItem('facultyId');
@@ -88,51 +84,46 @@ export class ClosureComponent implements OnInit {
     //   this.files = files;
     //   this.source = new LocalDataSource(this.files);
     // })
-    
-    this.getFaculty();
 
     this.getClosure();
   }
 
   
-  getFaculty(): void {
-    this.facultyService.getFaculties().subscribe((res: Faculty[]) => {
-      const newFaculty = [
-        {
-          _id: '',
-          name: 'None',
-        },
-        ...res,
-      ]
-      this.facultyList = newFaculty;
-    });
-  }
+  // getFaculty(): void {
+  //   this.facultyService.getFaculties().subscribe((res: Faculty[]) => {
+  //     const newFaculty = [
+  //       {
+  //         _id: '',
+  //         name: 'None',
+  //       },
+  //       ...res,
+  //     ]
+  //     this.facultyList = newFaculty;
+  //   });
+  // }
 
   getClosure(): void {
     this.closureService.getClosures().subscribe((res: Closure[]) => {
       const result = res.map(item => {
-        const faculty = this.facultyList.find(v => v._id === item._facultyId);
         return {
           _id: item._id,
+          topic: item.topic,
           startdate: dayjs(item.startdate).format('DD-MM-YYYY HH:mm'),
           deadline1: dayjs(item.deadline1).format('DD-MM-YYYY HH:mm'),
-          deadline2: dayjs(item.deadline2).format('DD-MM-YYYY HH:mm'),
-          facultyName: faculty?.name,
+          deadline2: dayjs(item.deadline2).format('DD-MM-YYYY HH:mm')
         }
       });
-
       this.sourceClosures = new LocalDataSource(result);
     });
   }
 
   onSubmit() {
-
+      const topic: string = this.deadlineForm.value.topic;
       const startdate: string = this.deadlineForm.value.startdate;
       const deadline1: string = this.deadlineForm.value.deadline1;
       const deadline2: string = this.deadlineForm.value.deadline2;
-      const _facultyId: any = this.deadlineForm.value._facultyId;
       
-      this.authService.submit(startdate, deadline1, deadline2, _facultyId).subscribe((res: HttpResponse<any>) => {
+      this.authService.submit(topic, startdate, deadline1, deadline2).subscribe((res: HttpResponse<any>) => {
         console.log('res', res);
         this.isAlert = true;
         const _self = this;
@@ -145,15 +136,13 @@ export class ClosureComponent implements OnInit {
     }
 
     onUpdate() {
-
+      const topic: string = this.deadlineForm.value.topic;
       const startdate: string = this.deadlineForm.value.startdate;
       const deadline1: string = this.deadlineForm.value.deadline1;
       const deadline2: string = this.deadlineForm.value.deadline2;
-      const _facultyId: any = this.deadlineForm.value._facultyId;
       
-      this.authService.update(startdate, deadline1, deadline2, _facultyId).subscribe((res: HttpResponse<any>) => {
-        console.log('res', res);
-        
+      this.authService.update(topic, startdate, deadline1, deadline2).subscribe((res: HttpResponse<any>) => {
+        console.log('res', res);      
       });
       this.isAlert = true;
     }

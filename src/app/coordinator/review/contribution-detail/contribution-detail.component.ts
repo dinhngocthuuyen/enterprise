@@ -3,6 +3,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NbDialogService } from '@nebular/theme';
 import { USER_PROVIDED_EFFECTS } from '@ngrx/effects';
+import { FileService } from '../../services/file.service';
 import { CoorService } from '../../services/review.service';
 import { CommentComponent } from '../comment/comment.component';
 
@@ -15,12 +16,14 @@ export class ContributionDetailComponent implements OnInit, AfterViewInit {
   conId!: string;
   cmts: any[]=[];
   userId: any;
+  facultyId: any;
   stuId!: string;
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private reviewService: CoorService,
     private dialogService: NbDialogService,
+    private FileService: FileService
   ) { }
   val:any;
   status: any;
@@ -33,8 +36,13 @@ export class ContributionDetailComponent implements OnInit, AfterViewInit {
   conDate: any;
   SubmitTime: any;
   Deadline: any;
+  url: any;
+  filename: any;
   ngOnInit() {
-    // this.facId = localStorage.getItem('facultyId');
+    //// load user id
+    this.userId = localStorage.getItem('userId');
+    this.facultyId = localStorage.getItem('facultyId');
+    this.url= "http://localhost:3000/upload/download/" + this.facultyId + "/" + this.userId;  
     this.conId = this.route.snapshot.params.id;
     // console.log("contribution id: ", this.conId);
     this.reviewService.getContributionDetail(this.conId).subscribe((contribution: any) => {
@@ -44,8 +52,8 @@ export class ContributionDetailComponent implements OnInit, AfterViewInit {
       this.cmts = cmts
       this.numOfCmt = this.cmts.length
     });
-    //// load user id
-    this.userId = localStorage.getItem('userId');
+
+
     /// load student name
     this.reviewService.getStudentId(this.conId).subscribe((stuId: any) =>{
       this.stuId = stuId;
@@ -109,4 +117,11 @@ export class ContributionDetailComponent implements OnInit, AfterViewInit {
     //   }
     // }
   })
+
+  // onLinkClicked(){
+  //   this.FileService.getFile(this.filename).subscribe((file: any) => {
+  //     this.file = file;
+  //     window.location.href = "http://localhost:3000/upload/download/" + this.facultyId + "/" + this.userId + "/" + this.filename
+  //   })
+  // }
 }

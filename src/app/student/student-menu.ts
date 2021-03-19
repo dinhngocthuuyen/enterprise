@@ -6,11 +6,10 @@ export const MENU_ITEMS: NbMenuItem[] = [
     icon: 'message-circle-outline',
     link: 'chat',
   },
-
   {
     title: 'Upload',
     icon: 'folder-outline',
-    link: 'upload',
+    link: 'topic',
   },
 
   {

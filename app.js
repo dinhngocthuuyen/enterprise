@@ -3,7 +3,6 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const { mongoose } = require('./db/mongoose');
 const path = require('path');
-const crypto = require('crypto');
 const multer = require('multer');
 const GridFsStorage = require('multer-gridfs-storage');
 const Grid = require('gridfs-stream');
@@ -17,7 +16,7 @@ const app = express();
 /* LOAD MONGOOSE MODEL */
 const jwt = require('jsonwebtoken');
 
-const { Post, Contribution, Coordinator, User, Role, Student, Message, Faculty, Comment, Closure, Topic } = require('./db/models');
+const {Contribution, Coordinator, User, Message, Faculty, Comment, Closure} = require('./db/models');
 const { info } = require('console');
 const { result } = require('lodash');
 
@@ -109,11 +108,6 @@ const storage = new GridFsStorage({
   url: connectionString,
   file: (req, file) => {
     return new Promise((resolve, reject) => {
-      // crypto.randomBytes(16, (err, buf) => {
-      //   if (err) {
-      //     return reject(err);
-      //   }
-        // const filename = buf.toString('hex') + path.extname(file.originalname);
         const filename = file.originalname;
         const fileInfo = {
           filename: filename,
@@ -121,7 +115,6 @@ const storage = new GridFsStorage({
           metadata: req.body
         };
         resolve(fileInfo);
-      // });
     });
   }
 });
@@ -133,10 +126,10 @@ const upload = multer({ storage });
 /////////////////////////////////////////////////////// UPLOAD //////////////////////////////////////////////////////////////
 
 // student gets files
-app.get('/upload/:facultyId/:userId', (req, res) => {
+app.get('/upload/:userId/:topicId', (req, res) => {
   gfs.files.find({
-      "metadata._facultyId": req.params.facultyId,
       "metadata._userId": req.params.userId,
+      "metadata._topicId": req.params.topicId,
   }).toArray((err, files) => {
     if (!files || files.length  === 0) {
       return res.status(404).json({
@@ -146,6 +139,20 @@ app.get('/upload/:facultyId/:userId', (req, res) => {
     return res.json(files);
   })
 })
+
+app.get('/upload/:filename', (req, res) => {
+  gfs.files.find({
+      filename: req.params.filename,
+  }).toArray((err, files) => {
+    if (!files || files.length  === 0) {
+      return res.status(404).json({
+        err: 'No files exist'
+      })
+    }
+    return res.json(files);
+  })
+})
+
 // coordinator gets files
 app.get('/upload/:facultyId', (req, res) => {
   gfs.files.find({
@@ -161,7 +168,7 @@ app.get('/upload/:facultyId', (req, res) => {
 })
 
 //Download file
-app.get('/upload/download/:filename', (req, res) => {
+app.get('/upload/download/:facultyId/:userId/:filename', (req, res) => {
   gfs.files.findOne({
     "metadata._facultyId": req.params.facultyId,
     "metadata._userId": req.params.userId,
@@ -179,7 +186,25 @@ app.get('/upload/download/:filename', (req, res) => {
 
 //Upload a single file to MongoDB
 app.post('/upload', upload.single('uploaded_file'), (req, res) => {
-  res.send('File uploaded successfully')
+  Contribution.findOne({_userId: req.body._userId}).then((contribution) => {
+    if(!contribution){
+      console.log('no contribution')
+      let date = Date.now();
+      let status = req.body.status;
+      let _userId = req.body._userId;
+      let _facultyId = req.body._facultyId;
+      let _topicId = req.body._topicId;
+      let newContribution = new Contribution({
+        date, status, _userId, _facultyId, _topicId,
+      });
+      newContribution.save()
+    } else {
+      console.log('have contribution')
+      //file.push(upload)
+    }
+  })
+  
+  res.redirect('http://localhost:4200/student/' + req.body._userId + '/topic/' + req.body._topicId +'/upload-contributions')
 })
 
 app.delete('/upload/:id', (req, res) => {
@@ -188,82 +213,6 @@ app.delete('/upload/:id', (req, res) => {
       return res.status(404).json({ err: err });
     }
     res.send('Delete successfully')
-  })
-})
-
-/////////////////////////////////////////////////////// TOPIC /////////////////////////////////////////////////////////////
-
-app.get('/topic', (req, res) => {
-  Topic.find({}).then((post) => {
-    res.send(post);
-  }).catch((e) => {
-    res.send(e);
-  });
-})
-
-app.post('/topic', (req, res) => {
-  let title = req.body.title
-  let deadline1 = req.body.deadline1
-  let deadline2 = req.body.deadline2
-  let newTopic = new Topic({
-    title, deadline1, deadline2 
-  });
-  newTopic.save().then((topicDoc) => {
-    res.send(topicDoc);
-  })
-})
-
-/////////////////////////////////////////////////////// POST //////////////////////////////////////////////////////////////
-
-//Return an array of all the posts in database that belongs to the authenticated user
-app.get('/post', (req, res) => {
-  Post.find({}).then((post) => {
-    res.send(post);
-  }).catch((e) => {
-    res.send(e);
-  });
-})
-
-app.get('/post/:id', (req, res) => {
-  //Return an array of all the posts in database
-  Post.find({_id: req.params.id}).then((post) => {
-    res.send(post);
-  }).catch((e) => {
-    res.send(e);
-  });
-})
-
-app.post('/post', authenticate, (req, res) => {
-  //Create a new post and return post document back to user (including post's id)
-  //Post's info (fields) will be passed in via JSON req body
-  let title = req.body.title
-  let post = req.body.post
-  let newPost = new Post({
-    title,
-    post,
-    _userId: req._id
-  });
-  newPost.save().then((postDoc) => {
-    //The full post document is returned (including id)
-    res.send(postDoc);
-  })
-})
-
-app.patch('/post/:id', (req, res) => {
-  //Update a selected post (post document with id in the URL) with the new values specified in the JSON body of the req
-  Post.findOneAndUpdate({_id: req.params.id}, {
-    $set: req.body
-  }).then(() => {
-    res.sendStatus(200);
-  })
-})
-
-app.delete('/post/:id', (req, res) => {
-  //Delete a selected post (document with id in the URL)
-  Post.findOneAndDelete({
-    _id: req.params.id
-  }).then((removePost) => {
-    res.send(removePost);
   })
 })
 
@@ -276,30 +225,28 @@ app.get('/profile/profile-detail/:id', (req, res) => {
     res.send(e);
   });
 })
-app.get('/coordinators/:id', (req, res) => {
 
+app.get('/coordinators/:id', (req, res) => {
     Coordinator.find({_id: req.params.id}).then((profiles) => {
         res.send(profiles);
     });
 })
+
 //POST Profile Coordinator
 app.post('/profiles', (req, res) => {
     let name = req.body.name;
     let address = req.body.address;
-
     let phone = req.body.phone;
     let email = req.body.email;
     let dob = req.body.dob;
-
-
     let newCoordinator = new Coordinator({
         name,address,dob,email,phone
     });
     newCoordinator.save().then((CoordinatorDoc) => {
-
         res.send(CoordinatorDoc);
     })
 })
+
 app.patch('/profile/:id', (req, res) => {
   //Update a selected post (post document with id in the URL) with the new values specified in the JSON body of the req
   User.findOneAndUpdate({_id: req.params.id}, {
@@ -407,9 +354,6 @@ app.get('/user/:id', (req, res) => {
   });
 })
 
-
-
-
 app.get('/faculty/:id', (req, res) => {
   Faculty.find({_id: req.params.id}).then((faculty) => {
       res.send(faculty);
@@ -417,8 +361,9 @@ app.get('/faculty/:id', (req, res) => {
     res.send(e);
   });
 })
+
 app.get('/users', (req, res) => {
-  User.find({}).then((user) => {
+  User.find().then((user) => {
       res.send(user);
   });
 })
@@ -461,6 +406,7 @@ app.delete('/closure/:id', (req, res) => {
  * Startdate tới deadline 1 là được nộp bài với sửa bài
  * Deadline 1 tới deadline 2 chỉ được nộp bài sửa nếu trước đó đã nộp file r
  */
+
  app.get('/closure/:facultyId/:userId', async (req, res) => {
   const getFileUpload = await gfs.files.find({
     metadata: {
@@ -525,6 +471,7 @@ app.get('/closure', (req, res) => {
     res.send(closure);
  });
 })
+
 
 //app.controller('MainClosure', function($scope) {
 //  $scope.Date = '20210313T00:00:00';
@@ -622,23 +569,17 @@ app.post('/:contributionId/comments', (req, res) => {
     res.send(newDoc)
   })
 });
-/////Student create contributions////
-// app.get('/users/:userId/contributions', (req, res) => {
-//   Contribution.find({
-//     _userId: req.params.userId
-//   }).then((contributions) => {
-//     res.send(contributions);
-//   })
-// });
-app.post('/:userId/contribution', (req, res) => {
 
-  console.log('req', req.body);
-
+app.post('/contribution', (req, res) => {
   let newContribution = new Contribution({
-      date: Date.now().toString(),
+      date: Date.now(),
       status: "Pending",
-      _userId: req.params.userId,
-      _facultyId: req.body.facultyId
+      _userId: req.body.userId,
+      _facultyId: req.body.facultyId,
+      file: {
+        _fileId: req.body.fileId,
+        _filename: req.body.filename
+      }
   });
   newContribution.save().then((newDoc) => {
     res.send(newDoc)
