@@ -1,22 +1,72 @@
 <nb-card>
-    <nb-card-header>Welcome to visit University of Greenwich</nb-card-header>
-    <nb-card-body class="example-items-rows">
-        <nb-tabset>
-            <nb-tab tabTitle="Introduction">
-       
-            </nb-tab>
-            <nb-tab tabTitle="Hot news">
-            </nb-tab>
+  <nb-card-header>Welcome to visit University of Greenwich</nb-card-header>
+  <nb-card-body class="example-items-rows">
+    <nb-tabset>
+      <nb-tab tabTitle="Introduction">
+        <nb-card-body style="display: flex; justify-content: center;">
+          <img src="./assets/images/guest-2.jpg">
+          <div class="col-md-4 col-sm-12">
+            <p>A nebula is an interstellar cloud of dust, hydrogen, helium and other ionized gases.
+              Originally, nebula was a name for any diffuse astronomical object,
+              including galaxies beyond the Milky Way. </p>
+              <button nbButton status="primary">Learn more</button>
+          </div>
+          
+        </nb-card-body>
+      </nb-tab>
 
-            <nb-tab tabTitle="Event" >
-            </nb-tab>
+      <nb-tab tabTitle="Hot news">
 
-            <nb-tab tabTitle="Admissions" >
-            </nb-tab>
+      </nb-tab>
 
-            <nb-tab tabTitle="Staffs" >
-            </nb-tab>
+      <nb-tab tabTitle="Event">
+      </nb-tab>
 
-          </nb-tabset>
-    </nb-card-body>
-  </nb-card>
+      <nb-tab tabTitle="Admissions">
+      </nb-tab>
+
+      <nb-tab tabTitle="Staffs">
+        <nb-card-body>
+          <div class="row">
+            <div class="col-md-6 col-sm-6">
+              <nb-card size="tiny">
+                <nb-card-header>Staff</nb-card-header> <br>
+                <nb-user name="Dinh Ngoc Thu Uyen" size="large" title="Manager">
+                </nb-user>
+              </nb-card>
+
+              <nb-card size="tiny">
+                <nb-card-header>Staff</nb-card-header> <br>
+                <nb-user name="Bui Anh Thu" size="large" title="Manager"></nb-user>
+              </nb-card>
+            </div>
+
+            <div class="col-md-6 col-sm-6">
+              <nb-card size="tiny">
+                <nb-card-header>Staff</nb-card-header> <br>
+                <nb-user name="Nguyen Thi Minh Thuy" size="large" title="Manager"></nb-user>
+              </nb-card>
+              <nb-card size="tiny">
+                <nb-card-header>Staff</nb-card-header> <br>
+                <nb-user name="Nguyen Dang Thuy Dung" size="large" title="Coordinator"></nb-user>
+              </nb-card>
+            </div>
+
+            <div class="col-md-6 col-sm-6">
+              <nb-card size="tiny">
+                <nb-card-header>Staff</nb-card-header> <br>
+                <nb-user name="Hoang Thanh Ky" size="large" title="Tutor"></nb-user>
+              </nb-card>
+              <nb-card size="tiny">
+                <nb-card-header>Staff</nb-card-header> <br>
+                <nb-user name="Nguyen Ngoc Quynh" size="large" title="Tutor"></nb-user>
+              </nb-card>
+            </div>
+
+          </div>
+        </nb-card-body>
+      </nb-tab>
+
+    </nb-tabset>
+  </nb-card-body>
+</nb-card>

@@ -13,6 +13,7 @@ import { MENU_ITEMS } from './guest-menu';
 })
 export class GuestComponent {
   menu = MENU_ITEMS;
+  
   constructor(private sidebarService: NbSidebarService) { }
 
   toggleCompact() {
