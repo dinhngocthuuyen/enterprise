@@ -8,13 +8,14 @@
     Submit successfully.
   </nb-alert>
 
-  <form id="form-create" class="form-dl" [formGroup]="deadlineForm" (ngSubmit)="onSubmit()">
+  <form id="form-create" class="form-dl" [formGroup]="deadlineForm">
 
     <div class="form-group">
       <label for="topic">Topic</label>
       <input class="dati" nbInput type="text" #topicInput formControlName="topic" class="form-control">
     </div>
 
+  <form id="form-create" class="form-dl" [formGroup]="deadlineForm">
     <div class="form-group">
       <label for="date">Start Date</label>
       <input class="dati" nbInput type="datetime-local" #startdateInput formControlName="startdate" class="form-control">
@@ -35,18 +36,13 @@
         <nb-option *ngFor="let faculty of facultyList" [value]="faculty">{{ faculty.name }}</nb-option>             
     </nb-select><br><br> -->
     
-    <button nbButton status="primary" type="submit" >Submit</button><br>
-    <button nbButton status="warning" type="update" >Update</button>
+    <button nbButton status="primary" (click)="onSubmitButtonClicked()">Submit</button>
+    <button nbButton status="warning" (click)="onUpdateButtonClicked()">Update</button>
 
-    
 
 </form>
 
 <nb-card-body>
-  <ng2-smart-table [settings]="settings" [source]="sourceClosures" (delete)="onDeleteButtonClicked($event)"></ng2-smart-table>
+  <ng2-smart-table [settings]="settings" [source]="sourceClosures" (edit)="onEditButtonClicked($event)" (delete)="onDeleteButtonClicked($event)"></ng2-smart-table>
 </nb-card-body>
-
-
-    
-  
-</nb-card>
+ 

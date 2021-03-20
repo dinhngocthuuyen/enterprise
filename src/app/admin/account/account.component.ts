@@ -11,7 +11,7 @@ import { User } from 'src/app/models/user';
 
 @Component({
   selector: 'app-account',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  // changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './account.component.html',
   styleUrls: ['./account.component.scss'],
 })
@@ -145,6 +145,12 @@ export class AccountComponent implements OnInit {
 
   showAlert() {
     this.isAlert = true;
+    const _self = this;
+    this.getUser();
+
+    setTimeout(function () {
+      _self.isAlert = false;
+    }, 3000);
   }
 
   onSubmit() {
@@ -187,13 +193,18 @@ export class AccountComponent implements OnInit {
   }
 
   onDeleteButtonClicked(event){
-    console.log('hihihi', event.data._id)
+    console.log( event.data._id)
     this.userService.deleteUser(event.data._id).subscribe((res: any) => {
       this.getUser();
     });
   }
-  
+
+  onCloseAlert() {
+    this.isAlert = !this.isAlert;
+  }
 }
+  
+
 
 
   

@@ -27,44 +27,60 @@ export class ClosureComponent implements OnInit {
     hideSubHeader: true,
     actions: {
       add: false,
-      edit: false,
+      
       position: 'right'
     },
     delete: {
       confirmDelete: true,
+    },
+    edit: {
+      confirmSave: true,
     },
     columns: {
       _id: {
         title: 'id',
         hide: true,
       },
-      topic:{
-        title: 'Topic'
-      },
-      startdate: {
+      startdateFormat: {
         title: 'Start Date',
       },
-      deadline1: {
+      deadline1Format: {
         title: 'Deadline 1',
       },
-      deadline2: {
+      deadline2Format: {
         title: 'Deadline 2'
-      }
+      },
+      startdate: {
+        hide: true,
+      },
+      deadline1: {
+        hide: true,
+      },
+      deadline2: {
+        hide: true,
+      },
+      topic: {
+        title: 'Topic'
+      },
+     
     },
 
   };
 
   deadlineForm = new FormGroup({
+    _closureId: new FormControl(),
+    topic: new FormControl(),
     startdate: new FormControl(),
     deadline1: new FormControl(),
     deadline2: new FormControl(),
-    topic: new FormControl(),
+    // _facultyId: new FormControl(),
   })
   
   isAlert: boolean = false;
   file: any;
   sourceClosures!: LocalDataSource;
   files: any;
+  // _facultyId: any;
   startdate: any ;
   deadline1: any ;
   deadline2: any ;
@@ -72,6 +88,9 @@ export class ClosureComponent implements OnInit {
  constructor(private authService: AuthService, private facultyService: FacultyService, private closureService: ClosureService,){
    
  }
+
+  // facultyList: any [] = [];
+  // closuresList: any = [];
 
   ngOnInit(): void {
     // this._facultyId = localStorage.getItem('facultyId');
@@ -84,6 +103,8 @@ export class ClosureComponent implements OnInit {
     //   this.files = files;
     //   this.source = new LocalDataSource(this.files);
     // })
+    
+    // this.getFaculty();
 
     this.getClosure();
   }
@@ -105,61 +126,87 @@ export class ClosureComponent implements OnInit {
   getClosure(): void {
     this.closureService.getClosures().subscribe((res: Closure[]) => {
       const result = res.map(item => {
+        // const faculty = this.facultyList.find(v => v._id === item._facultyId);
         return {
           _id: item._id,
+          startdateFormat: dayjs(item.startdate).format('DD-MM-YYYY HH:mm'),
+          deadline1Format: dayjs(item.deadline1).format('DD-MM-YYYY HH:mm'),
+          deadline2Format: dayjs(item.deadline2).format('DD-MM-YYYY HH:mm'),
+          startdate: item.startdate,
+          deadline1: item.deadline1,
+          deadline2: item.deadline2,
           topic: item.topic,
-          startdate: dayjs(item.startdate).format('DD-MM-YYYY HH:mm'),
-          deadline1: dayjs(item.deadline1).format('DD-MM-YYYY HH:mm'),
-          deadline2: dayjs(item.deadline2).format('DD-MM-YYYY HH:mm')
+          // _facultyId: faculty?._id,
+          // facultyName: faculty?.name,
         }
       });
+
       this.sourceClosures = new LocalDataSource(result);
     });
   }
-
-  onSubmit() {
-      const topic: string = this.deadlineForm.value.topic;
-      const startdate: string = this.deadlineForm.value.startdate;
-      const deadline1: string = this.deadlineForm.value.deadline1;
-      const deadline2: string = this.deadlineForm.value.deadline2;
-      
-      this.authService.submit(topic, startdate, deadline1, deadline2).subscribe((res: HttpResponse<any>) => {
-        console.log('res', res);
-        this.isAlert = true;
-        const _self = this;
-        this.getClosure();
-
-        setTimeout(function () {
-          _self.isAlert = false;
-        }, 3000);
-      });
-    }
-
-    onUpdate() {
-      const topic: string = this.deadlineForm.value.topic;
-      const startdate: string = this.deadlineForm.value.startdate;
-      const deadline1: string = this.deadlineForm.value.deadline1;
-      const deadline2: string = this.deadlineForm.value.deadline2;
-      
-      this.authService.update(topic, startdate, deadline1, deadline2).subscribe((res: HttpResponse<any>) => {
-        console.log('res', res);      
-      });
-      this.isAlert = true;
-    }
-  // onSubmitButtonClicked(startdate: String, deadline1:String, deadline2: String, _facultyId: string){
-  //   this.authService.submit(startdate, deadline1, deadline2, _facultyId ).subscribe((res: HttpResponse<any>) => {
-  //     console.log(res);
-  //   })
-  // }
 
   doSomething() {
     this.isAlert = true;
   }
 
   onDeleteButtonClicked(event){
-    console.log('hihihi', event.data._id)
     this.closureService.deleteClosure(event.data._id).subscribe((res: any) => {
       this.getClosure();
+    });
+  }
+
+  onEditButtonClicked(event){
+    const _closureId = event.data._id;
+    const startdate = event.data.startdate;
+    const deadline1 = event.data.deadline1;
+    const deadline2 = event.data.deadline2;
+    const topic = event.data.topic;
+    // const _facultyId = event.data._facultyId;
+
+    // const selectedFaculty = this.facultyList.find(v => v._id === _facultyId);
+
+    this.deadlineForm.patchValue({
+      _closureId,
+      startdate,
+      deadline1,
+      deadline2,
+      topic,
+      // _facultyId: selectedFaculty,
+    });
+  }
+
+  showAlert() {
+    this.isAlert = true;
+    const _self = this;
+    this.getClosure();
+
+    setTimeout(function () {
+      _self.isAlert = false;
+    }, 3000);
+  }
+
+  onSubmitButtonClicked() {
+    const topic: string =  this.deadlineForm.value.topic;
+    const startdate: string = this.deadlineForm.value.startdate;
+    const deadline1: string = this.deadlineForm.value.deadline1;
+    const deadline2: string = this.deadlineForm.value.deadline2;
+    // const _facultyId: string = this.deadlineForm.value._facultyId;
+    
+    this.authService.submit(topic,startdate, deadline1, deadline2).subscribe((res: HttpResponse<any>) => {
+      this.showAlert();
+    });
+  }
+
+  onUpdateButtonClicked() {
+    const _closureId: string = this.deadlineForm.value._closureId;
+    const startdate: string = this.deadlineForm.value.startdate;
+    const deadline1: string = this.deadlineForm.value.deadline1;
+    const deadline2: string = this.deadlineForm.value.deadline2;
+    const topic: string =  this.deadlineForm.value.topic;
+    // const _facultyId: string = this.deadlineForm.value._facultyId;
+    
+    this.closureService.updateClosure(_closureId, startdate, deadline1, deadline2,topic).subscribe((res: any) => {
+      this.showAlert();
     });
   }
 

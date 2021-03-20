@@ -4,7 +4,7 @@ import { ChatComponent } from './chat/chat.component';
 import { AdminComponent } from './admin.component';
 import { AccountComponent } from './account/account.component';
 import { ClosureComponent } from './closure/closure.component';
-import { ViewUsersComponent } from './view-users/view-users.component';
+
 
 const routes: Routes = [{
   path: '',
@@ -21,10 +21,6 @@ const routes: Routes = [{
     {
       path: 'closure',
       component: ClosureComponent,
-    },
-    {
-      path: 'view-user',
-      component: ViewUsersComponent,
     },
     {
       path: '',

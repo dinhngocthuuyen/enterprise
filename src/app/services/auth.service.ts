@@ -55,6 +55,16 @@ export class AuthService {
       })
     )
   }
+  // update(startdate: String, deadline1:String, deadline2: String) {
+  //   return this.webRequestService.update(startdate, deadline1, deadline2).pipe(
+  //     shareReplay(),
+  //     tap((res: HttpResponse<any>) => {
+  //       //The auth tokens will be in the header of this response
+  //       this.setSession(res.body._id, res.headers.get('x-access-token'), res.headers.get('x-refresh-token'));
+  //       console.log('UPDATE SUCCESSFULLY!!!');
+  //     })
+  //   )
+  // }
 
   private setSession(accessToken, refreshToken){
     localStorage.setItem('x-access-token', accessToken);

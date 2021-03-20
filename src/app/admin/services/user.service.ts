@@ -35,7 +35,7 @@ export class UserService {
   // }
 
   deleteUser(id: string) {
-    return this.WebReqService.delete(`account/${id}`);
+    return this.WebReqService.delete(`users/${id}`);
   }
 
 }

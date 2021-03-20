@@ -5,7 +5,7 @@
     <input hidden name="_facultyId" [value]="facultyId"/>
     <input hidden name="_userId" [value]="userId"/>
     <input hidden name="_topicId" [value]="topicId"/>
-    <button nbButton status="danger" type="submit">Upload</button>
+    <button nbButton status="danger" type="submit" [disabled]="isSubmit">Upload</button>
 </form>
 </nb-card-body>
 </nb-card>

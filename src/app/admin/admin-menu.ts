@@ -16,9 +16,4 @@ export const MENU_ITEMS: NbMenuItem[] = [
     icon: 'clock-outline',
     link: 'closure',
   },
-  {
-    title: 'User',
-    icon: 'clock-outline',
-    link: 'view-user',
-  },
 ]

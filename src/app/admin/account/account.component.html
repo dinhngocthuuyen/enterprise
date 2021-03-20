@@ -4,7 +4,7 @@
     <nb-icon icon="person-add-outline"></nb-icon>
   </nb-card-header>
 
-  <nb-alert status="success" *ngIf="isAlert">
+  <nb-alert status="success" closable (close)="onCloseAlert()" *ngIf="isAlert">
     Create account successfully.
   </nb-alert>
         

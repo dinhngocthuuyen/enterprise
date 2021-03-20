@@ -11,7 +11,6 @@ import { AccountComponent } from './account/account.component';
 import { ClosureComponent } from './closure/closure.component';
 import { AccountModule } from './account/account.module';
 import { ReactiveFormsModule } from '@angular/forms';
-import { ViewUsersComponent } from './view-users/view-users.component';
 
 @NgModule({
   imports: [
@@ -44,7 +43,7 @@ import { ViewUsersComponent } from './view-users/view-users.component';
     ChatComponent,   
     AccountComponent,
     ClosureComponent,
-    ViewUsersComponent,
+    
   ],
 })
 export class AdminModule {

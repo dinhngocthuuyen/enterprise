@@ -26,8 +26,13 @@ export class ClosureService {
   getClosures(): Observable<Closure[]> {
     return this.http.get<Closure[]>(this.API_PATH, this.options);
   }
+
   getClosure(): Observable<Closure> {
     return this.http.get<Closure>(this.API_PATH, this.options);
+  }
+
+  updateClosure(id: string, startdate: any, deadline1: any, deadline2: any, _facultyId: string) {
+    return this.WebReqService.patch(`closure/${id}`, { startdate, deadline1, deadline2, _facultyId });
   }
 
   deleteClosure(id: string) {

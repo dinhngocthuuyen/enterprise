@@ -402,6 +402,23 @@ app.delete('/closure/:id', (req, res) => {
   })
 })
 
+app.delete('/users/:id', (req, res) => {
+  //Delete a selected user (document with id in the URL)
+  User.findOneAndDelete({
+    _id: req.params.id
+  }).then((removePost) => {
+    res.send(removePost);
+  })
+})
+
+app.patch('/closure/:id', (req, res) => {
+  Closure.findOneAndUpdate({_id: req.params.id}, {
+    $set: req.body
+  }).then((updateClosure) => {
+    res.send(updateClosure);
+  })
+})
+
 /**
  * Startdate tới deadline 1 là được nộp bài với sửa bài
  * Deadline 1 tới deadline 2 chỉ được nộp bài sửa nếu trước đó đã nộp file r
