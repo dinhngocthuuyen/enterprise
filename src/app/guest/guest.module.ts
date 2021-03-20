@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { NbButtonModule, NbCardModule, NbIconModule, NbLayoutModule, NbMenuModule,NbCheckboxModule, NbSidebarModule, NbTabsetModule, NbThemeModule, NbTagInputDirective, NbFilterInputDirective, NbTreeGridModule, NbActionsModule, NbUserModule, NbContextMenuModule, NbChatModule, NbAlertModule, NbListModule } from '@nebular/theme';
+import { NbButtonModule, NbCardModule, NbIconModule, NbLayoutModule, NbMenuModule,NbCheckboxModule, NbSidebarModule, NbTabsetModule, NbThemeModule, NbTagInputDirective, NbFilterInputDirective, NbTreeGridModule, NbActionsModule, NbUserModule, NbContextMenuModule, NbChatModule, NbAlertModule, NbListModule, NbWindowModule } from '@nebular/theme';
 
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { CommonModule } from '@angular/common';
@@ -9,6 +9,9 @@ import { ChatComponent } from './chat/chat.component';
 import { GuestRoutingModule } from './guest-routing.module';
 import { GuestComponent } from '../manager/guest/guest.component';
 import { GuestHomeComponent } from './guest-home/guest-home.component';
+import { FormsModule } from '@angular/forms';
+import { config } from 'rxjs';
+
 
 @NgModule({
   imports: [
