@@ -2,6 +2,7 @@
   <nb-card-body>
 <form ngNoForm  [action]="url" method="post" enctype="multipart/form-data">
     <input class="form-control" type="file" name="uploaded_file" />
+    <input hidden name="status" value="Pending"/>
     <input hidden name="_facultyId" [value]="facultyId"/>
     <input hidden name="_userId" [value]="userId"/>
     <input hidden name="_topicId" [value]="topicId"/>
@@ -11,7 +12,6 @@
 </nb-card>
 <nb-card>
   <nb-card-body>
-    <!-- <input #search class="form-control" type="text" placeholder="&#xF002; Search" style="font-family:Arial, FontAwesome" (keydown.enter)="onSearch(search.value)"><br> -->
     <ng2-smart-table [settings]="settings" [source]="source" (delete)="onDeleteButtonClicked($event)"></ng2-smart-table>
   </nb-card-body>
 </nb-card>

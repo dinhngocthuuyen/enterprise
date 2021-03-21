@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ClosureService } from 'src/app/admin/services/closure.service';
 import { StudentService } from '../services/student.service'
-import * as dayjs from 'dayjs'
 
 @Component({
   selector: 'app-upload',
@@ -27,15 +26,11 @@ export class UploadComponent implements OnInit {
   ngOnInit(): void {
     this.closureService.getClosures().subscribe((topic: any) => {
       this.topic = topic;
-      //this.startdate = dayjs(this.topic.startdate).format('DD-MM-YYYY HH:mm');
-      // this.countDownDeadline1(this.topic.deadline1);
-      // this.countDownDeadline2(this.topic.deadline2); 
     })
   }
 
-  countDownDeadline1(date) {
+  countDownDeadline(date) {
     const countDownDate = new Date(date).getTime();
-    // const x = setInterval(() => {
       var now = new Date().getTime();
       var distance = countDownDate - now;
       var days = Math.floor(distance/ (1000*60*60*24));
@@ -45,27 +40,9 @@ export class UploadComponent implements OnInit {
       if (days < 0) {
         return 'Closed';
       } else {
-        return `${days} d ${hours}h ${minutes}m ${seconds}s`;
+        return `${days}days ${hours}hours ${minutes}minutes ${seconds}seconds`;
       }
-    // })
-  }
-
-  countDownDeadline2(date) {
-    const countDownDate = new Date(date).getTime();
-    // const x = setInterval(() => {
-      var now = new Date().getTime();
-      var distance = countDownDate - now;
-      var days = Math.floor(distance/ (1000*60*60*24));
-      var hours = Math.floor((distance % (1000*60*60*24)) / (1000*60*60));
-      var minutes = Math.floor((distance % (1000*60*60)) / (1000*60));
-      var seconds = Math.floor((distance % (1000*60)) / 1000);
-      if (days < 0) {
-        return 'Closed';
-      } else {
-        return `${days} d ${hours}h ${minutes}m ${seconds}s`;
-      }
-    // })
-  }
+    }
   
   onContributeButtonClicked(topicId) {
     this.studentId = localStorage.getItem('userId');

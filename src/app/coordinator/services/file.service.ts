@@ -11,7 +11,4 @@ export class FileService {
   getUpload(facultyId){
     return this.WebRequestService.get(`upload/${facultyId}`);
   }
-  getFile(filename){
-    return this.WebRequestService.get(`upload/${filename}`)
-  }
 }

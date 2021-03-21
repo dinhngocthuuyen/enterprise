@@ -20,10 +20,9 @@ export class ContributionDetailComponent implements OnInit, AfterViewInit {
   stuId!: string;
   constructor(
     private route: ActivatedRoute,
-    private router: Router,
     private reviewService: CoorService,
     private dialogService: NbDialogService,
-    private FileService: FileService
+
   ) { }
   val:any;
   status: any;
@@ -37,16 +36,17 @@ export class ContributionDetailComponent implements OnInit, AfterViewInit {
   SubmitTime: any;
   Deadline: any;
   url: any;
-  filename: any;
+  files = [];
   ngOnInit() {
     //// load user id
     this.userId = localStorage.getItem('userId');
     this.facultyId = localStorage.getItem('facultyId');
-    this.url= "http://localhost:3000/upload/download/" + this.facultyId + "/" + this.userId;  
+      
     this.conId = this.route.snapshot.params.id;
-    // console.log("contribution id: ", this.conId);
     this.reviewService.getContributionDetail(this.conId).subscribe((contribution: any) => {
       this.contribution = contribution;
+      this.studentId = contribution[0]._userId;
+      this.files = contribution[0].file;
     });
     this.reviewService.getComments(this.conId).subscribe((cmts: any) => {
       this.cmts = cmts
@@ -65,7 +65,6 @@ export class ContributionDetailComponent implements OnInit, AfterViewInit {
     this.reviewService.getConDate(this.conId).subscribe((contribution: any) => {
       this.conDate = contribution;
       this.SubmitTime = new Date(this.conDate).getTime();
-      // console.log("submit time: ", this.SubmitTime)
       this.Deadline = this.SubmitTime +(14*24*60*60*1000);
     });
   }
@@ -73,33 +72,25 @@ export class ContributionDetailComponent implements OnInit, AfterViewInit {
   }
   openApproved(){
     status = "Approved";
-    this.reviewService.updateStatus(this.conId, status).subscribe()
+    this.reviewService.updateStatus(this.conId, status).subscribe();
+    window.location.reload();
   }
   openNotApproved(){
     status = "Not Approved";
-    this.reviewService.updateStatus(this.conId, status).subscribe()
+    this.reviewService.updateStatus(this.conId, status).subscribe();
+    window.location.reload();
   }
   openDialogComment() {
     this.dialogService.open(CommentComponent)
       .onClose.subscribe((cmt: any)  =>{
         this.reviewService.postComment(this.conId, cmt).subscribe();
-        // this.cmts.push(this.cmts);
-        // console.log("cmts comment " + this.cmts)
+        window.location.reload();
       });
   }
+
   getdate = new FormGroup({
   date: new FormControl
   })
-  getVal(val){
-    console.log("aaaa" +val)
-  }
-  // countDownForm = new FormControl();
-
-  //  getdate(){
-  //    this.reviewService
-  //  }
-  // SubmitTime = new Date(this.conDate).getTime();
-  // Deadline = this.SubmitTime +(13*24*60*60*1000);
   showTime: any;
   x = setInterval(() =>{
     var now = new Date().getTime();
@@ -109,13 +100,6 @@ export class ContributionDetailComponent implements OnInit, AfterViewInit {
     var minutes = Math.floor((distance % (1000*60*60))/(1000*60));
     var seconds = Math.floor((distance % (1000*60))/1000);
     this.showTime = days + " days " + hours + " hours " + minutes + " minutes " +seconds + " seconds ";
-    // if(distance<0){
-    //   this.openNotApproved()
-    //   {
-    //   status = "Not Approved";
-    //   this.reviewService.updateStatus(this.conId, status).subscribe()
-    //   }
-    // }
   })
 
   // onLinkClicked(){

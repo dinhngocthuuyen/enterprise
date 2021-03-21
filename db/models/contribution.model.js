@@ -9,9 +9,9 @@ const ContributionSchema = new mongoose.Schema({
   },
   _facultyId: { type: mongoose.Types.ObjectId },
   _userId: { type: mongoose.Types.ObjectId },
+  _topicId: { type: mongoose.Types.ObjectId },
   file: [{
-    _fileId: { type: mongoose.Types.ObjectId },
-    _filename: { type: mongoose.Types.ObjectId },
+    _filename: String,
   }]
 })
 

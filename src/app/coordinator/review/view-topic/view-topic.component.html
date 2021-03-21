@@ -5,19 +5,18 @@
         <label>Start date: {{ topic.startdate }}</label>
         <br>
         <div>
-          Deadline 1: {{ countDownDeadline1Time }}
+          Deadline 1: {{ topic.deadline1 }}<br>
+          Deadline 1: <span style="color: red;">{{ countDownDeadline(topic.deadline1) }}</span>
         </div>
         <br>
-        <label>Deadline 2: {{ countDownDeadline2Time }}</label>
+        <div>
+          Deadline 2: {{ topic.deadline2 }}<br>
+          Deadline 2: <span style="color: red;">{{ countDownDeadline(topic.deadline2) }}</span>
+        </div>
         <br>
       </nb-card-body>
       <nb-card-footer>
-        <ng-template [ngIf]="checked == true" [ngIfElse]="editButton">
         <button nbButton status="primary" (click)="onContributeButtonClicked(topic._id)">View contribution</button>
-        </ng-template>
-        <ng-template #editButton>
-          <button nbButton status="primary">Edit</button>
-        </ng-template>
       </nb-card-footer>
     </nb-card>
     </div>

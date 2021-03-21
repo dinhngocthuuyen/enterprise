@@ -133,7 +133,7 @@ app.get('/upload/:userId/:topicId', (req, res) => {
   }).toArray((err, files) => {
     if (!files || files.length  === 0) {
       return res.status(404).json({
-        err: 'No files exist'
+        err: 'No files exist ljlih'
       })
     }
     return res.json(files);
@@ -186,33 +186,42 @@ app.get('/upload/download/:facultyId/:userId/:filename', (req, res) => {
 
 //Upload a single file to MongoDB
 app.post('/upload', upload.single('uploaded_file'), (req, res) => {
-  Contribution.findOne({_userId: req.body._userId}).then((contribution) => {
+  Contribution.findOne({
+    _userId: req.body._userId,
+    _topicId: req.body._topicId
+  }).then((contribution) => {
     if(!contribution){
-      console.log('no contribution')
       let date = Date.now();
       let status = req.body.status;
       let _userId = req.body._userId;
       let _facultyId = req.body._facultyId;
       let _topicId = req.body._topicId;
       let newContribution = new Contribution({
-        date, status, _userId, _facultyId, _topicId,
+        date, status, _userId, _facultyId, _topicId
       });
-      newContribution.save()
+      newContribution.file.push({ '_id': req.file.id, '_filename': req.file.filename});
+      newContribution.save();
     } else {
-      console.log('have contribution')
-      //file.push(upload)
-    }
+    contribution.file.push({ '_id': req.file.id, '_filename': req.file.filename});
+    contribution.save(); 
+  }}).catch((e) => {
+    res.send(e)
   })
-  
   res.redirect('http://localhost:4200/student/' + req.body._userId + '/topic/' + req.body._topicId +'/upload-contributions')
 })
 
-app.delete('/upload/:id', (req, res) => {
-  gfs.remove({_id : req.params.id, root: 'uploads'}, (err, gridStore) => {
+app.delete('/upload/remove/:id', (req, res) => {
+  gfs.remove({_id : req.params.id, root: 'uploads'}, (err) => {
     if (err) {
       return res.status(404).json({ err: err });
     }
-    res.send('Delete successfully')
+  })
+  Contribution.findOne({
+    "file._id" : req.params.id
+  }).then((contribution) => {
+    //console.log(req)
+    contribution.file.pull(req.params.id)
+    contribution.save()
   })
 })
 
@@ -337,15 +346,6 @@ app.patch('/user/:id', (req, res) => {
   })
 })
 
-app.delete('/user/:id', (req, res) => {
-  //Delete a selected user (document with id in the URL)
-  Post.findOneAndDelete({
-    _id: req.params.id
-  }).then((removeUser) => {
-    res.send(removeUser);
-  })
-})
-
 app.get('/user/:id', (req, res) => {
   User.find({_id: req.params.id}).then((user) => {
       res.send(user);
@@ -388,7 +388,6 @@ app.get('/faculties', (req, res) => {
 app.post('/closure', (req, res) => {
   let newClosure = new Closure(req.body);
   newClosure.save().then((ClosureDoc) => {
-
     res.send(ClosureDoc);
   })
 });
@@ -489,18 +488,18 @@ app.get('/closure', (req, res) => {
  });
 })
 
-
-//app.controller('MainClosure', function($scope) {
-//  $scope.Date = '20210313T00:00:00';
-
- // $scope.DateTimeEnd = '20210313T00:00:00';
-//});
-
-//////  Coordinator get contributions and send approve
+app.get('/coordinator/:facultyId/topic/:topicId', (req, res) => {
+  Contribution.find({
+    _facultyId: req.params.facultyId,
+    _topicId: req.params.topicId
+  }).then((contributions) => {
+    res.send(contributions);
+  })
+});
 
 app.get('/coordinator/:facultyId/contributions', (req, res) => {
   Contribution.find({
-    _facultyId: req.params.facultyId
+    _facultyId: req.params.facultyId,
   }).then((contributions) => {
     res.send(contributions);
   })
@@ -574,6 +573,8 @@ app.get('/:contributionId/comments', (req, res) => {
     _contributionId: req.params.contributionId,
   }).then((comments) => {
     res.send(comments);
+  }).catch((e) => {
+    res.send(e)
   })
 });
 app.post('/:contributionId/comments', (req, res) => {
@@ -584,22 +585,8 @@ app.post('/:contributionId/comments', (req, res) => {
   });
   newCmt.save().then((newDoc) => {
     res.send(newDoc)
-  })
-});
-
-app.post('/contribution', (req, res) => {
-  let newContribution = new Contribution({
-      date: Date.now(),
-      status: "Pending",
-      _userId: req.body.userId,
-      _facultyId: req.body.facultyId,
-      file: {
-        _fileId: req.body.fileId,
-        _filename: req.body.filename
-      }
-  });
-  newContribution.save().then((newDoc) => {
-    res.send(newDoc)
+  }).catch((e) => {
+    res.send(e)
   })
 });
 
@@ -649,9 +636,6 @@ app.post('/messages/:facultyId/:studentId', (req, res) => {
   })
 })
 
-
-
-
 //////////////////////send mail/////////////
 // app.post('/sendMail', (req, res) => {
 //   console.log("request came")
@@ -674,8 +658,6 @@ app.post('/sendMail', (req, res) => {
   console.log("request came")
   let username = req.body.username;
   let name = req.body.name;
-
-
   let email = new User({
     username,name
   });

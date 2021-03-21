@@ -1,5 +1,5 @@
 <nb-card>
-  <nb-card-header *ngFor="let contribution of contribution">Contribution Detail
+  <nb-card-header *ngFor="let contribution of contributions">Contribution Detail
   </nb-card-header>
   <nb-card-body *ngFor="let contribution of contribution">
     <div *ngFor="let student of student">
@@ -8,13 +8,12 @@
       <nb-action class="control-item" icon="email-outline" [routerLink]="['../../chat', contribution._userId]" style="float: right"></nb-action>
     </div>
     <label>File: </label> &nbsp;
-    <a [href]="url">slsf</a><br>
+      <a *ngFor="let file of files" href="{{'http://localhost:3000/upload/download/' + facultyId + '/' + studentId + '/' + file._filename}}">{{ file._filename }} <br></a>
     <label>Submit Date:</label> &nbsp;
     <span>{{contribution.date | date}}</span><br>
     <label>Status:</label> &nbsp;
     <span>{{contribution.status}}</span>
     <p #color:#00FF00>{{showTime}}</p>
-    <!-- <input #userID nbInput [value]="contribution?._userId" readonly> -->
   </nb-card-body>
   <nb-card-footer>
     <div class="btn" *ngFor="let contribution of contribution">

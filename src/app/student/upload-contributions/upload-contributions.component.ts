@@ -100,5 +100,6 @@ export class UploadContributionsComponent implements OnInit {
     this.StudentService.deleteUpload(event.data._id).subscribe((file: any) => {
       this.file = file;
     })
+    window.location.reload();
   }
 }
