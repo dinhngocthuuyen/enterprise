@@ -11,9 +11,10 @@
       <a *ngFor="let file of files" href="{{'http://localhost:3000/upload/download/' + facultyId + '/' + studentId + '/' + file._filename}}">{{ file._filename }} <br></a>
     <label>Submit Date:</label> &nbsp;
     <span>{{contribution.date | date}}</span><br>
-    <label>Status:</label> &nbsp;
-    <span>{{contribution.status}}</span>
-    <p #color:#00FF00>{{showTime}}</p>
+    <label>Status:</label> &nbsp; 
+    <span>{{contribution.status}}</span><br>
+    <label>Automatically reject after:</label>&nbsp;
+    <span>{{showTime}}</span>
   </nb-card-body>
   <nb-card-footer>
     <div class="btn" *ngFor="let contribution of contribution">
@@ -37,8 +38,11 @@
     </div>
   </nb-card-header>
   <nb-card-body>
-    <ul>
-      <li *ngFor="let cmt of cmts">{{ cmt.comment }}</li>
-    </ul>
+    <nb-card style="background-color:#F2F3F5; border-radius: 1em;" *ngFor="let cmt of cmts">
+      <nb-card-body>
+        <p style="color:grey">{{ cmt.date | date}}</p>
+        <p style="font-weight: bold;">{{ cmt.comment }}</p>
+    </nb-card-body>
+    </nb-card>
   </nb-card-body>
 </nb-card>
