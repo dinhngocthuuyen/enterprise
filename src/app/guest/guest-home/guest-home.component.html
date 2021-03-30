@@ -65,12 +65,25 @@
             University of Greenwich Admission 2021
           </nb-card-header>
           <nb-card-body>
-            <nb-card size="medium">
+            <nb-card>
               <input type="text" nbInput fullWidth fieldSize="medium" placeholder="Full name"><br>
               <input type="text" nbInput fullWidth fieldSize="medium" placeholder="High school name"><br>
-              <input type="text" nbInput fullWidth fieldSize="medium" placeholder="Faculty"><br>
               <input type="text" nbInput fullWidth fieldSize="medium" placeholder="Phone number"><br>
               <input type="text" nbInput fullWidth fieldSize="medium" placeholder="Address"><br>
+              <select name="campus" id="campus">
+                <option disabled selected>Choose Campus to register for admission</option>
+                <option value="HCM">Ho Chi Minh</option>
+                <option value="HaNoi">Ha Noi</option>
+                <option value="DaNang">Da Nang</option>
+                <option value="CanTho">Can Tho</option>
+              </select>
+              <br>
+              <select name="campus" id="campus">
+                <option disabled selected>Choose your major</option>
+                <option value="Math">Math</option>
+                <option value="History">History</option>
+                <option value="IT">Information Technology</option>
+              </select><br>
               <button nbButton status="primary">Submit</button>
             </nb-card>
           </nb-card-body>
