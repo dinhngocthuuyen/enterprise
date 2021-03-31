@@ -63,7 +63,7 @@ export class UploadContributionsComponent implements OnInit {
         renderComponent: ButtonViewComponent,
         onComponentInitFunction(instance) {
           instance.save.subscribe(row => {
-            window.location.href = "http://localhost:3000/upload/download/"+ row.metadata._facultyId + "/" + row.metadata._userId + "/" + row.filename;
+            window.location.href = "http://localhost:3000/download/" + row.metadata._userId + "/" + row.filename;
           });
         }
       }
@@ -78,7 +78,11 @@ export class UploadContributionsComponent implements OnInit {
   userId: any;
   topicId: any;
   contributionId: any;
+  contribution: any;
   isSubmit: boolean = false;
+  zip: any;
+  cmts: any;
+  numOfCmt: any;
   constructor(private StudentService: StudentService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
@@ -91,9 +95,17 @@ export class UploadContributionsComponent implements OnInit {
       this.source = new LocalDataSource(this.files);
     })
 
-    this.StudentService.getClosure(this.facultyId, this.userId).subscribe((res: any) => {
-      this.isSubmit = !res.isSubmit;
-    })
+    this.StudentService.getContribution(this.userId, this.topicId).subscribe((contribution: any) => {
+      this.contribution = contribution;
+      this.StudentService.getComments(contribution._id).subscribe((cmts: any) => {
+        this.cmts = cmts
+        this.numOfCmt = this.cmts.length
+      });
+    });
+
+    // this.StudentService.getClosure(this.facultyId, this.userId).subscribe((res: any) => {
+    //   this.isSubmit = !res.isSubmit;
+    // })
   }
 
   onDeleteButtonClicked(event){

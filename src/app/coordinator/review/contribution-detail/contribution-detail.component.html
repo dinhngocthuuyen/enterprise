@@ -8,7 +8,7 @@
       <nb-action class="control-item" icon="email-outline" [routerLink]="['../../chat', contribution._userId]" style="float: right"></nb-action>
     </div>
     <label>File: </label> &nbsp;
-      <a *ngFor="let file of files" href="{{'http://localhost:3000/upload/download/' + facultyId + '/' + studentId + '/' + file._filename}}">{{ file._filename }} <br></a>
+      <a *ngFor="let file of files" href="{{'http://localhost:3000/download/' + studentId + '/' + file._filename}}">{{ file._filename }} <br></a>
     <label>Submit Date:</label> &nbsp;
     <span>{{contribution.date | date}}</span><br>
     <label>Status:</label> &nbsp; 

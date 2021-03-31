@@ -22,7 +22,6 @@ export class ContributionDetailComponent implements OnInit, AfterViewInit {
     private route: ActivatedRoute,
     private reviewService: CoorService,
     private dialogService: NbDialogService,
-
   ) { }
   val:any;
   status: any;
@@ -47,6 +46,8 @@ export class ContributionDetailComponent implements OnInit, AfterViewInit {
       this.contribution = contribution;
       this.studentId = contribution[0]._userId;
       this.files = contribution[0].file;
+      this.SubmitTime = new Date(contribution[0].date).getTime();
+      this.Deadline = this.SubmitTime +(14*24*60*60*1000);
     });
     this.reviewService.getComments(this.conId).subscribe((cmts: any) => {
       this.cmts = cmts
@@ -61,12 +62,6 @@ export class ContributionDetailComponent implements OnInit, AfterViewInit {
         this.student = student
       })
     })
-    //get contribution date
-    this.reviewService.getConDate(this.conId).subscribe((contribution: any) => {
-      this.conDate = contribution;
-      this.SubmitTime = new Date(this.conDate).getTime();
-      this.Deadline = this.SubmitTime +(14*24*60*60*1000);
-    });
   }
   ngAfterViewInit() {
   }
@@ -101,11 +96,4 @@ export class ContributionDetailComponent implements OnInit, AfterViewInit {
     var seconds = Math.floor((distance % (1000*60))/1000);
     this.showTime = days + " days " + hours + " hours " + minutes + " minutes " +seconds + " seconds ";
   })
-
-  // onLinkClicked(){
-  //   this.FileService.getFile(this.filename).subscribe((file: any) => {
-  //     this.file = file;
-  //     window.location.href = "http://localhost:3000/upload/download/" + this.facultyId + "/" + this.userId + "/" + this.filename
-  //   })
-  // }
 }

@@ -1,6 +1,12 @@
+import { ListKeyManager } from '@angular/cdk/a11y';
 import { NbMenuItem } from '@nebular/theme';
 
 export const MENU_ITEMS: NbMenuItem[] = [
+  {
+    title: 'Contributions',
+    icon: 'file-text-outline',
+    link: 'view-selected-contributions'
+  },
   {
     title: 'Dashboard',
     icon: 'shopping-cart-outline',
@@ -45,12 +51,6 @@ export const MENU_ITEMS: NbMenuItem[] = [
     icon: 'shopping-cart-outline',
     link: 'coordinators/profile',
   },
-  {
-    title: 'Guest',
-    icon: 'person-outline',
-    link: 'guest',
-  },
-
   {
     title: 'Chat',
     icon: 'message-circle-outline',

@@ -6,8 +6,9 @@ const path = require('path');
 const multer = require('multer');
 const GridFsStorage = require('multer-gridfs-storage');
 const Grid = require('gridfs-stream');
-const methodOverride = require('method-override');
-const dayjs = require('dayjs')
+const dayjs = require('dayjs');
+const AdmZip = require('adm-zip');
+const fs = require('fs')
 
 const nodemailer = require("nodemailer");
 /* LOAD EXPRESS MODEL */
@@ -17,8 +18,6 @@ const app = express();
 const jwt = require('jsonwebtoken');
 
 const {Contribution, Coordinator, User, Message, Faculty, Comment, Closure} = require('./db/models');
-const { info } = require('console');
-const { result } = require('lodash');
 
 /* LOAD GLOBAL MIDDLEWARE */
 app.use(bodyParser.json());
@@ -133,11 +132,47 @@ app.get('/upload/:userId/:topicId', (req, res) => {
   }).toArray((err, files) => {
     if (!files || files.length  === 0) {
       return res.status(404).json({
-        err: 'No files exist ljlih'
+        err: 'No files exist'
       })
     }
     return res.json(files);
   })
+})
+
+// Manager downloads all selected contributions as zip
+app.get('/downloadAll/:userId/:topicId', (req, res) => {
+  const zip = new AdmZip();
+  const tempDir = 'src/assets/temporary/';
+  let downloadName;
+  gfs.files.find({
+    "metadata._userId": req.params.userId,
+    "metadata._topicId": req.params.topicId,
+  }).toArray((err, files) => {
+    if (!files || files.length  === 0) {
+      return res.status(404).json({
+        err: 'No files exist'
+      })   
+    }
+    if (fs.readdirSync(tempDir).length === 0) {
+      files.forEach(file => {
+        var readstream = gfs.createReadStream(file.filename);               
+        var writestream = fs.createWriteStream(tempDir + file.filename);
+        readstream.pipe(writestream);
+      })  
+    }
+    Closure.findOne({_id: req.params.topicId}).then((topic) => {
+      zip.addLocalFolder(tempDir);
+      downloadName = topic.topic;
+      const data = zip.toBuffer();
+      res.set('Content-Type','application/octet-stream');
+      res.set('Content-Disposition',`attachment; filename=${downloadName}.zip`);
+      res.set('Content-Length',data.length);
+      res.send(data);
+    })       
+  })
+  
+  
+  //fs.rmdir(tempDir, { recursive: true }).then(() => console.log('directory removed!'));
 })
 
 app.get('/upload/:filename', (req, res) => {
@@ -168,9 +203,8 @@ app.get('/upload/:facultyId', (req, res) => {
 })
 
 //Download file
-app.get('/upload/download/:facultyId/:userId/:filename', (req, res) => {
+app.get('/download/:userId/:filename', (req, res) => {
   gfs.files.findOne({
-    "metadata._facultyId": req.params.facultyId,
     "metadata._userId": req.params.userId,
     filename : req.params.filename
   }, (err, file) => {
@@ -203,9 +237,10 @@ app.post('/upload', upload.single('uploaded_file'), (req, res) => {
       newContribution.save();
     } else {
     contribution.file.push({ '_id': req.file.id, '_filename': req.file.filename});
+    contribution.status = 'Pending';
     contribution.save(); 
   }}).catch((e) => {
-    res.send(e)
+    res.redirect('http://localhost:4200/student/' + req.body._userId + '/topic/' + req.body._topicId +'/upload-contributions')
   })
   res.redirect('http://localhost:4200/student/' + req.body._userId + '/topic/' + req.body._topicId +'/upload-contributions')
 })
@@ -219,9 +254,10 @@ app.delete('/upload/remove/:id', (req, res) => {
   Contribution.findOne({
     "file._id" : req.params.id
   }).then((contribution) => {
-    //console.log(req)
     contribution.file.pull(req.params.id)
     contribution.save()
+  }).catch((e) => {
+    res.send(e);
   })
 })
 
@@ -515,9 +551,13 @@ app.get('/contribution/studentId/:id', (req, res) => {
       res.send(contributions._userId);
   });
 })
-app.get('/contribution/date/:id', (req, res) => {
-  Contribution.findOne({_id: req.params.id}).then((contributions) => {
-      res.send(contributions.date);
+
+app.get('/contribution/:userId/:topicId', (req, res) => {
+  Contribution.findOne({
+    _userId: req.params.userId,
+    _topicId: req.params.topicId
+  }).then((contribution) => {
+      res.send(contribution);
   });
 })
 
@@ -728,6 +768,8 @@ app.get('/viewcoor', authenticate, (req, res) => {
     res.send(e);
   });
 })
+
+
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 app.listen(3000, () => {

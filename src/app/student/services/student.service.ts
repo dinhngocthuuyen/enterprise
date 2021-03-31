@@ -46,5 +46,13 @@ export class StudentService {
   }
   createContribution(userId: string, facultyId: string, topicId: string) {
     return this.WebReqService.post(`contribution`, {userId, facultyId, topicId});
-  } 
+  }
+  
+  getComments(contributionId: string) {
+    return this.WebReqService.get(`${contributionId}/comments`)
+  }
+
+  getContribution(userId: string, topicId: string){
+    return this.WebReqService.get(`contribution/${userId}/${topicId}`)
+  }
 }

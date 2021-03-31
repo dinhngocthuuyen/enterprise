@@ -8,6 +8,9 @@
     <input hidden name="_topicId" [value]="topicId"/>
     <button nbButton status="danger" type="submit" [disabled]="isSubmit">Upload</button>
 </form>
+
+    <!-- <a nbButton href="{{'http://localhost:3000/downloadAll/' + userId + '/' + topicId}}">Download all</a> -->
+
 </nb-card-body>
 </nb-card>
 <nb-card>
@@ -16,3 +19,18 @@
   </nb-card-body>
 </nb-card>
 
+<nb-card>
+  <nb-card-header>
+    <div style="display: flex; justify-content: space-between;">
+      Comments
+    </div>
+  </nb-card-header>
+  <nb-card-body>
+    <nb-card style="background-color:#F2F3F5; border-radius: 1em;" *ngFor="let cmt of cmts">
+      <nb-card-body>
+        <p style="color:grey">{{ cmt.date | date}}</p>
+        <p style="font-weight: bold;">{{ cmt.comment }}</p>
+    </nb-card-body>
+    </nb-card>
+  </nb-card-body>
+</nb-card>

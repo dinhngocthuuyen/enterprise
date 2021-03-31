@@ -7,7 +7,6 @@ import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { HttpClientModule } from '@angular/common/http';
 import { ChatComponent } from './chat/chat.component';
 import { GuestRoutingModule } from './guest-routing.module';
-import { GuestComponent } from '../manager/guest/guest.component';
 import { GuestHomeComponent } from './guest-home/guest-home.component';
 import { FormsModule } from '@angular/forms';
 import { config } from 'rxjs';
