@@ -55,4 +55,8 @@ export class StudentService {
   getContribution(userId: string, topicId: string){
     return this.WebReqService.get(`contribution/${userId}/${topicId}`)
   }
+
+  getDeadline(topicId: string){
+    return this.WebReqService.get(`closure/${topicId}`)
+  }
 }

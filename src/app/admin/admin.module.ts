@@ -5,7 +5,6 @@ import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { CommonModule } from '@angular/common';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { HttpClientModule } from '@angular/common/http';
-import { ChatComponent } from './chat/chat.component';
 import { AdminRoutingModule } from './admin-routing.module';
 import { AccountComponent } from './account/account.component';
 import { ClosureComponent } from './closure/closure.component';
@@ -39,8 +38,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     NbAlertModule,
     NbInputModule
   ],
-  declarations: [
-    ChatComponent,   
+  declarations: [  
     AccountComponent,
     ClosureComponent,
     

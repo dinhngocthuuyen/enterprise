@@ -517,6 +517,13 @@ app.patch('/closure/:id', (req, res) => {
   })
 })
 
+app.get('/closure/:topicId', (req, res) => {
+  Closure.findOne({_id: req.params.topicId}).then((closure) => {
+    res.send(closure);
+ }).catch((e) => {
+   res.send(e)
+ })
+})
 
 app.get('/closure', (req, res) => {
   Closure.find({}).then((closure) => {

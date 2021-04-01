@@ -1,6 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { LocalDataSource, ViewCell } from 'ng2-smart-table';
 import { StudentService } from '../services/student.service'
 
@@ -79,7 +78,8 @@ export class UploadContributionsComponent implements OnInit {
   topicId: any;
   contributionId: any;
   contribution: any;
-  isSubmit: boolean = false;
+  disableUploadButton: boolean = false;
+  topic: any;
   zip: any;
   cmts: any;
   numOfCmt: any;
@@ -89,10 +89,23 @@ export class UploadContributionsComponent implements OnInit {
     this.facultyId = localStorage.getItem('facultyId');
     this.userId = localStorage.getItem('userId');
     this.topicId = this.route.snapshot.params.id;
-    
-    this.StudentService.getUpload(this.userId, this.topicId).subscribe((files: any) => {
-      this.files = files;
-      this.source = new LocalDataSource(this.files);
+
+    this.StudentService.getDeadline(this.topicId).subscribe((closure: any) => {
+      //this.disableUploadButton = false;
+      var now = new Date().getTime();
+      var deadline1 = new Date(closure.deadline1).getTime();
+      var deadline2 = new Date(closure.deadline2).getTime();
+        if(now > deadline1){        
+          this.disableUploadButton = true
+        }
+      this.StudentService.getUpload(this.userId, this.topicId).subscribe((files: any) => {
+        this.disableUploadButton = false;
+        this.files = files;
+        this.source = new LocalDataSource(this.files);
+        if(now > deadline2){
+          this.disableUploadButton = true;
+        }
+      })     
     })
 
     this.StudentService.getContribution(this.userId, this.topicId).subscribe((contribution: any) => {
@@ -102,10 +115,6 @@ export class UploadContributionsComponent implements OnInit {
         this.numOfCmt = this.cmts.length
       });
     });
-
-    // this.StudentService.getClosure(this.facultyId, this.userId).subscribe((res: any) => {
-    //   this.isSubmit = !res.isSubmit;
-    // })
   }
 
   onDeleteButtonClicked(event){

@@ -16,12 +16,7 @@
     <br>
   </nb-card-body>
   <nb-card-footer>
-    <ng-template [ngIf]="checked == true" [ngIfElse]="editButton">
     <button nbButton status="primary" (click)="onContributeButtonClicked(topic._id)">Contribute</button>
-    </ng-template>
-    <ng-template #editButton>
-      <button nbButton status="primary">Edit</button>
-    </ng-template>
   </nb-card-footer>
 </nb-card>
 </div>
