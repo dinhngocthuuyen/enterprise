@@ -5,7 +5,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
   {
     title: 'Contributions',
     icon: 'file-text-outline',
-    link: 'view-selected-contributions'
+    link: 'view-topics'
   },
   {
     title: 'Dashboard',

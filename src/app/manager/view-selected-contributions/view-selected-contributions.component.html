@@ -1,6 +1,6 @@
 <nb-card>
     <nb-card-body>
-      <!-- <input #search class="form-control" type="text" placeholder="&#xF002; Search" style="font-family:Arial, FontAwesome" (keydown.enter)="onSearch(search.value)"><br> -->
+      <a nbButton status="danger" href="{{'http://localhost:3000/downloadAll2/' + topicId}}">Download all</a>
       <ng2-smart-table [settings]="settings" [source]="source" ></ng2-smart-table>
     </nb-card-body>
   </nb-card>

@@ -3,13 +3,13 @@ import { Router } from '@angular/router';
 import { ClosureService } from 'src/app/admin/services/closure.service';
 
 @Component({
-  selector: 'app-view-topic',
-  templateUrl: './view-topic.component.html',
-  styleUrls: ['./view-topic.component.scss']
+  selector: 'app-view-topics',
+  templateUrl: './view-topics.component.html',
+  styleUrls: ['./view-topics.component.scss']
 })
-export class ViewTopicComponent implements OnInit {
-  coordinatorId!: any;
-  facultyId: any;
+export class ViewTopicsComponent implements OnInit {
+
+  userId!: any;
   startdate: any;
   deadline1: any;
   deadline2: any;
@@ -17,9 +17,8 @@ export class ViewTopicComponent implements OnInit {
   topicId: any;
   countDownDeadline1Time: any;
   countDownDeadline2Time: any;
-  constructor(
-    private closureService: ClosureService,
-    private router: Router) { }
+
+  constructor(private closureService: ClosureService, private router: Router) { }
 
   ngOnInit(): void {
     this.closureService.getClosures().subscribe((topic: any) => {
@@ -43,8 +42,7 @@ export class ViewTopicComponent implements OnInit {
   }
   
   onContributeButtonClicked(topicId) {
-    this.coordinatorId = localStorage.getItem('userId');
-    this.facultyId = localStorage.getItem('facultyId');
-    this.router.navigate(['coordinator/' + this.coordinatorId + '/topic/' + topicId + '/review']);
+    this.userId = localStorage.getItem('userId');
+    this.router.navigate(['manager/' + this.userId + '/topic/' + topicId + '/view-selected-contributions']);
   }
 }

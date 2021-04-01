@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { LocalDataSource } from 'ng2-smart-table';
+import { ViewProfile } from '../service/manager.service';
 
 @Component({
   selector: 'app-view-selected-contributions',
@@ -17,26 +20,35 @@ export class ViewSelectedContributionsComponent implements OnInit {
       position: 'right'
     },
     columns: {
-      _id: {
-        title: 'ID',
+      _userId: {
+        title: 'Student ID',
       },
-      filename: {
-        title: 'File name',
+      _facultyId: {
+        title: 'Faculty ID',
       },
-      uploadDate: {
+      date: {
         title: 'Upload date',
-      },
-      contentType: {
-        title: 'File type'
       },
     }
   }
-  source!:any;
+  source!: LocalDataSource
+  contributions: any;
+  zip: any;
+  topicId: any;
+  download: any;
 
-
-  constructor() { }
+  constructor(private ViewProfile: ViewProfile, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-  }
+    this.topicId = this.route.snapshot.params.id;
 
+    this.ViewProfile.getContributions(this.topicId).subscribe((contributions: any) => {
+      this.contributions = contributions;
+      this.source = new LocalDataSource(this.contributions);
+    })
+    
+    this.ViewProfile.getDownloadAll(this.topicId).subscribe((download: any) => {
+      this.download = download;
+    })
+  }
 }

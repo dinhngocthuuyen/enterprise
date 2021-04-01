@@ -91,7 +91,6 @@ export class UploadContributionsComponent implements OnInit {
     this.topicId = this.route.snapshot.params.id;
 
     this.StudentService.getDeadline(this.topicId).subscribe((closure: any) => {
-      //this.disableUploadButton = false;
       var now = new Date().getTime();
       var deadline1 = new Date(closure.deadline1).getTime();
       var deadline2 = new Date(closure.deadline2).getTime();

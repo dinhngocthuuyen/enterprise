@@ -14,7 +14,12 @@ export class ViewProfile {
   getviewcoordinator(){
     return this.WebRequestService.get('viewcoor');
   }
-  
+  getContributions(topicId: string){
+    return this.WebRequestService.get(`contributions/approved/${topicId}`);
+  }
+  getDownloadAll(topicId: string){
+    return this.WebRequestService.get(`downloadAll1/${topicId}`)
+  }
 }
 
 

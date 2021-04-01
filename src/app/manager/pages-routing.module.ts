@@ -5,10 +5,10 @@ import { AdminComponent } from './admin/admin.component';
 import { StudentComponent } from './student/student.component';
 import { StaffComponent } from './staff/staff.component';
 import { StudentmanagerComponent } from './manager/studentmanager/studentmanager.component';
-import { ChatComponent } from './chat/chat.component';
 import { viewComponent } from './viewprofile/viewprofile.component';
 import { viewdetailComponent } from './viewprofile/viewprofile-detail/viewdetail.component';
 import { ViewSelectedContributionsComponent } from './view-selected-contributions/view-selected-contributions.component';
+import { ViewTopicsComponent } from './view-topics/view-topics.component';
 
 const routes: Routes = [{
   path: '',
@@ -57,10 +57,6 @@ const routes: Routes = [{
       loadChildren: () => import('./staff/staff.module')
         .then(m => m.StaffModule),
     },
-    {
-      path: 'chat',
-      component: ChatComponent,
-    },
 
     {
       path: 'viewprofile',
@@ -76,13 +72,16 @@ const routes: Routes = [{
       component: viewdetailComponent,
     },
     {
-      path: 'view-selected-contributions',
+      path: 'topic/:id/view-selected-contributions',
       component: ViewSelectedContributionsComponent
     },
-
+    {
+      path: 'view-topics',
+      component: ViewTopicsComponent
+    },
     {
       path: '',
-      redirectTo: 'dashboard',
+      redirectTo: 'view-topics',
       pathMatch: 'full',
     },
 

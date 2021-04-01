@@ -140,12 +140,9 @@ app.get('/upload/:userId/:topicId', (req, res) => {
 })
 
 // Manager downloads all selected contributions as zip
-app.get('/downloadAll/:userId/:topicId', (req, res) => {
-  const zip = new AdmZip();
-  const tempDir = 'src/assets/temporary/';
-  let downloadName;
+app.get('/downloadAll1/:topicId', (req, res) => {
+  const tempDir = 'src/assets/temporary/' + req.params.topicId;
   gfs.files.find({
-    "metadata._userId": req.params.userId,
     "metadata._topicId": req.params.topicId,
   }).toArray((err, files) => {
     if (!files || files.length  === 0) {
@@ -153,26 +150,32 @@ app.get('/downloadAll/:userId/:topicId', (req, res) => {
         err: 'No files exist'
       })   
     }
+    if (!fs.existsSync(tempDir)) {
+      fs.mkdirSync(tempDir);
+    }
     if (fs.readdirSync(tempDir).length === 0) {
       files.forEach(file => {
         var readstream = gfs.createReadStream(file.filename);               
-        var writestream = fs.createWriteStream(tempDir + file.filename);
+        var writestream = fs.createWriteStream(tempDir + '/' + file.filename);
         readstream.pipe(writestream);
       })  
-    }
-    Closure.findOne({_id: req.params.topicId}).then((topic) => {
-      zip.addLocalFolder(tempDir);
-      downloadName = topic.topic;
-      const data = zip.toBuffer();
-      res.set('Content-Type','application/octet-stream');
-      res.set('Content-Disposition',`attachment; filename=${downloadName}.zip`);
-      res.set('Content-Length',data.length);
-      res.send(data);
-    })       
+    }   
   })
+})
+
+app.get('/downloadAll2/:topicId', (req, res) => {
+  const zip = new AdmZip();
   
-  
-  //fs.rmdir(tempDir, { recursive: true }).then(() => console.log('directory removed!'));
+  Closure.findOne({_id: req.params.topicId}).then((topic) => {
+    const tempDir = 'src/assets/temporary/' + req.params.topicId;
+    zip.addLocalFolder(tempDir);
+    downloadName = topic.topic;
+    const data = zip.toBuffer();
+    res.set('Content-Type','application/octet-stream');
+    res.set('Content-Disposition',`attachment; filename=${downloadName}.zip`);
+    res.set('Content-Length',data.length);
+    res.send(data);
+  })       
 })
 
 app.get('/upload/:filename', (req, res) => {
@@ -610,6 +613,14 @@ app.get('/approved/:facultyId/contributions', (req, res) => {
   Contribution.find({
     _facultyId: req.params.facultyId,
     status: {$ne: "Pending"}
+  }).then((contributions) => {
+    res.send(contributions);
+  })
+});
+app.get('/contributions/approved/:topicId', (req, res) => {
+  Contribution.find({
+    _topicId: req.params.topicId,
+    status: "Approved"
   }).then((contributions) => {
     res.send(contributions);
   })
