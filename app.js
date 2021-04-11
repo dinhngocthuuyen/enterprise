@@ -291,7 +291,7 @@ app.patch('/profile/:id', (req, res) => {
   })
 })
 
-app.put('/coordinators/:_id' ,(req, res) => {
+app.put('/coordinators/:id' ,(req, res) => {
   Coordinator.findOneAndUpdate({_id: req.params.id},{
       $set: req.body
   }).then(() =>{
@@ -451,11 +451,23 @@ app.get('/coordinator/:facultyId/contributions', (req, res) => {
     res.send(contributions);
   })
 });
+
 app.get('/contribution/:id', (req, res) => {
   Contribution.find({_id: req.params.id}).then((contributions) => {
       res.send(contributions);
   });
 })
+app.get('/contribution/studentId/:id', (req, res) => {
+  Contribution.findOne({_id: req.params.id}).then((contributions) => {
+      res.send(contributions._userId);
+  });
+})
+app.get('/contribution/date/:id', (req, res) => {
+  Contribution.findOne({_id: req.params.id}).then((contributions) => {
+      res.send(contributions.date);
+  });
+})
+
 app.patch('/contributions/:id', (req, res) => {
   Contribution.findOneAndUpdate({_id: req.params.id},{
       $set: req.body

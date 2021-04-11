@@ -25,19 +25,20 @@ export class ContributionDetailComponent implements OnInit, AfterViewInit {
   val:any;
   status: any;
   studentId!: string;
+  student: any;
   numOfCmt: any;
   file!: string;
   @Input() contribution;
   @Input() contributions;
-
+  conDate: any;
+  SubmitTime: any;
+  Deadline: any;
   ngOnInit() {
     // this.facId = localStorage.getItem('facultyId');
     this.conId = this.route.snapshot.params.id;
     // console.log("contribution id: ", this.conId);
     this.reviewService.getContributionDetail(this.conId).subscribe((contribution: any) => {
       this.contribution = contribution;
-      this.studentId = this.contribution._id;
-      console.log("student Id"+this.studentId)
     });
     this.reviewService.getComments(this.conId).subscribe((cmts: any) => {
       this.cmts = cmts
@@ -45,12 +46,20 @@ export class ContributionDetailComponent implements OnInit, AfterViewInit {
     });
     //// load user id
     this.userId = localStorage.getItem('userId');
-    /// load student
-    // this.stuId = this.studentId;
-    // this.reviewService.getUser(this.studentId).subscribe(() => {
-
-    // })
-  
+    /// load student name
+    this.reviewService.getStudentId(this.conId).subscribe((stuId: any) =>{
+      this.stuId = stuId;
+      this.reviewService.getUser(this.stuId).subscribe((student: any) =>{
+        this.student = student
+      })
+    })
+    //get contribution date
+    this.reviewService.getConDate(this.conId).subscribe((contribution: any) => {
+      this.conDate = contribution;
+      this.SubmitTime = new Date(this.conDate).getTime();
+      // console.log("submit time: ", this.SubmitTime)
+      this.Deadline = this.SubmitTime +(14*24*60*60*1000);
+    });
   }
   ngAfterViewInit() {
   }
@@ -81,8 +90,8 @@ export class ContributionDetailComponent implements OnInit, AfterViewInit {
   //  getdate(){
   //    this.reviewService
   //  }
-  SubmitTime = new Date("2021-02-23T04:21:59.159Z").getTime();
-  Deadline = this.SubmitTime +(14*24*60*60*1000);
+  // SubmitTime = new Date(this.conDate).getTime();
+  // Deadline = this.SubmitTime +(13*24*60*60*1000);
   showTime: any;
   x = setInterval(() =>{
     var now = new Date().getTime();
@@ -92,11 +101,12 @@ export class ContributionDetailComponent implements OnInit, AfterViewInit {
     var minutes = Math.floor((distance % (1000*60*60))/(1000*60));
     var seconds = Math.floor((distance % (1000*60))/1000);
     this.showTime = days + " days " + hours + " hours " + minutes + " minutes " +seconds + " seconds ";
-    if(distance= 0 && distance<0){
-      this.openNotApproved()
-      {
-      status = "Not Approved";
-      this.reviewService.updateStatus(this.conId, status).subscribe()   
-      } }
+    // if(distance<0){
+    //   this.openNotApproved()
+    //   {
+    //   status = "Not Approved";
+    //   this.reviewService.updateStatus(this.conId, status).subscribe()
+    //   }
+    // }
   })
 }

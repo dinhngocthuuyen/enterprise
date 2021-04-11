@@ -51,6 +51,7 @@ export class viewComponent implements OnInit {
 
   }
 
+
    onUserRowSelect(event){
      this.router.navigate(['manager/'+this.userId+'/viewdetail/' + event.data._id]);
 
