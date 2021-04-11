@@ -1,13 +1,36 @@
-<form ngNoForm  [action]="url" method="post" enctype="multipart/form-data">
-    <input class="form-control" type="file" name="uploaded_file" />
-    <input name="_facultyId" [value]="facultyId"/>
-    <input name="_userId" [value]="userId"/>
-    <button nbButton status="danger" type="submit">Upload</button>
-</form>
-<!--*ngIf="deadline1; else deadline2" -->
 <nb-card>
   <nb-card-body>
-    <!-- <input #search class="form-control" type="text" placeholder="&#xF002; Search" style="font-family:Arial, FontAwesome" (keydown.enter)="onSearch(search.value)"><br> -->
+<form ngNoForm  [action]="url" method="post" enctype="multipart/form-data">
+    <input class="form-control" type="file" name="uploaded_file" />
+    <input hidden name="status" value="Pending"/>
+    <input hidden name="_facultyId" [value]="facultyId"/>
+    <input hidden name="_userId" [value]="userId"/>
+    <input hidden name="_topicId" [value]="topicId"/>
+    <button nbButton status="danger" type="submit" [disabled]="disableUploadButton">Upload</button>
+</form>
+
+    <!-- <a nbButton href="{{'http://localhost:3000/downloadAll/' + userId + '/' + topicId}}">Download all</a> -->
+
+</nb-card-body>
+</nb-card>
+<nb-card>
+  <nb-card-body>
     <ng2-smart-table [settings]="settings" [source]="source" (delete)="onDeleteButtonClicked($event)"></ng2-smart-table>
+  </nb-card-body>
+</nb-card>
+
+<nb-card>
+  <nb-card-header>
+    <div style="display: flex; justify-content: space-between;">
+      Comments
+    </div>
+  </nb-card-header>
+  <nb-card-body>
+    <nb-card style="background-color:#F2F3F5; border-radius: 1em;" *ngFor="let cmt of cmts">
+      <nb-card-body>
+        <p style="color:grey">{{ cmt.date | date}}</p>
+        <p style="font-weight: bold;">{{ cmt.comment }}</p>
+    </nb-card-body>
+    </nb-card>
   </nb-card-body>
 </nb-card>

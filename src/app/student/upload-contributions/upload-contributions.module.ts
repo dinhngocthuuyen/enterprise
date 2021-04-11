@@ -4,7 +4,6 @@ import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
 import { NbButtonGroupModule, NbButtonModule, NbCardModule, NbDatepickerModule, NbFilterInputDirective, NbIconModule, NbInputDirective, NbInputModule, NbLayoutModule, NbListComponent, NbListModule, NbRadioGroupComponent, NbRadioModule, NbSelectModule, NbSidebarModule, NbSortDirection, NbSortRequest, NbTableModule, NbTabsetModule, NbTimepickerModule, NbTreeGridDataSource, NbTreeGridDataSourceBuilder, NbTreeGridModule } from '@nebular/theme';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
 
-
 @NgModule({
   imports: [
       NbButtonModule,
@@ -19,9 +18,6 @@ import { Ng2SmartTableModule } from 'ng2-smart-table';
       ReactiveFormsModule,
       BrowserModule,
       NbSelectModule,
-      
-      
-
   ],
   declarations: [
       

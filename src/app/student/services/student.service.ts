@@ -35,10 +35,28 @@ export class StudentService {
     return this.WebReqService.post(`messages/${facultyId}/${id}`, {text, reply})
   }
 
-  getUpload(facultyId: string, userId: string){
-    return this.WebReqService.get(`upload/${facultyId}/${userId}`);
+  getUpload(userId: string, topicId: string){
+    return this.WebReqService.get(`upload/${userId}/${topicId}`);
   }
   deleteUpload(id: string) {
-    return this.WebReqService.delete(`upload/${id}`);
+    return this.WebReqService.delete(`upload/remove/${id}`);
+  }
+  getClosure(facultyId: string, userId: string){
+    return this.WebReqService.get(`closure/${facultyId}/${userId}`);
+  }
+  createContribution(userId: string, facultyId: string, topicId: string) {
+    return this.WebReqService.post(`contribution`, {userId, facultyId, topicId});
+  }
+  
+  getComments(contributionId: string) {
+    return this.WebReqService.get(`${contributionId}/comments`)
+  }
+
+  getContribution(userId: string, topicId: string){
+    return this.WebReqService.get(`contribution/${userId}/${topicId}`)
+  }
+
+  getDeadline(topicId: string){
+    return this.WebReqService.get(`closure/${topicId}`)
   }
 }

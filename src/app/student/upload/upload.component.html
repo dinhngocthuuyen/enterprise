@@ -1,11 +1,22 @@
+<div *ngFor="let topic of topic">
 <nb-card>
-  
-    <!-- <nb-tab tabTitle="Upload file"> -->
-      <form action="/action_page.php">
-        <label for="myfile">Select a file:</label>
-        <input type="file" id="myfile" name="myfile"><br><br>
-        <button nbButton status="primary">Upload</button>
-      </form>      
-    <!-- </nb-tab> -->
-  
+  <nb-card-header>{{topic.topic}}</nb-card-header>
+  <nb-card-body>
+    <label>Start date: {{ topic.startdate }}</label>
+    <br>
+    <div>
+      Deadline 1: {{ topic.deadline1 }}<br>
+      Deadline 1: <span style="color: red;">{{ countDownDeadline(topic.deadline1) }}</span>
+    </div>
+    <br>
+    <div>
+      Deadline 2: {{ topic.deadline2 }}<br>
+      Deadline 2: <span style="color: red;">{{ countDownDeadline(topic.deadline2) }}</span>
+    </div>
+    <br>
+  </nb-card-body>
+  <nb-card-footer>
+    <button nbButton status="primary" (click)="onContributeButtonClicked(topic._id)">Contribute</button>
+  </nb-card-footer>
 </nb-card>
+</div>

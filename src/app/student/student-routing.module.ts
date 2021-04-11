@@ -20,22 +20,21 @@ const routes: Routes = [{
       component: SendMailComponent,
     },
     {
-      path: 'upload-contributions',
+      path: 'topic/:id/upload-contributions',
       component: UploadContributionsComponent
     },
-  
+    {
+      path: 'topic',
+      component: UploadComponent
+    },
     {
       path: '',
-      redirectTo: 'dashboard',
+      redirectTo: 'topic',
       pathMatch: 'full',
     },
-
     {
-      path: '**',
-    //   component: NotFoundComponent,
-    },
-
-
+      path: '**'
+    }
   ],
 }];
 

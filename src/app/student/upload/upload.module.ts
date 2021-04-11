@@ -21,8 +21,6 @@ import { UploadComponent } from './upload.component';
       ReactiveFormsModule,
       BrowserModule,
       NbSelectModule,
-      
-
   ],
   declarations: [
       

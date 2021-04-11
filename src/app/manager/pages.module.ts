@@ -3,12 +3,12 @@ import { NbButtonModule, NbCardModule, NbIconModule, NbLayoutModule, NbMenuModul
 import { PagesRoutingModule } from './pages-routing.module';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { CommonModule } from '@angular/common';
-import { GuestComponent } from './guest/guest.component';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { HttpClientModule } from '@angular/common/http';
-import { GuestDetailComponent } from './guest/guest-detail/guest-detail.component';
 import { viewComponent } from './viewprofile/viewprofile.component';
 import { viewdetailComponent } from './viewprofile/viewprofile-detail/viewdetail.component';
+import { ViewSelectedContributionsComponent } from './view-selected-contributions/view-selected-contributions.component';
+import { ViewTopicsComponent } from './view-topics/view-topics.component';
 
 @NgModule({
   imports: [
@@ -29,16 +29,14 @@ import { viewdetailComponent } from './viewprofile/viewprofile-detail/viewdetail
     Ng2SmartTableModule,
     NbActionsModule,
     NbUserModule,
-    // NbChatModule,
     NbContextMenuModule,
     HttpClientModule,
   ],
   declarations: [
-    GuestComponent,
-    GuestDetailComponent,
     viewComponent,
-    viewdetailComponent
-
+    viewdetailComponent,
+    ViewSelectedContributionsComponent,
+    ViewTopicsComponent
   ],
 })
 export class PagesModule {

@@ -3,11 +3,12 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const { mongoose } = require('./db/mongoose');
 const path = require('path');
-const crypto = require('crypto');
 const multer = require('multer');
 const GridFsStorage = require('multer-gridfs-storage');
 const Grid = require('gridfs-stream');
-const methodOverride = require('method-override');
+const dayjs = require('dayjs');
+const AdmZip = require('adm-zip');
+const fs = require('fs')
 
 const nodemailer = require("nodemailer");
 /* LOAD EXPRESS MODEL */
@@ -16,9 +17,7 @@ const app = express();
 /* LOAD MONGOOSE MODEL */
 const jwt = require('jsonwebtoken');
 
-const { Post, Contribution, Coordinator, User, Role, Student, Message, Faculty, Comment, Closure } = require('./db/models');
-const { info } = require('console');
-const { result } = require('lodash');
+const {Contribution, Coordinator, User, Message, Faculty, Comment, Closure} = require('./db/models');
 
 /* LOAD GLOBAL MIDDLEWARE */
 app.use(bodyParser.json());
@@ -108,11 +107,6 @@ const storage = new GridFsStorage({
   url: connectionString,
   file: (req, file) => {
     return new Promise((resolve, reject) => {
-      // crypto.randomBytes(16, (err, buf) => {
-      //   if (err) {
-      //     return reject(err);
-      //   }
-        // const filename = buf.toString('hex') + path.extname(file.originalname);
         const filename = file.originalname;
         const fileInfo = {
           filename: filename,
@@ -120,7 +114,6 @@ const storage = new GridFsStorage({
           metadata: req.body
         };
         resolve(fileInfo);
-      // });
     });
   }
 });
@@ -132,12 +125,10 @@ const upload = multer({ storage });
 /////////////////////////////////////////////////////// UPLOAD //////////////////////////////////////////////////////////////
 
 // student gets files
-app.get('/upload/:facultyId/:userId', (req, res) => {
+app.get('/upload/:userId/:topicId', (req, res) => {
   gfs.files.find({
-    metadata: {
-      _facultyId: req.params.facultyId,
-      _userId: req.params.userId,
-    }
+      "metadata._userId": req.params.userId,
+      "metadata._topicId": req.params.topicId,
   }).toArray((err, files) => {
     if (!files || files.length  === 0) {
       return res.status(404).json({
@@ -147,6 +138,59 @@ app.get('/upload/:facultyId/:userId', (req, res) => {
     return res.json(files);
   })
 })
+
+// Manager downloads all selected contributions as zip
+app.get('/downloadAll1/:topicId', (req, res) => {
+  const tempDir = 'src/assets/temporary/' + req.params.topicId;
+  gfs.files.find({
+    "metadata._topicId": req.params.topicId,
+  }).toArray((err, files) => {
+    if (!files || files.length  === 0) {
+      return res.status(404).json({
+        err: 'No files exist'
+      })   
+    }
+    if (!fs.existsSync(tempDir)) {
+      fs.mkdirSync(tempDir);
+    }
+    if (fs.readdirSync(tempDir).length === 0) {
+      files.forEach(file => {
+        var readstream = gfs.createReadStream(file.filename);               
+        var writestream = fs.createWriteStream(tempDir + '/' + file.filename);
+        readstream.pipe(writestream);
+      })  
+    }   
+  })
+})
+
+app.get('/downloadAll2/:topicId', (req, res) => {
+  const zip = new AdmZip();
+  
+  Closure.findOne({_id: req.params.topicId}).then((topic) => {
+    const tempDir = 'src/assets/temporary/' + req.params.topicId;
+    zip.addLocalFolder(tempDir);
+    downloadName = topic.topic;
+    const data = zip.toBuffer();
+    res.set('Content-Type','application/octet-stream');
+    res.set('Content-Disposition',`attachment; filename=${downloadName}.zip`);
+    res.set('Content-Length',data.length);
+    res.send(data);
+  })       
+})
+
+app.get('/upload/:filename', (req, res) => {
+  gfs.files.find({
+      filename: req.params.filename,
+  }).toArray((err, files) => {
+    if (!files || files.length  === 0) {
+      return res.status(404).json({
+        err: 'No files exist'
+      })
+    }
+    return res.json(files);
+  })
+})
+
 // coordinator gets files
 app.get('/upload/:facultyId', (req, res) => {
   gfs.files.find({
@@ -162,12 +206,9 @@ app.get('/upload/:facultyId', (req, res) => {
 })
 
 //Download file
-app.get('/upload/download/:facultyId/:userId/:filename', (req, res) => {
+app.get('/download/:userId/:filename', (req, res) => {
   gfs.files.findOne({
-    metadata: {
-      _facultyId: req.params.facultyId,
-      _userId: req.params.userId,
-    },
+    "metadata._userId": req.params.userId,
     filename : req.params.filename
   }, (err, file) => {
     if (!file || file.length  === 0) {
@@ -182,70 +223,44 @@ app.get('/upload/download/:facultyId/:userId/:filename', (req, res) => {
 
 //Upload a single file to MongoDB
 app.post('/upload', upload.single('uploaded_file'), (req, res) => {
-  res.send('File uploaded successfully')
+  Contribution.findOne({
+    _userId: req.body._userId,
+    _topicId: req.body._topicId
+  }).then((contribution) => {
+    if(!contribution){
+      let date = Date.now();
+      let status = req.body.status;
+      let _userId = req.body._userId;
+      let _facultyId = req.body._facultyId;
+      let _topicId = req.body._topicId;
+      let newContribution = new Contribution({
+        date, status, _userId, _facultyId, _topicId
+      });
+      newContribution.file.push({ '_id': req.file.id, '_filename': req.file.filename});
+      newContribution.save();
+    } else {
+    contribution.file.push({ '_id': req.file.id, '_filename': req.file.filename});
+    contribution.status = 'Pending';
+    contribution.save(); 
+  }}).catch((e) => {
+    res.redirect('http://localhost:4200/student/' + req.body._userId + '/topic/' + req.body._topicId +'/upload-contributions')
+  })
+  res.redirect('http://localhost:4200/student/' + req.body._userId + '/topic/' + req.body._topicId +'/upload-contributions')
 })
 
-app.delete('/upload/:id', (req, res) => {
-  gfs.remove({_id : req.params.id, root: 'uploads'}, (err, gridStore) => {
+app.delete('/upload/remove/:id', (req, res) => {
+  gfs.remove({_id : req.params.id, root: 'uploads'}, (err) => {
     if (err) {
       return res.status(404).json({ err: err });
     }
-    res.send('Delete successfully')
   })
-})
-
-
-/////////////////////////////////////////////////////// POST //////////////////////////////////////////////////////////////
-
-//Return an array of all the posts in database that belongs to the authenticated user
-app.get('/post', (req, res) => {
-  Post.find({}).then((post) => {
-    res.send(post);
+  Contribution.findOne({
+    "file._id" : req.params.id
+  }).then((contribution) => {
+    contribution.file.pull(req.params.id)
+    contribution.save()
   }).catch((e) => {
     res.send(e);
-  });
-})
-
-app.get('/post/:id', (req, res) => {
-  //Return an array of all the posts in database
-  Post.find({_id: req.params.id}).then((post) => {
-    res.send(post);
-  }).catch((e) => {
-    res.send(e);
-  });
-})
-
-app.post('/post', authenticate, (req, res) => {
-  //Create a new post and return post document back to user (including post's id)
-  //Post's info (fields) will be passed in via JSON req body
-  let title = req.body.title
-  let post = req.body.post
-  let newPost = new Post({
-    title,
-    post,
-    _userId: req._id
-  });
-  newPost.save().then((postDoc) => {
-    //The full post document is returned (including id)
-    res.send(postDoc);
-  })
-})
-
-app.patch('/post/:id', (req, res) => {
-  //Update a selected post (post document with id in the URL) with the new values specified in the JSON body of the req
-  Post.findOneAndUpdate({_id: req.params.id}, {
-    $set: req.body
-  }).then(() => {
-    res.sendStatus(200);
-  })
-})
-
-app.delete('/post/:id', (req, res) => {
-  //Delete a selected post (document with id in the URL)
-  Post.findOneAndDelete({
-    _id: req.params.id
-  }).then((removePost) => {
-    res.send(removePost);
   })
 })
 
@@ -258,30 +273,28 @@ app.get('/profile/profile-detail/:id', (req, res) => {
     res.send(e);
   });
 })
-app.get('/coordinators/:id', (req, res) => {
 
+app.get('/coordinators/:id', (req, res) => {
     Coordinator.find({_id: req.params.id}).then((profiles) => {
         res.send(profiles);
     });
 })
+
 //POST Profile Coordinator
 app.post('/profiles', (req, res) => {
     let name = req.body.name;
     let address = req.body.address;
-
     let phone = req.body.phone;
     let email = req.body.email;
     let dob = req.body.dob;
-
-
     let newCoordinator = new Coordinator({
         name,address,dob,email,phone
     });
     newCoordinator.save().then((CoordinatorDoc) => {
-
         res.send(CoordinatorDoc);
     })
 })
+
 app.patch('/profile/:id', (req, res) => {
   //Update a selected post (post document with id in the URL) with the new values specified in the JSON body of the req
   User.findOneAndUpdate({_id: req.params.id}, {
@@ -372,15 +385,6 @@ app.patch('/user/:id', (req, res) => {
   })
 })
 
-app.delete('/user/:id', (req, res) => {
-  //Delete a selected user (document with id in the URL)
-  Post.findOneAndDelete({
-    _id: req.params.id
-  }).then((removeUser) => {
-    res.send(removeUser);
-  })
-})
-
 app.get('/user/:id', (req, res) => {
   User.find({_id: req.params.id}).then((user) => {
       res.send(user);
@@ -389,9 +393,6 @@ app.get('/user/:id', (req, res) => {
   });
 })
 
-
-
-
 app.get('/faculty/:id', (req, res) => {
   Faculty.find({_id: req.params.id}).then((faculty) => {
       res.send(faculty);
@@ -399,8 +400,9 @@ app.get('/faculty/:id', (req, res) => {
     res.send(e);
   });
 })
+
 app.get('/users', (req, res) => {
-  User.find({}).then((user) => {
+  User.find().then((user) => {
       res.send(user);
   });
 })
@@ -425,10 +427,106 @@ app.get('/faculties', (req, res) => {
 app.post('/closure', (req, res) => {
   let newClosure = new Closure(req.body);
   newClosure.save().then((ClosureDoc) => {
-
     res.send(ClosureDoc);
   })
 });
+
+app.delete('/closure/:id', (req, res) => {
+  //Delete a selected closure (document with id in the URL)
+  Closure.findOneAndDelete({
+    _id: req.params.id
+  }).then((removePost) => {
+    res.send(removePost);
+  })
+})
+
+app.delete('/users/:id', (req, res) => {
+  //Delete a selected user (document with id in the URL)
+  User.findOneAndDelete({
+    _id: req.params.id
+  }).then((removePost) => {
+    res.send(removePost);
+  })
+})
+
+app.patch('/closure/:id', (req, res) => {
+  Closure.findOneAndUpdate({_id: req.params.id}, {
+    $set: req.body
+  }).then((updateClosure) => {
+    res.send(updateClosure);
+  })
+})
+
+/**
+ * Startdate tới deadline 1 là được nộp bài với sửa bài
+ * Deadline 1 tới deadline 2 chỉ được nộp bài sửa nếu trước đó đã nộp file r
+ */
+
+ app.get('/closure/:facultyId/:userId', async (req, res) => {
+  const getFileUpload = await gfs.files.find({
+    metadata: {
+      _facultyId: req.params.facultyId,
+      _userId: req.params.userId,
+    }
+  }).toArray();
+
+  const checkFileUpload = (fileUpload) => {
+    if (fileUpload.length !== 0) {
+      return true;
+    }
+    return false;
+  }
+
+  Closure.find({}).then((closure) => {
+    const lastClosure = closure[closure.length -1];
+    const currentDate = dayjs();
+    const startdate = dayjs(lastClosure.startdate);
+    const deadline1 = dayjs(lastClosure.deadline1);
+    const deadline2 = dayjs(lastClosure.deadline2);
+
+    const isSubmit = () => {
+      const diffStartDate = deadline1.diff(startdate, 'DD-MM-YYY HH:mm');
+      const diffDeadline1 = deadline1.diff(currentDate, 'DD-MM-YYY HH:mm');
+      const diffDeadline2 = deadline2.diff(currentDate, 'DD-MM-YYY HH:mm');
+      const isFileUpload = checkFileUpload(getFileUpload);
+
+      // console.log('diffStartDate', diffStartDate);
+      // console.log('diffDeadline1', diffDeadline1);
+      // console.log('diffDeadline2', diffDeadline2);
+
+      if (diffStartDate > diffDeadline1 && diffDeadline1 > 0) {
+        console.log('Trường hợp 1 tính từ startdate -> deadline1: Mở form');
+        return true;
+      }
+
+      if (diffDeadline2 < 0) {
+        console.log('Trường hợp 3 quá hạn deadline2 & đã nộp bài: Đóng form');
+        return false;
+      }
+
+      if (diffDeadline2 > diffDeadline1 && isFileUpload) {
+        console.log('Trường hợp 2 tính từ deadline1 -> deadline2 & đã nộp bài: Mở form');
+        return true;
+      }
+
+      return false;
+    }
+      
+    res.send({
+      closure: lastClosure,
+      isSubmit: isSubmit(),
+      filesUpload: getFileUpload,
+    });
+  })
+})
+
+app.get('/closure/:topicId', (req, res) => {
+  Closure.findOne({_id: req.params.topicId}).then((closure) => {
+    res.send(closure);
+ }).catch((e) => {
+   res.send(e)
+ })
+})
 
 app.get('/closure', (req, res) => {
   Closure.find({}).then((closure) => {
@@ -436,17 +534,18 @@ app.get('/closure', (req, res) => {
  });
 })
 
-//app.controller('MainClosure', function($scope) {
-//  $scope.Date = '20210313T00:00:00';
-
- // $scope.DateTimeEnd = '20210313T00:00:00';
-//});
-
-//////  Coordinator get contributions and send approve
+app.get('/coordinator/:facultyId/topic/:topicId', (req, res) => {
+  Contribution.find({
+    _facultyId: req.params.facultyId,
+    _topicId: req.params.topicId
+  }).then((contributions) => {
+    res.send(contributions);
+  })
+});
 
 app.get('/coordinator/:facultyId/contributions', (req, res) => {
   Contribution.find({
-    _facultyId: req.params.facultyId
+    _facultyId: req.params.facultyId,
   }).then((contributions) => {
     res.send(contributions);
   })
@@ -462,9 +561,13 @@ app.get('/contribution/studentId/:id', (req, res) => {
       res.send(contributions._userId);
   });
 })
-app.get('/contribution/date/:id', (req, res) => {
-  Contribution.findOne({_id: req.params.id}).then((contributions) => {
-      res.send(contributions.date);
+
+app.get('/contribution/:userId/:topicId', (req, res) => {
+  Contribution.findOne({
+    _userId: req.params.userId,
+    _topicId: req.params.topicId
+  }).then((contribution) => {
+      res.send(contribution);
   });
 })
 
@@ -514,12 +617,22 @@ app.get('/approved/:facultyId/contributions', (req, res) => {
     res.send(contributions);
   })
 });
+app.get('/contributions/approved/:topicId', (req, res) => {
+  Contribution.find({
+    _topicId: req.params.topicId,
+    status: "Approved"
+  }).then((contributions) => {
+    res.send(contributions);
+  })
+});
 /////// Comment
 app.get('/:contributionId/comments', (req, res) => {
   Comment.find({
     _contributionId: req.params.contributionId,
   }).then((comments) => {
     res.send(comments);
+  }).catch((e) => {
+    res.send(e)
   })
 });
 app.post('/:contributionId/comments', (req, res) => {
@@ -530,32 +643,14 @@ app.post('/:contributionId/comments', (req, res) => {
   });
   newCmt.save().then((newDoc) => {
     res.send(newDoc)
+  }).catch((e) => {
+    res.send(e)
   })
 });
-/////Student create contributions////
-// app.get('/users/:userId/contributions', (req, res) => {
-//   Contribution.find({
-//     _userId: req.params.userId
-//   }).then((contributions) => {
-//     res.send(contributions);
-//   })
-// });
-// app.post('/users/:userId/contributions', (req, res) => {
-//   let newContribution = new Contribution({
-//       file: req.body.file,
-//       date: Date.now().toString(),
-//       status: "Pending",
-//       _userId: req.params.userId,
-//       _facultyId: req.body.facultyId
-//   });
-//   newContribution.save().then((newDoc) => {
-//     res.send(newDoc)
-//   })
-// });
 
 app.get('/contributions', (req, res) => {
-  Contribution.find({}).then((roles) => {
-      res.send(roles);
+  Contribution.find({}).then((contributions) => {
+      res.send(contributions);
   });
 })
 
@@ -599,9 +694,6 @@ app.post('/messages/:facultyId/:studentId', (req, res) => {
   })
 })
 
-
-
-
 //////////////////////send mail/////////////
 // app.post('/sendMail', (req, res) => {
 //   console.log("request came")
@@ -624,8 +716,6 @@ app.post('/sendMail', (req, res) => {
   console.log("request came")
   let username = req.body.username;
   let name = req.body.name;
-
-
   let email = new User({
     username,name
   });
@@ -697,6 +787,7 @@ app.get('/viewcoor', authenticate, (req, res) => {
   });
 })
 
+<<<<<<< HEAD
 app.get('/viewdetail/:id', (req, res) => {
   //Return an array of all the posts in database
   User.find({_id: req.params.id}).then((post) => {
@@ -705,11 +796,11 @@ app.get('/viewdetail/:id', (req, res) => {
     res.send(e);
   });
 })
+=======
+>>>>>>> 9c469e31abe526bea18d037817c1bd6c4ee984d9
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 app.listen(3000, () => {
   console.log(`App is listening at http://localhost:3000`)
 })
-
-

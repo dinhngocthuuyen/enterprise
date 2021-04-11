@@ -10,6 +10,9 @@ import { WebRequestService } from 'src/app/shared/web-request.service';
 export class CoorService {
 
   constructor(private WebReqService: WebRequestService) {}
+  getContribution(facultyId: string, topicId){
+    return this.WebReqService.get(`coordinator/${facultyId}/topic/${topicId}`);
+  }
   getContributions(facultyId: string){
     return this.WebReqService.get(`coordinator/${facultyId}/contributions`);
   }
@@ -66,8 +69,5 @@ export class CoorService {
   }
   getStudentId(id: string){
     return this.WebReqService.get(`contribution/studentId/${id}`);
-  }
-  getConDate(id: string){
-    return this.WebReqService.get(`contribution/date/${id}`);
   }
 }

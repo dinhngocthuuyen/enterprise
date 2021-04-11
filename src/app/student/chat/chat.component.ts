@@ -30,5 +30,6 @@ export class ChatComponent implements OnInit {
     console.log("text", event.message);
     console.log("reply student: ", reply);
     this.chatService.postMess(this.facId, this.stuId, event.message, reply).subscribe();
+    window.location.reload();
   }
 }

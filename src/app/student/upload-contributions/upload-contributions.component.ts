@@ -1,6 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { LocalDataSource, ViewCell } from 'ng2-smart-table';
 import { StudentService } from '../services/student.service'
 
@@ -63,7 +62,7 @@ export class UploadContributionsComponent implements OnInit {
         renderComponent: ButtonViewComponent,
         onComponentInitFunction(instance) {
           instance.save.subscribe(row => {
-            window.location.href = "http://localhost:3000/upload/download/"+ row.metadata._facultyId + "/" + row.metadata._userId + "/" + row.filename;
+            window.location.href = "http://localhost:3000/download/" + row.metadata._userId + "/" + row.filename;
           });
         }
       }
@@ -76,26 +75,51 @@ export class UploadContributionsComponent implements OnInit {
   source!: LocalDataSource;
   facultyId: any;
   userId: any;
-
-  constructor(private StudentService: StudentService, private router: Router) { }
+  topicId: any;
+  contributionId: any;
+  contribution: any;
+  disableUploadButton: boolean = false;
+  topic: any;
+  zip: any;
+  cmts: any;
+  numOfCmt: any;
+  constructor(private StudentService: StudentService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.facultyId = localStorage.getItem('facultyId');
     this.userId = localStorage.getItem('userId');
+    this.topicId = this.route.snapshot.params.id;
 
-    this.StudentService.getUpload(this.facultyId, this.userId).subscribe((files: any) => {
-      this.files = files;
-      this.source = new LocalDataSource(this.files);
+    this.StudentService.getDeadline(this.topicId).subscribe((closure: any) => {
+      var now = new Date().getTime();
+      var deadline1 = new Date(closure.deadline1).getTime();
+      var deadline2 = new Date(closure.deadline2).getTime();
+        if(now > deadline1){        
+          this.disableUploadButton = true
+        }
+      this.StudentService.getUpload(this.userId, this.topicId).subscribe((files: any) => {
+        this.disableUploadButton = false;
+        this.files = files;
+        this.source = new LocalDataSource(this.files);
+        if(now > deadline2){
+          this.disableUploadButton = true;
+        }
+      })     
     })
-  
+
+    this.StudentService.getContribution(this.userId, this.topicId).subscribe((contribution: any) => {
+      this.contribution = contribution;
+      this.StudentService.getComments(contribution._id).subscribe((cmts: any) => {
+        this.cmts = cmts
+        this.numOfCmt = this.cmts.length
+      });
+    });
   }
 
   onDeleteButtonClicked(event){
     this.StudentService.deleteUpload(event.data._id).subscribe((file: any) => {
       this.file = file;
     })
+    window.location.reload();
   }
-
-  
-
 }

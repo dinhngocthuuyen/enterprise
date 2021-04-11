@@ -1,15 +1,14 @@
 import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { PagesComponent } from './pages.component';
-
 import { AdminComponent } from './admin/admin.component';
 import { StudentComponent } from './student/student.component';
 import { StaffComponent } from './staff/staff.component';
-import { GuestComponent } from './guest/guest.component';
 import { StudentmanagerComponent } from './manager/studentmanager/studentmanager.component';
-import { GuestDetailComponent } from './guest/guest-detail/guest-detail.component';
 import { viewComponent } from './viewprofile/viewprofile.component';
 import { viewdetailComponent } from './viewprofile/viewprofile-detail/viewdetail.component';
+import { ViewSelectedContributionsComponent } from './view-selected-contributions/view-selected-contributions.component';
+import { ViewTopicsComponent } from './view-topics/view-topics.component';
 
 const routes: Routes = [{
   path: '',
@@ -58,15 +57,7 @@ const routes: Routes = [{
       loadChildren: () => import('./staff/staff.module')
         .then(m => m.StaffModule),
     },
-    {
-      path: 'guest/:id',
-      component: GuestComponent,
-    },
 
-    {
-      path: 'guest/guest-detail/:id',
-      component: GuestDetailComponent
-    },
     {
       path: 'viewprofile',
       component:  viewComponent,
@@ -80,10 +71,17 @@ const routes: Routes = [{
       path: 'viewdetail/:id',
       component: viewdetailComponent,
     },
-
+    {
+      path: 'topic/:id/view-selected-contributions',
+      component: ViewSelectedContributionsComponent
+    },
+    {
+      path: 'view-topics',
+      component: ViewTopicsComponent
+    },
     {
       path: '',
-      redirectTo: 'dashboard',
+      redirectTo: 'view-topics',
       pathMatch: 'full',
     },
 

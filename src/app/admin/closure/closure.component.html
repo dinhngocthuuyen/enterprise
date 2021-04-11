@@ -1,4 +1,3 @@
-<p>Closure Date!</p>
 
 <nb-card status="primary">
   <nb-card-header>
@@ -6,16 +5,38 @@
   </nb-card-header>
 
   <nb-card-body>
-    <label for="date">Start Date</label>
-    <input class="dati" nbInput #startdateSelect placeholder="Pick Date" type="datetime-local" ><br><br>
+  <nb-alert status="success" closable (close)="onCloseAlert()" *ngIf="isAlert">
+    Submit successfully.
+  </nb-alert>
 
-    <label for="date">Deadline 1</label>
-    <input class="dati" nbInput #deadline1Select placeholder="Pick Date" type="datetime-local" >
-    <button nbButton status="primary" type="submit">Update</button><br><br>
+  <form id="form-create" class="form-dl" [formGroup]="deadlineForm">
+    <div class="form-group">
+      <label for="topic">Topic</label>
+      <input class="dati" nbInput type="text" #topicInput formControlName="topic" class="form-control">
+    </div>
 
-    <label for="date">Deadline 2</label>
-    <input class="dati" nbInput #deadline2Select placeholder="Pick Date" type="datetime-local">
-    <button nbButton status="primary" type="submit">Update</button><br><br>
-    <button nbButton status="primary" type="submit" (click) = 'onSubmitButtonClicked(startdateSelect.value, deadline1Select.value, deadline2Select.value)' >Submit</button>
-  </nb-card-body>
+    <div class="form-group">
+      <label for="date">Start Date</label>
+      <input class="dati" nbInput type="datetime-local" #startdateInput formControlName="startdate" class="form-control">
+    </div>
+    
+    <div class="form-group">
+      <label for="date">Deadline1</label>
+      <input class="dati" nbInput type="datetime-local" #deadline1Input formControlName="deadline1" class="form-control">
+    </div>
+    
+    <div class="form-group">
+      <label for="date">Deadline2</label>
+      <input class="dati" nbInput type="datetime-local" #deadline2Input formControlName="deadline2" class="form-control">
+    </div>
+    
+    <button nbButton status="primary" (click)="onSubmitButtonClicked()">Submit</button>
+    <button nbButton status="warning" (click)="onUpdateButtonClicked()">Update</button>
+
+</form>
+
+  <br>
+  <ng2-smart-table [settings]="settings" [source]="sourceClosures" (edit)="onEditButtonClicked($event)" (delete)="onDeleteButtonClicked($event)"></ng2-smart-table>
+</nb-card-body>
+ 
 </nb-card>

@@ -1,6 +1,10 @@
 .form-cr {
     padding: 30px;
     position: relative;
+    input {
+        width:35%;
+        border-radius:10px;
+    }
 }
 .faculty {
     padding:10px;

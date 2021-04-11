@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 // import { __param } from 'tslib';
-import {ViewProfile} from "../../service/manager.service"
+import {ViewDetail} from "../../service/manager.service"
 @Component({
   selector: 'viewdetail',
   templateUrl: './viewdetail.component.html',
@@ -12,7 +12,7 @@ export class viewdetailComponent implements OnInit {
   //constructor() { }
   constructor(
     private route: ActivatedRoute,
-    private ViewProfile : ViewProfile,
+    private ViewProfile : ViewDetail,
     private router: Router,
     ) { }
 

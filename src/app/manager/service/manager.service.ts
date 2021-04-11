@@ -14,6 +14,21 @@ export class ViewProfile {
   getviewcoordinator(){
     return this.WebRequestService.get('viewcoor');
   }
+  getContributions(topicId: string){
+    return this.WebRequestService.get(`contributions/approved/${topicId}`);
+  }
+  getDownloadAll(topicId: string){
+    return this.WebRequestService.get(`downloadAll1/${topicId}`)
+  }
+}
+
+
+@Injectable({
+  providedIn: 'root'
+})
+export class ViewDetail {
+
+  constructor(private WebRequestService: WebRequestService) {}
   getviewdetail(id: string){
     return this.WebRequestService.get(`viewdetail/${id}`);
 }

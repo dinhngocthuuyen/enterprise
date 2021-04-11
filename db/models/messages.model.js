@@ -5,7 +5,6 @@ const MessageSchema = new mongoose.Schema({
   date: Date,
   reply: Boolean,
   _studentId: mongoose.Types.ObjectId,
-  _coordinatorId: mongoose.Types.ObjectId,
   _facultyId: mongoose.Types.ObjectId
 })
 

@@ -15,7 +15,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
   {
     title: 'Review',
     icon: 'checkmark-circle-outline',
-    link: 'review',
+    link: 'topic',
   },
   {
     title: 'Update Profile',

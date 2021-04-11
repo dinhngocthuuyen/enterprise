@@ -1,22 +1,182 @@
 <nb-card>
-    <nb-card-header>Welcome to visit University of Greenwich</nb-card-header>
-    <nb-card-body class="example-items-rows">
-        <nb-tabset>
-            <nb-tab tabTitle="Introduction">
-       
-            </nb-tab>
-            <nb-tab tabTitle="Hot news">
-            </nb-tab>
+  <nb-card-header>Welcome to visit University of Greenwich</nb-card-header>
+  <nb-card-body class="example-items-rows">
+    <nb-tabset>
+      <nb-tab tabTitle="Introduction">
+        <nb-card-body>
+          <div class="background" style="display: flex; justify-content: center;">
+            <img src="./assets/images/guest-6.png">
+          </div>
+          <br>
+          <br>
+          <div class="row">
+            <img src="./assets/images/guest-2.jpg">
+            <div class="col-md-4 col-sm-12">
+              <h5>The dynamism of Greenwich students</h5>
+              <p>A nebula is an interstellar cloud of dust, hydrogen, helium and other ionized gases.
+                Originally, nebula was a name for any diffuse astronomical object,
+                including galaxies beyond the Milky Way. </p>
+              <button nbButton status="primary">Learn more</button>
+            </div>
+          </div>
+        </nb-card-body>
+      </nb-tab>
 
-            <nb-tab tabTitle="Event" >
-            </nb-tab>
+      <nb-tab tabTitle="Event">
+        <nb-card-body>
+          <div class="row">
+            <img src="./assets/images/guest-3.jpg" style="width: 30%;">
+            <div class="col-md-6 col-sm-6">
+              <h5>Talkshow: Learning Machine Learning</h5>
+              <p>A nebula is an interstellar cloud of dust, hydrogen, helium and other ionized gases.
+                Originally, nebula was a name for any diffuse astronomical object,
+                including galaxies beyond the Milky Way. </p>
+              <button nbButton status="primary">Learn more</button>
+            </div>
+          </div>
+          <br>
+          <div class="row">
+            <img src="./assets/images/guest-4.png" style="width: 30%;">
+            <div class="col-md-6 col-sm-6">
+              <h5>Talkshow: Marketing</h5>
+              <p>A nebula is an interstellar cloud of dust, hydrogen, helium and other ionized gases.
+                Originally, nebula was a name for any diffuse astronomical object,
+                including galaxies beyond the Milky Way. </p>
+              <button nbButton status="primary">Learn more</button>
+            </div>
+          </div>
+          <br>
+          <div class="row">
+            <img src="./assets/images/guest-5.jpg" style="width: 30%;">
+            <div class="col-md-6 col-sm-6">
+              <h5>Teambuilding 2021</h5>
+              <p>A nebula is an interstellar cloud of dust, hydrogen, helium and other ionized gases.
+                Originally, nebula was a name for any diffuse astronomical object,
+                including galaxies beyond the Milky Way. </p>
+              <button nbButton status="primary">Learn more</button>
+            </div>
+          </div>
+        </nb-card-body>
+      </nb-tab>
 
-            <nb-tab tabTitle="Admissions" >
-            </nb-tab>
+      <nb-tab tabTitle="Admissions">
+        <nb-card status="primary">
+          <nb-card-header style="display: flex; justify-content: center;">
+            University of Greenwich Admission 2021
+          </nb-card-header>
+          <nb-card-body>
+            <nb-card>
+              <input type="text" nbInput fullWidth fieldSize="medium" placeholder="Full name"><br>
+              <input type="text" nbInput fullWidth fieldSize="medium" placeholder="High school name"><br>
+              <input type="text" nbInput fullWidth fieldSize="medium" placeholder="Phone number"><br>
+              <input type="text" nbInput fullWidth fieldSize="medium" placeholder="Address"><br>
+              <select name="campus" id="campus">
+                <option disabled selected>Choose Campus to register for admission</option>
+                <option value="HCM">Ho Chi Minh</option>
+                <option value="HaNoi">Ha Noi</option>
+                <option value="DaNang">Da Nang</option>
+                <option value="CanTho">Can Tho</option>
+              </select>
+              <br>
+              <select name="campus" id="campus">
+                <option disabled selected>Choose your major</option>
+                <option value="Math">Math</option>
+                <option value="History">History</option>
+                <option value="IT">Information Technology</option>
+              </select><br>
+              <button nbButton status="primary">Submit</button>
+            </nb-card>
+          </nb-card-body>
+        </nb-card>
+      </nb-tab>
 
-            <nb-tab tabTitle="Staffs" >
-            </nb-tab>
+      <nb-tab tabTitle="Student Magazine">
+        <nb-card>
+          <nb-card-header>Math</nb-card-header>
+          <nb-card-body>
+            <div class="col"> 
+              <h5>Arithmetic study - Part 1 </h5>
+              <p>A nebula is an interstellar cloud of dust, hydrogen, helium and other ionized gases.
+                Originally, nebula was a name for any diffuse astronomical object,
+                including galaxies beyond the Milky Way. </p>
+              <button nbButton status="primary">Learn more</button>
+            </div>
+            
+          </nb-card-body>
+        </nb-card>
+        <nb-card>
+          <nb-card-header>History</nb-card-header>
+          <nb-card-body>
+            <div class="row">
+              <img src="./assets/images/guest-8.jpg" style="width: 30%;">
+              <div class="col-md-6 col-sm-6">
+                <h5>History of the ancient capital of Hue</h5>
+                <p>A nebula is an interstellar cloud of dust, hydrogen, helium and other ionized gases.
+                  Originally, nebula was a name for any diffuse astronomical object,
+                  including galaxies beyond the Milky Way. </p>
+                <button nbButton status="primary">Learn more</button>
+              </div>
+            </div>
+          </nb-card-body>
+        </nb-card>
+        <nb-card>
+          <nb-card-header>Information Technology</nb-card-header>
+          <nb-card-body>
+            <div class="col">
+              <h5>Machine Learning - Deep Learning </h5>
+              <p>A nebula is an interstellar cloud of dust, hydrogen, helium and other ionized gases.
+                Originally, nebula was a name for any diffuse astronomical object,
+                including galaxies beyond the Milky Way. </p>
+              <button nbButton status="primary">Learn more</button>
+            </div>
+          </nb-card-body>
+        </nb-card>
+      </nb-tab>
 
-          </nb-tabset>
-    </nb-card-body>
-  </nb-card>
+      <nb-tab tabTitle="Staffs">
+        <nb-card-body>
+          <div class="row">
+            <div class="col-md-6 col-sm-6">
+              <nb-card size="tiny">
+                <nb-card-header>Staff</nb-card-header> <br>
+                <nb-user name="Dinh Ngoc Thu Uyen" size="large" title="Manager">
+                </nb-user>
+              </nb-card>
+
+              <nb-card size="tiny">
+                <nb-card-header>Staff</nb-card-header> <br>
+                <nb-user name="Bui Anh Thu" size="large" title="Manager"></nb-user>
+              </nb-card>
+            </div>
+
+            <div class="col-md-6 col-sm-6">
+              <nb-card size="tiny">
+                <nb-card-header>Staff</nb-card-header> <br>
+                <nb-user name="Nguyen Thi Minh Thuy" size="large" title="Manager"></nb-user>
+              </nb-card>
+              <nb-card size="tiny">
+                <nb-card-header>Staff</nb-card-header> <br>
+                <nb-user name="Nguyen Dang Thuy Dung" size="large" title="Coordinator"></nb-user>
+              </nb-card>
+            </div>
+
+            <div class="col-md-6 col-sm-6">
+              <nb-card size="tiny">
+                <nb-card-header>Staff</nb-card-header> <br>
+                <nb-user name="Hoang Thanh Ky" size="large" title="Tutor"></nb-user>
+              </nb-card>
+              </div>
+              <div class="col-md-6 col-sm-6">
+              <nb-card size="tiny">
+                <nb-card-header>Staff</nb-card-header> <br>
+                <nb-user name="Nguyen Ngoc Quynh" size="large" title="Tutor"></nb-user>
+              </nb-card>
+            </div>
+
+          </div>
+        </nb-card-body>
+      </nb-tab>
+
+    </nb-tabset>
+  </nb-card-body>
+</nb-card>

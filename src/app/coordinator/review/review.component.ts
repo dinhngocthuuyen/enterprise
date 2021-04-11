@@ -17,11 +17,8 @@ export class ReviewComponent implements OnInit {
       _userId: {
         title: 'User ID',
       },
-      file: {
-        title: 'File',
-      },
       date: {
-        title: 'Date',
+        title: 'Submit date',
         type: Date,
       },
       status: {
@@ -37,6 +34,7 @@ export class ReviewComponent implements OnInit {
     private reviewService: CoorService,
   ){}
   facId: any;
+  topicId: any;
   contributions: any;
   source!: LocalDataSource;
 
@@ -47,13 +45,16 @@ export class ReviewComponent implements OnInit {
   approvedC: any;
   approved!: LocalDataSource;
   userId: any;
+  student: any;
   ngOnInit() {
     /// load all contributions by faculyID
     this.facId = localStorage.getItem('facultyId');
-    this.reviewService.getContributions(this.facId).subscribe((contributions: any) => {
+    this.topicId = this.route.snapshot.params.id;
+    this.reviewService.getContribution(this.facId, this.topicId).subscribe((contributions: any) => {
       this.contributions = contributions;
       this.source = new LocalDataSource(this.contributions)
     });
+
     /// load pending contributions by faculyID
     this.reviewService.getPendingCs(this.facId).subscribe((contributions: any) => {
       this.contributions = contributions;
@@ -72,4 +73,6 @@ export class ReviewComponent implements OnInit {
   navigateToDetail(event) {
     this.router.navigate(['coordinator/' + this.userId + '/review/' + event.data._id])
   }
+
+  
 }

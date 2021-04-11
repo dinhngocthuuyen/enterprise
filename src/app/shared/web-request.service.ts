@@ -43,6 +43,7 @@ export class WebRequestService {
     return this.http.get(`${this.ROOT_URL}/${uri}`)
   }
 
+
   post(uri: string, payload: Object ){
     return this.http.post(`${this.ROOT_URL}/${uri}`, payload)
   }
@@ -53,7 +54,7 @@ export class WebRequestService {
 
   delete(uri: string){
     return this.http.delete(`${this.ROOT_URL}/${uri}`)
-  }  
+  }
 
   login(username: string, password: string){
     return this.http.post(`${this.ROOT_URL}/users/login`,{ username, password }, { observe: 'response' });
@@ -64,8 +65,12 @@ export class WebRequestService {
     return this.http.post(`${this.ROOT_URL}/users/`,{ username, name, password, role, _facultyId }, { observe: 'response' });
   }
 
-  submit(startdate: String, deadline1:String, deadline2: String){
-    return this.http.post(`${this.ROOT_URL}/closure/`,{ startdate, deadline1, deadline2 }, { observe: 'response' });
+  submit(topic: String, startdate: String, deadline1:String, deadline2: String){
+    return this.http.post(`${this.ROOT_URL}/closure/`,{ topic, startdate, deadline1, deadline2}, { observe: 'response' });
+  }
+
+  update(topic: String, startdate: String, deadline1:String, deadline2: String){
+    return this.http.post(`${this.ROOT_URL}/closure/`,{ topic, startdate, deadline1, deadline2}, { observe: 'response' });
   }
 
   getDepDropDownValues():Observable<any> {
