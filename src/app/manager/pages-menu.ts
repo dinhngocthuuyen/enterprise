@@ -8,55 +8,15 @@ export const MENU_ITEMS: NbMenuItem[] = [
     home: true,
   },
   {
-    title: 'Login',
-    icon: 'shopping-cart-outline',
-    link: 'login',
-  },
-
-  {
-    title: 'Faculty',
-    icon: 'home-outline',
-    link: 'faculty',
-  },
-  {
     title: 'Manager student',
     icon: 'shopping-cart-outline',
     link: 'manager/studentmanager',
-  },
-
-  {
-    title: 'Admin',
-    icon: 'person-outline',
-    link: 'admin',
-  },
-
-  {
-    title: 'Student',
-    icon: 'home-outline',
-    link: 'student',
   },
   {
     title: 'Review',
     icon: 'shopping-cart-outline',
     link: 'coordinators/review',
   },
-  {
-    title: 'Update Profile',
-    icon: 'shopping-cart-outline',
-    link: 'coordinators/profile',
-  },
-  {
-    title: 'Guest',
-    icon: 'person-outline',
-    link: 'guest',
-  },
-
-  {
-    title: 'Chat',
-    icon: 'message-circle-outline',
-    link: 'chat',
-  },
-
   {
     title: 'View Profile',
     icon: 'eye-outline',

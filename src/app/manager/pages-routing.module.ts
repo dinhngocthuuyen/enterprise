@@ -8,7 +8,6 @@ import { StaffComponent } from './staff/staff.component';
 import { GuestComponent } from './guest/guest.component';
 import { StudentmanagerComponent } from './manager/studentmanager/studentmanager.component';
 import { GuestDetailComponent } from './guest/guest-detail/guest-detail.component';
-import { ChatComponent } from './chat/chat.component';
 import { viewComponent } from './viewprofile/viewprofile.component';
 import { viewdetailComponent } from './viewprofile/viewprofile-detail/viewdetail.component';
 
@@ -59,12 +58,6 @@ const routes: Routes = [{
       loadChildren: () => import('./staff/staff.module')
         .then(m => m.StaffModule),
     },
-
-    // {
-    //   path: 'review',
-    //   component: ReviewComponent,
-    // },
-
     {
       path: 'guest/:id',
       component: GuestComponent,
@@ -74,12 +67,6 @@ const routes: Routes = [{
       path: 'guest/guest-detail/:id',
       component: GuestDetailComponent
     },
-
-    {
-      path: 'chat',
-      component: ChatComponent,
-    },
-
     {
       path: 'viewprofile',
       component:  viewComponent,
