@@ -148,24 +148,24 @@ app.get('/downloadAll1/:topicId', (req, res) => {
     if (!files || files.length  === 0) {
       return res.status(404).json({
         err: 'No files exist'
-      })   
+      })
     }
     if (!fs.existsSync(tempDir)) {
       fs.mkdirSync(tempDir);
     }
     if (fs.readdirSync(tempDir).length === 0) {
       files.forEach(file => {
-        var readstream = gfs.createReadStream(file.filename);               
+        var readstream = gfs.createReadStream(file.filename);
         var writestream = fs.createWriteStream(tempDir + '/' + file.filename);
         readstream.pipe(writestream);
-      })  
-    }   
+      })
+    }
   })
 })
 
 app.get('/downloadAll2/:topicId', (req, res) => {
   const zip = new AdmZip();
-  
+
   Closure.findOne({_id: req.params.topicId}).then((topic) => {
     const tempDir = 'src/assets/temporary/' + req.params.topicId;
     zip.addLocalFolder(tempDir);
@@ -175,7 +175,7 @@ app.get('/downloadAll2/:topicId', (req, res) => {
     res.set('Content-Disposition',`attachment; filename=${downloadName}.zip`);
     res.set('Content-Length',data.length);
     res.send(data);
-  })       
+  })
 })
 
 app.get('/upload/:filename', (req, res) => {
@@ -241,7 +241,7 @@ app.post('/upload', upload.single('uploaded_file'), (req, res) => {
     } else {
     contribution.file.push({ '_id': req.file.id, '_filename': req.file.filename});
     contribution.status = 'Pending';
-    contribution.save(); 
+    contribution.save();
   }}).catch((e) => {
     res.redirect('http://localhost:4200/student/' + req.body._userId + '/topic/' + req.body._topicId +'/upload-contributions')
   })
@@ -511,7 +511,7 @@ app.patch('/closure/:id', (req, res) => {
 
       return false;
     }
-      
+
     res.send({
       closure: lastClosure,
       isSubmit: isSubmit(),
@@ -714,13 +714,17 @@ app.get('/sendMail/:id', (req, res) => {
 
 app.post('/sendMail', (req, res) => {
   console.log("request came")
-  let username = req.body.username;
-  let name = req.body.name;
+  let _id = req.body._id;
   let email = new User({
-    username,name
+    _id
   });
-  sendMail(email, info =>{
+  send(email, info =>{
     res.send(info)
+  })
+  User.findOne({_id:email._id }).then((user) => {
+    sendMail(user._facultyId)
+
+    return user._facultyId
   })
 })
 // const CLIENTID='263011216435-sk4g07kjfrb4mt0t5dpml2fkvimv89s1.apps.googleusercontent.com';
@@ -728,8 +732,15 @@ app.post('/sendMail', (req, res) => {
 // const REDIRECTURI ='https://developers.google.com/oauthplayground';
 // const REFRESHTOKEN ='//04MMc5Bqs-QsjCgYIARAAGAQSNwF-L9IrCg-1VUaT8zq4A76uj8uXsq7i-FKOpWZVSkG4yvD-49S5ZClJG6CX7PDrv8apzvy80O8';
 
-async function sendMail(){
+async function sendMail(email){
+  const output=`
+  <h1>Thanks for using the cinema app</h1>
+  <h2>Your ticket information </h2>
+  <p>username: ${email.username}</p>
+  <p>name: ${email.name}</p>
 
+  <b>a new report has been submitted http://localhost:4200/coordinator/60335f75415f78217707d45d/review/60336c3eee28af28831ad73b</b>
+`;
     // const accessToken = await oAuth2Client.generateAccessAuthToken
     const transporter = nodemailer.createTransport({
 
@@ -755,9 +766,9 @@ async function sendMail(){
 
     const mailOption = {
       from: 'Dung <dungndtgcs17091@fpt.edu.vn>',// sender address
-      to: "ndtd3012199@gmail.com",
+      to: email,
      subject: "New submission" , // Subject line
-      html: "<b>a new report has been submitted http://localhost:4200/coordinator/60335f75415f78217707d45d/review/60336c3eee28af28831ad73b</b>", // html body
+      html: output, // html body
     }
     transporter.sendMail(mailOption, function(error){
       if(error){
@@ -787,7 +798,6 @@ app.get('/viewcoor', authenticate, (req, res) => {
   });
 })
 
-<<<<<<< HEAD
 app.get('/viewdetail/:id', (req, res) => {
   //Return an array of all the posts in database
   User.find({_id: req.params.id}).then((post) => {
@@ -796,8 +806,6 @@ app.get('/viewdetail/:id', (req, res) => {
     res.send(e);
   });
 })
-=======
->>>>>>> 9c469e31abe526bea18d037817c1bd6c4ee984d9
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { User } from 'src/app/models/user';
@@ -11,12 +11,16 @@ import { StudentService } from '../services/student.service';
   styleUrls: ['./send-mail.component.scss']
 })
 export class SendMailComponent implements OnInit {
+   email!: FormGroup;
+
   userId: any;
   user: any[]=[];
+
   constructor(
     private store: Store<User>,
     private studentService: StudentService,
     private route: ActivatedRoute,
+    private fb: FormBuilder,
 
     ) { }
 
@@ -25,11 +29,14 @@ export class SendMailComponent implements OnInit {
     this.studentService.getUser(this.userId).subscribe((user: any) => {
       this.user = user;
     });
-  }
-  email = new FormGroup({
-  username: new FormControl(''),
+    this.email = this.fb.group({
+      "_id": [this.userId, [Validators.required]]
+  });
 
-  })
+  }
+  // email = new FormGroup({
+  // username: new FormControl(this.userId),
+
   sendMail(){
 
     this.studentService.sendMail( this.email.value).subscribe(

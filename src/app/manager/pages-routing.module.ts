@@ -2,7 +2,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { PagesComponent } from './pages.component';
 import { AdminComponent } from './admin/admin.component';
-import { StudentComponent } from './student/student.component';
 import { StaffComponent } from './staff/staff.component';
 import { StudentmanagerComponent } from './manager/studentmanager/studentmanager.component';
 import { viewComponent } from './viewprofile/viewprofile.component';
@@ -13,16 +12,7 @@ import { ViewTopicsComponent } from './view-topics/view-topics.component';
 const routes: Routes = [{
   path: '',
   component: PagesComponent,
-  children: [
-    {
-      path: 'student',
-      component: StudentComponent,
-    },
-    {
-      path: 'student',
-      loadChildren: () => import('./student/student.module')
-        .then(m => m.StudentModule),
-    },
+  children: [  
     {
       path: 'manager/studentmanager',
       component: StudentmanagerComponent,
