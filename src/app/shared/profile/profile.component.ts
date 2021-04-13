@@ -1,10 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { NbDialogService } from '@nebular/theme';
 import { select, Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
-import { Coordinator } from 'src/app/models';
 import { User } from 'src/app/models/user';
 import { CoorService } from '../../coordinator/services/review.service';
 

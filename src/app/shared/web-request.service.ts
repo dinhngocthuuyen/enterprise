@@ -1,13 +1,12 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import { Coordinator } from '../models';
 import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class WebRequestService {
- 
+
   options = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
@@ -25,20 +24,6 @@ export class WebRequestService {
     this.ROOT_URL = "http://localhost:3000";
   }
 
- getProfiles(uri: string): Observable<Coordinator[]> {
-    return this.http.get<Coordinator[]>(`${this.ROOT_URL}/${uri}`);
-  }
-  // updateProfiles(changes:Partial<Coordinator>){
-  //   // return this.http.patch<Coordinator>(`${this.ROOT_URL}/${id}`, this.options)
-  //      return this.http.put<Coordinator>(this.ROOT_URL + '/' +  changes._id,changes, this.options)
-
-  // }
-
-  updateProfiles(uri: string,changes:Partial<Coordinator> ){
-    // return this.http.patch<Coordinator>(this.ROOT_URL + {uri} +  changes._id,changes,  this.options)
-    return this.http.patch(`${this.ROOT_URL}/${uri}/`+ changes._id,changes, this.options)
-
-  }
   get(uri: string){
     return this.http.get(`${this.ROOT_URL}/${uri}`)
   }
@@ -77,5 +62,5 @@ export class WebRequestService {
     return this.http.get<Account[]>(`${this.ROOT_URL}/account`);
   }
 
-  
+
 }
