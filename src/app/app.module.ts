@@ -13,7 +13,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { EffectsModule } from '@ngrx/effects';
 import { HttpClientModule } from '@angular/common/http';
 import { ROOT_REDUCERS, metaReducers } from './manager/reducers';
-import { StudentManagerModule } from './manager/manager/studentmanager/studentmanager.module';
 import { LoginComponent } from './login/login.component';
 import { CoordinatorComponent } from './coordinator/coordinator.component';
 import { HeaderComponent } from './shared/header/header.component';
@@ -78,7 +77,6 @@ import { ClosureComponent } from './admin/closure/closure.component';
       },
     }),
     EffectsModule.forRoot([]),
-    StudentManagerModule,
     ReactiveFormsModule,
     FormsModule,
     NbAlertModule,

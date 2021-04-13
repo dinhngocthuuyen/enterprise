@@ -1,9 +1,7 @@
 import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { PagesComponent } from './pages.component';
-import { AdminComponent } from './admin/admin.component';
-import { StaffComponent } from './staff/staff.component';
-import { StudentmanagerComponent } from './manager/studentmanager/studentmanager.component';
+
 import { viewComponent } from './viewprofile/viewprofile.component';
 import { viewdetailComponent } from './viewprofile/viewprofile-detail/viewdetail.component';
 import { ViewSelectedContributionsComponent } from './view-selected-contributions/view-selected-contributions.component';
@@ -12,40 +10,12 @@ import { ViewTopicsComponent } from './view-topics/view-topics.component';
 const routes: Routes = [{
   path: '',
   component: PagesComponent,
-  children: [  
-    {
-      path: 'manager/studentmanager',
-      component: StudentmanagerComponent,
-    },
-    {
-      path: 'manager/studentmanager',
-      loadChildren: () => import('./manager/studentmanager/studentmanager.module')
-        .then(m => m.StudentManagerModule),
-    },
+  children: [
 
     {
       path: '',
       redirectTo: 'dashboard',
       pathMatch: 'full',
-    },
-    {
-      path: 'admin',
-      component: AdminComponent,
-    },
-    {
-      path: 'admin',
-      loadChildren: () => import('./admin/admin.module')
-        .then(m => m.AdminModule),
-    },
-
-    {
-      path: 'staff',
-      component:  StaffComponent,
-    },
-    {
-      path: 'staff',
-      loadChildren: () => import('./staff/staff.module')
-        .then(m => m.StaffModule),
     },
 
     {
