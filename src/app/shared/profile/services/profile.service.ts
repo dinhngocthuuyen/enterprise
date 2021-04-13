@@ -2,8 +2,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable, Input } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Coordinator } from 'src/app/models';
-import { CoordinatorComponent } from '../../coordinator.component';
-import { CoordinatorModule } from '../../coordinator.module';
+import { CoordinatorComponent } from '../../../coordinator/coordinator.component';
+import { CoordinatorModule } from '../../../coordinator/coordinator.module';
 import { WebRequestService } from 'src/app/shared/web-request.service'
 @Injectable({
   providedIn: 'root'
@@ -42,7 +42,7 @@ export class ProfileService {
 
     ) {    this.ROOT_URL = "http://localhost:3000"
   }
-  
+
 //   update = {
 //     id: this.coordinator._id,
 //     changes: this.coordinator.name,

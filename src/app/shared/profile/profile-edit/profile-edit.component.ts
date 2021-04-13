@@ -6,7 +6,7 @@ import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { Coordinator } from 'src/app/models';
 import { User } from 'src/app/models/user';
-import { CoorService } from '../../services/review.service';
+import { CoorService } from '../../../coordinator/services/review.service';
 
 @Component({
   selector: 'app-profile-edit',
@@ -17,10 +17,10 @@ export class ProfileEditComponent implements OnInit {
   userId: any;
   user: any[]=[];
   // @Input() user;
-editForm = new FormGroup({
+  role: any;
+  editForm = new FormGroup({
   name: new FormControl(''),
   username: new FormControl(''),
-
 })
     constructor(
       private store: Store<User>,
@@ -32,19 +32,20 @@ editForm = new FormGroup({
 
     ngOnInit() {
       this.userId = localStorage.getItem('userId');
+      this.role = localStorage.getItem('role');
       this.profileService.getProfile(this.userId).subscribe((user: any) => {
         this.user = user;
       });
     }
- 
+
     edit(){
       this.profileService.updateProfile(this.userId,this.editForm.value).subscribe((result)=>
       console.log(result,"data update success")
       )
-      
-      this.router.navigate(['coordinator/'+this.userId +'/profile'])
+
+      this.router.navigate([this.role + '/'+this.userId])
     }
     back() {
-      this.router.navigate([ 'coordinator/'+this.userId +'/profile'])
+      this.router.navigate([this.role + '/'+this.userId ])
     }
 }

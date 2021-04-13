@@ -21,6 +21,7 @@ export class AuthService {
         console.log('LOGGED IN!!!');
         localStorage.setItem('userId', res.body._id);
         localStorage.setItem('facultyId', res.body._facultyId);
+        localStorage.setItem('role', res.body.role);
       })
     )
   }

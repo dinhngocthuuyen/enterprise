@@ -4,6 +4,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { UsersService } from './user.service';
 import { NbMenuService } from '@nebular/theme';
 import { filter, map } from 'rxjs/operators';
+import { isNgTemplate } from '@angular/compiler';
 
 @Component({
   selector: 'app-header',
@@ -13,10 +14,16 @@ import { filter, map } from 'rxjs/operators';
 export class HeaderComponent implements OnInit {
   userMenu = [{
     title: 'Log out',
-   }];
+    data: {id: 'logout'}
+   },
+  {
+    title: 'Profile',
+    data: {id: 'profile'}
+  }];
   @Input() user;
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     private userService: UsersService,
     private nbMenuService: NbMenuService,
     private authService: AuthService
@@ -42,7 +49,11 @@ export class HeaderComponent implements OnInit {
     this.nbMenuService.onItemClick().pipe(
       filter(({ tag }) => tag === 'my-context-menu'),
       map(({ item: { title } }) => title),
-    ).subscribe(() => this.authService.logout())
-  //logout = this.authService.logout();
+    ).subscribe((title) => {
+      if (title ==="Log out") { this.authService.logout() }
+      else {
+       this.router.navigate(['/profile/' + this.userId])
+      }
+    })
   }
 }

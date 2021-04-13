@@ -44,17 +44,11 @@ export class UploadContributionsComponent implements OnInit {
       position: 'right'
     },
     columns: {
-      _id: {
-        title: 'ID',
-      },
       filename: {
         title: 'File name',
       },
       uploadDate: {
         title: 'Upload date',
-      },
-      contentType: {
-        title: 'File type'
       },
       button: {
         title: 'Download',
@@ -94,7 +88,7 @@ export class UploadContributionsComponent implements OnInit {
       var now = new Date().getTime();
       var deadline1 = new Date(closure.deadline1).getTime();
       var deadline2 = new Date(closure.deadline2).getTime();
-        if(now > deadline1){        
+        if(now > deadline1){
           this.disableUploadButton = true
         }
       this.StudentService.getUpload(this.userId, this.topicId).subscribe((files: any) => {
@@ -104,7 +98,7 @@ export class UploadContributionsComponent implements OnInit {
         if(now > deadline2){
           this.disableUploadButton = true;
         }
-      })     
+      })
     })
 
     this.StudentService.getContribution(this.userId, this.topicId).subscribe((contribution: any) => {

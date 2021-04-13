@@ -7,7 +7,6 @@ import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { HttpClientModule } from '@angular/common/http';
 import { ChatComponent } from './chat/chat.component';
 import { StudentRoutingModule } from './student-routing.module';
-import { SendMailComponent } from './send-mail/send-mail.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { UploadContributionsComponent } from './upload-contributions/upload-contributions.component';
 import { UploadComponent } from './upload/upload.component';
@@ -38,10 +37,7 @@ import { UploadComponent } from './upload/upload.component';
   ],
   declarations: [
     ChatComponent,
-    SendMailComponent,
     UploadContributionsComponent,
-    
-    
     UploadComponent,
   ],
 })

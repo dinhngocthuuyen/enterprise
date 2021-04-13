@@ -16,11 +16,11 @@ export class CoorService {
   getContributions(facultyId: string){
     return this.WebReqService.get(`coordinator/${facultyId}/contributions`);
   }
-  getPendingCs(facultyId: string){
-    return this.WebReqService.get(`pending/${facultyId}/contributions`);
+  getPendingCs(facultyId: string, topicId){
+    return this.WebReqService.get(`pending/${facultyId}/contributions/${topicId}`);
   }
-  getApprovedCs(facultyId: string){
-    return this.WebReqService.get(`approved/${facultyId}/contributions`);
+  getApprovedCs(facultyId: string, topicId){
+    return this.WebReqService.get(`approved/${facultyId}/contributions/${topicId}`);
   }
   getUser(id: string){
     return this.WebReqService.get(`user/${id}`);

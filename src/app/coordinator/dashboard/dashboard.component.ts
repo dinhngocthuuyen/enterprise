@@ -36,6 +36,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   faculty: any;
   approveContribution: any;
   // report
+  topicId: any;
 
   ngOnInit(): void {
     var myChart = new Chart("myChart", {
@@ -86,10 +87,10 @@ export class DashboardComponent implements OnInit, OnDestroy {
         }
       }
     });
-    
-// 
-    this.facId = localStorage.getItem('facultyId');
 
+//
+    this.facId = localStorage.getItem('facultyId');
+    this.topicId = this.route.snapshot.params.id;
     this.dashboardService.getContributions(this.facId).subscribe((contribution: any) => {
       this.contribution = contribution;
       // this.numOfCon = this.contribution.length
@@ -98,7 +99,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
       this.faculty = faculty
     });
 
-    this.dashboardService.getApprovedCs(this.facId).subscribe((approveContribution: any) => {
+    this.dashboardService.getApprovedCs(this.facId, this.topicId).subscribe((approveContribution: any) => {
       this.approveContribution = approveContribution;
       // this.numOfCon = this.approveContribution.length
       // console.log('abc', this.numOfCon)

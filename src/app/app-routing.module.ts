@@ -1,6 +1,8 @@
 import { ExtraOptions, RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { LoginComponent } from './login/login.component';
+import { ProfileComponent } from './shared/profile/profile.component';
+import { ProfileEditComponent } from './shared/profile/profile-edit/profile-edit.component';
 
 export const routes: Routes = [
   {
@@ -41,6 +43,14 @@ export const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent,
+  },
+  {
+    path: 'profile/:id',
+    component: ProfileComponent,
+  },
+  {
+    path: 'profile/:id/profile-edit',
+    component: ProfileEditComponent,
   },
 
   { path: '', redirectTo: 'login', pathMatch: 'full' },

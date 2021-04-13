@@ -17,10 +17,5 @@ export const MENU_ITEMS: NbMenuItem[] = [
     icon: 'checkmark-circle-outline',
     link: 'topic',
   },
-  {
-    title: 'Update Profile',
-    icon: 'shopping-cart-outline',
-    link: 'profile',
-  },
 
 ]

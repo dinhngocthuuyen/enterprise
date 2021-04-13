@@ -56,13 +56,13 @@ export class ReviewComponent implements OnInit {
     });
 
     /// load pending contributions by faculyID
-    this.reviewService.getPendingCs(this.facId).subscribe((contributions: any) => {
+    this.reviewService.getPendingCs(this.facId, this.topicId).subscribe((contributions: any) => {
       this.contributions = contributions;
       this.pending = new LocalDataSource(this.contributions);
       this.numOfP = this.contributions.length;
     });
     /// load pending contributions by faculyID
-    this.reviewService.getApprovedCs(this.facId).subscribe((contributions: any) => {
+    this.reviewService.getApprovedCs(this.facId, this.topicId).subscribe((contributions: any) => {
       this.contributions = contributions;
       this.approved = new LocalDataSource(this.contributions)
     });
@@ -74,5 +74,5 @@ export class ReviewComponent implements OnInit {
     this.router.navigate(['coordinator/' + this.userId + '/review/' + event.data._id])
   }
 
-  
+
 }

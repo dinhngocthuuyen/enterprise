@@ -9,14 +9,13 @@ import { CoordinatorRoutingModule } from './coordinator-routing.module';
 import { ChatComponent } from './chat/chat.component';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
-import { ProfileEditComponent } from './profile/profile-edit/profile-edit.component';
-import { ProfileComponent } from './profile/profile.component';
+import { ProfileEditComponent } from '../shared/profile/profile-edit/profile-edit.component';
+import { ProfileComponent } from '../shared/profile/profile.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { ReviewComponent } from './review/review.component';
 import { ContributionDetailComponent } from './review/contribution-detail/contribution-detail.component';
 import { CommentComponent } from './review/comment/comment.component';
-import { ResetPasswordComponent } from './profile/reset-password/reset-password.component';
 import { ChatListComponent } from './chat/chat-list.component';
 import { ConsService } from './services/cons.service';
 import { ContributionData } from '../models';
@@ -63,7 +62,6 @@ import { ViewTopicComponent } from './review/view-topic/view-topic.component';
     ReviewComponent,
     ContributionDetailComponent,
     CommentComponent,
-    ResetPasswordComponent,
     ChatListComponent,
     ViewTopicComponent,
   ],

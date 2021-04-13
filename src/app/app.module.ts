@@ -23,6 +23,7 @@ import { WebRequestInterceptor } from './services/web-request.interceptor';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AccountComponent } from './admin/account/account.component';
 import { ClosureComponent } from './admin/closure/closure.component';
+import { TermConditionComponent } from './student/upload/term-condition/term-condition.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { ClosureComponent } from './admin/closure/closure.component';
     AdminComponent,
     StudentComponent,
     GuestComponent,
+    TermConditionComponent,
   ],
   imports: [
     BrowserModule,

@@ -21,7 +21,10 @@ export class AdminComponent {
   constructor(private sidebarService: NbSidebarService) { }
 
   toggleCompact() {
-    this.sidebarService.toggle(true, 'left');
+    this.sidebarService.toggle(true, 'menu-sidebar');
+    // this.layoutService.changeLayoutSize();
+
+    // return false;
   }
 
 }

@@ -2,25 +2,17 @@
     <nb-card-header>Profile</nb-card-header>
     <nb-card-body>
         <div class="post" *ngFor="let user of user">
-            <p><strong>Id:</strong> {{ user._id }}</p>
             <p><strong>User Name: </strong>{{ user.username }}</p>
-            <!-- <p> <strong>Password: </strong>{{ user.password }}</p> -->
             <p><strong>Name: </strong>{{ user.name }}</p>
-            <p><strong>Faculty id: </strong>{{ user._facultyId }}</p>
             <p><strong>Role: </strong>{{ user.role }}</p>
-            <!-- <ul class="faculty" *ngFor="let faculty of faculty">
-                <p>aaa</p>
-                <li><strong>Faculty Name: </strong>{{faculty.name}}</li>
-            </ul> -->
+            <p><strong>Faculty: </strong></p>
             </div>
     </nb-card-body>
- 
+
         <nb-card-footer>
         <button nbButton status="primary" (click)="back()">Back</button>
         <button nbButton status="success" (click)="profileEdit()">Update profile</button>
-        <button nbButton status="danger" (click)="resetPassword()">Reset Password</button>
 
         </nb-card-footer>
 </nb-card>
 
-    

@@ -601,17 +601,19 @@ app.get('/getYear/:facultyId/contributions', (req, res) => {
     res.send(contributions);
   })
 });
-app.get('/pending/:facultyId/contributions', (req, res) => {
+app.get('/pending/:facultyId/contributions/:topicId', (req, res) => {
   Contribution.find({
     _facultyId: req.params.facultyId,
+    _topicId: req.params.topicId,
     status: "Pending"
   }).then((contributions) => {
     res.send(contributions);
   })
 });
-app.get('/approved/:facultyId/contributions', (req, res) => {
+app.get('/approved/:facultyId/contributions/:topicId', (req, res) => {
   Contribution.find({
     _facultyId: req.params.facultyId,
+    _topicId: req.params.topicId,
     status: {$ne: "Pending"}
   }).then((contributions) => {
     res.send(contributions);
