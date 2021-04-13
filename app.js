@@ -718,29 +718,26 @@ app.post('/sendMail', (req, res) => {
   let email = new User({
     _id
   });
-  send(email, info =>{
-    res.send(info)
-  })
   User.findOne({_id:email._id }).then((user) => {
-    sendMail(user._facultyId)
-
-    return user._facultyId
+    fId = user._facultyId,
+    User.findOne({_facultyId:fId, role:"coordinator"}).then((coor) => {
+      sendMail(coor.username,_id)
+    })
   })
 })
-// const CLIENTID='263011216435-sk4g07kjfrb4mt0t5dpml2fkvimv89s1.apps.googleusercontent.com';
-// const CLIENTSECRET ='xdatDMw7ET7cTCoPiLJsmcFg';
-// const REDIRECTURI ='https://developers.google.com/oauthplayground';
-// const REFRESHTOKEN ='//04MMc5Bqs-QsjCgYIARAAGAQSNwF-L9IrCg-1VUaT8zq4A76uj8uXsq7i-FKOpWZVSkG4yvD-49S5ZClJG6CX7PDrv8apzvy80O8';
 
-async function sendMail(email){
-  const output=`
-  <h1>Thanks for using the cinema app</h1>
-  <h2>Your ticket information </h2>
-  <p>username: ${email.username}</p>
-  <p>name: ${email.name}</p>
-
-  <b>a new report has been submitted http://localhost:4200/coordinator/60335f75415f78217707d45d/review/60336c3eee28af28831ad73b</b>
+async function sendMail(email,_id){
+  User.findOne({_id:_id}).then((user) => {
+ const name = user.name;
+ const output=`
+ <h2>Review contribution notification</h2>
+ <p>${name} has just submitted a new contribution</p>
+ <p>Checking the URL below to review submitted contribution in your faculty</p>
+ <b>http://localhost:4200/coordinator/60335f75415f78217707d45d/review/60336c3eee28af28831ad73b</b>
 `;
+
+
+
     // const accessToken = await oAuth2Client.generateAccessAuthToken
     const transporter = nodemailer.createTransport({
 
@@ -753,21 +750,14 @@ async function sendMail(email){
         user: 'dungndtgcs17091@fpt.edu.vn',
         // Your Gmail password or App Password
         pass: '30121999'
-
-        // type: 'OAuth2',
-        // user: 'dungndtgcs17091@fpt.edu.vn',
-        // clientId: CLIENTID,
-        // clientSecret: CLIENTSECRET,
-        // redirectUri:REDIRECTURI,
-        // refreshToken:REFRESHTOKEN,
       }
       })
 
 
     const mailOption = {
-      from: 'Dung <dungndtgcs17091@fpt.edu.vn>',// sender address
+      from: 'Enterprise Web <dungndtgcs17091@fpt.edu.vn>',// sender address
       to: email,
-     subject: "New submission" , // Subject line
+     subject: "Student just submitted new contribution" , // Subject line
       html: output, // html body
     }
     transporter.sendMail(mailOption, function(error){
@@ -777,6 +767,7 @@ async function sendMail(email){
         console.log('Email send success ')
       }
     })
+  })
 }
 ////////////////////////////////////////viewprofile/////////////////////////////
 app.get('/viewprofile', authenticate, (req, res) => {
