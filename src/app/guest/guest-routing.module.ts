@@ -1,23 +1,33 @@
 import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
-import { ChatComponent } from './chat/chat.component';
 import { GuestComponent } from './guest.component';
-import { GuestHomeComponent } from './guest-home/guest-home.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { EventComponent } from './guest-home/event/event.component';
+import { IntroductionComponent } from './guest-home/introduction/introduction.component';
+import { MagazineComponent } from './guest-home/magazine/magazine.component';
 
 const routes: Routes = [{
   path: '',
   component: GuestComponent,
   children: [
     {
-      path: 'chat',
-      component: ChatComponent,
+      path: 'dashboard',
+      component: DashboardComponent,
     },
 
     {
-      path: 'guest-home',
-      component: GuestHomeComponent,
+      path: 'event',
+      component: EventComponent,
+    },
+    {
+      path: 'introduction',
+      component: IntroductionComponent,
     },
 
+    {
+      path: 'magazine',
+      component: MagazineComponent,
+    },
     {
       path: '',
       redirectTo: 'dashboard',

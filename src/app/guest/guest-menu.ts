@@ -4,12 +4,25 @@ export const MENU_ITEMS: NbMenuItem[] = [
   {
     title: 'Home',
     icon: 'home-outline',
-    link: 'guest-home',
+    children:[
+      {
+        title: 'Introduction',
+        link: 'introduction'
+      },
+      {
+        title: 'Events',
+        link: 'event'
+      },
+      {
+        title: 'Magazine',
+        link: 'magazine'
+      }
+    ]
   },
   {
-    title: 'Chat',
+    title: 'Dashboard',
     icon: 'message-circle-outline',
-    link: 'chat',
+    link: 'dashboard',
   },
 
 ]

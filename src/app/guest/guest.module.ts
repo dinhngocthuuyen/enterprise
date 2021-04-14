@@ -5,11 +5,13 @@ import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { CommonModule } from '@angular/common';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { HttpClientModule } from '@angular/common/http';
-import { ChatComponent } from './chat/chat.component';
 import { GuestRoutingModule } from './guest-routing.module';
-import { GuestHomeComponent } from './guest-home/guest-home.component';
 import { FormsModule } from '@angular/forms';
 import { config } from 'rxjs';
+import { EventComponent } from './guest-home/event/event.component';
+import { IntroductionComponent } from './guest-home/introduction/introduction.component';
+import { MagazineComponent } from './guest-home/magazine/magazine.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 
 @NgModule({
@@ -38,8 +40,10 @@ import { config } from 'rxjs';
     HttpClientModule
   ],
   declarations: [
-    ChatComponent,
-    GuestHomeComponent,
+    EventComponent,
+    IntroductionComponent,
+    MagazineComponent,
+    DashboardComponent
   ],
 })
 export class GuestModule {
