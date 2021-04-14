@@ -1,7 +1,11 @@
+import { DatePipe } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { NbDialogService } from '@nebular/theme';
+import { htmlPrefilter } from 'jquery';
 import { LocalDataSource, ViewCell } from 'ng2-smart-table';
 import { StudentService } from '../services/student.service'
+import { TermConditionComponent } from '../upload/term-condition/term-condition.component';
 
 @Component({
   selector: 'button-view',
@@ -49,6 +53,8 @@ export class UploadContributionsComponent implements OnInit {
       },
       uploadDate: {
         title: 'Upload date',
+        valuePrepareFunction: (date: any) => {
+          return new DatePipe('en-US').transform(date, 'MMMM d, YYYY')}
       },
       button: {
         title: 'Download',
@@ -77,7 +83,9 @@ export class UploadContributionsComponent implements OnInit {
   zip: any;
   cmts: any;
   numOfCmt: any;
-  constructor(private StudentService: StudentService, private route: ActivatedRoute) { }
+  constructor(private StudentService: StudentService,
+    private dialogService: NbDialogService,
+    private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.facultyId = localStorage.getItem('facultyId');
@@ -115,5 +123,14 @@ export class UploadContributionsComponent implements OnInit {
       this.file = file;
     })
     window.location.reload();
+  }
+  checked = false;
+
+  toggle(checked: boolean) {
+    this.checked = checked;
+  }
+  openDialogTerm() {
+    this.dialogService.open(TermConditionComponent)
+      .onClose.subscribe();
   }
 }

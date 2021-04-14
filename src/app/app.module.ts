@@ -24,6 +24,7 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AccountComponent } from './admin/account/account.component';
 import { ClosureComponent } from './admin/closure/closure.component';
 import { TermConditionComponent } from './student/upload/term-condition/term-condition.component';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,6 @@ import { TermConditionComponent } from './student/upload/term-condition/term-con
     AdminComponent,
     StudentComponent,
     GuestComponent,
-    TermConditionComponent,
   ],
   imports: [
     BrowserModule,
@@ -46,8 +46,8 @@ import { TermConditionComponent } from './student/upload/term-condition/term-con
     NbThemeModule.forRoot({ name: 'default' }),
     NbSidebarModule.forRoot(),
     NbMenuModule.forRoot(),
-    // NbChatModule.forRoot({ messageGoogleMapKey: 'MAP_KEY' }),
     NbDialogModule.forRoot(),
+    FlexLayoutModule,
     NbLayoutModule,
     NbButtonModule,
     NbIconModule,
@@ -59,9 +59,7 @@ import { TermConditionComponent } from './student/upload/term-condition/term-con
     BrowserAnimationsModule,
     NbActionsModule,
     NbUserModule,
-    // NbChatModule,
     NbContextMenuModule,
-   // NbAccordionModule,
     NbInputModule,
     NbListModule,
     NbOptionModule,

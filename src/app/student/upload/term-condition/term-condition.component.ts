@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NbDialogRef } from '@nebular/theme';
 
 @Component({
   selector: 'app-term-condition',
@@ -7,12 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TermConditionComponent implements OnInit {
 
-  constructor() { }
+  constructor(protected ref: NbDialogRef<TermConditionComponent>) {}
 
   ngOnInit(): void {
   }
 
-  cancel() {}
-
-  submit() {}
+  cancel() {
+    this.ref.close()
+  }
 }

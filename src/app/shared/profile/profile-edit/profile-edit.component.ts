@@ -1,12 +1,9 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { NbDialogRef, NbDialogService } from '@nebular/theme';
 import { select, Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
-import { Coordinator } from 'src/app/models';
 import { User } from 'src/app/models/user';
-import { CoorService } from '../../../coordinator/services/review.service';
+import { ProfileService } from '../services/profile.service';
 
 @Component({
   selector: 'app-profile-edit',
@@ -16,18 +13,13 @@ import { CoorService } from '../../../coordinator/services/review.service';
 export class ProfileEditComponent implements OnInit {
   userId: any;
   user: any[]=[];
-  // @Input() user;
   role: any;
   editForm = new FormGroup({
   name: new FormControl(''),
-  username: new FormControl(''),
 })
     constructor(
-      private store: Store<User>,
       private router: Router,
-      private route: ActivatedRoute,
-      private profileService: CoorService,
-      // protected dialogRef: NbDialogRef<ProfileEditComponent>
+      private profileService: ProfileService,
     ) { }
 
     ngOnInit() {
@@ -43,9 +35,9 @@ export class ProfileEditComponent implements OnInit {
       console.log(result,"data update success")
       )
 
-      this.router.navigate([this.role + '/'+this.userId])
+      this.router.navigate([this.role + '/' +this.userId])
     }
-    back() {
-      this.router.navigate([this.role + '/'+this.userId ])
-    }
+    // back() {
+    //   this.router.navigate([this.role + '/' +this.userId ]);
+    // }
 }

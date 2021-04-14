@@ -44,6 +44,6 @@ profileEdit() {
   this.router.navigate([ '/profile/'+this.userId +'/profile-edit'])
 }
 back() {
-  this.router.navigate([ '/' + this.role + '/' + this.userId ])
+  this.router.navigate([ this.role + '/' + this.userId ])
 }
 }

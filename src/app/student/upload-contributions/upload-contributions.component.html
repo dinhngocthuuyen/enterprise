@@ -6,8 +6,19 @@
     <input hidden name="_facultyId" [value]="facultyId"/>
     <input hidden name="_userId" [value]="userId"/>
     <input hidden name="_topicId" [value]="topicId"/>
-    <button nbButton status="danger" type="submit" [disabled]="disableUploadButton">Upload</button>
+    <div style="margin:10px 0 10px 0 ">
+      <nb-checkbox status="basic" (checkedChange)="toggle($event)"></nb-checkbox> &nbsp;
+      <span>I agree to </span> &nbsp;
+      <a (click)="openDialogTerm()" style="color: blue;">Terms and Conditions</a>
+    </div>
+    <ng-template [ngIf]="checked==true" [ngIfElse]="disableBtn">
+      <button nbButton status="danger" type="submit" [disabled]="disableUploadButton">Upload</button>
+    </ng-template>
+    <ng-template #disableBtn>
+      <button nbButton disabled>Upload</button>
+    </ng-template>
 </form>
+
 
     <!-- <a nbButton href="{{'http://localhost:3000/downloadAll/' + userId + '/' + topicId}}">Download all</a> -->
 

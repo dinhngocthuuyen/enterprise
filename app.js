@@ -264,7 +264,7 @@ app.delete('/upload/remove/:id', (req, res) => {
   })
 })
 
-//GET Profile Coordinator
+//GET Profile 
 app.get('/profile/profile-detail/:id', (req, res) => {
   //Return an array of all the posts in database
   User.find({_id: req.params.id}).then((user) => {
@@ -272,27 +272,6 @@ app.get('/profile/profile-detail/:id', (req, res) => {
   }).catch((e) => {
     res.send(e);
   });
-})
-
-app.get('/coordinators/:id', (req, res) => {
-    Coordinator.find({_id: req.params.id}).then((profiles) => {
-        res.send(profiles);
-    });
-})
-
-//POST Profile Coordinator
-app.post('/profiles', (req, res) => {
-    let name = req.body.name;
-    let address = req.body.address;
-    let phone = req.body.phone;
-    let email = req.body.email;
-    let dob = req.body.dob;
-    let newCoordinator = new Coordinator({
-        name,address,dob,email,phone
-    });
-    newCoordinator.save().then((CoordinatorDoc) => {
-        res.send(CoordinatorDoc);
-    })
 })
 
 app.patch('/profile/:id', (req, res) => {
@@ -304,20 +283,20 @@ app.patch('/profile/:id', (req, res) => {
   })
 })
 
-app.put('/coordinators/:id' ,(req, res) => {
-  Coordinator.findOneAndUpdate({_id: req.params.id},{
-      $set: req.body
-  }).then(() =>{
-      res.sendStatus(200);
-  });
-});
+// app.put('/coordinators/:id' ,(req, res) => {
+//   Coordinator.findOneAndUpdate({_id: req.params.id},{
+//       $set: req.body
+//   }).then(() =>{
+//       res.sendStatus(200);
+//   });
+// });
 
-//GET Coordinator
-app.get('/coordinators', (req, res) => {
-  Coordinator.find({}).then((coordinators) => {
-      res.send(coordinators);
-  });
-});
+// //GET Coordinator
+// app.get('/coordinators', (req, res) => {
+//   Coordinator.find({}).then((coordinators) => {
+//       res.send(coordinators);
+//   });
+// });
 
 ///////////////////////////////////////////////////////////// USER /////////////////////////////////////////////////////////////
 app.post('/users', (req, res) => {

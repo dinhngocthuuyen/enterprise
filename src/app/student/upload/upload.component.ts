@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { NbDialogService } from '@nebular/theme';
 import { ClosureService } from 'src/app/admin/services/closure.service';
+import { TermConditionComponent } from './term-condition/term-condition.component';
 
 @Component({
   selector: 'app-upload',
@@ -17,6 +19,7 @@ export class UploadComponent implements OnInit {
   topicId: any;
   constructor(
     private closureService: ClosureService,
+    private dialogService: NbDialogService,
     private router: Router) { }
 
   ngOnInit(): void {
@@ -45,5 +48,4 @@ export class UploadComponent implements OnInit {
     this.facultyId = localStorage.getItem('facultyId');
     this.router.navigate(['student/' + this.studentId + '/topic/' + topicId + '/upload-contributions']);
   }
-
 }

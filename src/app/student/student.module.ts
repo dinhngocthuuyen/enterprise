@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { NbButtonModule, NbCardModule, NbIconModule, NbLayoutModule, NbMenuModule,NbCheckboxModule, NbSidebarModule, NbTabsetModule, NbThemeModule, NbTagInputDirective, NbFilterInputDirective, NbTreeGridModule, NbActionsModule, NbUserModule, NbContextMenuModule, NbChatModule } from '@nebular/theme';
+import { NbButtonModule, NbCardModule, NbIconModule, NbLayoutModule, NbMenuModule,NbCheckboxModule, NbSidebarModule, NbTabsetModule, NbThemeModule, NbTagInputDirective, NbFilterInputDirective, NbTreeGridModule, NbActionsModule, NbUserModule, NbContextMenuModule, NbChatModule, NbDialogModule } from '@nebular/theme';
 
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { CommonModule } from '@angular/common';
@@ -10,6 +10,8 @@ import { StudentRoutingModule } from './student-routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { UploadContributionsComponent } from './upload-contributions/upload-contributions.component';
 import { UploadComponent } from './upload/upload.component';
+import { TermConditionComponent } from './upload/term-condition/term-condition.component';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 @NgModule({
   imports: [
@@ -19,6 +21,7 @@ import { UploadComponent } from './upload/upload.component';
     NbThemeModule.forRoot({ name: 'default' }),
     NbSidebarModule.forRoot(),
     NbMenuModule.forRoot(),
+    NbDialogModule.forChild(),
     NbLayoutModule,
     NbButtonModule,
     NbIconModule,
@@ -33,12 +36,14 @@ import { UploadComponent } from './upload/upload.component';
     ReactiveFormsModule,
     NbContextMenuModule,
     NbChatModule,
+    FlexLayoutModule,
     HttpClientModule
   ],
   declarations: [
     ChatComponent,
     UploadContributionsComponent,
     UploadComponent,
+    TermConditionComponent
   ],
 })
 export class StudentModule {

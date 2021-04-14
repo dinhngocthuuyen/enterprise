@@ -12,13 +12,15 @@ import { isNgTemplate } from '@angular/compiler';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
-  userMenu = [{
-    title: 'Log out',
-    data: {id: 'logout'}
-   },
+  userMenu = [
   {
     title: 'Profile',
     data: {id: 'profile'}
+
+   },
+  {
+    title: 'Log out',
+    data: {id: 'logout'}
   }];
   @Input() user;
   constructor(
