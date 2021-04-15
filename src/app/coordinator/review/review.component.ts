@@ -61,7 +61,7 @@ export class ReviewComponent implements OnInit {
       this.pending = new LocalDataSource(this.contributions);
       this.numOfP = this.contributions.length;
     });
-    /// load pending contributions by faculyID
+    /// load approved contributions by faculyID
     this.reviewService.getApprovedCs(this.facId, this.topicId).subscribe((contributions: any) => {
       this.contributions = contributions;
       this.approved = new LocalDataSource(this.contributions)

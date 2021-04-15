@@ -13,4 +13,11 @@ export class StudentService {
     return this.WebReqService.get(`faculty`);
   }
 
+  getContributions(facultyId: string){
+    return this.WebReqService.get(`coordinator/${facultyId}/contributions`);
+  }
+
+  // getApprovedCs(facultyId: string, topicId){
+  //   return this.WebReqService.get(`approved/${facultyId}/contributions/${topicId}`);
+  // }
 }

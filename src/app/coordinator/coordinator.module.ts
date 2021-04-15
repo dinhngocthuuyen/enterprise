@@ -21,6 +21,7 @@ import { ConsService } from './services/cons.service';
 import { ContributionData } from '../models';
 import { PeriodsService } from './services/periods.service';
 import { ViewTopicComponent } from './review/view-topic/view-topic.component';
+import { ViewContributionsComponent } from './view-contributions/view-contributions.component';
 
 @NgModule({
   imports: [
@@ -64,6 +65,7 @@ import { ViewTopicComponent } from './review/view-topic/view-topic.component';
     CommentComponent,
     ChatListComponent,
     ViewTopicComponent,
+    ViewContributionsComponent
   ],
   providers: [{provide: ContributionData, useClass: ConsService}, PeriodsService ]
 })
