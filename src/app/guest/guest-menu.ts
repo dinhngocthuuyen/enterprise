@@ -21,7 +21,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
   },
   {
     title: 'Dashboard',
-    icon: 'message-circle-outline',
+    icon: 'bookmark-outline',
     link: 'dashboard',
   },
 

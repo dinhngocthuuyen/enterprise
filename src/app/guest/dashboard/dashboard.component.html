@@ -1,24 +1,27 @@
-<div *ngFor="let f of faculty">
-<nb-card>
-  <nb-card-header>{{ f.name }}</nb-card-header>
+<nb-card status="warning">
+  <nb-card-header style="display: flex; justify-content: center;">
+    <nb-icon icon="star-outline"></nb-icon> &nbsp;
+    <span *ngFor="let faculty of faculty">{{ faculty.name }}</span> &nbsp;
+    <nb-icon icon="star-outline"></nb-icon>
+  </nb-card-header>
   <nb-card-body>
-  <div class="row " >
-    <div class="col-md-4 col-sm-12">
-      <nb-card size="tiny" class="info-card">
-        <nb-card-body>
-          <label>Total Contributions</label>
-          <div *ngFor="let contribution of contributions"></div>
+    <div class="row " >
+      <div class="col-md-6 col-sm-12">
+        <nb-card  class="info-card">
+          <nb-card-body>
+            <label>Total Contributions</label><br>
+            <h3>{{ numofcons }}</h3>
           </nb-card-body>
-      </nb-card>
+        </nb-card>
+      </div>
+      <div class="col-md-6 col-sm-12">
+        <nb-card class="info-card">
+          <nb-card-body>
+            <label>Percent of Contributions</label><br>
+            <h3 type="number" maxlength="3">{{ percent }}%</h3>
+          </nb-card-body>
+        </nb-card>
+      </div>
     </div>
-    <div class="col-md-4 col-sm-12">
-      <nb-card class="info-card" >Thu</nb-card>
-    </div>
-    <div class="col-md-4 col-sm-12">
-      <nb-card class="info-card">Thu</nb-card>
-    </div>
-  </div>
-</nb-card-body>
+    </nb-card-body>
 </nb-card>
-
-</div>

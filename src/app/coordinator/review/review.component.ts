@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LocalDataSource } from 'ng2-smart-table';
@@ -19,7 +20,8 @@ export class ReviewComponent implements OnInit {
       },
       date: {
         title: 'Submit date',
-        type: Date,
+        valuePrepareFunction: (date: any) => {
+          return new DatePipe('en-US').transform(date, 'MMMM d, YYYY')}
       },
       status: {
         title: 'Status',

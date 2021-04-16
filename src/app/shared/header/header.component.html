@@ -3,7 +3,7 @@
     <nb-action class="user-action" >
       <nb-user
       [nbContextMenu]="userMenu"
-        [name]="user?.name"
+        [name]="user?.name | titlecase"
         [title]="user?.role | titlecase"
         nbContextMenuTag="my-context-menu">
       </nb-user>

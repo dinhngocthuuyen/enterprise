@@ -53,7 +53,7 @@ export class ConsService extends ContributionData {
     });
   }
 
-getContributionData(period: string): Observable<Contribution[]> {
+  getContributionData(period: string): Observable<Contribution[]> {
     return observableOf(this.data[period]);
   }
 }

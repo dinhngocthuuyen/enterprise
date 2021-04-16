@@ -242,6 +242,10 @@ app.post('/upload', upload.single('uploaded_file'), (req, res) => {
     contribution.file.push({ '_id': req.file.id, '_filename': req.file.filename});
     contribution.status = 'Pending';
     contribution.save();
+    console.log("fac", req.body._facultyId);
+    User.findOne({_facultyId: req.body._facultyId, role:"coordinator"}).then((coor) => {
+      sendMail(coor.username, coor._id)
+    })
   }}).catch((e) => {
     res.redirect('http://localhost:4200/student/' + req.body._userId + '/topic/' + req.body._topicId +'/upload-contributions')
   })
@@ -264,7 +268,7 @@ app.delete('/upload/remove/:id', (req, res) => {
   })
 })
 
-//GET Profile 
+//GET Profile
 app.get('/profile/profile-detail/:id', (req, res) => {
   //Return an array of all the posts in database
   User.find({_id: req.params.id}).then((user) => {
@@ -557,26 +561,27 @@ app.patch('/contributions/:id', (req, res) => {
       res.sendStatus(200);
   });
 });
-app.get('/getYear/:facultyId/contributions/:cyear', (req, res) => {
+app.get('/getMonth/contributions/:month', (req, res) => {
   // Contribution.aggregate({
   //   _facultyId: req.params.facultyId
   // }, {month: [{$month: "$date"}, 2], _id: 0})
   Contribution.aggregate([
+    // {_facultyId: req.params.facultyId},
     {
-      $project: {year: {$year: "$date"}}
+      $project: {month: {$month: "$date"}}
     },
     {
-      $match: {year: parseInt(req.params.cyear)}
+      $match: {month: parseInt(req.params.month)}
     }
   ])
   .then((contributions) => {
     res.send(contributions);
   })
 });
-app.get('/getYear/:facultyId/contributions', (req, res) => {
+app.get('/getMonth/:facultyId/contributions', (req, res) => {
   Contribution.find({
     _facultyId: req.params.facultyId
-  }, {year: {$year: "$date"}, _id: 0}).then((contributions) => {
+  }, {month: {$month: "$date"}, _id: 0}).then((contributions) => {
     res.send(contributions);
   })
 });
@@ -779,6 +784,11 @@ app.get('/viewdetail/:id', (req, res) => {
   });
 })
 
+app.get('/guest/contributions/:fId', (req, res) => {
+  Contribution.find({_facultyId: req.params.fId}).then((coor) => {
+    res.send(coor)
+  })
+})
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 app.listen(3000, () => {
