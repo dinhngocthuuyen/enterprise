@@ -2,15 +2,15 @@
     <nb-card>
       <nb-card-header>{{topic.topic}}</nb-card-header>
       <nb-card-body>
-        <label>Start date: {{ topic.startdate }}</label>
+        <label>Start date: {{ topic.startdate | date }}</label>
         <br>
         <div>
-          Deadline 1: {{ topic.deadline1 }}<br>
+          Deadline 1: {{ topic.deadline1 | date }}<br>
           Deadline 1: <span style="color: red;">{{ countDownDeadline(topic.deadline1) }}</span>
         </div>
         <br>
         <div>
-          Deadline 2: {{ topic.deadline2 }}<br>
+          Deadline 2: {{ topic.deadline2  | date}}<br>
           Deadline 2: <span style="color: red;">{{ countDownDeadline(topic.deadline2) }}</span>
         </div>
         <br>

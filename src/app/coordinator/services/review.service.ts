@@ -70,7 +70,5 @@ export class CoorService {
   getStudentId(id: string){
     return this.WebReqService.get(`contribution/studentId/${id}`);
   }
-  getConsByMonth(month: number){
-    return this.WebReqService.get(`getMonth/contributions/${month}`)
-  }
+  
 }

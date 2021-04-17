@@ -27,4 +27,7 @@ export class GuestService {
   // getApprovedCs(facultyId: string, topicId){
   //   return this.WebReqService.get(`approved/${facultyId}/contributions/${topicId}`);
   // }
+  getConsByMonth(month: number){
+    return this.WebReqService.get(`getMonth/contributions/${month}`)
+  }
 }

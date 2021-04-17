@@ -20,11 +20,11 @@ const routes: Routes = [{
       path: 'chat/:id',
       component: ChatComponent,
     },
-    {
-      path: 'dashboard',
-      component: DashboardComponent,
-      data: { title: "Dash" }
-    },
+    // {
+    //   path: 'dashboard',
+    //   component: DashboardComponent,
+    //   data: { title: "Dash" }
+    // },
     {
       path: 'review/:id',
       component: ContributionDetailComponent,
@@ -39,7 +39,7 @@ const routes: Routes = [{
     },
     {
       path: '',
-      redirectTo: 'dashboard',
+      redirectTo: 'topic',
       pathMatch: 'full',
     },
 

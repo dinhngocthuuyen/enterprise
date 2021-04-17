@@ -7,12 +7,12 @@ export const MENU_ITEMS: NbMenuItem[] = [
     icon: 'file-text-outline',
     link: 'view-topics'
   },
-  {
-    title: 'Dashboard',
-    icon: 'shopping-cart-outline',
-    link: 'dashboard',
-    home: true,
-  },
+  // {
+  //   title: 'Dashboard',
+  //   icon: 'shopping-cart-outline',
+  //   link: 'dashboard',
+  //   home: true,
+  // },
 
   {
     title: 'View Profile',

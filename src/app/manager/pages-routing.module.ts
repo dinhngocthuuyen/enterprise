@@ -12,21 +12,21 @@ const routes: Routes = [{
   component: PagesComponent,
   children: [
 
-    {
-      path: '',
-      redirectTo: 'dashboard',
-      pathMatch: 'full',
-    },
+    // {
+    //   path: '',
+    //   redirectTo: 'dashboard',
+    //   pathMatch: 'full',
+    // },
 
     {
       path: 'viewprofile',
       component:  viewComponent,
     },
 
-    {
-      path: 'viewcoordinator',
-      component:  viewComponent,
-    },
+    // {
+    //   path: 'viewcoordinator',
+    //   component:  viewComponent,
+    // },
     {
       path: 'viewdetail/:id',
       component: viewdetailComponent,
