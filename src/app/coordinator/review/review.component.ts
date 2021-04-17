@@ -2,7 +2,6 @@ import { DatePipe } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LocalDataSource } from 'ng2-smart-table';
-import { FileDetector } from 'protractor';
 import { CoorService } from '../services/review.service';
 
 @Component({
@@ -75,6 +74,4 @@ export class ReviewComponent implements OnInit {
   navigateToDetail(event) {
     this.router.navigate(['coordinator/' + this.userId + '/review/' + event.data._id])
   }
-
-
 }

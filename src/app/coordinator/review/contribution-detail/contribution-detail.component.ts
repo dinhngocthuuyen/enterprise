@@ -2,8 +2,6 @@ import { AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild } from '
 import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NbDialogService } from '@nebular/theme';
-import { USER_PROVIDED_EFFECTS } from '@ngrx/effects';
-import { FileService } from '../../services/file.service';
 import { CoorService } from '../../services/review.service';
 import { CommentComponent } from '../comment/comment.component';
 
@@ -28,14 +26,13 @@ export class ContributionDetailComponent implements OnInit, AfterViewInit {
   studentId!: string;
   student: any;
   numOfCmt: any;
-  file!: string;
   @Input() contribution;
   @Input() contributions;
   conDate: any;
   SubmitTime: any;
   Deadline: any;
   url: any;
-  files = [];
+  files: any[] = [];
   ngOnInit() {
     //// load user id
     this.userId = localStorage.getItem('userId');
