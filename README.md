@@ -67,15 +67,63 @@ Students cannot submit new contribution if they do not agree to Terms and Condit
 
 ### 2.4 Coordinator
 
+Coordinator can interact with student through chat room. In chat UI, it displays student list that sent messages to Coordinator. To reply messages, Coordinator just click on student name in list and reply messages. 
+
+![image](https://user-images.githubusercontent.com/46740045/121028230-d7f23880-c7d1-11eb-8199-2540b7cb066a.png)
+
+![image](https://user-images.githubusercontent.com/46740045/121028251-dc1e5600-c7d1-11eb-9a07-ad40506680c7.png)
+
+Coordinator can view contribution detail in Review tab. Detail information including File name, Start date, Deadline for uploading contributions and status of deadline. Each contribution is displayed in different card.
+
+![image](https://user-images.githubusercontent.com/46740045/121028284-e5a7be00-c7d1-11eb-810e-b185109a6ac8.png)
+
+![image](https://user-images.githubusercontent.com/46740045/121028305-eb050880-c7d1-11eb-9308-fb9edd0b6d13.png)
+
+![image](https://user-images.githubusercontent.com/46740045/121029896-310e9c00-c7d3-11eb-93f9-80e53c1c6e2e.png)
+
+Coordinator can “approved” if it qualified or “not approved” if unsatisfied. They also make a comment on the contributions.
+
+![image](https://user-images.githubusercontent.com/46740045/121029920-366be680-c7d3-11eb-9974-9ce2db443f5d.png)
 
 
-Sau khi clone về cần  
+### 2.5 Manager
+
+The manager can see a list of all students and coordinators. It also shows the information of coordinators and students, and the faculties they belongs to.
+
+![image](https://user-images.githubusercontent.com/46740045/121030767-fc4f1480-c7d3-11eb-9bcf-6115d6f5c9a3.png)
+
+Manager can also view available topics and download contributions of these topics that have been approved by the coordinators as zip files.
+
+![image](https://user-images.githubusercontent.com/46740045/121031022-31f3fd80-c7d4-11eb-8f6f-e88553b051ed.png)
+
+![image](https://user-images.githubusercontent.com/46740045/121031191-56e87080-c7d4-11eb-87a2-42ec081f3bd8.png)
+
+### 2.6 Guest
+
+Guest can view the university’s information through those tabs: Introduction, event, admissions, student magazine, staffs. All gathered and managed by the Manager.
+
+![image](https://user-images.githubusercontent.com/46740045/121031428-86977880-c7d4-11eb-9d86-f3ffdd6b3c26.png)
+
+Event tab displays all events took play in university.
+
+![image](https://user-images.githubusercontent.com/46740045/121031569-a9c22800-c7d4-11eb-941e-c2a5747d6b38.png)
+
+![image](https://user-images.githubusercontent.com/46740045/121031600-b2b2f980-c7d4-11eb-90d1-1d23d4e84c7a.png)
+
+Guest can see some selected reports.
+
+![image](https://user-images.githubusercontent.com/46740045/121031637-bb0b3480-c7d4-11eb-8848-4d1ae769b0bb.png)
+
+![image](https://user-images.githubusercontent.com/46740045/121031648-bd6d8e80-c7d4-11eb-98f3-36e1431b0831.png)
+
+# Notes
+After cloning the project  
 $ npm i. 
 
-Cách push code:  
-git stash (bỏ code mình mới modifed)  
-git pull (pull code mới về)   
-git stash pop (thêm lại code đã stash và merge code)  
+How to push code:  
+git stash (put newly modifed code)  
+git pull (pull new code)   
+git stash pop (add stashed code & merge code)  
 git status  
 git add  
 git status  
@@ -83,7 +131,7 @@ git commit -m "note here"
 npm run prepush  
 git push  
 
-Cách tạo branch trên github  
-- tạo branch trên github  
-- git fetch (update branch mới)  
-- git checkout <tên branch mình đặt> (chuyển qua branch mình)  
+How to create branch on Github  
+- create branch on github  
+- git fetch (update new branch)  
+- git checkout <branch's name> (switch to another branch)  
